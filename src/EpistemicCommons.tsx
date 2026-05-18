@@ -382,12 +382,32 @@ export default function EpistemicCommonsV2({ onBack }: { onBack: () => void }) {
   const [genLoading, setGenLoading] = useState(false);
   const [genError, setGenError] = useState<string | null>(null);
   const [genPreview, setGenPreview] = useState<any>(null);
+  // Scenario selection state
+  const [selectedIds, setSelectedIds] = useState<Set<string>>(new Set());
+  const [queue, setQueue] = useState<string[]>([]);
 
   useEffect(() => { setAnimIn(false); const t = setTimeout(() => setAnimIn(true), 50); return () => clearTimeout(t); }, [phase, roleIdx, crisisIdx]);
 
   const crisis = crises[crisisIdx];
   const role = ROLES[roleIdx];
   const crisisDecisions = decisions[crisis?.id] || {};
+
+  // IDs of scenarios that have been completed
+  const completedIds = new Set(outcomes.map((o: any) => o.crisisId));
+
+  const startQueue = (ids: string[]) => {
+    if (ids.length === 0) return;
+    setQueue(ids);
+    const firstId = ids[0];
+    const idx = crises.findIndex((c: any) => c.id === firstId);
+    if (idx === -1) return;
+    setCrisisIdx(idx);
+    setRoleIdx(0);
+    setSelectedOption(null);
+    setShowAllIntel(false);
+    setShowCounterfactuals(false);
+    setPhase("briefing");
+  };
 
   const commitDecision = () => {
     if (!selectedOption) return;
@@ -398,23 +418,41 @@ export default function EpistemicCommonsV2({ onBack }: { onBack: () => void }) {
       setRoleIdx(roleIdx + 1);
     } else {
       const outcome = computeOutcome(crisis, newDec[crisis.id]);
-      setOutcomes([...outcomes, { crisisId: crisis.id, ...outcome }]);
+      setOutcomes((prev: any[]) => {
+        const existing = prev.findIndex((o: any) => o.crisisId === crisis.id);
+        if (existing >= 0) {
+          const updated = [...prev];
+          updated[existing] = { crisisId: crisis.id, ...outcome };
+          return updated;
+        }
+        return [...prev, { crisisId: crisis.id, ...outcome }];
+      });
       setPhase("resolution");
     }
   };
 
   const nextCrisis = () => {
-    if (crisisIdx < crises.length - 1) {
-      setCrisisIdx(crisisIdx + 1);
-      setRoleIdx(0); setSelectedOption(null); setShowAllIntel(false); setShowCounterfactuals(false);
-      setPhase("briefing");
-    } else {
-      setPhase("debrief");
+    // Find current position in queue and advance
+    const currentPos = queue.indexOf(crisis.id);
+    const nextId = currentPos >= 0 && currentPos < queue.length - 1 ? queue[currentPos + 1] : null;
+    if (nextId) {
+      const idx = crises.findIndex((c: any) => c.id === nextId);
+      if (idx >= 0) {
+        setCrisisIdx(idx);
+        setRoleIdx(0); setSelectedOption(null); setShowAllIntel(false); setShowCounterfactuals(false);
+        setPhase("briefing");
+        return;
+      }
     }
+    // Queue exhausted — return to select
+    setRoleIdx(0); setSelectedOption(null); setShowAllIntel(false); setShowCounterfactuals(false);
+    setPhase("select");
   };
 
   const restart = () => {
-    setPhase("intro"); setCrisisIdx(0); setRoleIdx(0); setDecisions({}); setSelectedOption(null); setOutcomes([]); setShowAllIntel(false); setShowCounterfactuals(false); setShowScoring(false);
+    setPhase("intro"); setCrisisIdx(0); setRoleIdx(0); setDecisions({}); setSelectedOption(null);
+    setOutcomes([]); setShowAllIntel(false); setShowCounterfactuals(false); setShowScoring(false);
+    setSelectedIds(new Set()); setQueue([]);
   };
 
   const handleGenerate = async () => {
@@ -433,6 +471,14 @@ export default function EpistemicCommonsV2({ onBack }: { onBack: () => void }) {
     if (!genPreview) return;
     setCrises((prev: any[]) => [...prev, genPreview]);
     setGenPreview(null); setGenContext(""); setGenError(null);
+  };
+
+  const toggleSelectId = (id: string) => {
+    setSelectedIds(prev => {
+      const next = new Set(prev);
+      if (next.has(id)) next.delete(id); else next.add(id);
+      return next;
+    });
   };
 
   const css = `@import url('https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:wght@400;500;700&family=Space+Mono:wght@400;700&family=Instrument+Serif&display=swap');
@@ -463,10 +509,10 @@ textarea, input { font-family: 'DM Sans', sans-serif; }
           <div style={{ fontFamily: "'DM Mono', monospace", fontSize: 11, color: "#64748b", marginTop: 4 }}>Asymmetric Information · Collective Deliberation · Coordination Under Uncertainty</div>
         </div>
       </div>
-      {phase !== "intro" && phase !== "debrief" && (
+      {phase !== "intro" && phase !== "select" && phase !== "debrief" && queue.length > 0 && (
         <div style={{ textAlign: "right" as const }}>
           <div style={{ fontFamily: "'DM Mono', monospace", fontSize: 11, color: "#64748b" }}>CRISIS</div>
-          <div style={{ fontFamily: "'Space Mono', monospace", fontSize: 22, fontWeight: 700 }}>{crisisIdx + 1} / {crises.length}</div>
+          <div style={{ fontFamily: "'Space Mono', monospace", fontSize: 22, fontWeight: 700 }}>{queue.indexOf(crisis?.id) + 1} / {queue.length}</div>
         </div>
       )}
     </div>
@@ -522,34 +568,125 @@ textarea, input { font-family: 'DM Sans', sans-serif; }
               ))}
             </div>
 
-            <div style={{ marginBottom: 20 }}>
-              <div style={{ fontFamily: "'Space Mono', monospace", fontSize: 10, letterSpacing: 2, color: "#64748b", marginBottom: 10 }}>SCENARIO LIBRARY ({crises.length} available)</div>
-              <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
-                {crises.map((c: any, i: number) => (
-                  <div key={c.id} style={{ display: "flex", alignItems: "center", gap: 10, padding: "8px 12px", background: "#0c0f14", borderRadius: 6, border: "1px solid #1e2533" }}>
-                    <span style={{ fontSize: 18 }}>{c.icon}</span>
-                    <div style={{ flex: 1 }}>
-                      <div style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 13, fontWeight: 700, color: "#e2e8f0" }}>{c.title}</div>
-                      <div style={{ fontFamily: "'DM Mono', monospace", fontSize: 9, color: "#64748b", marginTop: 1 }}>{c.category}</div>
-                    </div>
-                    <span style={{ fontFamily: "'DM Mono', monospace", fontSize: 9, color: i < BUILT_IN_CRISES.length ? "#64748b" : i < BUILT_IN_CRISES.length + WORKSHOP_SCENARIOS.length ? "#06b6d4" : "#a855f7" }}>
-                      {i < BUILT_IN_CRISES.length ? "BUILT-IN" : i < BUILT_IN_CRISES.length + WORKSHOP_SCENARIOS.length ? "WORKSHOP" : "AI-GENERATED"}
-                    </span>
-                  </div>
-                ))}
+            <button onClick={() => setPhase("select")} style={{ width: "100%", padding: "14px 24px", background: "linear-gradient(135deg, #06b6d4, #0ea5e9)", color: "#fff", border: "none", borderRadius: 8, cursor: "pointer", fontFamily: "'Space Mono', monospace", fontSize: 14, fontWeight: 700, letterSpacing: 2, textTransform: "uppercase" }}>
+              Choose Scenarios →
+            </button>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  // ─── SELECT ────────────────────────────────
+  if (phase === "select") {
+    const coreCrises = crises.slice(0, BUILT_IN_CRISES.length);
+    const workshopCrises = crises.slice(BUILT_IN_CRISES.length, BUILT_IN_CRISES.length + WORKSHOP_SCENARIOS.length);
+    const aiCrises = crises.slice(BUILT_IN_CRISES.length + WORKSHOP_SCENARIOS.length);
+    const workshopIds = workshopCrises.map((c: any) => c.id);
+    const anyCompleted = completedIds.size > 0;
+
+    const ScenarioCard = ({ c, typeLabel, typeColor }: { c: any; typeLabel: string; typeColor: string }) => {
+      const isSelected = selectedIds.has(c.id);
+      const isCompleted = completedIds.has(c.id);
+      const outcome = outcomes.find((o: any) => o.crisisId === c.id);
+      const gc: Record<string, string> = { A: "#10b981", "A-": "#10b981", B: "#06b6d4", "B-": "#06b6d4", C: "#f59e0b", "C-": "#f59e0b", D: "#f97316", "D-": "#f97316", F: "#ef4444" };
+      const gradeCol = outcome ? (gc[outcome.coordinationGrade] || "#64748b") : null;
+      return (
+        <div onClick={() => toggleSelectId(c.id)} style={{ position: "relative", background: "#141820", border: `2px solid ${isSelected ? "#06b6d4" : "#1e2533"}`, borderRadius: 10, padding: 16, cursor: "pointer", transition: "all 0.18s ease", transform: isSelected ? "translateY(-2px)" : "none", boxShadow: isSelected ? "0 6px 24px rgba(6,182,212,0.15)" : "none" }}>
+          {isCompleted && outcome && (
+            <div style={{ position: "absolute", top: 10, right: 10, fontFamily: "'Space Mono', monospace", fontSize: 13, fontWeight: 700, color: gradeCol!, background: `${gradeCol}18`, border: `1px solid ${gradeCol}44`, borderRadius: 6, padding: "2px 8px" }}>{outcome.coordinationGrade}</div>
+          )}
+          <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 8 }}>
+            <span style={{ fontSize: 26 }}>{c.icon}</span>
+            <div style={{ flex: 1, paddingRight: isCompleted ? 44 : 0 }}>
+              <div style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 14, fontWeight: 700, color: "#e2e8f0", lineHeight: 1.2 }}>{c.title}</div>
+              <div style={{ fontFamily: "'DM Mono', monospace", fontSize: 9, color: "#64748b", marginTop: 2 }}>{c.category}</div>
+            </div>
+          </div>
+          {c.stakes && <p style={{ color: "#64748b", fontSize: 11, lineHeight: 1.5, marginBottom: 8 }}>{c.stakes}</p>}
+          <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
+            <span style={{ fontFamily: "'DM Mono', monospace", fontSize: 9, color: typeColor, background: `${typeColor}18`, padding: "2px 8px", borderRadius: 4 }}>{typeLabel}</span>
+            {isCompleted && <span style={{ fontFamily: "'DM Mono', monospace", fontSize: 9, color: "#10b981" }}>PLAYED</span>}
+          </div>
+        </div>
+      );
+    };
+
+    return (
+      <div style={S}><style>{css}</style>{hdr}
+        <div style={{ maxWidth: 800, margin: "0 auto" }}>
+          <div className="fade-up" style={{ marginBottom: 24 }}>
+            <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-end", marginBottom: 16 }}>
+              <div>
+                <div style={{ fontFamily: "'Space Mono', monospace", fontSize: 10, letterSpacing: 2, color: "#64748b", marginBottom: 4 }}>SCENARIO SELECTION</div>
+                <h2 style={{ fontFamily: "'Instrument Serif', serif", fontSize: 26, fontWeight: 400 }}>Choose your scenarios</h2>
+              </div>
+              <div style={{ display: "flex", gap: 10, flexWrap: "wrap" as const, justifyContent: "flex-end" }}>
+                {anyCompleted && (
+                  <button onClick={() => setPhase("debrief")} style={{ padding: "10px 18px", background: "#141820", color: "#10b981", border: "1px solid #10b98144", borderRadius: 8, cursor: "pointer", fontFamily: "'Space Mono', monospace", fontSize: 10, fontWeight: 700, letterSpacing: 1 }}>
+                    View Debrief ({completedIds.size} played) →
+                  </button>
+                )}
+                <button onClick={() => startQueue(crises.map((c: any) => c.id))} style={{ padding: "10px 18px", background: "#1e293b", color: "#94a3b8", border: "1px solid #334155", borderRadius: 8, cursor: "pointer", fontFamily: "'Space Mono', monospace", fontSize: 10, letterSpacing: 1 }}>
+                  Play All ({crises.length})
+                </button>
+                <button onClick={() => { if (selectedIds.size > 0) startQueue([...selectedIds]); }} disabled={selectedIds.size === 0} style={{ padding: "10px 18px", background: selectedIds.size > 0 ? "linear-gradient(135deg, #06b6d4, #0ea5e9)" : "#1e293b", color: selectedIds.size > 0 ? "#fff" : "#334155", border: "none", borderRadius: 8, cursor: selectedIds.size > 0 ? "pointer" : "not-allowed", fontFamily: "'Space Mono', monospace", fontSize: 10, fontWeight: 700, letterSpacing: 1 }}>
+                  Play Selected ({selectedIds.size}) →
+                </button>
               </div>
             </div>
 
-            <div style={{ background: "#0c0f14", border: "1px solid #a855f733", borderRadius: 10, padding: 16, marginBottom: 20 }}>
-              <div style={{ fontFamily: "'Space Mono', monospace", fontSize: 10, letterSpacing: 2, color: "#a855f7", marginBottom: 10 }}>🧠 AI SCENARIO GENERATOR</div>
+            {/* CORE SCENARIOS */}
+            <div style={{ marginBottom: 24 }}>
+              <div style={{ fontFamily: "'Space Mono', monospace", fontSize: 10, letterSpacing: 2, color: "#64748b", marginBottom: 10, display: "flex", alignItems: "center", gap: 8 }}>
+                CORE SCENARIOS
+                <span style={{ background: "#1e293b", borderRadius: 4, padding: "2px 6px", fontSize: 9 }}>{coreCrises.length}</span>
+              </div>
+              <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12 }}>
+                {coreCrises.map((c: any) => <ScenarioCard key={c.id} c={c} typeLabel="BUILT-IN" typeColor="#64748b" />)}
+              </div>
+            </div>
+
+            {/* WORKSHOP LIFECYCLE */}
+            {workshopCrises.length > 0 && (
+              <div style={{ marginBottom: 24 }}>
+                <div style={{ fontFamily: "'Space Mono', monospace", fontSize: 10, letterSpacing: 2, color: "#06b6d4", marginBottom: 10, display: "flex", alignItems: "center", gap: 8 }}>
+                  WORKSHOP LIFECYCLE
+                  <span style={{ background: "#06b6d418", borderRadius: 4, padding: "2px 6px", fontSize: 9 }}>{workshopCrises.length}</span>
+                  <button onClick={() => startQueue(workshopIds)} style={{ marginLeft: "auto", padding: "4px 12px", background: "#06b6d418", color: "#06b6d4", border: "1px solid #06b6d433", borderRadius: 6, cursor: "pointer", fontFamily: "'Space Mono', monospace", fontSize: 9, fontWeight: 700, letterSpacing: 1 }}>
+                    Play Lifecycle Arc →
+                  </button>
+                </div>
+                <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12 }}>
+                  {workshopCrises.map((c: any) => <ScenarioCard key={c.id} c={c} typeLabel="WORKSHOP" typeColor="#06b6d4" />)}
+                </div>
+              </div>
+            )}
+
+            {/* AI-GENERATED */}
+            {aiCrises.length > 0 && (
+              <div style={{ marginBottom: 24 }}>
+                <div style={{ fontFamily: "'Space Mono', monospace", fontSize: 10, letterSpacing: 2, color: "#a855f7", marginBottom: 10, display: "flex", alignItems: "center", gap: 8 }}>
+                  AI-GENERATED
+                  <span style={{ background: "#a855f718", borderRadius: 4, padding: "2px 6px", fontSize: 9 }}>{aiCrises.length}</span>
+                </div>
+                <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12 }}>
+                  {aiCrises.map((c: any) => <ScenarioCard key={c.id} c={c} typeLabel="AI-GENERATED" typeColor="#a855f7" />)}
+                </div>
+              </div>
+            )}
+
+            {/* AI SCENARIO GENERATOR */}
+            <div style={{ background: "#141820", border: "1px solid #a855f733", borderRadius: 10, padding: 20 }}>
+              <div style={{ fontFamily: "'Space Mono', monospace", fontSize: 10, letterSpacing: 2, color: "#a855f7", marginBottom: 8 }}>AI SCENARIO GENERATOR</div>
               <p style={{ color: "#94a3b8", fontSize: 12, lineHeight: 1.5, marginBottom: 10 }}>Describe a governance context and the AI will generate a complete playable scenario with asymmetric intel, options, trade-offs, and interactions.</p>
-              <textarea value={genContext} onChange={e => setGenContext(e.target.value)} placeholder="e.g. AI-generated evidence admitted in a criminal trial, AI agents autonomously trading on financial markets, a school district deploying AI tutors that collect student behavioral data..." style={{ width: "100%", padding: 12, background: "#141820", border: "1px solid #1e2533", borderRadius: 8, color: "#e2e8f0", fontSize: 13, lineHeight: 1.5, resize: "vertical", minHeight: 70, outline: "none" }} />
+              <textarea value={genContext} onChange={e => setGenContext(e.target.value)} placeholder="e.g. AI-generated evidence admitted in a criminal trial, AI agents autonomously trading on financial markets, a school district deploying AI tutors that collect student behavioral data..." style={{ width: "100%", padding: 12, background: "#0c0f14", border: "1px solid #1e2533", borderRadius: 8, color: "#e2e8f0", fontSize: 13, lineHeight: 1.5, resize: "vertical", minHeight: 70, outline: "none" }} />
               <button onClick={handleGenerate} disabled={genLoading || !genContext.trim()} style={{ marginTop: 8, padding: "10px 20px", background: genLoading ? "#1e293b" : "#a855f7", color: genLoading ? "#64748b" : "#fff", border: "none", borderRadius: 6, cursor: genLoading ? "wait" : "pointer", fontFamily: "'Space Mono', monospace", fontSize: 11, fontWeight: 700, letterSpacing: 1 }}>
-                {genLoading ? "⏳ GENERATING SCENARIO..." : "GENERATE SCENARIO →"}
+                {genLoading ? "GENERATING SCENARIO..." : "GENERATE SCENARIO →"}
               </button>
               {genError && <p style={{ color: "#ef4444", fontSize: 12, marginTop: 8 }}>{genError}</p>}
               {genPreview && (
-                <div style={{ marginTop: 12, background: "#141820", borderRadius: 8, padding: 14, border: "1px solid #a855f733" }}>
+                <div style={{ marginTop: 12, background: "#0c0f14", borderRadius: 8, padding: 14, border: "1px solid #a855f733" }}>
                   <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 8 }}>
                     <span style={{ fontSize: 22 }}>{genPreview.icon}</span>
                     <div>
@@ -559,16 +696,12 @@ textarea, input { font-family: 'DM Sans', sans-serif; }
                   </div>
                   <p style={{ color: "#94a3b8", fontSize: 12, lineHeight: 1.5, marginBottom: 10 }}>{genPreview.publicBriefing}</p>
                   <div style={{ display: "flex", gap: 8 }}>
-                    <button onClick={addGeneratedScenario} style={{ padding: "8px 16px", background: "#10b981", color: "#0c0f14", border: "none", borderRadius: 6, cursor: "pointer", fontFamily: "'Space Mono', monospace", fontSize: 10, fontWeight: 700, letterSpacing: 1 }}>✓ ADD TO LIBRARY</button>
-                    <button onClick={() => { setGenPreview(null); handleGenerate(); }} style={{ padding: "8px 16px", background: "#1e293b", color: "#94a3b8", border: "1px solid #334155", borderRadius: 6, cursor: "pointer", fontFamily: "'Space Mono', monospace", fontSize: 10, letterSpacing: 1 }}>↻ REGENERATE</button>
+                    <button onClick={addGeneratedScenario} style={{ padding: "8px 16px", background: "#10b981", color: "#0c0f14", border: "none", borderRadius: 6, cursor: "pointer", fontFamily: "'Space Mono', monospace", fontSize: 10, fontWeight: 700, letterSpacing: 1 }}>ADD TO LIBRARY</button>
+                    <button onClick={() => { setGenPreview(null); handleGenerate(); }} style={{ padding: "8px 16px", background: "#1e293b", color: "#94a3b8", border: "1px solid #334155", borderRadius: 6, cursor: "pointer", fontFamily: "'Space Mono', monospace", fontSize: 10, letterSpacing: 1 }}>REGENERATE</button>
                   </div>
                 </div>
               )}
             </div>
-
-            <button onClick={() => setPhase("briefing")} style={{ width: "100%", padding: "14px 24px", background: "linear-gradient(135deg, #06b6d4, #a855f7)", color: "#fff", border: "none", borderRadius: 8, cursor: "pointer", fontFamily: "'Space Mono', monospace", fontSize: 14, fontWeight: 700, letterSpacing: 2, textTransform: "uppercase" }}>
-              Begin Simulation ({crises.length} scenarios) →
-            </button>
           </div>
         </div>
       </div>
@@ -772,9 +905,16 @@ textarea, input { font-family: 'DM Sans', sans-serif; }
             )}
           </div>
 
-          <button onClick={nextCrisis} style={{ width: "100%", padding: "14px", background: crisisIdx < crises.length - 1 ? "linear-gradient(135deg, #06b6d4, #a855f7)" : "#141820", color: "#fff", border: crisisIdx >= crises.length - 1 ? "1px solid #1e2533" : "none", borderRadius: 8, cursor: "pointer", fontFamily: "'Space Mono', monospace", fontSize: 13, fontWeight: 700, letterSpacing: 2, textTransform: "uppercase" }}>
-            {crisisIdx < crises.length - 1 ? "Next Crisis →" : "View Full Debrief →"}
-          </button>
+          <div style={{ display: "flex", gap: 12 }}>
+            {queue.indexOf(crisis.id) < queue.length - 1 && (
+              <button onClick={nextCrisis} style={{ flex: 1, padding: "14px", background: "linear-gradient(135deg, #06b6d4, #0ea5e9)", color: "#fff", border: "none", borderRadius: 8, cursor: "pointer", fontFamily: "'Space Mono', monospace", fontSize: 13, fontWeight: 700, letterSpacing: 2, textTransform: "uppercase" as const }}>
+                Next in Queue →
+              </button>
+            )}
+            <button onClick={() => setPhase("select")} style={{ flex: 1, padding: "14px", background: "#141820", color: "#e2e8f0", border: "1px solid #1e2533", borderRadius: 8, cursor: "pointer", fontFamily: "'Space Mono', monospace", fontSize: 13, fontWeight: 700, letterSpacing: 2, textTransform: "uppercase" as const }}>
+              ← Back to Scenarios
+            </button>
+          </div>
         </div>
       </div>
     );
@@ -782,11 +922,13 @@ textarea, input { font-family: 'DM Sans', sans-serif; }
 
   // ─── DEBRIEF ───────────────────────────────
   if (phase === "debrief") {
+    // Only average/display scenarios that were actually played
+    const playedOutcomes = outcomes;
     const totalScores: any = { integrity: 0, trust: 0, legitimacy: 0, rights: 0 };
-    outcomes.forEach(o => { for (const k of Object.keys(totalScores)) totalScores[k] += o.scores[k]; });
-    const grades = outcomes.map(o => o.coordinationGrade);
+    playedOutcomes.forEach((o: any) => { for (const k of Object.keys(totalScores)) totalScores[k] += o.scores[k]; });
+    const grades = playedOutcomes.map((o: any) => o.coordinationGrade);
     const gradeToVal: Record<string, number> = { A: 4, "A-": 3.5, B: 3, "B-": 2.5, C: 2, "C-": 1.5, D: 1, "D-": 0.5, F: 0 };
-    const avgGradeVal = grades.reduce((s: number, g: string) => s + (gradeToVal[g] ?? 2), 0) / grades.length;
+    const avgGradeVal = grades.length > 0 ? grades.reduce((s: number, g: string) => s + (gradeToVal[g] ?? 2), 0) / grades.length : 2;
     const overallGrade = avgGradeVal >= 3.75 ? "A" : avgGradeVal >= 3.25 ? "A-" : avgGradeVal >= 2.75 ? "B" : avgGradeVal >= 2.25 ? "B-" : avgGradeVal >= 1.75 ? "C" : avgGradeVal >= 1.25 ? "C-" : avgGradeVal >= 0.75 ? "D" : avgGradeVal >= 0.25 ? "D-" : "F";
     const gradeColor: any = { A: "#10b981", "A-": "#10b981", B: "#06b6d4", "B-": "#06b6d4", C: "#f59e0b", "C-": "#f59e0b", D: "#f97316", "D-": "#f97316", F: "#ef4444" }[overallGrade] || "#64748b";
 
@@ -803,7 +945,9 @@ textarea, input { font-family: 'DM Sans', sans-serif; }
       <div style={S}><style>{css}</style>{hdr}
         <div style={{ maxWidth: 720, margin: "0 auto" }}>
           <div className="fade-up" style={{ background: "#141820", border: `1px solid ${gradeColor}33`, borderRadius: 12, padding: 32, marginBottom: 20 }}>
-            <div style={{ fontFamily: "'Space Mono', monospace", fontSize: 10, letterSpacing: 3, color: gradeColor, marginBottom: 8 }}>SIMULATION OUTCOME</div>
+            <div style={{ fontFamily: "'Space Mono', monospace", fontSize: 10, letterSpacing: 3, color: gradeColor, marginBottom: 8 }}>
+              SIMULATION OUTCOME — {grades.length} of {crises.length} SCENARIOS PLAYED
+            </div>
             <h2 style={{ fontFamily: "'Instrument Serif', serif", fontSize: 32, fontWeight: 400, color: gradeColor, marginBottom: 12 }}>{archetype}</h2>
             <p style={{ color: "#94a3b8", lineHeight: 1.7, fontSize: 14 }}>{archetypeDesc}</p>
           </div>
@@ -828,26 +972,33 @@ textarea, input { font-family: 'DM Sans', sans-serif; }
             {METRICS_INFO.map(m => <MetricBar key={m.key} label={m.label} value={totalScores[m.key]} icon={m.icon} color={m.color} />)}
           </div>
 
-          {crises.map((c: any, ci: number) => {
-            const o = outcomes[ci]; if (!o) return null;
-            const gc: any = { A: "#10b981", B: "#06b6d4", C: "#f59e0b", D: "#f97316", F: "#ef4444" }[o.coordinationGrade] || "#64748b";
+          {crises.map((c: any) => {
+            const o = outcomes.find((out: any) => out.crisisId === c.id);
+            const gcMap: Record<string, string> = { A: "#10b981", "A-": "#10b981", B: "#06b6d4", "B-": "#06b6d4", C: "#f59e0b", "C-": "#f59e0b", D: "#f97316", "D-": "#f97316", F: "#ef4444" };
+            const gc = o ? (gcMap[o.coordinationGrade] || "#64748b") : null;
             return (
-              <div key={c.id} style={{ background: "#141820", border: "1px solid #1e2533", borderRadius: 10, padding: 16, marginBottom: 10 }}>
-                <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 8 }}>
+              <div key={c.id} style={{ background: "#141820", border: `1px solid ${o ? "#1e2533" : "#0f1520"}`, borderRadius: 10, padding: 16, marginBottom: 10, opacity: o ? 1 : 0.45 }}>
+                <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: o ? 8 : 0 }}>
                   <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
                     <span style={{ fontSize: 20 }}>{c.icon}</span>
                     <span style={{ fontFamily: "'Instrument Serif', serif", fontSize: 16 }}>{c.title}</span>
                   </div>
-                  <span style={{ fontFamily: "'Space Mono', monospace", fontSize: 18, fontWeight: 700, color: gc }}>{o.coordinationGrade}</span>
+                  {o ? (
+                    <span style={{ fontFamily: "'Space Mono', monospace", fontSize: 18, fontWeight: 700, color: gc! }}>{o.coordinationGrade}</span>
+                  ) : (
+                    <span style={{ fontFamily: "'DM Mono', monospace", fontSize: 9, color: "#334155", background: "#1e293b", padding: "3px 8px", borderRadius: 4 }}>NOT PLAYED</span>
+                  )}
                 </div>
-                <div style={{ display: "flex", gap: 6, flexWrap: "wrap" }}>
-                  {o.triggeredInteractions.map((inter: any, i: number) => (
-                    <span key={i} style={{ fontFamily: "'DM Mono', monospace", fontSize: 9, padding: "3px 8px", borderRadius: 4, background: inter.type === "synergy" ? "#10b98122" : "#ef444422", color: inter.type === "synergy" ? "#10b981" : "#ef4444" }}>
-                      {inter.type === "synergy" ? "🤝" : "💥"} {inter.label}
-                    </span>
-                  ))}
-                  {o.triggeredInteractions.length === 0 && <span style={{ fontFamily: "'DM Mono', monospace", fontSize: 9, color: "#64748b" }}>No interactions — isolated action</span>}
-                </div>
+                {o && (
+                  <div style={{ display: "flex", gap: 6, flexWrap: "wrap" }}>
+                    {o.triggeredInteractions.map((inter: any, i: number) => (
+                      <span key={i} style={{ fontFamily: "'DM Mono', monospace", fontSize: 9, padding: "3px 8px", borderRadius: 4, background: inter.type === "synergy" ? "#10b98122" : "#ef444422", color: inter.type === "synergy" ? "#10b981" : "#ef4444" }}>
+                        {inter.type === "synergy" ? "🤝" : "💥"} {inter.label}
+                      </span>
+                    ))}
+                    {o.triggeredInteractions.length === 0 && <span style={{ fontFamily: "'DM Mono', monospace", fontSize: 9, color: "#64748b" }}>No interactions — isolated action</span>}
+                  </div>
+                )}
               </div>
             );
           })}
@@ -871,8 +1022,11 @@ textarea, input { font-family: 'DM Sans', sans-serif; }
           </div>
 
           <div style={{ display: "flex", gap: 12 }}>
-            <button onClick={restart} style={{ flex: 1, padding: "14px 24px", background: "#141820", color: "#e2e8f0", border: "1px solid #1e2533", borderRadius: 8, cursor: "pointer", fontFamily: "'Space Mono', monospace", fontSize: 13, fontWeight: 700, letterSpacing: 2, textTransform: "uppercase" as const }}>
-              ↻ Run Again
+            <button onClick={() => setPhase("select")} style={{ flex: 1, padding: "14px 24px", background: "#141820", color: "#e2e8f0", border: "1px solid #1e2533", borderRadius: 8, cursor: "pointer", fontFamily: "'Space Mono', monospace", fontSize: 13, fontWeight: 700, letterSpacing: 2, textTransform: "uppercase" as const }}>
+              ↩ Scenarios
+            </button>
+            <button onClick={restart} style={{ flex: 1, padding: "14px 24px", background: "#0c0f14", color: "#64748b", border: "1px solid #1e2533", borderRadius: 8, cursor: "pointer", fontFamily: "'Space Mono', monospace", fontSize: 13, letterSpacing: 2, textTransform: "uppercase" as const }}>
+              ↻ Restart
             </button>
             <button onClick={onBack} style={{ flex: 1, padding: "14px 24px", background: "#0c0f14", color: "#64748b", border: "1px solid #1e2533", borderRadius: 8, cursor: "pointer", fontFamily: "'Space Mono', monospace", fontSize: 13, letterSpacing: 2, textTransform: "uppercase" as const }}>
               ← Home

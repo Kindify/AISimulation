@@ -198,13 +198,37 @@ function computeOutcome(crisis: any, decisions: any) {
   }
   const synergies = triggeredInteractions.filter((i: any) => i.type === "synergy").length;
   const conflicts = triggeredInteractions.filter((i: any) => i.type === "conflict").length;
-  let coordinationGrade, coordinationDesc;
-  if (synergies >= 2 && conflicts === 0) { coordinationGrade = "A"; coordinationDesc = "Exceptional coordination. Multiple institutional actors reinforced each other."; }
-  else if (synergies > conflicts) { coordinationGrade = "B"; coordinationDesc = "Positive coordination. More synergies than conflicts, though gaps remain."; }
-  else if (conflicts > synergies && synergies > 0) { coordinationGrade = "D"; coordinationDesc = "Poor coordination. Actions mostly worked against each other."; }
-  else if (conflicts > 0 && synergies === 0) { coordinationGrade = "F"; coordinationDesc = "Coordination failure. Actions actively undermined each other."; }
-  else { coordinationGrade = "C"; coordinationDesc = "Isolated action. Each institution acted independently — no synergies, no conflicts."; }
   for (const k of Object.keys(scores)) scores[k] = Math.max(-30, Math.min(30, scores[k]));
+  const totalScore = Object.values(scores).reduce((a: any, b: any) => (a as number) + (b as number), 0) as number;
+
+  // Base grade from interactions
+  let baseGradeVal: number;
+  if (synergies >= 2 && conflicts === 0) baseGradeVal = 4; // A
+  else if (synergies > conflicts) baseGradeVal = 3; // B
+  else if (synergies === 0 && conflicts === 0) baseGradeVal = 2; // C
+  else if (conflicts > synergies && synergies > 0) baseGradeVal = 1; // D
+  else baseGradeVal = 0; // F
+
+  // Score modifier: strong positive scores bump up, strong negative bump down
+  if (totalScore >= 20) baseGradeVal = Math.min(4, baseGradeVal + 1);
+  else if (totalScore >= 10) baseGradeVal = Math.min(4, baseGradeVal + 0.5);
+  else if (totalScore <= -20) baseGradeVal = Math.max(0, baseGradeVal - 1);
+  else if (totalScore <= -10) baseGradeVal = Math.max(0, baseGradeVal - 0.5);
+
+  const gradeMap: { [key: string]: [string, string] } = {
+    "4": ["A", "Exceptional coordination. Institutional actors reinforced each other and collective impact was strongly positive."],
+    "3.5": ["A-", "Strong coordination with good outcomes. Minor gaps but overall highly effective."],
+    "3": ["B", "Positive coordination. More synergies than conflicts, though some damage accumulated."],
+    "2.5": ["B-", "Moderate coordination. Positive intent but mixed collective outcomes."],
+    "2": ["C", "Isolated action. Each institution acted independently — outcomes reflect individual choices, not coordination."],
+    "1.5": ["C-", "Weak coordination with negative drift. Independent action produced poor collective results."],
+    "1": ["D", "Poor coordination. Actions mostly worked against each other."],
+    "0.5": ["D-", "Very poor coordination. Significant institutional conflicts with damaging outcomes."],
+    "0": ["F", "Coordination failure. Actions actively undermined each other with severe consequences."]
+  };
+
+  const gradeKey = String(Math.round(baseGradeVal * 2) / 2);
+  const [coordinationGrade, coordinationDesc] = gradeMap[gradeKey] || gradeMap["2"];
   return { scores, triggeredInteractions, chosenOptions, coordinationGrade, coordinationDesc };
 }
 
@@ -220,13 +244,24 @@ function computeCounterfactuals(crisis: any, decisions: any, currentOutcome: any
       const totalCurrent = Object.values(currentOutcome.scores).reduce((a: any, b: any) => a + b, 0) as number;
       const totalAlt = Object.values(altOutcome.scores).reduce((a: any, b: any) => a + b, 0) as number;
       const diff = totalAlt - totalCurrent;
-      if (Math.abs(diff) >= 5) {
+      // Only show improvements (positive diff) — "what could have gone better"
+      if (diff >= 5) {
         const role = ROLES.find(r => r.id === roleId);
-        counterfactuals.push({ roleId, roleName: role!.name, roleIcon: role!.icon, roleColor: role!.color, fromLabel: currentOutcome.chosenOptions[roleId]?.label, toLabel: opt.label, diff, newGrade: altOutcome.coordinationGrade, newInteractions: altOutcome.triggeredInteractions });
+        counterfactuals.push({
+          roleId,
+          roleName: role!.name,
+          roleIcon: role!.icon,
+          roleColor: role!.color,
+          fromLabel: currentOutcome.chosenOptions[roleId]?.label,
+          toLabel: opt.label,
+          diff,
+          newGrade: altOutcome.coordinationGrade,
+          newInteractions: altOutcome.triggeredInteractions
+        });
       }
     }
   }
-  counterfactuals.sort((a: any, b: any) => Math.abs(b.diff) - Math.abs(a.diff));
+  counterfactuals.sort((a: any, b: any) => b.diff - a.diff);
   return counterfactuals.slice(0, 3);
 }
 
@@ -636,7 +671,7 @@ textarea, input { font-family: 'DM Sans', sans-serif; }
   if (phase === "resolution") {
     const outcome = outcomes[outcomes.length - 1];
     const counterfactuals = computeCounterfactuals(crisis, decisions[crisis.id], outcome);
-    const gradeColor: any = { A: "#10b981", B: "#06b6d4", C: "#f59e0b", D: "#f97316", F: "#ef4444" }[outcome.coordinationGrade] || "#64748b";
+    const gradeColor: any = { A: "#10b981", "A-": "#10b981", B: "#06b6d4", "B-": "#06b6d4", C: "#f59e0b", "C-": "#f59e0b", D: "#f97316", "D-": "#f97316", F: "#ef4444" }[outcome.coordinationGrade] || "#64748b";
 
     return (
       <div style={S}><style>{css}</style>{hdr}
@@ -685,36 +720,39 @@ textarea, input { font-family: 'DM Sans', sans-serif; }
             {METRICS_INFO.map(m => <MetricBar key={m.key} label={m.label} value={outcome.scores[m.key]} icon={m.icon} color={m.color} />)}
           </div>
 
-          {counterfactuals.length > 0 && (
-            <div style={{ marginBottom: 16 }}>
-              <button onClick={() => setShowCounterfactuals(!showCounterfactuals)} style={{ width: "100%", padding: "12px", background: "#1e293b", color: "#94a3b8", border: "1px solid #334155", borderRadius: 8, cursor: "pointer", fontFamily: "'Space Mono', monospace", fontSize: 11, letterSpacing: 1 }}>
-                {showCounterfactuals ? "▾ HIDE" : "▸ SHOW"} COUNTERFACTUAL ANALYSIS — What if one role decided differently?
-              </button>
-              {showCounterfactuals && (
-                <div style={{ marginTop: 10 }}>
-                  {counterfactuals.map((cf: any, i: number) => (
-                    <div key={i} style={{ background: "#141820", border: `1px solid ${cf.roleColor}33`, borderRadius: 10, padding: 14, marginBottom: 8, borderLeft: `3px solid ${cf.roleColor}` }}>
-                      <div style={{ display: "flex", alignItems: "center", gap: 6, marginBottom: 6 }}>
-                        <span style={{ fontSize: 14 }}>{cf.roleIcon}</span>
-                        <span style={{ fontFamily: "'Space Mono', monospace", fontSize: 10, fontWeight: 700, color: cf.roleColor }}>{cf.roleName}</span>
-                      </div>
-                      <p style={{ color: "#e2e8f0", fontSize: 13, marginBottom: 4 }}>
-                        If they had chosen <strong style={{ color: cf.roleColor }}>{cf.toLabel}</strong> instead of <span style={{ color: "#64748b" }}>{cf.fromLabel}</span>:
-                      </p>
-                      <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
-                        <span style={{ fontFamily: "'Space Mono', monospace", fontSize: 16, fontWeight: 700, color: cf.diff > 0 ? "#10b981" : "#ef4444" }}>
-                          {cf.diff > 0 ? "+" : ""}{cf.diff} overall
-                        </span>
-                        <span style={{ fontFamily: "'DM Mono', monospace", fontSize: 10, color: "#64748b" }}>
-                          Grade: {outcome.coordinationGrade} → {cf.newGrade}
-                        </span>
-                      </div>
+          <div style={{ marginBottom: 16 }}>
+            <button onClick={() => setShowCounterfactuals(!showCounterfactuals)} style={{ width: "100%", padding: "12px", background: "#1e293b", color: "#94a3b8", border: "1px solid #334155", borderRadius: 8, cursor: "pointer", fontFamily: "'Space Mono', monospace", fontSize: 11, letterSpacing: 1 }}>
+              {showCounterfactuals ? "▾ HIDE" : "▸ SHOW"} WHAT COULD HAVE GONE BETTER? — Largest improvement opportunities
+            </button>
+            {showCounterfactuals && (
+              <div style={{ marginTop: 10 }}>
+                {counterfactuals.map((cf: any, i: number) => (
+                  <div key={i} style={{ background: "#141820", border: `1px solid ${cf.roleColor}33`, borderRadius: 10, padding: 14, marginBottom: 8, borderLeft: `3px solid ${cf.roleColor}` }}>
+                    <div style={{ display: "flex", alignItems: "center", gap: 6, marginBottom: 6 }}>
+                      <span style={{ fontSize: 14 }}>{cf.roleIcon}</span>
+                      <span style={{ fontFamily: "'Space Mono', monospace", fontSize: 10, fontWeight: 700, color: cf.roleColor }}>{cf.roleName}</span>
                     </div>
-                  ))}
-                </div>
-              )}
-            </div>
-          )}
+                    <p style={{ color: "#e2e8f0", fontSize: 13, marginBottom: 4 }}>
+                      If they had chosen <strong style={{ color: cf.roleColor }}>{cf.toLabel}</strong> instead of <span style={{ color: "#64748b" }}>{cf.fromLabel}</span>:
+                    </p>
+                    <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
+                      <span style={{ fontFamily: "'Space Mono', monospace", fontSize: 16, fontWeight: 700, color: "#10b981" }}>
+                        +{cf.diff} overall
+                      </span>
+                      <span style={{ fontFamily: "'DM Mono', monospace", fontSize: 10, color: "#64748b" }}>
+                        Grade: {outcome.coordinationGrade} → {cf.newGrade}
+                      </span>
+                    </div>
+                  </div>
+                ))}
+                {counterfactuals.length === 0 && (
+                  <div style={{ marginTop: 10, padding: 14, background: "#141820", border: "1px solid #10b98133", borderRadius: 10, borderLeft: "3px solid #10b981" }}>
+                    <span style={{ fontFamily: "'Space Mono', monospace", fontSize: 11, color: "#10b981" }}>✓ No single-role change would have improved the outcome. Your choices were collectively near-optimal for this scenario.</span>
+                  </div>
+                )}
+              </div>
+            )}
+          </div>
 
           <div style={{ marginBottom: 16 }}>
             <button onClick={() => setShowAllIntel(!showAllIntel)} style={{ width: "100%", padding: "12px", background: "#1e293b", color: "#94a3b8", border: "1px solid #334155", borderRadius: 8, cursor: "pointer", fontFamily: "'Space Mono', monospace", fontSize: 11, letterSpacing: 1 }}>
@@ -747,9 +785,10 @@ textarea, input { font-family: 'DM Sans', sans-serif; }
     const totalScores: any = { integrity: 0, trust: 0, legitimacy: 0, rights: 0 };
     outcomes.forEach(o => { for (const k of Object.keys(totalScores)) totalScores[k] += o.scores[k]; });
     const grades = outcomes.map(o => o.coordinationGrade);
-    const avgGradeVal = grades.reduce((s: number, g: string) => s + ({ A: 4, B: 3, C: 2, D: 1, F: 0 }[g] || 0), 0) / grades.length;
-    const overallGrade = avgGradeVal >= 3.5 ? "A" : avgGradeVal >= 2.5 ? "B" : avgGradeVal >= 1.5 ? "C" : avgGradeVal >= 0.5 ? "D" : "F";
-    const gradeColor: any = { A: "#10b981", B: "#06b6d4", C: "#f59e0b", D: "#f97316", F: "#ef4444" }[overallGrade] || "#64748b";
+    const gradeToVal: Record<string, number> = { A: 4, "A-": 3.5, B: 3, "B-": 2.5, C: 2, "C-": 1.5, D: 1, "D-": 0.5, F: 0 };
+    const avgGradeVal = grades.reduce((s: number, g: string) => s + (gradeToVal[g] ?? 2), 0) / grades.length;
+    const overallGrade = avgGradeVal >= 3.75 ? "A" : avgGradeVal >= 3.25 ? "A-" : avgGradeVal >= 2.75 ? "B" : avgGradeVal >= 2.25 ? "B-" : avgGradeVal >= 1.75 ? "C" : avgGradeVal >= 1.25 ? "C-" : avgGradeVal >= 0.75 ? "D" : avgGradeVal >= 0.25 ? "D-" : "F";
+    const gradeColor: any = { A: "#10b981", "A-": "#10b981", B: "#06b6d4", "B-": "#06b6d4", C: "#f59e0b", "C-": "#f59e0b", D: "#f97316", "D-": "#f97316", F: "#ef4444" }[overallGrade] || "#64748b";
 
     let archetype, archetypeDesc;
     if (overallGrade === "A") { archetype = "The Aligned Ecosystem"; archetypeDesc = "Your institutions found ways to reinforce each other. This is the aspiration of multi-stakeholder governance — achieved in practice by very few systems. The key factor wasn't any single actor's wisdom, but the communication architecture between them."; }

@@ -165,6 +165,14 @@ export default function PacingProblem({ onBack }: { onBack: () => void }) {
     history: [] as any[], turn: 0
   });
 
+  // Debrief engagement state
+  const [copied, setCopied] = useState(false);
+  const [feedbackSubmitted, setFeedbackSubmitted] = useState(false);
+  const [feedbackThinking, setFeedbackThinking] = useState<string | null>(null);
+  const [feedbackUseCase, setFeedbackUseCase] = useState<string | null>(null);
+  const [feedbackEmail, setFeedbackEmail] = useState("");
+  const [feedbackSubmitting, setFeedbackSubmitting] = useState(false);
+
   useEffect(() => {
     if (phase === "event") {
       setAnimateIn(false);
@@ -210,6 +218,7 @@ export default function PacingProblem({ onBack }: { onBack: () => void }) {
   const restart = () => {
     setPhase("intro"); setCurrentEvent(0); setSliderValue(50); setShowOutcome(false); setOutcomeData(null);
     setState({ bandwidth: 100, credibility: 60, captureRisk: 15, obsolescenceRisk: 15, publicTrust: 65, history: [], turn: 0 });
+    setCopied(false); setFeedbackSubmitted(false); setFeedbackThinking(null); setFeedbackUseCase(null); setFeedbackEmail(""); setFeedbackSubmitting(false);
   };
 
   const gameOver = state.bandwidth <= 0 || state.captureRisk >= 90 || state.obsolescenceRisk >= 90 || state.publicTrust <= 5;
@@ -294,6 +303,57 @@ export default function PacingProblem({ onBack }: { onBack: () => void }) {
     else if (state.credibility >= 50 && state.captureRisk < 40 && state.obsolescenceRisk < 40) { archetype = "The Adaptive Institution"; archetypeDesc = "You managed the impossible balance — maintaining enough speed to stay relevant while preserving enough rigour to stay credible. This is rare in practice, but institutions like DARPA and certain central banks have achieved it in narrow domains."; archetypeColor = "#10b981"; }
     else { archetype = "The Muddling Through"; archetypeDesc = "You avoided catastrophic failure but accumulated damage on all fronts. This is the most common real-world outcome — institutions that survive but gradually lose effectiveness. Reform becomes harder the longer this state persists."; archetypeColor = "#a855f7"; }
 
+    const resultText = [
+      `🏛️ INSTITUTIONAL STRESS TEST — The Pacing Problem Simulator`,
+      ``,
+      `My Result: ${archetype}`,
+      ``,
+      `Final Metrics:`,
+      `  📊 Bandwidth: ${state.bandwidth}%`,
+      `  🏛️ Credibility: ${state.credibility}%`,
+      `  👥 Public Trust: ${state.publicTrust}%`,
+      `  🎯 Capture Risk: ${state.captureRisk}%`,
+      `  ⏳ Obsolescence: ${state.obsolescenceRisk}%`,
+      ``,
+      `Decision Pattern: ⚡ Speed: ${speedChoices} | ⚖️ Balanced: ${balancedChoices} | 🔬 Rigour: ${rigourChoices}`,
+      ``,
+      `There is no correct answer — only trade-offs.`,
+      ``,
+      `Try it: strategy.mobilis.studio`
+    ].join('\n');
+
+    const copyResult = () => {
+      navigator.clipboard.writeText(resultText).then(() => {
+        setCopied(true);
+        setTimeout(() => setCopied(false), 2500);
+      });
+    };
+
+    const submitFeedback = async () => {
+      setFeedbackSubmitting(true);
+      try {
+        const formData = new URLSearchParams();
+        formData.append("form-name", "simulation-feedback");
+        formData.append("tool", "pacing-problem");
+        formData.append("archetype", archetype);
+        formData.append("grade", archetypeColor);
+        formData.append("changed-thinking", feedbackThinking || "");
+        formData.append("use-case", feedbackUseCase || "");
+        formData.append("email", feedbackEmail);
+        formData.append("timestamp", new Date().toISOString());
+        await fetch("/", {
+          method: "POST",
+          headers: { "Content-Type": "application/x-www-form-urlencoded" },
+          body: formData.toString()
+        });
+        setFeedbackSubmitted(true);
+      } catch (err) {
+        console.error("Feedback submission error:", err);
+        setFeedbackSubmitted(true);
+      }
+      setFeedbackSubmitting(false);
+    };
+
     return (
       <div style={S}>
         {headerBar}
@@ -342,6 +402,92 @@ export default function PacingProblem({ onBack }: { onBack: () => void }) {
               The pacing problem is not a puzzle to solve — it's a tension to manage. Every institution faces the same fundamental trade-off: act quickly enough to matter, or carefully enough to be right. The simulation demonstrates why "just regulate AI" is insufficient as a strategy. The <em style={{ color: "#e2e8f0" }}>how</em> of governance matters as much as the <em style={{ color: "#e2e8f0" }}>whether</em>, and the costs of both action and inaction are real and measurable.
             </p>
           </div>
+
+          {/* ─── SHAREABLE RESULTS CARD ─── */}
+          <div style={{ background: "#141820", border: "1px solid #1e2533", borderRadius: 12, padding: 24, marginBottom: 20 }}>
+            <div style={{ fontFamily: "'Space Mono', monospace", fontSize: 10, letterSpacing: 2, color: "#f97316", marginBottom: 12 }}>SHARE YOUR RESULT</div>
+            <div style={{ background: "#0c0f14", border: `1px solid ${archetypeColor}33`, borderRadius: 10, padding: 20, marginBottom: 16 }}>
+              <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: 12 }}>
+                <div>
+                  <div style={{ fontFamily: "'DM Mono', monospace", fontSize: 9, color: "#64748b", letterSpacing: 1 }}>MY INSTITUTIONAL ARCHETYPE</div>
+                  <div style={{ fontFamily: "'Instrument Serif', serif", fontSize: 20, color: archetypeColor, marginTop: 4 }}>{archetype}</div>
+                </div>
+              </div>
+              <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 8, marginBottom: 12 }}>
+                {[
+                  { label: "Bandwidth", val: state.bandwidth, icon: "📊", suffix: "%" },
+                  { label: "Credibility", val: state.credibility, icon: "🏛️", suffix: "%" },
+                  { label: "Public Trust", val: state.publicTrust, icon: "👥", suffix: "%" },
+                  { label: "Capture Risk", val: state.captureRisk, icon: "🎯", suffix: "%" }
+                ].map((m, i) => (
+                  <div key={i} style={{ fontFamily: "'DM Mono', monospace", fontSize: 11, color: "#94a3b8" }}>
+                    {m.icon} {m.label}: <span style={{ color: "#e2e8f0", fontWeight: 700 }}>{m.val}{m.suffix}</span>
+                  </div>
+                ))}
+              </div>
+              <div style={{ fontFamily: "'DM Mono', monospace", fontSize: 11, color: "#64748b", marginBottom: 12 }}>
+                ⚡ {speedChoices} speed · ⚖️ {balancedChoices} balanced · 🔬 {rigourChoices} rigour
+              </div>
+              <div style={{ paddingTop: 12, borderTop: "1px solid #1e2533", fontFamily: "'DM Mono', monospace", fontSize: 9, color: "#64748b" }}>
+                strategy.mobilis.studio — AI Governance Simulation
+              </div>
+            </div>
+            <button onClick={copyResult} style={{ width: "100%", padding: "12px", background: copied ? "#10b981" : "#1e293b", color: copied ? "#0c0f14" : "#94a3b8", border: "1px solid #334155", borderRadius: 8, cursor: "pointer", fontFamily: "'Space Mono', monospace", fontSize: 11, fontWeight: 700, letterSpacing: 1, transition: "all 0.3s ease" }}>
+              {copied ? "COPIED TO CLIPBOARD" : "COPY RESULT TO SHARE"}
+            </button>
+          </div>
+
+          {/* ─── FEEDBACK CAPTURE ─── */}
+          {!feedbackSubmitted ? (
+            <div style={{ background: "#141820", border: "1px solid #1e2533", borderRadius: 12, padding: 24, marginBottom: 20 }}>
+              <div style={{ fontFamily: "'Space Mono', monospace", fontSize: 10, letterSpacing: 2, color: "#f59e0b", marginBottom: 16 }}>QUICK FEEDBACK — HELP US IMPROVE</div>
+              <div style={{ marginBottom: 16 }}>
+                <p style={{ color: "#e2e8f0", fontSize: 13, fontWeight: 700, marginBottom: 8 }}>Did this change how you think about AI governance?</p>
+                <div style={{ display: "flex", gap: 8, flexWrap: "wrap" as const }}>
+                  {["Yes, significantly", "Somewhat", "Not really"].map(opt => (
+                    <button key={opt} onClick={() => setFeedbackThinking(opt)} style={{ padding: "8px 14px", background: feedbackThinking === opt ? "#f59e0b22" : "#0c0f14", border: `1px solid ${feedbackThinking === opt ? "#f59e0b" : "#1e2533"}`, borderRadius: 6, color: feedbackThinking === opt ? "#f59e0b" : "#94a3b8", cursor: "pointer", fontFamily: "'DM Mono', monospace", fontSize: 11, transition: "all 0.2s ease" }}>{opt}</button>
+                  ))}
+                </div>
+              </div>
+              <div style={{ marginBottom: 16 }}>
+                <p style={{ color: "#e2e8f0", fontSize: 13, fontWeight: 700, marginBottom: 8 }}>Would you use this in a group setting?</p>
+                <div style={{ display: "flex", gap: 8, flexWrap: "wrap" as const }}>
+                  {["Yes, with my team", "Yes, in a class", "Yes, at a workshop", "Just exploring"].map(opt => (
+                    <button key={opt} onClick={() => setFeedbackUseCase(opt)} style={{ padding: "8px 14px", background: feedbackUseCase === opt ? "#06b6d422" : "#0c0f14", border: `1px solid ${feedbackUseCase === opt ? "#06b6d4" : "#1e2533"}`, borderRadius: 6, color: feedbackUseCase === opt ? "#06b6d4" : "#94a3b8", cursor: "pointer", fontFamily: "'DM Mono', monospace", fontSize: 11, transition: "all 0.2s ease" }}>{opt}</button>
+                  ))}
+                </div>
+              </div>
+              <div style={{ marginBottom: 16 }}>
+                <p style={{ color: "#e2e8f0", fontSize: 13, fontWeight: 700, marginBottom: 4 }}>Want the facilitator's guide when it's ready?</p>
+                <p style={{ color: "#64748b", fontSize: 11, marginBottom: 8 }}>Optional — includes workshop formats, printable role cards, and new scenario alerts.</p>
+                <input type="email" value={feedbackEmail} onChange={e => setFeedbackEmail(e.target.value)} placeholder="your@email.com (optional)" style={{ width: "100%", padding: "10px 14px", background: "#0c0f14", border: "1px solid #1e2533", borderRadius: 8, color: "#e2e8f0", fontSize: 13, outline: "none", fontFamily: "'DM Sans', sans-serif" }} />
+              </div>
+              <button onClick={submitFeedback} disabled={(!feedbackThinking && !feedbackUseCase && !feedbackEmail) || feedbackSubmitting} style={{ width: "100%", padding: "12px", background: (feedbackThinking || feedbackUseCase || feedbackEmail) ? "linear-gradient(135deg, #f59e0b, #06b6d4)" : "#1e293b", color: (feedbackThinking || feedbackUseCase || feedbackEmail) ? "#0c0f14" : "#334155", border: "none", borderRadius: 8, cursor: (feedbackThinking || feedbackUseCase || feedbackEmail) ? "pointer" : "not-allowed", fontFamily: "'Space Mono', monospace", fontSize: 11, fontWeight: 700, letterSpacing: 1, opacity: feedbackSubmitting ? 0.6 : 1 }}>
+                {feedbackSubmitting ? "SENDING..." : "SUBMIT FEEDBACK"}
+              </button>
+            </div>
+          ) : (
+            <div style={{ background: "#141820", border: "1px solid #10b98133", borderRadius: 12, padding: 20, marginBottom: 20, textAlign: "center" as const }}>
+              <span style={{ fontSize: 24 }}>🙏</span>
+              <p style={{ color: "#10b981", fontFamily: "'Space Mono', monospace", fontSize: 12, fontWeight: 700, marginTop: 8 }}>Thank you for your feedback!</p>
+              <p style={{ color: "#64748b", fontSize: 11, marginTop: 4 }}>
+                {feedbackEmail ? "We'll send you the facilitator's guide when it's ready." : "Your input helps us make these tools more effective."}
+              </p>
+            </div>
+          )}
+
+          {/* ─── FACILITATOR CTA ─── */}
+          <div style={{ background: "linear-gradient(135deg, #f9731611, #06b6d411)", border: "1px solid #f9731633", borderRadius: 12, padding: 20, marginBottom: 20, textAlign: "center" as const }}>
+            <div style={{ fontSize: 28, marginBottom: 8 }}>🎓</div>
+            <div style={{ fontFamily: "'Instrument Serif', serif", fontSize: 20, color: "#e2e8f0", marginBottom: 8 }}>Run this with your team</div>
+            <p style={{ color: "#94a3b8", fontSize: 13, lineHeight: 1.6, marginBottom: 12, maxWidth: 480, margin: "0 auto 12px" }}>
+              These simulations are designed for group workshops. Assign real roles, separate your participants, and discover how your organization thinks about AI governance trade-offs.
+            </p>
+            <p style={{ color: "#64748b", fontFamily: "'DM Mono', monospace", fontSize: 10 }}>
+              Workshop formats available: 15-minute demo · 1-hour session · 2-hour lifecycle arc
+            </p>
+          </div>
+
           <div style={{ display: "flex", gap: 12 }}>
             <button onClick={restart} style={{ flex: 1, padding: "14px 24px", background: "#141820", color: "#e2e8f0", border: "1px solid #1e2533", borderRadius: 8, cursor: "pointer", fontFamily: "'Space Mono', monospace", fontSize: 13, fontWeight: 700, letterSpacing: 2, textTransform: "uppercase" as const }}>
               ↻ Run Again

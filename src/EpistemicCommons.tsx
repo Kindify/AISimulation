@@ -385,6 +385,13 @@ export default function EpistemicCommonsV2({ onBack }: { onBack: () => void }) {
   // Scenario selection state
   const [selectedIds, setSelectedIds] = useState<Set<string>>(new Set());
   const [queue, setQueue] = useState<string[]>([]);
+  // Debrief engagement state
+  const [copied, setCopied] = useState(false);
+  const [feedbackSubmitted, setFeedbackSubmitted] = useState(false);
+  const [feedbackThinking, setFeedbackThinking] = useState<string | null>(null);
+  const [feedbackUseCase, setFeedbackUseCase] = useState<string | null>(null);
+  const [feedbackEmail, setFeedbackEmail] = useState("");
+  const [feedbackSubmitting, setFeedbackSubmitting] = useState(false);
 
   useEffect(() => { setAnimIn(false); const t = setTimeout(() => setAnimIn(true), 50); return () => clearTimeout(t); }, [phase, roleIdx, crisisIdx]);
 
@@ -453,6 +460,7 @@ export default function EpistemicCommonsV2({ onBack }: { onBack: () => void }) {
     setPhase("intro"); setCrisisIdx(0); setRoleIdx(0); setDecisions({}); setSelectedOption(null);
     setOutcomes([]); setShowAllIntel(false); setShowCounterfactuals(false); setShowScoring(false);
     setSelectedIds(new Set()); setQueue([]);
+    setCopied(false); setFeedbackSubmitted(false); setFeedbackThinking(null); setFeedbackUseCase(null); setFeedbackEmail(""); setFeedbackSubmitting(false);
   };
 
   const handleGenerate = async () => {
@@ -1020,6 +1028,149 @@ textarea, input { font-family: 'DM Sans', sans-serif; }
               <p style={{ color: "#94a3b8", fontSize: 12, lineHeight: 1.6 }}>Full version: separate devices, real-time decision locking, a negotiation phase for limited info-sharing before commitment, and AI-generated scenarios tailored to your workshop context.</p>
             </div>
           </div>
+
+          {/* ─── SHAREABLE RESULTS CARD ─── */}
+          {(() => {
+            const resultText = [
+              `🌐 THE EPISTEMIC COMMONS — AI Governance Simulation`,
+              ``,
+              `My Result: ${archetype}`,
+              `Coordination Grade: ${overallGrade}`,
+              `Synergies: ${totalSynergies} | Conflicts: ${totalConflicts}`,
+              ``,
+              `Metrics:`,
+              `  🎯 Information Integrity: ${totalScores.integrity > 0 ? '+' : ''}${totalScores.integrity}`,
+              `  👥 Public Trust: ${totalScores.trust > 0 ? '+' : ''}${totalScores.trust}`,
+              `  ⚖️ Institutional Legitimacy: ${totalScores.legitimacy > 0 ? '+' : ''}${totalScores.legitimacy}`,
+              `  🛡️ Individual Rights: ${totalScores.rights > 0 ? '+' : ''}${totalScores.rights}`,
+              ``,
+              `The hardest problem in AI governance isn't individual decisions — it's coordination.`,
+              ``,
+              `Try it: strategy.mobilis.studio`
+            ].join('\n');
+            const copyResult = () => {
+              navigator.clipboard.writeText(resultText).then(() => {
+                setCopied(true);
+                setTimeout(() => setCopied(false), 2500);
+              });
+            };
+            const submitFeedback = async () => {
+              setFeedbackSubmitting(true);
+              try {
+                const formData = new URLSearchParams();
+                formData.append("form-name", "simulation-feedback");
+                formData.append("tool", "epistemic-commons");
+                formData.append("archetype", archetype);
+                formData.append("grade", overallGrade);
+                formData.append("changed-thinking", feedbackThinking || "");
+                formData.append("use-case", feedbackUseCase || "");
+                formData.append("email", feedbackEmail);
+                formData.append("timestamp", new Date().toISOString());
+                await fetch("/", {
+                  method: "POST",
+                  headers: { "Content-Type": "application/x-www-form-urlencoded" },
+                  body: formData.toString()
+                });
+                setFeedbackSubmitted(true);
+              } catch (err) {
+                console.error("Feedback submission error:", err);
+                setFeedbackSubmitted(true);
+              }
+              setFeedbackSubmitting(false);
+            };
+            return (
+              <>
+                <div style={{ background: "#141820", border: "1px solid #1e2533", borderRadius: 12, padding: 24, marginBottom: 20 }}>
+                  <div style={{ fontFamily: "'Space Mono', monospace", fontSize: 10, letterSpacing: 2, color: "#06b6d4", marginBottom: 12 }}>SHARE YOUR RESULT</div>
+                  <div style={{ background: "#0c0f14", border: `1px solid ${gradeColor}33`, borderRadius: 10, padding: 20, marginBottom: 16 }}>
+                    <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: 12 }}>
+                      <div>
+                        <div style={{ fontFamily: "'DM Mono', monospace", fontSize: 9, color: "#64748b", letterSpacing: 1 }}>MY INSTITUTIONAL ARCHETYPE</div>
+                        <div style={{ fontFamily: "'Instrument Serif', serif", fontSize: 20, color: gradeColor, marginTop: 4 }}>{archetype}</div>
+                      </div>
+                      <div style={{ textAlign: "right" as const }}>
+                        <div style={{ fontFamily: "'Instrument Serif', serif", fontSize: 36, color: gradeColor, lineHeight: 1 }}>{overallGrade}</div>
+                        <div style={{ fontFamily: "'DM Mono', monospace", fontSize: 9, color: "#64748b" }}>GRADE</div>
+                      </div>
+                    </div>
+                    <div style={{ display: "flex", gap: 16, marginBottom: 12 }}>
+                      <div><span style={{ fontFamily: "'Space Mono', monospace", fontSize: 14, color: "#10b981", fontWeight: 700 }}>{totalSynergies}</span><span style={{ fontFamily: "'DM Mono', monospace", fontSize: 9, color: "#64748b", marginLeft: 4 }}>synergies</span></div>
+                      <div><span style={{ fontFamily: "'Space Mono', monospace", fontSize: 14, color: "#ef4444", fontWeight: 700 }}>{totalConflicts}</span><span style={{ fontFamily: "'DM Mono', monospace", fontSize: 9, color: "#64748b", marginLeft: 4 }}>conflicts</span></div>
+                    </div>
+                    <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 8 }}>
+                      {[
+                        { label: "Integrity", val: totalScores.integrity, icon: "🎯" },
+                        { label: "Trust", val: totalScores.trust, icon: "👥" },
+                        { label: "Legitimacy", val: totalScores.legitimacy, icon: "⚖️" },
+                        { label: "Rights", val: totalScores.rights, icon: "🛡️" }
+                      ].map((m, i) => (
+                        <div key={i} style={{ fontFamily: "'DM Mono', monospace", fontSize: 11, color: m.val > 0 ? "#10b981" : m.val < 0 ? "#ef4444" : "#64748b" }}>
+                          {m.icon} {m.label}: {m.val > 0 ? "+" : ""}{m.val}
+                        </div>
+                      ))}
+                    </div>
+                    <div style={{ marginTop: 12, paddingTop: 12, borderTop: "1px solid #1e2533", fontFamily: "'DM Mono', monospace", fontSize: 9, color: "#64748b" }}>
+                      strategy.mobilis.studio — AI Governance Simulation
+                    </div>
+                  </div>
+                  <button onClick={copyResult} style={{ width: "100%", padding: "12px", background: copied ? "#10b981" : "#1e293b", color: copied ? "#0c0f14" : "#94a3b8", border: "1px solid #334155", borderRadius: 8, cursor: "pointer", fontFamily: "'Space Mono', monospace", fontSize: 11, fontWeight: 700, letterSpacing: 1, transition: "all 0.3s ease" }}>
+                    {copied ? "COPIED TO CLIPBOARD" : "COPY RESULT TO SHARE"}
+                  </button>
+                </div>
+
+                {/* ─── FEEDBACK CAPTURE ─── */}
+                {!feedbackSubmitted ? (
+                  <div style={{ background: "#141820", border: "1px solid #1e2533", borderRadius: 12, padding: 24, marginBottom: 20 }}>
+                    <div style={{ fontFamily: "'Space Mono', monospace", fontSize: 10, letterSpacing: 2, color: "#f59e0b", marginBottom: 16 }}>QUICK FEEDBACK — HELP US IMPROVE</div>
+                    <div style={{ marginBottom: 16 }}>
+                      <p style={{ color: "#e2e8f0", fontSize: 13, fontWeight: 700, marginBottom: 8 }}>Did this change how you think about AI governance?</p>
+                      <div style={{ display: "flex", gap: 8, flexWrap: "wrap" as const }}>
+                        {["Yes, significantly", "Somewhat", "Not really"].map(opt => (
+                          <button key={opt} onClick={() => setFeedbackThinking(opt)} style={{ padding: "8px 14px", background: feedbackThinking === opt ? "#f59e0b22" : "#0c0f14", border: `1px solid ${feedbackThinking === opt ? "#f59e0b" : "#1e2533"}`, borderRadius: 6, color: feedbackThinking === opt ? "#f59e0b" : "#94a3b8", cursor: "pointer", fontFamily: "'DM Mono', monospace", fontSize: 11, transition: "all 0.2s ease" }}>{opt}</button>
+                        ))}
+                      </div>
+                    </div>
+                    <div style={{ marginBottom: 16 }}>
+                      <p style={{ color: "#e2e8f0", fontSize: 13, fontWeight: 700, marginBottom: 8 }}>Would you use this in a group setting?</p>
+                      <div style={{ display: "flex", gap: 8, flexWrap: "wrap" as const }}>
+                        {["Yes, with my team", "Yes, in a class", "Yes, at a workshop", "Just exploring"].map(opt => (
+                          <button key={opt} onClick={() => setFeedbackUseCase(opt)} style={{ padding: "8px 14px", background: feedbackUseCase === opt ? "#06b6d422" : "#0c0f14", border: `1px solid ${feedbackUseCase === opt ? "#06b6d4" : "#1e2533"}`, borderRadius: 6, color: feedbackUseCase === opt ? "#06b6d4" : "#94a3b8", cursor: "pointer", fontFamily: "'DM Mono', monospace", fontSize: 11, transition: "all 0.2s ease" }}>{opt}</button>
+                        ))}
+                      </div>
+                    </div>
+                    <div style={{ marginBottom: 16 }}>
+                      <p style={{ color: "#e2e8f0", fontSize: 13, fontWeight: 700, marginBottom: 4 }}>Want the facilitator's guide when it's ready?</p>
+                      <p style={{ color: "#64748b", fontSize: 11, marginBottom: 8 }}>Optional — includes workshop formats, printable role cards, and new scenario alerts.</p>
+                      <input type="email" value={feedbackEmail} onChange={e => setFeedbackEmail(e.target.value)} placeholder="your@email.com (optional)" style={{ width: "100%", padding: "10px 14px", background: "#0c0f14", border: "1px solid #1e2533", borderRadius: 8, color: "#e2e8f0", fontSize: 13, outline: "none", fontFamily: "'DM Sans', sans-serif" }} />
+                    </div>
+                    <button onClick={submitFeedback} disabled={(!feedbackThinking && !feedbackUseCase && !feedbackEmail) || feedbackSubmitting} style={{ width: "100%", padding: "12px", background: (feedbackThinking || feedbackUseCase || feedbackEmail) ? "linear-gradient(135deg, #f59e0b, #06b6d4)" : "#1e293b", color: (feedbackThinking || feedbackUseCase || feedbackEmail) ? "#0c0f14" : "#334155", border: "none", borderRadius: 8, cursor: (feedbackThinking || feedbackUseCase || feedbackEmail) ? "pointer" : "not-allowed", fontFamily: "'Space Mono', monospace", fontSize: 11, fontWeight: 700, letterSpacing: 1, opacity: feedbackSubmitting ? 0.6 : 1 }}>
+                      {feedbackSubmitting ? "SENDING..." : "SUBMIT FEEDBACK"}
+                    </button>
+                  </div>
+                ) : (
+                  <div style={{ background: "#141820", border: "1px solid #10b98133", borderRadius: 12, padding: 20, marginBottom: 20, textAlign: "center" as const }}>
+                    <span style={{ fontSize: 24 }}>🙏</span>
+                    <p style={{ color: "#10b981", fontFamily: "'Space Mono', monospace", fontSize: 12, fontWeight: 700, marginTop: 8 }}>Thank you for your feedback!</p>
+                    <p style={{ color: "#64748b", fontSize: 11, marginTop: 4 }}>
+                      {feedbackEmail ? "We'll send you the facilitator's guide when it's ready." : "Your input helps us make these tools more effective."}
+                    </p>
+                  </div>
+                )}
+
+                {/* ─── FACILITATOR CTA ─── */}
+                <div style={{ background: "linear-gradient(135deg, #06b6d411, #a855f711)", border: "1px solid #06b6d433", borderRadius: 12, padding: 20, marginBottom: 20, textAlign: "center" as const }}>
+                  <div style={{ fontSize: 28, marginBottom: 8 }}>🎓</div>
+                  <div style={{ fontFamily: "'Instrument Serif', serif", fontSize: 20, color: "#e2e8f0", marginBottom: 8 }}>Run this with your team</div>
+                  <p style={{ color: "#94a3b8", fontSize: 13, lineHeight: 1.6, marginBottom: 12, maxWidth: 480, margin: "0 auto 12px" }}>
+                    These simulations are designed for group workshops. Assign real roles, separate your participants, and discover how your organization thinks about AI governance trade-offs.
+                  </p>
+                  <p style={{ color: "#64748b", fontFamily: "'DM Mono', monospace", fontSize: 10 }}>
+                    Workshop formats available: 15-minute demo · 1-hour session · 2-hour lifecycle arc
+                  </p>
+                </div>
+              </>
+            );
+          })()}
 
           <div style={{ display: "flex", gap: 12 }}>
             <button onClick={() => setPhase("select")} style={{ flex: 1, padding: "14px 24px", background: "#141820", color: "#e2e8f0", border: "1px solid #1e2533", borderRadius: 8, cursor: "pointer", fontFamily: "'Space Mono', monospace", fontSize: 13, fontWeight: 700, letterSpacing: 2, textTransform: "uppercase" as const }}>

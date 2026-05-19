@@ -10,6 +10,17 @@
     <meta name="twitter:image" content="https://bolt.new/static/og_default.png" />
   </head>
   <body>
+    <!-- Netlify Forms detection -->
+    <form name="simulation-feedback" netlify netlify-honeypot="bot-field" hidden>
+      <input name="bot-field" />
+      <input name="tool" />
+      <input name="archetype" />
+      <input name="grade" />
+      <input name="changed-thinking" />
+      <input name="use-case" />
+      <input name="email" />
+      <input name="timestamp" />
+    </form>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
   </body>

@@ -684,32 +684,7 @@ textarea, input { font-family: 'DM Sans', sans-serif; }
               </div>
             )}
 
-            {/* AI SCENARIO GENERATOR */}
-            <div style={{ background: "#141820", border: "1px solid #a855f733", borderRadius: 10, padding: 20 }}>
-              <div style={{ fontFamily: "'Space Mono', monospace", fontSize: 10, letterSpacing: 2, color: "#a855f7", marginBottom: 8 }}>AI SCENARIO GENERATOR</div>
-              <p style={{ color: "#94a3b8", fontSize: 12, lineHeight: 1.5, marginBottom: 10 }}>Describe a governance context and the AI will generate a complete playable scenario with asymmetric intel, options, trade-offs, and interactions.</p>
-              <textarea value={genContext} onChange={e => setGenContext(e.target.value)} placeholder="e.g. AI-generated evidence admitted in a criminal trial, AI agents autonomously trading on financial markets, a school district deploying AI tutors that collect student behavioral data..." style={{ width: "100%", padding: 12, background: "#0c0f14", border: "1px solid #1e2533", borderRadius: 8, color: "#e2e8f0", fontSize: 13, lineHeight: 1.5, resize: "vertical", minHeight: 70, outline: "none" }} />
-              <button onClick={handleGenerate} disabled={genLoading || !genContext.trim()} style={{ marginTop: 8, padding: "10px 20px", background: genLoading ? "#1e293b" : "#a855f7", color: genLoading ? "#64748b" : "#fff", border: "none", borderRadius: 6, cursor: genLoading ? "wait" : "pointer", fontFamily: "'Space Mono', monospace", fontSize: 11, fontWeight: 700, letterSpacing: 1 }}>
-                {genLoading ? "GENERATING SCENARIO..." : "GENERATE SCENARIO →"}
-              </button>
-              {genError && <p style={{ color: "#ef4444", fontSize: 12, marginTop: 8 }}>{genError}</p>}
-              {genPreview && (
-                <div style={{ marginTop: 12, background: "#0c0f14", borderRadius: 8, padding: 14, border: "1px solid #a855f733" }}>
-                  <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 8 }}>
-                    <span style={{ fontSize: 22 }}>{genPreview.icon}</span>
-                    <div>
-                      <div style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 15, fontWeight: 700, color: "#e2e8f0" }}>{genPreview.title}</div>
-                      <div style={{ fontFamily: "'DM Mono', monospace", fontSize: 9, color: "#a855f7" }}>{genPreview.category}</div>
-                    </div>
-                  </div>
-                  <p style={{ color: "#94a3b8", fontSize: 12, lineHeight: 1.5, marginBottom: 10 }}>{genPreview.publicBriefing}</p>
-                  <div style={{ display: "flex", gap: 8 }}>
-                    <button onClick={addGeneratedScenario} style={{ padding: "8px 16px", background: "#10b981", color: "#0c0f14", border: "none", borderRadius: 6, cursor: "pointer", fontFamily: "'Space Mono', monospace", fontSize: 10, fontWeight: 700, letterSpacing: 1 }}>ADD TO LIBRARY</button>
-                    <button onClick={() => { setGenPreview(null); handleGenerate(); }} style={{ padding: "8px 16px", background: "#1e293b", color: "#94a3b8", border: "1px solid #334155", borderRadius: 6, cursor: "pointer", fontFamily: "'Space Mono', monospace", fontSize: 10, letterSpacing: 1 }}>REGENERATE</button>
-                  </div>
-                </div>
-              )}
-            </div>
+            {/* AI SCENARIO GENERATOR — hidden until functional */}
           </div>
         </div>
       </div>

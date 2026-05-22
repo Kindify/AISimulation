@@ -1,4 +1,4 @@
-# The Epistemic Commons & Institutional Stress Test
+# AI Governance Simulation - The Epistemic Commons & Institutional Stress Test
 
 **Live at [strategy.mobilis.studio](https://strategy.mobilis.studio)**
 
@@ -10,7 +10,7 @@ Interactive simulation tools for exploring AI governance trade-offs. Built as an
 
 **IF** we build tools that honestly communicate the trade-offs of AI governance and validate their effectiveness through empirical study,
 
-**THEN** policymakers and the public will move from "vague fear" to "accurate mental models" of epistemic and institutional risks,
+**THEN** policymakers and the public will move from "vague fear" towards "accurate mental models" of epistemic and institutional risks,
 
 **WHICH LEADS TO** increased democratic pressure for robust, evidence-based AI safeguards and faster institutional adaptation.
 
@@ -28,18 +28,18 @@ A single-player strategy dashboard where you manage an AI regulatory body with l
 - **The Trade-off**: Increasing speed risks regulatory capture and errors. Increasing rigour leads to obsolescence as technology outpaces your rules.
 - **The Insight**: There is no correct answer — only trade-offs. The *how* of governance matters as much as the *whether*.
 
-### Tool B: The Epistemic Commons (Multiplayer Coordination Game)
+### Tool B: The Epistemic Commons (Multiplayer Coordination Simulation)
 
-A multiplayer-prototype deliberation game where 4 institutional actors face AI-driven crises with asymmetric information.
+A multiplayer-prototype deliberation simulation where 4 institutional actors face AI-driven crises with asymmetric information.
 
 - **The Roles**: Regulator, Platform, Journalist, AI Lab — each with private intelligence the others can't see.
 - **The Mechanic**: Commit decisions blind, then discover how your choices *interact*. Synergies amplify good outcomes. Conflicts create cascading failures.
-- **The Insight**: The hardest problem in AI governance isn't making good individual decisions — it's making decisions that *compose well* across institutions with different information, incentives, and time horizons.
+- **The Insight**: Some of the hardest problems in AI governance aren't just making good individual decisions — it's making decisions that *compose well* across institutions with different information, incentives, and time horizons.
 
 **Features:**
 - Visible scoring framework with 4 metrics (Information Integrity, Public Trust, Institutional Legitimacy, Individual Rights)
 - Counterfactual "what if" analysis after each crisis
-- AI-powered scenario generator (describe a context → get a playable scenario)
+- Future scenario generator (describe a context to build a playable scenario - coming soon)
 - 6 built-in scenarios forming a lifecycle arc
 
 ---
@@ -72,15 +72,15 @@ The lifecycle arc supports a retrospective exercise: after playing "The Day Of,"
 Play one scenario from each tool to demonstrate the core mechanics.
 
 ### Standard Workshop (1 hour)
-- **Round 1** (20 min): Institutional Stress Test — individual pacing problem
-- **Round 2** (25 min): Epistemic Commons — one crisis with full debrief
+- **Round 1** (10 min): Institutional Stress Test — individual pacing problem
+- **Round 2** (10 min): Epistemic Commons — one crisis with full debrief
 - **Discussion** (15 min): Compare individual vs. collective decision-making dynamics
 
-### Full Lifecycle (2 hours)
-- **Round 1** (25 min): The Crossing — anticipatory governance
-- **Round 2** (25 min): The Void — institutional adaptation
-- **Round 3** (25 min): The Jump or The Day Of — escalation/accountability
-- **Debrief** (30 min): Lifecycle retrospective — where was intervention possible?
+### Full Lifecycle
+- **Round 1** (10 min): The Crossing — anticipatory governance
+- **Round 2** (10 min): The Void — institutional adaptation
+- **Round 3** (15 min): The Jump or The Day Of — escalation/accountability
+- **Debrief** (15 min): Lifecycle retrospective — where was intervention possible?
 
 ### Multiplayer (In-Person)
 Assign each participant a role. Physically separate them. Give 3 minutes to read private intel and decide. Bring everyone together for the reveal. The moment players see what others knew is where the learning happens.
@@ -91,7 +91,6 @@ Assign each participant a role. Physically separate them. Give 3 minutes to read
 
 - React 18 + Vite
 - Inline styling (no CSS framework)
-- Anthropic API for AI scenario generation
 - Deployed on Netlify
 
 ---
@@ -99,7 +98,7 @@ Assign each participant a role. Physically separate them. Give 3 minutes to read
 ## Running Locally
 
 ```bash
-git clone https://github.com/Kindify/AISimulation.git
+git clone https://github.com/[your-username]/AISimulation.git
 cd AISimulation
 npm install
 npm run dev
@@ -109,7 +108,7 @@ npm run dev
 
 ## Roadmap
 
-- [ ] True multiplayer: separate devices, real-time decision locking
+
 - [ ] Negotiation phase: limited information sharing before commitment
 - [ ] Expanded scenario library (target: 8-10 curated scenarios)
 - [ ] Empirical validation: does playing improve decision-making quality?
@@ -126,11 +125,18 @@ The core pedagogical bet: people develop better mental models of complex trade-o
 ---
 
 ## License
-
 MIT
+
+Copyright (c) 2026 M. Janes
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 ---
 
 ## Contact
 
-Built by MJanes · github.com/kindify
+Built by [your name] · [your email or social link]

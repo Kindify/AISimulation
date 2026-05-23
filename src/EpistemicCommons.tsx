@@ -365,6 +365,8 @@ function RoleCard({ role, isActive, isCompleted }: any) {
   );
 }
 
+export { ROLES, BUILT_IN_CRISES, computeOutcome };
+
 // ─── MAIN ────────────────────────────────────────────────
 export default function EpistemicCommonsV2({ onBack }: { onBack: () => void }) {
   const [phase, setPhase] = useState("intro");

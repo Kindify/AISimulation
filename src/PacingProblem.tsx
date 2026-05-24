@@ -1,4 +1,5 @@
 import { useState, useEffect, useCallback } from "react";
+import { track } from "./analytics";
 
 const EVENTS = [
   {
@@ -195,6 +196,14 @@ export default function PacingProblem({ onBack }: { onBack: () => void }) {
     else if (sliderValue > 65) outcome = ev.rigourOutcome;
     else outcome = ev.balancedOutcome;
 
+    track("pacing_decision", {
+      event_id: ev.id,
+      event_title: ev.title,
+      slider_value: sliderValue,
+      bias: sliderValue < 35 ? "speed" : sliderValue > 65 ? "rigour" : "balanced",
+      choice_label: outcome.label,
+    });
+
     setState(prev => ({
       ...prev,
       bandwidth: clamp(prev.bandwidth - ev.bandwidthCost, 0, 100),
@@ -223,6 +232,30 @@ export default function PacingProblem({ onBack }: { onBack: () => void }) {
 
   const gameOver = state.bandwidth <= 0 || state.captureRisk >= 90 || state.obsolescenceRisk >= 90 || state.publicTrust <= 5;
   useEffect(() => { if (gameOver && phase === "event") setPhase("debrief"); }, [gameOver, phase]);
+
+  useEffect(() => {
+    if (phase === "debrief") {
+      const speedChoices = state.history.filter(h => h.bias === "speed").length;
+      const balancedChoices = state.history.filter(h => h.bias === "balanced").length;
+      const rigourChoices = state.history.filter(h => h.bias === "rigour").length;
+      let archetype = "The Muddling Through";
+      if (state.captureRisk >= 60) archetype = "The Captured Regulator";
+      else if (state.obsolescenceRisk >= 60) archetype = "The Museum Piece";
+      else if (state.publicTrust <= 25) archetype = "The Discredited Authority";
+      else if (state.credibility >= 50 && state.captureRisk < 40 && state.obsolescenceRisk < 40) archetype = "The Adaptive Institution";
+      track("pacing_debrief", {
+        archetype,
+        bandwidth: state.bandwidth,
+        credibility: state.credibility,
+        capture_risk: state.captureRisk,
+        obsolescence_risk: state.obsolescenceRisk,
+        public_trust: state.publicTrust,
+        speed_choices: speedChoices,
+        balanced_choices: balancedChoices,
+        rigour_choices: rigourChoices,
+      });
+    }
+  }, [phase]);
 
   const S = { fontFamily: "'DM Sans', sans-serif", background: "#0c0f14", color: "#e2e8f0", minHeight: "100vh", padding: "24px" };
 
@@ -282,7 +315,7 @@ export default function PacingProblem({ onBack }: { onBack: () => void }) {
                 </div>
               ))}
             </div>
-            <button onClick={() => setPhase("event")} style={{ width: "100%", padding: "14px 24px", background: "linear-gradient(135deg, #f97316, #a855f7)", color: "#fff", border: "none", borderRadius: 8, cursor: "pointer", fontFamily: "'Space Mono', monospace", fontSize: 14, fontWeight: 700, letterSpacing: 2, textTransform: "uppercase" as const }}>
+            <button onClick={() => { track("pacing_start"); setPhase("event"); }} style={{ width: "100%", padding: "14px 24px", background: "linear-gradient(135deg, #f97316, #a855f7)", color: "#fff", border: "none", borderRadius: 8, cursor: "pointer", fontFamily: "'Space Mono', monospace", fontSize: 14, fontWeight: 700, letterSpacing: 2, textTransform: "uppercase" as const }}>
               Begin Simulation →
             </button>
           </div>
@@ -323,6 +356,7 @@ export default function PacingProblem({ onBack }: { onBack: () => void }) {
     ].join('\n');
 
     const copyResult = () => {
+      track("pacing_share", { archetype });
       navigator.clipboard.writeText(resultText).then(() => {
         setCopied(true);
         setTimeout(() => setCopied(false), 2500);
@@ -330,6 +364,12 @@ export default function PacingProblem({ onBack }: { onBack: () => void }) {
     };
 
     const submitFeedback = async () => {
+      track("feedback_submitted", {
+        tool: "pacing",
+        changed_thinking: feedbackThinking || "",
+        use_case: feedbackUseCase || "",
+        has_email: feedbackEmail ? "yes" : "no",
+      });
       setFeedbackSubmitting(true);
       try {
         const formData = new URLSearchParams();

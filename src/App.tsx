@@ -1,7 +1,8 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import PacingProblem from "./PacingProblem";
 import EpistemicCommonsV2 from "./EpistemicCommons";
 import QuickPlay from "./QuickPlay";
+import { track } from "./analytics";
 
 const css = `@import url('https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:wght@400;500;700&family=Space+Mono:wght@400;700&family=Instrument+Serif&display=swap');
 * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -25,6 +26,10 @@ textarea, input { font-family: 'DM Sans', sans-serif; }
 
 function Home({ onSelect }: { onSelect: (tool: string) => void }) {
   const [showTheory, setShowTheory] = useState(false);
+
+  useEffect(() => {
+    track("home_view");
+  }, []);
 
   return (
     <div style={{ fontFamily: "'DM Sans', sans-serif", background: "#0c0f14", color: "#e2e8f0", minHeight: "100vh", padding: "24px" }}>
@@ -55,7 +60,7 @@ function Home({ onSelect }: { onSelect: (tool: string) => void }) {
           </p>
           <button
             className="play-now-btn"
-            onClick={() => onSelect("quick")}
+            onClick={() => { track("quick_play_start_click"); onSelect("quick"); }}
             style={{ width: "100%", padding: "16px", background: "linear-gradient(135deg, #06b6d4, #0ea5e9)", color: "#0c0f14", border: "none", borderRadius: 10, cursor: "pointer", fontFamily: "'Space Mono', monospace", fontSize: 14, fontWeight: 700, letterSpacing: 3 }}
           >
             PLAY NOW →
@@ -67,7 +72,7 @@ function Home({ onSelect }: { onSelect: (tool: string) => void }) {
         <div className="home-tools" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 20, marginBottom: 36 }}>
 
           {/* Pacing Problem */}
-          <div className="tool-card" onClick={() => onSelect("pacing")} style={{ background: "#141820", border: "1px solid #1e2533", borderRadius: 12, padding: 28, display: "flex", flexDirection: "column" as const, gap: 0 }}>
+          <div className="tool-card" onClick={() => { track("pacing_start_click"); onSelect("pacing"); }} style={{ background: "#141820", border: "1px solid #1e2533", borderRadius: 12, padding: 28, display: "flex", flexDirection: "column" as const, gap: 0 }}>
             <div style={{ display: "flex", alignItems: "center", gap: 12, marginBottom: 16 }}>
               <div style={{ width: 44, height: 44, borderRadius: 10, background: "#f9731618", border: "1px solid #f9731633", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 22, flexShrink: 0 }}>🏛️</div>
               <div>
@@ -90,7 +95,7 @@ function Home({ onSelect }: { onSelect: (tool: string) => void }) {
           </div>
 
           {/* Epistemic Commons */}
-          <div className="tool-card" onClick={() => onSelect("commons")} style={{ background: "#141820", border: "1px solid #1e2533", borderRadius: 12, padding: 28, display: "flex", flexDirection: "column" as const, gap: 0 }}>
+          <div className="tool-card" onClick={() => { track("commons_start_click"); onSelect("commons"); }} style={{ background: "#141820", border: "1px solid #1e2533", borderRadius: 12, padding: 28, display: "flex", flexDirection: "column" as const, gap: 0 }}>
             <div style={{ display: "flex", alignItems: "center", gap: 12, marginBottom: 16 }}>
               <div style={{ width: 44, height: 44, borderRadius: 10, background: "#06b6d418", border: "1px solid #06b6d433", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 22, flexShrink: 0 }}>🌐</div>
               <div>

@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { ROLES, BUILT_IN_CRISES, computeOutcome } from "./EpistemicCommons";
 import WORKSHOP_SCENARIOS from "./workshop-scenarios";
+import { track } from "./analytics";
 
 const METRICS_INFO = [
   { key: "integrity", label: "Information Integrity", icon: "🎯" },
@@ -47,7 +48,7 @@ export default function QuickPlay({ onBack, onFullPlay }: Props) {
   const [feedbackEmail, setFeedbackEmail] = useState("");
   const [feedbackSubmitted, setFeedbackSubmitted] = useState(false);
 
-  const randomize = () => {
+  const randomize = (isReroll = false) => {
     const allCrises = [...BUILT_IN_CRISES, ...(WORKSHOP_SCENARIOS as any[])];
     const randomCrisis = allCrises[Math.floor(Math.random() * allCrises.length)];
     const randomRole = ROLES[Math.floor(Math.random() * ROLES.length)];
@@ -68,12 +69,41 @@ export default function QuickPlay({ onBack, onFullPlay }: Props) {
     setFeedbackThinking(null);
     setFeedbackEmail("");
     setFeedbackSubmitted(false);
+    if (isReroll) {
+      track("quick_play_reroll");
+    } else {
+      track("quick_play_loaded", {
+        scenario_id: randomCrisis.id,
+        scenario_title: randomCrisis.title,
+        role_id: randomRole.id,
+        role_name: randomRole.name,
+      });
+    }
   };
 
   useEffect(() => { randomize(); }, []);
 
+  useEffect(() => {
+    if (phase === "outcome" && outcome && crisis && role) {
+      track("quick_play_outcome", {
+        scenario_id: crisis.id,
+        role_id: role.id,
+        grade: outcome.coordinationGrade,
+        synergies: outcome.triggeredInteractions.filter((i: any) => i.type === "synergy").length,
+        conflicts: outcome.triggeredInteractions.filter((i: any) => i.type === "conflict").length,
+      });
+    }
+  }, [phase]);
+
   const commitChoice = () => {
     if (!selectedOption || !crisis || !role) return;
+    const opts: any[] = crisis.options[role.id] || [];
+    track("quick_play_commit", {
+      scenario_id: crisis.id,
+      role_id: role.id,
+      option_id: selectedOption,
+      option_label: opts.find((o: any) => o.id === selectedOption)?.label || "",
+    });
     const allDecisions = { ...otherDecisions, [role.id]: selectedOption };
     const result = computeOutcome(crisis, allDecisions);
     setOutcome(result);
@@ -82,6 +112,11 @@ export default function QuickPlay({ onBack, onFullPlay }: Props) {
   };
 
   const submitFeedback = async () => {
+    track("feedback_submitted", {
+      tool: "quick_play",
+      changed_thinking: feedbackThinking || "",
+      has_email: feedbackEmail ? "yes" : "no",
+    });
     try {
       const formData = new URLSearchParams();
       formData.append("form-name", "quickplay-feedback");
@@ -230,7 +265,7 @@ export default function QuickPlay({ onBack, onFullPlay }: Props) {
 
           {/* Bottom nav */}
           <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
-            <button onClick={randomize} style={{ background: "none", border: "1px solid #1e2533", borderRadius: 6, padding: "8px 14px", color: "#64748b", cursor: "pointer", fontFamily: "'DM Mono', monospace", fontSize: 11 }}>
+            <button onClick={() => randomize(true)} style={{ background: "none", border: "1px solid #1e2533", borderRadius: 6, padding: "8px 14px", color: "#64748b", cursor: "pointer", fontFamily: "'DM Mono', monospace", fontSize: 11 }}>
               Different scenario
             </button>
             <button onClick={onBack} style={{ background: "none", border: "none", color: "#475569", cursor: "pointer", fontFamily: "'DM Mono', monospace", fontSize: 11 }}>
@@ -264,6 +299,7 @@ export default function QuickPlay({ onBack, onFullPlay }: Props) {
   ].join("\n");
 
   const copyResult = () => {
+    track("quick_play_share", { scenario_id: crisis.id, grade: outcome.coordinationGrade });
     navigator.clipboard.writeText(resultText).then(() => {
       setCopied(true);
       setTimeout(() => setCopied(false), 2500);
@@ -443,7 +479,7 @@ export default function QuickPlay({ onBack, onFullPlay }: Props) {
             See how your choices interact when you control the coordination. Play every institution — discover what each knew and didn't know.
           </p>
           <button
-            onClick={onFullPlay}
+            onClick={() => { track("quick_play_upsell_click"); onFullPlay(); }}
             style={{ padding: "14px 32px", background: "linear-gradient(135deg, #06b6d4, #0ea5e9)", color: "#0c0f14", border: "none", borderRadius: 8, cursor: "pointer", fontFamily: "'Space Mono', monospace", fontSize: 12, fontWeight: 700, letterSpacing: 2 }}
           >
             PLAY FULL SIMULATION →
@@ -452,7 +488,7 @@ export default function QuickPlay({ onBack, onFullPlay }: Props) {
 
         {/* Bottom nav */}
         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", paddingBottom: 12 }}>
-          <button onClick={randomize} style={{ background: "none", border: "1px solid #1e2533", borderRadius: 6, padding: "8px 14px", color: "#64748b", cursor: "pointer", fontFamily: "'DM Mono', monospace", fontSize: 11 }}>
+          <button onClick={() => randomize(true)} style={{ background: "none", border: "1px solid #1e2533", borderRadius: 6, padding: "8px 14px", color: "#64748b", cursor: "pointer", fontFamily: "'DM Mono', monospace", fontSize: 11 }}>
             Play again (new scenario)
           </button>
           <button onClick={onBack} style={{ background: "none", border: "none", color: "#475569", cursor: "pointer", fontFamily: "'DM Mono', monospace", fontSize: 11 }}>

@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import WORKSHOP_SCENARIOS from "./workshop-scenarios";
+import { track } from "./analytics";
 
 // ─── ROLES ───────────────────────────────────────────────
 const ROLES = [
@@ -397,6 +398,28 @@ export default function EpistemicCommonsV2({ onBack }: { onBack: () => void }) {
 
   useEffect(() => { setAnimIn(false); const t = setTimeout(() => setAnimIn(true), 50); return () => clearTimeout(t); }, [phase, roleIdx, crisisIdx]);
 
+  useEffect(() => {
+    if (phase === "debrief" && outcomes.length > 0) {
+      const gradeToVal: Record<string, number> = { A: 4, "A-": 3.5, B: 3, "B-": 2.5, C: 2, "C-": 1.5, D: 1, "D-": 0.5, F: 0 };
+      const grades = outcomes.map((o: any) => o.coordinationGrade);
+      const avgGradeVal = grades.reduce((s: number, g: string) => s + (gradeToVal[g] ?? 2), 0) / grades.length;
+      const overallGrade = avgGradeVal >= 3.75 ? "A" : avgGradeVal >= 3.25 ? "A-" : avgGradeVal >= 2.75 ? "B" : avgGradeVal >= 2.25 ? "B-" : avgGradeVal >= 1.75 ? "C" : avgGradeVal >= 1.25 ? "C-" : avgGradeVal >= 0.75 ? "D" : avgGradeVal >= 0.25 ? "D-" : "F";
+      let archetype = "The Institutional Fragmentation";
+      if (overallGrade === "A") archetype = "The Aligned Ecosystem";
+      else if (overallGrade === "B") archetype = "The Imperfect Coalition";
+      else if (overallGrade === "C") archetype = "The Fog of Governance";
+      const totalSynergies = outcomes.reduce((s: number, o: any) => s + o.triggeredInteractions.filter((i: any) => i.type === "synergy").length, 0);
+      const totalConflicts = outcomes.reduce((s: number, o: any) => s + o.triggeredInteractions.filter((i: any) => i.type === "conflict").length, 0);
+      track("commons_debrief", {
+        overall_grade: overallGrade,
+        archetype,
+        total_synergies: totalSynergies,
+        total_conflicts: totalConflicts,
+        scenarios_played: outcomes.length,
+      });
+    }
+  }, [phase]);
+
   const crisis = crises[crisisIdx];
   const role = ROLES[roleIdx];
   const crisisDecisions = decisions[crisis?.id] || {};
@@ -410,6 +433,11 @@ export default function EpistemicCommonsV2({ onBack }: { onBack: () => void }) {
     const firstId = ids[0];
     const idx = crises.findIndex((c: any) => c.id === firstId);
     if (idx === -1) return;
+    const startCrisis = crises[idx];
+    track("commons_scenario_start", {
+      scenario_id: startCrisis.id,
+      scenario_title: startCrisis.title,
+    });
     setCrisisIdx(idx);
     setRoleIdx(0);
     setSelectedOption(null);
@@ -420,6 +448,14 @@ export default function EpistemicCommonsV2({ onBack }: { onBack: () => void }) {
 
   const commitDecision = () => {
     if (!selectedOption) return;
+    const opts: any[] = crisis.options[role.id] || [];
+    track("commons_role_commit", {
+      scenario_id: crisis.id,
+      role_id: role.id,
+      option_id: selectedOption,
+      option_label: opts.find((o: any) => o.id === selectedOption)?.label || "",
+      stance: opts.find((o: any) => o.id === selectedOption)?.stance || "",
+    });
     const newDec = { ...decisions, [crisis.id]: { ...crisisDecisions, [role.id]: selectedOption } };
     setDecisions(newDec);
     setSelectedOption(null);
@@ -427,6 +463,16 @@ export default function EpistemicCommonsV2({ onBack }: { onBack: () => void }) {
       setRoleIdx(roleIdx + 1);
     } else {
       const outcome = computeOutcome(crisis, newDec[crisis.id]);
+      track("commons_resolution", {
+        scenario_id: crisis.id,
+        grade: outcome.coordinationGrade,
+        synergies: outcome.triggeredInteractions.filter((i: any) => i.type === "synergy").length,
+        conflicts: outcome.triggeredInteractions.filter((i: any) => i.type === "conflict").length,
+        integrity: outcome.scores.integrity,
+        trust: outcome.scores.trust,
+        legitimacy: outcome.scores.legitimacy,
+        rights: outcome.scores.rights,
+      });
       setOutcomes((prev: any[]) => {
         const existing = prev.findIndex((o: any) => o.crisisId === crisis.id);
         if (existing >= 0) {
@@ -1026,12 +1072,19 @@ textarea, input { font-family: 'DM Sans', sans-serif; }
               `Try it: strategy.mobilis.studio`
             ].join('\n');
             const copyResult = () => {
+              track("commons_share", { archetype, grade: overallGrade });
               navigator.clipboard.writeText(resultText).then(() => {
                 setCopied(true);
                 setTimeout(() => setCopied(false), 2500);
               });
             };
             const submitFeedback = async () => {
+              track("feedback_submitted", {
+                tool: "commons",
+                changed_thinking: feedbackThinking || "",
+                use_case: feedbackUseCase || "",
+                has_email: feedbackEmail ? "yes" : "no",
+              });
               setFeedbackSubmitting(true);
               try {
                 const formData = new URLSearchParams();

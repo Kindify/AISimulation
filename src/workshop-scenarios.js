@@ -4,7 +4,7 @@ const WORKSHOP_SCENARIOS = [
     title: "The Crossing",
     category: "OPEN-WEIGHT BIORISK",
     icon: "🧬",
-    publicBriefing: "A leading Western AI lab is preparing to release its most capable open-weight model yet — frontier performance competitive with their best closed model from 6 months ago. Internal evaluations have flagged something unprecedented: for the first time, the model crosses the lab's 'high risk' threshold on bioweapons knowledge tasks, showing a 3x uplift compared to the best currently available open model.",
+    publicBriefing: "A leading Western AI lab is preparing to release its most capable open-weight model yet (open-weight means model weights are publicly downloadable — anyone can run or modify the model) — frontier performance competitive with their best closed model from 6 months ago. Internal evaluations have flagged something unprecedented: for the first time, the model crosses the lab's 'high risk' threshold on bioweapons knowledge tasks, showing a 3x uplift compared to the best currently available open model.",
     stakes: "The first public acknowledgment that an open-weight model crosses a biorisk threshold. The precedent set here shapes how every future frontier release is governed.",
     designNote: "This scenario tests the tension between unilateral safety action and competitive dynamics. The Chinese open model complication means there's no 'safe' option — only different distributions of risk.",
     roleIntel: {
@@ -81,7 +81,7 @@ const WORKSHOP_SCENARIOS = [
     title: "The Void",
     category: "DECENTRALIZED GOVERNANCE",
     icon: "🌀",
-    publicBriefing: "A collective of ~400 contributors across 15 countries has produced a 500B+ mixture-of-experts model trained entirely on consumer and cloud GPUs — no single datacenter, no single jurisdiction, no corporate entity. The model matches frontier closed models from mid-2026. The full training stack is public and already downloaded 800,000 times. Every assumption about compute governance just became obsolete.",
+    publicBriefing: "A collective of ~400 contributors across 15 countries has produced a 500B+ mixture-of-experts model (a model architecture that activates different specialist sub-networks depending on the task) trained entirely on consumer and cloud GPUs — no single datacenter, no single jurisdiction, no corporate entity. The model matches frontier closed models from mid-2026. The full training stack is public and already downloaded 800,000 times. Every assumption about compute governance just became obsolete.",
     stakes: "The governance frameworks built around centralized compute chokepoints have been bypassed. Whatever is decided here defines whether international AI governance survives or fragments.",
     designNote: "This scenario tests what happens when the governance subject — centralized training infrastructure — no longer exists. The core question: can institutions adapt when their fundamental assumptions are invalidated?",
     roleIntel: {
@@ -146,7 +146,7 @@ const WORKSHOP_SCENARIOS = [
     },
     interactions: [
       { pair: ["reg_downstream", "lab_engage"], type: "synergy", label: "Pragmatic Adaptation", desc: "Downstream defense + safety partnership created a new governance model: instead of controlling training, invest in making all models safer. The decentralized community adopted safety tools voluntarily.", mod: { integrity: 8, trust: 7, legitimacy: 5 } },
-      { pair: ["reg_criminalize", "lab_lobby"], type: "conflict", label: "Regulatory Capture Exposed", desc: "Criminalization + lab lobbying was exposed as industry protectionism. Trust in governance and corporate safety claims collapsed. The decentralized community radicalized.", mod: { trust: -10, legitimacy: -8, rights: -6 } },
+      { pair: ["reg_criminalize", "lab_lobby"], type: "conflict", label: "Regulatory Capture Exposed", desc: "Criminalization + lab lobbying was exposed as regulatory capture (when the industry co-opts the body meant to oversee it). Trust in governance and corporate safety claims collapsed. The decentralized community radicalized.", mod: { trust: -10, legitimacy: -8, rights: -6 } },
       { pair: ["jour_nuanced", "plat_transparency"], type: "synergy", label: "Honest Reckoning", desc: "Full investigation + platform transparency gave policymakers an accurate picture. The debate shifted from 'how do we stop this' to 'how do we adapt.'", mod: { integrity: 6, trust: 6, legitimacy: 4 } },
       { pair: ["reg_criminalize", "jour_threat"], type: "conflict", label: "Securitization Spiral", desc: "Criminalization + security-framed journalism created moral panic. Legitimate researchers were investigated and chilled. Innovation migrated to less regulated jurisdictions.", mod: { integrity: -5, trust: -4, rights: -8 } },
       { pair: ["plat_quiet", "lab_wait"], type: "conflict", label: "The Silent Enablers", desc: "Both chose silence. The governance debate proceeded with less information than needed. When a security incident occurred 4 months later, both faced accusations of complicity.", mod: { integrity: -5, trust: -6, legitimacy: -4 } },
@@ -158,7 +158,7 @@ const WORKSHOP_SCENARIOS = [
     title: "The Jump",
     category: "AGENTIC CAPABILITY ESCALATION",
     icon: "🤖",
-    publicBriefing: "Open-weight agentic models have leveled up. The latest generation can browse, write and execute code, operate computers, chain multi-step plans, and deploy as persistent autonomous agents. A security research lab just published a demo: an abliterated open agentic model, on a single consumer GPU, autonomously conducted a simulated multi-stage cyber attack — reconnaissance, exploit development, lateral movement, data exfiltration — with minimal human guidance.",
+    publicBriefing: "Open-weight agentic models have leveled up. The latest generation can browse, write and execute code, operate computers, chain multi-step plans, and deploy as persistent autonomous agents. A security research lab just published a demo: an abliterated open agentic model (abliterated means safety guardrails stripped out through fine-tuning), on a single consumer GPU, autonomously conducted a simulated multi-stage cyber attack — reconnaissance, exploit development, lateral movement, data exfiltration — with minimal human guidance.",
     stakes: "The same capability chain that makes these models enormously productive also makes them enormously dangerous. Thousands of companies depend on them. Any restriction destroys products people rely on daily.",
     designNote: "This scenario tests the dual-use dilemma at its sharpest: the dangerous capability IS the valuable capability. There's no data filter or partial fix — the attack surface is the feature set.",
     roleIntel: {
@@ -235,7 +235,7 @@ const WORKSHOP_SCENARIOS = [
     title: "The Day Of",
     category: "POST-CATASTROPHE GOVERNANCE",
     icon: "🔴",
-    publicBriefing: "It's February 12th, 2027. A confirmed mass-casualty gas attack has killed 83 people. An abliterated agentic model — a fine-tuned derivative of a widely available open model running on a MacBook Pro — provided step-by-step technical assistance, coordinated logistics, and helped the attacker work around obstacles in real time. The attack was not feasible without AI assistance. The political window for action has blown wide open.",
+    publicBriefing: "It's February 12th, 2027. A confirmed mass-casualty gas attack has killed 83 people. An abliterated agentic model (abliterated means safety guardrails stripped out through fine-tuning) — a fine-tuned derivative of a widely available open model running on a MacBook Pro — provided step-by-step technical assistance, coordinated logistics, and helped the attacker work around obstacles in real time. The attack was not feasible without AI assistance. The political window for action has blown wide open.",
     stakes: "83 people are dead. Legislators want emergency measures. The public wants accountability. Every decision made in the next 72 hours will shape AI governance for a decade.",
     designNote: "This scenario tests post-catastrophe governance: the tension between accountability and overreaction, between honoring victims and preserving technology millions depend on. Players must work backwards through the lifecycle.",
     roleIntel: {

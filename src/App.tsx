@@ -56,7 +56,7 @@ function Home({ onSelect }: { onSelect: (tool: string) => void }) {
             One crisis. One role. Your call.
           </h2>
           <p style={{ color: "#94a3b8", fontSize: 14, lineHeight: 1.7, marginBottom: 24, maxWidth: 520 }}>
-            Get randomly assigned an AI governance crisis and an institutional role. Make one decision and discover how it interacts with what the other three institutions chose — without knowing what they knew.
+            You're randomly assigned a governance crisis and an institutional role with private information the others don't have. Make one decision and see how it interacts with what the other three institutions chose independently.
           </p>
           <button
             className="play-now-btn"
@@ -94,17 +94,17 @@ function Home({ onSelect }: { onSelect: (tool: string) => void }) {
             </div>
           </div>
 
-          {/* Epistemic Commons */}
+          {/* AI Governance Game */}
           <div className="tool-card" onClick={() => { track("commons_start_click"); onSelect("commons"); }} style={{ background: "#141820", border: "1px solid #1e2533", borderRadius: 12, padding: 28, display: "flex", flexDirection: "column" as const, gap: 0 }}>
             <div style={{ display: "flex", alignItems: "center", gap: 12, marginBottom: 16 }}>
               <div style={{ width: 44, height: 44, borderRadius: 10, background: "#06b6d418", border: "1px solid #06b6d433", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 22, flexShrink: 0 }}>🌐</div>
               <div>
                 <div style={{ fontFamily: "'Space Mono', monospace", fontSize: 9, letterSpacing: 2, color: "#06b6d4", marginBottom: 3 }}>MULTIPLAYER / SOLO</div>
-                <div style={{ fontFamily: "'Instrument Serif', serif", fontSize: 20, fontWeight: 400, lineHeight: 1.1 }}>The Epistemic Commons</div>
+                <div style={{ fontFamily: "'Instrument Serif', serif", fontSize: 20, fontWeight: 400, lineHeight: 1.1 }}>The AI Governance Game</div>
               </div>
             </div>
             <p style={{ color: "#64748b", fontSize: 13, lineHeight: 1.6, marginBottom: 20, flex: 1 }}>
-              Collective coordination under asymmetric information. Step into four institutional roles — each holding different intelligence. Discover how your choices interact across the system.
+              Four institutions. One crisis. Each has different information and different incentives. Make your call, then discover how your decision interacts with what the others chose.
             </p>
             <div style={{ display: "flex", gap: 6, flexWrap: "wrap" as const, marginBottom: 20 }}>
               {["6 crisis scenarios", "4 institutional roles", "Coordination grade + counterfactuals"].map(t => (

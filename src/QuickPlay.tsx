@@ -170,10 +170,19 @@ export default function QuickPlay({ onBack, onFullPlay }: Props) {
               <div style={{ fontFamily: "'DM Mono', monospace", fontSize: 10, color: "#64748b", marginTop: 4, letterSpacing: 1 }}>{crisis.category}</div>
             </div>
             <div style={{ textAlign: "right" as const }}>
-              <div style={{ background: role.bg, border: `1px solid ${role.color}44`, borderRadius: 10, padding: "10px 14px", display: "inline-block" }}>
-                <div style={{ fontSize: 22 }}>{role.icon}</div>
-                <div style={{ fontFamily: "'Space Mono', monospace", fontSize: 9, fontWeight: 700, color: role.color, letterSpacing: 1, marginTop: 4, whiteSpace: "nowrap" as const }}>YOUR ROLE</div>
-                <div style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 12, color: "#e2e8f0", fontWeight: 700, marginTop: 2 }}>{role.name}</div>
+              <div style={{ background: role.bg, border: `1px solid ${role.color}44`, borderRadius: 10, padding: "12px 14px", display: "inline-block", maxWidth: 200, textAlign: "left" as const }}>
+                <div style={{ display: "flex", alignItems: "center", gap: 6, marginBottom: 6 }}>
+                  <span style={{ fontSize: 18 }}>{role.icon}</span>
+                  <div style={{ fontFamily: "'Space Mono', monospace", fontSize: 9, fontWeight: 700, color: role.color, letterSpacing: 1, whiteSpace: "nowrap" as const }}>{role.name}</div>
+                </div>
+                <div style={{ marginBottom: 4 }}>
+                  <div style={{ fontFamily: "'DM Mono', monospace", fontSize: 8, color: "#64748b", letterSpacing: 1, marginBottom: 2 }}>YOUR ROLE</div>
+                  <div style={{ fontSize: 10, color: "#e2e8f0", lineHeight: 1.4 }}>{role.role}</div>
+                </div>
+                <div>
+                  <div style={{ fontFamily: "'DM Mono', monospace", fontSize: 8, color: "#f59e0b", letterSpacing: 1, marginBottom: 2 }}>YOUR INCENTIVES</div>
+                  <div style={{ fontSize: 10, color: "#94a3b8", lineHeight: 1.4 }}>{role.incentive}</div>
+                </div>
               </div>
             </div>
           </div>
@@ -474,7 +483,7 @@ export default function QuickPlay({ onBack, onFullPlay }: Props) {
         {/* Full play CTA */}
         <div style={{ background: "linear-gradient(135deg, #06b6d411, #0ea5e911)", border: "1px solid #06b6d433", borderRadius: 12, padding: 24, marginBottom: 20, textAlign: "center" as const }}>
           <div style={{ fontFamily: "'Space Mono', monospace", fontSize: 9, letterSpacing: 2, color: "#06b6d4", marginBottom: 10 }}>WANT TO GO DEEPER?</div>
-          <div style={{ fontFamily: "'Instrument Serif', serif", fontSize: 20, color: "#e2e8f0", marginBottom: 10 }}>Play all 4 roles in the full simulation</div>
+          <div style={{ fontFamily: "'Instrument Serif', serif", fontSize: 20, color: "#e2e8f0", marginBottom: 10 }}>Play all 4 roles in The AI Governance Game</div>
           <p style={{ color: "#94a3b8", fontSize: 13, lineHeight: 1.6, marginBottom: 16, maxWidth: 420, margin: "0 auto 16px" }}>
             See how your choices interact when you control the coordination. Play every institution — discover what each knew and didn't know.
           </p>
@@ -482,7 +491,7 @@ export default function QuickPlay({ onBack, onFullPlay }: Props) {
             onClick={() => { track("quick_play_upsell_click"); onFullPlay(); }}
             style={{ padding: "14px 32px", background: "linear-gradient(135deg, #06b6d4, #0ea5e9)", color: "#0c0f14", border: "none", borderRadius: 8, cursor: "pointer", fontFamily: "'Space Mono', monospace", fontSize: 12, fontWeight: 700, letterSpacing: 2 }}
           >
-            PLAY FULL SIMULATION →
+            PLAY THE AI GOVERNANCE GAME →
           </button>
         </div>
 

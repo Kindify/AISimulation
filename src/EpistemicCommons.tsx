@@ -4,10 +4,46 @@ import { track } from "./analytics";
 
 // ─── ROLES ───────────────────────────────────────────────
 const ROLES = [
-  { id: "regulator", name: "The Regulator", icon: "🏛️", color: "#f59e0b", bg: "#f59e0b18", desc: "You oversee AI policy. You see public trust data and have formal authority — but using it has costs." },
-  { id: "platform", name: "The Platform", icon: "📱", color: "#06b6d4", bg: "#06b6d418", desc: "You control distribution. You see spread velocity and detection confidence — but your incentives are conflicted." },
-  { id: "journalist", name: "The Journalist", icon: "📰", color: "#10b981", bg: "#10b98118", desc: "You shape the narrative. You see source data and expert contacts — but editorial pressure demands speed." },
-  { id: "ailab", name: "The AI Lab", icon: "🔬", color: "#a855f7", bg: "#a855f718", desc: "You built the technology. You see technical signatures and have unique tools — but transparency has competitive costs." },
+  {
+    id: "regulator",
+    name: "The Regulator",
+    icon: "🏛️",
+    color: "#f59e0b",
+    bg: "#f59e0b18",
+    desc: "You set policy and have formal authority to act. Your objective is public safety and institutional credibility.",
+    role: "You set policy and have formal authority to act. Your objective is public safety and institutional credibility.",
+    incentive: "Political pressure to act fast OR appear measured. Your legitimacy depends on due process, but the crisis won't wait for process."
+  },
+  {
+    id: "platform",
+    name: "The Platform",
+    icon: "📱",
+    color: "#06b6d4",
+    bg: "#06b6d418",
+    desc: "You control content distribution and user access. Your objective is a safe, trustworthy platform ecosystem.",
+    role: "You control content distribution and user access. Your objective is a safe, trustworthy platform ecosystem.",
+    incentive: "Revenue depends on engagement and growth. Legal liability pushes toward caution. Acting alone while competitors don't costs you users."
+  },
+  {
+    id: "journalist",
+    name: "The Journalist",
+    icon: "📰",
+    color: "#10b981",
+    bg: "#10b98118",
+    desc: "You shape the public narrative through investigation and reporting. Your objective is informing the public accurately.",
+    role: "You shape the public narrative through investigation and reporting. Your objective is informing the public accurately.",
+    incentive: "Editorial pressure to publish fast and first. Competitor outlets are working the same story. Speed and accuracy pull in opposite directions."
+  },
+  {
+    id: "ailab",
+    name: "The AI Lab",
+    icon: "🔬",
+    color: "#a855f7",
+    bg: "#a855f718",
+    desc: "You develop the technology and hold unique technical knowledge. Your objective is responsible development and deployment.",
+    role: "You develop the technology and hold unique technical knowledge. Your objective is responsible development and deployment.",
+    incentive: "Transparency has competitive costs. Competitors who don't share safety findings gain an advantage. Legal exposure increases with disclosure."
+  },
 ];
 
 const METRICS_INFO = [
@@ -561,7 +597,7 @@ textarea, input { font-family: 'DM Sans', sans-serif; }
         </button>
         <div>
           <div style={{ fontFamily: "'Space Mono', monospace", fontSize: 10, letterSpacing: 3, color: "#06b6d4", marginBottom: 4 }}>MULTIPLAYER PROTOTYPE v2</div>
-          <h1 style={{ fontFamily: "'Instrument Serif', serif", fontSize: 26, fontWeight: 400 }}>The Epistemic Commons</h1>
+          <h1 style={{ fontFamily: "'Instrument Serif', serif", fontSize: 26, fontWeight: 400 }}>The AI Governance Game</h1>
           <div style={{ fontFamily: "'DM Mono', monospace", fontSize: 11, color: "#64748b", marginTop: 4 }}>Asymmetric Information · Collective Deliberation · Coordination Under Uncertainty</div>
         </div>
       </div>
@@ -582,7 +618,7 @@ textarea, input { font-family: 'DM Sans', sans-serif; }
           <div className="fade-up" style={{ background: "#141820", border: "1px solid #1e2533", borderRadius: 12, padding: 32 }}>
             <div style={{ fontSize: 48, marginBottom: 16 }}>🌐</div>
             <h2 style={{ fontFamily: "'Instrument Serif', serif", fontSize: 28, fontWeight: 400, marginBottom: 16 }}>The coordination problem is the real problem.</h2>
-            <p style={{ color: "#94a3b8", lineHeight: 1.7, fontSize: 15, marginBottom: 20 }}>AI governance isn't about any single institution — it's about whether multiple actors with different information, different incentives, and different time horizons can act coherently under pressure.</p>
+            <p style={{ color: "#94a3b8", lineHeight: 1.7, fontSize: 15, marginBottom: 20 }}>AI governance isn't about any single institution — it's about whether multiple actors with asymmetric information (each actor knows things the others don't), different incentives, and different time horizons can act coherently under pressure.</p>
             <div style={{ background: "#1e293b", borderRadius: 8, padding: 16, marginBottom: 20 }}>
               <div style={{ fontFamily: "'Space Mono', monospace", fontSize: 11, letterSpacing: 1.5, color: "#06b6d4", marginBottom: 10 }}>HOW IT WORKS</div>
               <p style={{ color: "#94a3b8", lineHeight: 1.7, fontSize: 14 }}>A crisis unfolds. You step into four institutional roles — each with <strong style={{ color: "#e2e8f0" }}>private intelligence</strong> the others can't see. Commit each role's decision blind, then discover how your choices <strong style={{ color: "#e2e8f0" }}>interact</strong>.</p>
@@ -595,7 +631,7 @@ textarea, input { font-family: 'DM Sans', sans-serif; }
               </button>
               {showScoring && (
                 <div style={{ background: "#0c0f14", border: "1px solid #1e2533", borderTop: "none", borderRadius: "0 0 8px 8px", padding: 16 }}>
-                  <p style={{ color: "#94a3b8", fontSize: 12, lineHeight: 1.6, marginBottom: 12 }}>Your outcome is measured on four metrics. Each role's individual choice affects all four — but the <strong style={{ color: "#e2e8f0" }}>interactions between roles</strong> generate the largest swings. A single synergy or conflict can outweigh any individual decision.</p>
+                  <p style={{ color: "#94a3b8", fontSize: 12, lineHeight: 1.6, marginBottom: 12 }}>Your outcome is measured on four metrics. Each role's individual choice affects all four — but the <strong style={{ color: "#e2e8f0" }}>interactions between roles</strong> generate the largest swings. A single synergy (two actions that amplified each other's positive effects) or conflict (two actions that undermined each other, making things worse) can outweigh any individual decision. Your coordination grade (measures how well institutional actions reinforced or undermined each other) is determined by the balance of these interactions.</p>
                   {METRICS_INFO.map(m => (
                     <div key={m.key} style={{ display: "flex", gap: 10, marginBottom: 10, padding: 10, background: "#141820", borderRadius: 6, border: `1px solid ${m.color}22` }}>
                       <span style={{ fontSize: 18 }}>{m.icon}</span>
@@ -614,12 +650,19 @@ textarea, input { font-family: 'DM Sans', sans-serif; }
 
             <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 10, marginBottom: 20 }}>
               {ROLES.map(r => (
-                <div key={r.id} style={{ background: r.bg, borderRadius: 8, padding: 12, border: `1px solid ${r.color}22` }}>
-                  <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 4 }}>
+                <div key={r.id} style={{ background: r.bg, borderRadius: 8, padding: 14, border: `1px solid ${r.color}22` }}>
+                  <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 8 }}>
                     <span style={{ fontSize: 18 }}>{r.icon}</span>
                     <span style={{ fontFamily: "'Space Mono', monospace", fontSize: 10, fontWeight: 700, color: r.color, letterSpacing: 1 }}>{r.name}</span>
                   </div>
-                  <div style={{ fontSize: 11, color: "#94a3b8", lineHeight: 1.4 }}>{r.desc}</div>
+                  <div style={{ marginBottom: 6 }}>
+                    <div style={{ fontFamily: "'DM Mono', monospace", fontSize: 9, color: "#64748b", letterSpacing: 1, marginBottom: 3 }}>YOUR ROLE</div>
+                    <div style={{ fontSize: 11, color: "#e2e8f0", lineHeight: 1.4 }}>{r.role}</div>
+                  </div>
+                  <div>
+                    <div style={{ fontFamily: "'DM Mono', monospace", fontSize: 9, color: "#f59e0b", letterSpacing: 1, marginBottom: 3 }}>YOUR INCENTIVES</div>
+                    <div style={{ fontSize: 11, color: "#94a3b8", lineHeight: 1.4 }}>{r.incentive}</div>
+                  </div>
                 </div>
               ))}
             </div>
@@ -790,11 +833,18 @@ textarea, input { font-family: 'DM Sans', sans-serif; }
           </div>
           <div className={animIn ? "slide-in" : ""} style={{ opacity: animIn ? 1 : 0 }}>
             <div style={{ background: role.bg, border: `1px solid ${role.color}33`, borderRadius: 12, padding: 20, marginBottom: 16 }}>
-              <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
-                <span style={{ fontSize: 32 }}>{role.icon}</span>
-                <div>
-                  <div style={{ fontFamily: "'Space Mono', monospace", fontSize: 12, fontWeight: 700, color: role.color, letterSpacing: 1 }}>{role.name.toUpperCase()}</div>
-                  <div style={{ fontSize: 13, color: "#94a3b8", marginTop: 2 }}>{role.desc}</div>
+              <div style={{ display: "flex", alignItems: "flex-start", gap: 10 }}>
+                <span style={{ fontSize: 32, flexShrink: 0 }}>{role.icon}</span>
+                <div style={{ flex: 1 }}>
+                  <div style={{ fontFamily: "'Space Mono', monospace", fontSize: 12, fontWeight: 700, color: role.color, letterSpacing: 1, marginBottom: 8 }}>{role.name.toUpperCase()}</div>
+                  <div style={{ marginBottom: 6 }}>
+                    <div style={{ fontFamily: "'DM Mono', monospace", fontSize: 9, color: "#64748b", letterSpacing: 1, marginBottom: 3 }}>YOUR ROLE</div>
+                    <div style={{ fontSize: 12, color: "#e2e8f0", lineHeight: 1.4 }}>{role.role}</div>
+                  </div>
+                  <div>
+                    <div style={{ fontFamily: "'DM Mono', monospace", fontSize: 9, color: "#f59e0b", letterSpacing: 1, marginBottom: 3 }}>YOUR INCENTIVES</div>
+                    <div style={{ fontSize: 12, color: "#94a3b8", lineHeight: 1.4 }}>{role.incentive}</div>
+                  </div>
                 </div>
               </div>
             </div>
@@ -1055,7 +1105,7 @@ textarea, input { font-family: 'DM Sans', sans-serif; }
           {/* ─── SHAREABLE RESULTS CARD ─── */}
           {(() => {
             const resultText = [
-              `🌐 THE EPISTEMIC COMMONS — AI Governance Simulation`,
+              `🌐 THE AI GOVERNANCE GAME — AI Governance Simulation`,
               ``,
               `My Result: ${archetype}`,
               `Coordination Grade: ${overallGrade}`,

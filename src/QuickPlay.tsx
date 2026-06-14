@@ -240,8 +240,9 @@ export default function QuickPlay({ onBack, onFullPlay }: Props) {
                     {isSelected && <span style={{ color: role.color, fontSize: 16, marginLeft: 8 }}>✓</span>}
                   </div>
                   <p style={{ color: "#94a3b8", fontSize: 13, lineHeight: 1.5, marginBottom: 10 }}>{opt.detail}</p>
-                  <div style={{ background: "#f59e0b0d", border: "1px solid #f59e0b22", borderRadius: 6, padding: "8px 12px" }}>
-                    <span style={{ fontFamily: "'DM Mono', monospace", fontSize: 11, color: "#f59e0b" }}>{opt.tradeoff}</span>
+                  <div style={{ fontFamily: "'DM Mono', monospace", fontSize: 10, color: "#94a3b8", lineHeight: 1.4, padding: "6px 10px", background: "#1e293b", borderRadius: 4, borderLeft: "2px solid #334155" }}>
+                    <span style={{ color: "#64748b", letterSpacing: 1, fontSize: 9 }}>TENSION: </span>
+                    {opt.tension || opt.detail}
                   </div>
                 </div>
               );

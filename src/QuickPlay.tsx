@@ -1,13 +1,15 @@
 import { useState, useEffect } from "react";
+import { useTranslation } from "react-i18next";
 import { ROLES, BUILT_IN_CRISES, computeOutcome } from "./EpistemicCommons";
 import WORKSHOP_SCENARIOS from "./workshop-scenarios";
+import LanguageToggle from "./LanguageToggle";
 import { track } from "./analytics";
 
 const METRICS_INFO = [
-  { key: "integrity", label: "Information Integrity", icon: "🎯" },
-  { key: "trust", label: "Public Trust", icon: "👥" },
-  { key: "legitimacy", label: "Institutional Legitimacy", icon: "⚖️" },
-  { key: "rights", label: "Individual Rights", icon: "🛡️" },
+  { key: "integrity", labelKey: "metrics.integrity", icon: "🎯" },
+  { key: "trust", labelKey: "metrics.trust", icon: "👥" },
+  { key: "legitimacy", labelKey: "metrics.legitimacy", icon: "⚖️" },
+  { key: "rights", labelKey: "metrics.rights", icon: "🛡️" },
 ];
 
 const gradeColor = (g: string) =>
@@ -37,6 +39,7 @@ interface Props {
 }
 
 export default function QuickPlay({ onBack, onFullPlay }: Props) {
+  const { t } = useTranslation();
   const [phase, setPhase] = useState<"play" | "outcome">("play");
   const [crisis, setCrisis] = useState<any>(null);
   const [role, setRole] = useState<any>(null);
@@ -165,22 +168,23 @@ export default function QuickPlay({ onBack, onFullPlay }: Props) {
           {/* Header bar */}
           <div className="fade-up" style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 28 }}>
             <div>
-              <div style={{ fontFamily: "'Space Mono', monospace", fontSize: 9, letterSpacing: 3, color: "#06b6d4", marginBottom: 4 }}>QUICK PLAY</div>
+              <div style={{ fontFamily: "'Space Mono', monospace", fontSize: 9, letterSpacing: 3, color: "#06b6d4", marginBottom: 4 }}>{t("quickPlay.title")}</div>
               <div style={{ fontFamily: "'Instrument Serif', serif", fontSize: 22, fontWeight: 400, color: "#e2e8f0", lineHeight: 1.2 }}>{crisis.icon} {crisis.title}</div>
               <div style={{ fontFamily: "'DM Mono', monospace", fontSize: 10, color: "#64748b", marginTop: 4, letterSpacing: 1 }}>{crisis.category}</div>
             </div>
-            <div style={{ textAlign: "right" as const }}>
+            <div style={{ display: "flex", flexDirection: "column" as const, alignItems: "flex-end", gap: 8 }}>
+              <LanguageToggle />
               <div style={{ background: role.bg, border: `1px solid ${role.color}44`, borderRadius: 10, padding: "12px 14px", display: "inline-block", maxWidth: 200, textAlign: "left" as const }}>
                 <div style={{ display: "flex", alignItems: "center", gap: 6, marginBottom: 6 }}>
                   <span style={{ fontSize: 18 }}>{role.icon}</span>
                   <div style={{ fontFamily: "'Space Mono', monospace", fontSize: 9, fontWeight: 700, color: role.color, letterSpacing: 1, whiteSpace: "nowrap" as const }}>{role.name}</div>
                 </div>
                 <div style={{ marginBottom: 4 }}>
-                  <div style={{ fontFamily: "'DM Mono', monospace", fontSize: 8, color: "#64748b", letterSpacing: 1, marginBottom: 2 }}>YOUR ROLE</div>
+                  <div style={{ fontFamily: "'DM Mono', monospace", fontSize: 8, color: "#64748b", letterSpacing: 1, marginBottom: 2 }}>{t("quickPlay.yourRole")}</div>
                   <div style={{ fontSize: 10, color: "#e2e8f0", lineHeight: 1.4 }}>{role.role}</div>
                 </div>
                 <div>
-                  <div style={{ fontFamily: "'DM Mono', monospace", fontSize: 8, color: "#f59e0b", letterSpacing: 1, marginBottom: 2 }}>YOUR INCENTIVES</div>
+                  <div style={{ fontFamily: "'DM Mono', monospace", fontSize: 8, color: "#f59e0b", letterSpacing: 1, marginBottom: 2 }}>{t("quickPlay.yourIncentives")}</div>
                   <div style={{ fontSize: 10, color: "#94a3b8", lineHeight: 1.4 }}>{role.incentive}</div>
                 </div>
               </div>
@@ -189,11 +193,11 @@ export default function QuickPlay({ onBack, onFullPlay }: Props) {
 
           {/* Situation */}
           <div className="fade-up" style={{ background: "#141820", border: "1px solid #1e2533", borderRadius: 12, padding: 20, marginBottom: 16 }}>
-            <div style={{ fontFamily: "'Space Mono', monospace", fontSize: 9, letterSpacing: 2, color: "#94a3b8", marginBottom: 10 }}>SITUATION</div>
+            <div style={{ fontFamily: "'Space Mono', monospace", fontSize: 9, letterSpacing: 2, color: "#94a3b8", marginBottom: 10 }}>{t("quickPlay.situation")}</div>
             <p style={{ color: "#cbd5e1", fontSize: 14, lineHeight: 1.7 }}>{crisis.publicBriefing}</p>
             {crisis.stakes && (
               <div style={{ marginTop: 12, paddingTop: 12, borderTop: "1px solid #1e2533", fontFamily: "'DM Mono', monospace", fontSize: 11, color: "#f59e0b" }}>
-                STAKES: {crisis.stakes}
+                {t("quickPlay.stakes")}: {crisis.stakes}
               </div>
             )}
           </div>
@@ -202,7 +206,7 @@ export default function QuickPlay({ onBack, onFullPlay }: Props) {
           <div className="fade-up" style={{ background: "#141820", border: `1px solid ${role.color}33`, borderRadius: 12, padding: 20, marginBottom: 20, borderLeft: `3px solid ${role.color}` }}>
             <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 12 }}>
               <span style={{ fontSize: 14 }}>🔒</span>
-              <div style={{ fontFamily: "'Space Mono', monospace", fontSize: 9, letterSpacing: 2, color: role.color }}>YOUR PRIVATE INTELLIGENCE</div>
+              <div style={{ fontFamily: "'Space Mono', monospace", fontSize: 9, letterSpacing: 2, color: role.color }}>{t("quickPlay.privateIntel")}</div>
             </div>
             {crisis.roleIntel?.[role.id] && (
               <>
@@ -218,7 +222,7 @@ export default function QuickPlay({ onBack, onFullPlay }: Props) {
           </div>
 
           {/* Options */}
-          <div style={{ fontFamily: "'Space Mono', monospace", fontSize: 9, letterSpacing: 2, color: "#64748b", marginBottom: 12 }}>YOUR CALL — CHOOSE ONE</div>
+          <div style={{ fontFamily: "'Space Mono', monospace", fontSize: 9, letterSpacing: 2, color: "#64748b", marginBottom: 12 }}>{t("quickPlay.yourCall")}</div>
           <div style={{ display: "flex", flexDirection: "column" as const, gap: 10, marginBottom: 24 }}>
             {myOptions.map((opt: any) => {
               const isSelected = selectedOption === opt.id;
@@ -241,7 +245,7 @@ export default function QuickPlay({ onBack, onFullPlay }: Props) {
                   </div>
                   <p style={{ color: "#94a3b8", fontSize: 13, lineHeight: 1.5, marginBottom: 10 }}>{opt.detail}</p>
                   <div style={{ fontFamily: "'DM Mono', monospace", fontSize: 10, color: "#94a3b8", lineHeight: 1.4, padding: "6px 10px", background: "#1e293b", borderRadius: 4, borderLeft: "2px solid #334155" }}>
-                    <span style={{ color: "#64748b", letterSpacing: 1, fontSize: 9 }}>TENSION: </span>
+                    <span style={{ color: "#64748b", letterSpacing: 1, fontSize: 9 }}>{t("quickPlay.tension")}: </span>
                     {opt.tension || opt.detail}
                   </div>
                 </div>
@@ -270,16 +274,16 @@ export default function QuickPlay({ onBack, onFullPlay }: Props) {
               transition: "all 0.2s ease",
             }}
           >
-            COMMIT DECISION →
+            {t("quickPlay.commitDecision")}
           </button>
 
           {/* Bottom nav */}
           <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
             <button onClick={() => randomize(true)} style={{ background: "none", border: "1px solid #1e2533", borderRadius: 6, padding: "8px 14px", color: "#64748b", cursor: "pointer", fontFamily: "'DM Mono', monospace", fontSize: 11 }}>
-              Different scenario
+              {t("quickPlay.differentScenario")}
             </button>
             <button onClick={onBack} style={{ background: "none", border: "none", color: "#475569", cursor: "pointer", fontFamily: "'DM Mono', monospace", fontSize: 11 }}>
-              ← Back to home
+              ← {t("nav.backToHome")}
             </button>
           </div>
         </div>
@@ -328,14 +332,17 @@ export default function QuickPlay({ onBack, onFullPlay }: Props) {
             <div style={{ fontFamily: "'Instrument Serif', serif", fontSize: 22, color: "#e2e8f0", marginBottom: 4 }}>{crisis.icon} {crisis.title}</div>
             <div style={{ fontFamily: "'DM Mono', monospace", fontSize: 11, color: "#64748b" }}>Your role: <span style={{ color: role.color }}>{role.icon} {role.name}</span></div>
           </div>
-          <div style={{ textAlign: "right" as const }}>
-            <div style={{ fontFamily: "'Instrument Serif', serif", fontSize: 52, color: gc, lineHeight: 1 }}>{outcome.coordinationGrade}</div>
-            <div style={{ fontFamily: "'DM Mono', monospace", fontSize: 9, color: "#64748b", marginTop: 2 }}>COORDINATION GRADE</div>
+          <div style={{ textAlign: "right" as const, display: "flex", flexDirection: "column" as const, alignItems: "flex-end", gap: 8 }}>
+            <LanguageToggle />
+            <div>
+              <div style={{ fontFamily: "'Instrument Serif', serif", fontSize: 52, color: gc, lineHeight: 1 }}>{outcome.coordinationGrade}</div>
+              <div style={{ fontFamily: "'DM Mono', monospace", fontSize: 9, color: "#64748b", marginTop: 2 }}>{t("quickPlay.coordinationGrade")}</div>
+            </div>
           </div>
         </div>
 
         {/* What everyone decided */}
-        <div style={{ fontFamily: "'Space Mono', monospace", fontSize: 9, letterSpacing: 2, color: "#64748b", marginBottom: 10 }}>WHAT EVERYONE DECIDED</div>
+        <div style={{ fontFamily: "'Space Mono', monospace", fontSize: 9, letterSpacing: 2, color: "#64748b", marginBottom: 10 }}>{t("quickPlay.whatEveryoneDecided")}</div>
         <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 10, marginBottom: 16 }}>
           {ROLES.map(r => {
             const isMe = r.id === role.id;
@@ -355,10 +362,10 @@ export default function QuickPlay({ onBack, onFullPlay }: Props) {
                 <div style={{ display: "flex", alignItems: "center", gap: 6, marginBottom: 6 }}>
                   <span style={{ fontSize: 16 }}>{r.icon}</span>
                   <span style={{ fontFamily: "'Space Mono', monospace", fontSize: 9, fontWeight: 700, color: r.color, letterSpacing: 1 }}>{r.name}</span>
-                  {isMe && <span style={{ fontFamily: "'DM Mono', monospace", fontSize: 8, color: r.color, background: `${r.color}22`, padding: "1px 5px", borderRadius: 3, marginLeft: "auto" }}>YOU</span>}
+                  {isMe && <span style={{ fontFamily: "'DM Mono', monospace", fontSize: 8, color: r.color, background: `${r.color}22`, padding: "1px 5px", borderRadius: 3, marginLeft: "auto" }}>{t("quickPlay.you")}</span>}
                 </div>
                 <div style={{ fontSize: 13, fontWeight: 700, color: "#e2e8f0", marginBottom: 4 }}>{opt?.label}</div>
-                {!isMe && <div style={{ fontFamily: "'DM Mono', monospace", fontSize: 9, color: "#475569" }}>decided independently</div>}
+                {!isMe && <div style={{ fontFamily: "'DM Mono', monospace", fontSize: 9, color: "#475569" }}>{t("quickPlay.decidedIndependently")}</div>}
                 <span style={{ fontFamily: "'DM Mono', monospace", fontSize: 9, letterSpacing: 1, padding: "2px 6px", borderRadius: 3, marginTop: 6, display: "inline-block", background: opt?.stance === "transparent" ? "#10b98122" : opt?.stance === "restrictive" ? "#ef444422" : "#f59e0b22", color: opt?.stance === "transparent" ? "#10b981" : opt?.stance === "restrictive" ? "#ef4444" : "#f59e0b" }}>
                   {opt?.stance?.toUpperCase()}
                 </span>
@@ -368,14 +375,14 @@ export default function QuickPlay({ onBack, onFullPlay }: Props) {
         </div>
 
         {/* Interactions */}
-        <div style={{ fontFamily: "'Space Mono', monospace", fontSize: 9, letterSpacing: 2, color: "#64748b", marginBottom: 10 }}>WHAT HAPPENED</div>
+        <div style={{ fontFamily: "'Space Mono', monospace", fontSize: 9, letterSpacing: 2, color: "#64748b", marginBottom: 10 }}>{t("quickPlay.whatHappened")}</div>
         {outcome.triggeredInteractions.length > 0 ? (
           <div style={{ marginBottom: 16 }}>
             {outcome.triggeredInteractions.map((inter: any, i: number) => (
               <div key={i} className="fade-up" style={{ background: "#141820", border: `1px solid ${inter.type === "synergy" ? "#10b981" : "#ef4444"}33`, borderRadius: 10, padding: 16, marginBottom: 10, borderLeft: `3px solid ${inter.type === "synergy" ? "#10b981" : "#ef4444"}` }}>
                 <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 6 }}>
                   <span style={{ fontSize: 14 }}>{inter.type === "synergy" ? "🤝" : "💥"}</span>
-                  <span style={{ fontFamily: "'Space Mono', monospace", fontSize: 11, fontWeight: 700, color: inter.type === "synergy" ? "#10b981" : "#ef4444" }}>{inter.type.toUpperCase()}: {inter.label}</span>
+                  <span style={{ fontFamily: "'Space Mono', monospace", fontSize: 11, fontWeight: 700, color: inter.type === "synergy" ? "#10b981" : "#ef4444" }}>{inter.type === "synergy" ? t("govGame.synergy") : t("govGame.conflict")}: {inter.label}</span>
                 </div>
                 <p style={{ color: "#94a3b8", lineHeight: 1.6, fontSize: 13 }}>{inter.desc}</p>
               </div>
@@ -384,32 +391,34 @@ export default function QuickPlay({ onBack, onFullPlay }: Props) {
         ) : (
           <div style={{ background: "#141820", border: "1px solid #1e2533", borderRadius: 10, padding: 16, marginBottom: 16 }}>
             <p style={{ color: "#64748b", fontSize: 13, lineHeight: 1.6, fontStyle: "italic" }}>
-              No institutional interactions were triggered. Each actor operated in isolation — no coordination, no conflict. This is the default state of AI governance.
+              {t("quickPlay.noInteractions")}
             </p>
           </div>
         )}
 
         {/* Collective impact */}
         <div style={{ background: "#141820", border: "1px solid #1e2533", borderRadius: 12, padding: 20, marginBottom: 16 }}>
-          <div style={{ fontFamily: "'Space Mono', monospace", fontSize: 9, letterSpacing: 2, color: "#64748b", marginBottom: 12 }}>COLLECTIVE IMPACT</div>
-          {METRICS_INFO.map(m => <MetricBar key={m.key} label={m.label} value={outcome.scores[m.key]} icon={m.icon} />)}
+          <div style={{ fontFamily: "'Space Mono', monospace", fontSize: 9, letterSpacing: 2, color: "#64748b", marginBottom: 12 }}>{t("quickPlay.collectiveImpact")}</div>
+          {METRICS_INFO.map(m => <MetricBar key={m.key} label={t(m.labelKey)} value={outcome.scores[m.key]} icon={m.icon} />)}
         </div>
 
         {/* Key insight */}
         <div className="fade-up" style={{ background: "#141820", border: "1px solid #06b6d433", borderRadius: 12, padding: 20, marginBottom: 16 }}>
-          <div style={{ fontFamily: "'Space Mono', monospace", fontSize: 9, letterSpacing: 2, color: "#06b6d4", marginBottom: 10 }}>THE KEY INSIGHT</div>
+          <div style={{ fontFamily: "'Space Mono', monospace", fontSize: 9, letterSpacing: 2, color: "#06b6d4", marginBottom: 10 }}>{t("quickPlay.keyInsight")}</div>
           <p style={{ color: "#94a3b8", lineHeight: 1.75, fontSize: 14 }}>
-            You controlled one institution. Three others made decisions you couldn't see or influence. The outcome was shaped more by the <em style={{ color: "#e2e8f0", fontStyle: "normal", fontWeight: 700 }}>interactions between choices</em> than by any single decision.
+            {t("quickPlay.keyInsightText").split("interactions between choices").map((part, i) =>
+              i === 0 ? <span key={i}>{part}<em style={{ color: "#e2e8f0", fontStyle: "normal", fontWeight: 700 }}>interactions between choices</em></span> : <span key={i}>{part}</span>
+            )}
           </p>
         </div>
 
         {/* Share */}
         <div style={{ background: "#141820", border: "1px solid #1e2533", borderRadius: 12, padding: 20, marginBottom: 16 }}>
-          <div style={{ fontFamily: "'Space Mono', monospace", fontSize: 9, letterSpacing: 2, color: "#06b6d4", marginBottom: 12 }}>SHARE YOUR RESULT</div>
+          <div style={{ fontFamily: "'Space Mono', monospace", fontSize: 9, letterSpacing: 2, color: "#06b6d4", marginBottom: 12 }}>{t("quickPlay.shareResult")}</div>
           <div style={{ background: "#0c0f14", border: `1px solid ${gc}33`, borderRadius: 10, padding: 18, marginBottom: 12 }}>
             <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: 10 }}>
               <div>
-                <div style={{ fontFamily: "'DM Mono', monospace", fontSize: 9, color: "#64748b" }}>QUICK PLAY RESULT</div>
+                <div style={{ fontFamily: "'DM Mono', monospace", fontSize: 9, color: "#64748b" }}>{t("quickPlay.quickPlayResult")}</div>
                 <div style={{ fontFamily: "'Instrument Serif', serif", fontSize: 16, color: "#e2e8f0", marginTop: 4 }}>{crisis.title}</div>
                 <div style={{ fontFamily: "'DM Mono', monospace", fontSize: 11, color: role.color, marginTop: 2 }}>{role.icon} {role.name}</div>
               </div>
@@ -435,17 +444,17 @@ export default function QuickPlay({ onBack, onFullPlay }: Props) {
             onClick={copyResult}
             style={{ width: "100%", padding: "12px", background: copied ? "#10b981" : "#1e293b", color: copied ? "#0c0f14" : "#94a3b8", border: "1px solid #334155", borderRadius: 8, cursor: "pointer", fontFamily: "'Space Mono', monospace", fontSize: 11, fontWeight: 700, letterSpacing: 1, transition: "all 0.3s ease" }}
           >
-            {copied ? "COPIED TO CLIPBOARD" : "COPY RESULT TO SHARE"}
+            {copied ? t("quickPlay.copiedToClipboard") : t("quickPlay.copyResult")}
           </button>
         </div>
 
         {/* Feedback */}
         {!feedbackSubmitted ? (
           <div style={{ background: "#141820", border: "1px solid #1e2533", borderRadius: 12, padding: 20, marginBottom: 16 }}>
-            <div style={{ fontFamily: "'Space Mono', monospace", fontSize: 9, letterSpacing: 2, color: "#f59e0b", marginBottom: 14 }}>QUICK FEEDBACK</div>
-            <p style={{ color: "#e2e8f0", fontSize: 13, fontWeight: 700, marginBottom: 8 }}>Did this change how you think about AI governance?</p>
+            <div style={{ fontFamily: "'Space Mono', monospace", fontSize: 9, letterSpacing: 2, color: "#f59e0b", marginBottom: 14 }}>{t("feedback.title")}</div>
+            <p style={{ color: "#e2e8f0", fontSize: 13, fontWeight: 700, marginBottom: 8 }}>{t("feedback.changedThinking")}</p>
             <div style={{ display: "flex", gap: 8, flexWrap: "wrap" as const, marginBottom: 14 }}>
-              {["Yes, significantly", "Somewhat", "No"].map(opt => (
+              {[t("feedback.yesSignificantly"), t("feedback.somewhat"), t("feedback.notReally")].map(opt => (
                 <button
                   type="button"
                   key={opt}
@@ -462,7 +471,7 @@ export default function QuickPlay({ onBack, onFullPlay }: Props) {
                 type="email"
                 value={feedbackEmail}
                 onChange={e => setFeedbackEmail(e.target.value)}
-                placeholder="your@email.com (optional)"
+                placeholder={t("feedback.emailPlaceholder")}
                 style={{ flex: 1, padding: "10px 14px", background: "#0c0f14", border: "1px solid #1e2533", borderRadius: 8, color: "#e2e8f0", fontSize: 13, outline: "none", fontFamily: "'DM Sans', sans-serif" }}
               />
               <button
@@ -470,39 +479,39 @@ export default function QuickPlay({ onBack, onFullPlay }: Props) {
                 disabled={!feedbackThinking && !feedbackEmail}
                 style={{ padding: "10px 18px", background: (feedbackThinking || feedbackEmail) ? "linear-gradient(135deg, #f59e0b, #06b6d4)" : "#1e293b", color: (feedbackThinking || feedbackEmail) ? "#0c0f14" : "#334155", border: "none", borderRadius: 8, cursor: (feedbackThinking || feedbackEmail) ? "pointer" : "not-allowed", fontFamily: "'Space Mono', monospace", fontSize: 10, fontWeight: 700, letterSpacing: 1, whiteSpace: "nowrap" as const }}
               >
-                SUBMIT
+                {t("feedback.submit")}
               </button>
             </div>
           </div>
         ) : (
           <div style={{ background: "#141820", border: "1px solid #10b98133", borderRadius: 12, padding: 18, marginBottom: 16, textAlign: "center" as const }}>
-            <p style={{ color: "#10b981", fontFamily: "'Space Mono', monospace", fontSize: 12, fontWeight: 700 }}>Thank you for your feedback!</p>
-            <p style={{ color: "#64748b", fontSize: 11, marginTop: 4 }}>Your input helps us improve these tools.</p>
+            <p style={{ color: "#10b981", fontFamily: "'Space Mono', monospace", fontSize: 12, fontWeight: 700 }}>{t("feedback.thankYou")}</p>
+            <p style={{ color: "#64748b", fontSize: 11, marginTop: 4 }}>{t("feedback.inputHelps")}</p>
           </div>
         )}
 
         {/* Full play CTA */}
         <div style={{ background: "linear-gradient(135deg, #06b6d411, #0ea5e911)", border: "1px solid #06b6d433", borderRadius: 12, padding: 24, marginBottom: 20, textAlign: "center" as const }}>
-          <div style={{ fontFamily: "'Space Mono', monospace", fontSize: 9, letterSpacing: 2, color: "#06b6d4", marginBottom: 10 }}>WANT TO GO DEEPER?</div>
+          <div style={{ fontFamily: "'Space Mono', monospace", fontSize: 9, letterSpacing: 2, color: "#06b6d4", marginBottom: 10 }}>{t("quickPlay.wantGoDeeper")}</div>
           <div style={{ fontFamily: "'Instrument Serif', serif", fontSize: 20, color: "#e2e8f0", marginBottom: 10 }}>Play all 4 roles in The AI Governance Game</div>
           <p style={{ color: "#94a3b8", fontSize: 13, lineHeight: 1.6, marginBottom: 16, maxWidth: 420, margin: "0 auto 16px" }}>
-            See how your choices interact when you control the coordination. Play every institution — discover what each knew and didn't know.
+            {t("quickPlay.deeperDesc")}
           </p>
           <button
             onClick={() => { track("quick_play_upsell_click"); onFullPlay(); }}
             style={{ padding: "14px 32px", background: "linear-gradient(135deg, #06b6d4, #0ea5e9)", color: "#0c0f14", border: "none", borderRadius: 8, cursor: "pointer", fontFamily: "'Space Mono', monospace", fontSize: 12, fontWeight: 700, letterSpacing: 2 }}
           >
-            PLAY THE AI GOVERNANCE GAME →
+            {t("quickPlay.playGovGame")}
           </button>
         </div>
 
         {/* Bottom nav */}
         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", paddingBottom: 12 }}>
           <button onClick={() => randomize(true)} style={{ background: "none", border: "1px solid #1e2533", borderRadius: 6, padding: "8px 14px", color: "#64748b", cursor: "pointer", fontFamily: "'DM Mono', monospace", fontSize: 11 }}>
-            Play again (new scenario)
+            {t("quickPlay.playAgain")}
           </button>
           <button onClick={onBack} style={{ background: "none", border: "none", color: "#475569", cursor: "pointer", fontFamily: "'DM Mono', monospace", fontSize: 11 }}>
-            ← Back to home
+            ← {t("nav.backToHome")}
           </button>
         </div>
       </div>

@@ -1,6 +1,8 @@
 import { useState, useEffect } from "react";
+import { useTranslation } from "react-i18next";
 import WORKSHOP_SCENARIOS from "./workshop-scenarios";
 import { track } from "./analytics";
+import LanguageToggle from "./LanguageToggle";
 
 // ─── ROLES ───────────────────────────────────────────────
 const ROLES = [
@@ -387,6 +389,7 @@ function MetricBar({ label, value, maxVal = 30, icon, color }: any) {
 }
 
 function RoleCard({ role, isActive, isCompleted }: any) {
+  const { t } = useTranslation();
   return (
     <div style={{ background: isActive ? role.bg : "#141820", border: `1px solid ${isActive ? role.color : isCompleted ? "#334155" : "#1e2533"}`, borderRadius: 10, padding: "10px 12px", opacity: isCompleted && !isActive ? 0.6 : 1, transition: "all 0.3s ease" }}>
       <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
@@ -394,7 +397,7 @@ function RoleCard({ role, isActive, isCompleted }: any) {
         <div>
           <div style={{ fontFamily: "'Space Mono', monospace", fontSize: 10, fontWeight: 700, color: role.color, letterSpacing: 1 }}>{role.name}</div>
           <div style={{ fontFamily: "'DM Mono', monospace", fontSize: 9, color: isCompleted ? "#10b981" : isActive ? role.color : "#64748b", marginTop: 1 }}>
-            {isCompleted ? "✓ COMMITTED" : isActive ? "▸ YOUR TURN" : "WAITING"}
+            {isCompleted ? `✓ ${t("govGame.committed")}` : isActive ? `▸ ${t("govGame.yourTurn")}` : t("govGame.waiting")}
           </div>
         </div>
       </div>
@@ -406,6 +409,7 @@ export { ROLES, BUILT_IN_CRISES, computeOutcome };
 
 // ─── MAIN ────────────────────────────────────────────────
 export default function EpistemicCommonsV2({ onBack }: { onBack: () => void }) {
+  const { t } = useTranslation();
   const [phase, setPhase] = useState("intro");
   const [crises, setCrises] = useState([...BUILT_IN_CRISES, ...WORKSHOP_SCENARIOS]);
   const [crisisIdx, setCrisisIdx] = useState(0);
@@ -593,20 +597,23 @@ textarea, input { font-family: 'DM Sans', sans-serif; }
     <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 24, borderBottom: "1px solid #1e2533", paddingBottom: 16 }}>
       <div style={{ display: "flex", alignItems: "center", gap: 16 }}>
         <button onClick={onBack} style={{ background: "none", border: "1px solid #1e2533", borderRadius: 6, color: "#64748b", cursor: "pointer", fontFamily: "'Space Mono', monospace", fontSize: 10, letterSpacing: 1, padding: "6px 12px", flexShrink: 0 }}>
-          ← HOME
+          ← {t("nav.backToHome")}
         </button>
         <div>
-          <div style={{ fontFamily: "'Space Mono', monospace", fontSize: 10, letterSpacing: 3, color: "#06b6d4", marginBottom: 4 }}>MULTIPLAYER PROTOTYPE v2</div>
-          <h1 style={{ fontFamily: "'Instrument Serif', serif", fontSize: 26, fontWeight: 400 }}>The AI Governance Game</h1>
-          <div style={{ fontFamily: "'DM Mono', monospace", fontSize: 11, color: "#64748b", marginTop: 4 }}>Asymmetric Information · Collective Deliberation · Coordination Under Uncertainty</div>
+          <div style={{ fontFamily: "'Space Mono', monospace", fontSize: 10, letterSpacing: 3, color: "#06b6d4", marginBottom: 4 }}>{t("govGame.multiplayerPrototype")}</div>
+          <h1 style={{ fontFamily: "'Instrument Serif', serif", fontSize: 26, fontWeight: 400 }}>{t("govGame.title")}</h1>
+          <div style={{ fontFamily: "'DM Mono', monospace", fontSize: 11, color: "#64748b", marginTop: 4 }}>{t("govGame.subtitle")}</div>
         </div>
       </div>
-      {phase !== "intro" && phase !== "select" && phase !== "debrief" && queue.length > 0 && (
-        <div style={{ textAlign: "right" as const }}>
-          <div style={{ fontFamily: "'DM Mono', monospace", fontSize: 11, color: "#64748b" }}>CRISIS</div>
-          <div style={{ fontFamily: "'Space Mono', monospace", fontSize: 22, fontWeight: 700 }}>{queue.indexOf(crisis?.id) + 1} / {queue.length}</div>
-        </div>
-      )}
+      <div style={{ display: "flex", alignItems: "center", gap: 24 }}>
+        {phase !== "intro" && phase !== "select" && phase !== "debrief" && queue.length > 0 && (
+          <div style={{ textAlign: "right" as const }}>
+            <div style={{ fontFamily: "'DM Mono', monospace", fontSize: 11, color: "#64748b" }}>{t("govGame.crisis")}</div>
+            <div style={{ fontFamily: "'Space Mono', monospace", fontSize: 22, fontWeight: 700 }}>{queue.indexOf(crisis?.id) + 1} / {queue.length}</div>
+          </div>
+        )}
+        <LanguageToggle />
+      </div>
     </div>
   );
 
@@ -617,10 +624,10 @@ textarea, input { font-family: 'DM Sans', sans-serif; }
         <div style={{ maxWidth: 720, margin: "0 auto", paddingTop: 16 }}>
           <div className="fade-up" style={{ background: "#141820", border: "1px solid #1e2533", borderRadius: 12, padding: 32 }}>
             <div style={{ fontSize: 48, marginBottom: 16 }}>🌐</div>
-            <h2 style={{ fontFamily: "'Instrument Serif', serif", fontSize: 28, fontWeight: 400, marginBottom: 16 }}>The coordination problem is the real problem.</h2>
+            <h2 style={{ fontFamily: "'Instrument Serif', serif", fontSize: 28, fontWeight: 400, marginBottom: 16 }}>{t("govGame.coordinationProblem")}</h2>
             <p style={{ color: "#94a3b8", lineHeight: 1.7, fontSize: 15, marginBottom: 20 }}>AI governance isn't about any single institution — it's about whether multiple actors with asymmetric information (each actor knows things the others don't), different incentives, and different time horizons can act coherently under pressure.</p>
             <div style={{ background: "#1e293b", borderRadius: 8, padding: 16, marginBottom: 20 }}>
-              <div style={{ fontFamily: "'Space Mono', monospace", fontSize: 11, letterSpacing: 1.5, color: "#06b6d4", marginBottom: 10 }}>HOW IT WORKS</div>
+              <div style={{ fontFamily: "'Space Mono', monospace", fontSize: 11, letterSpacing: 1.5, color: "#06b6d4", marginBottom: 10 }}>{t("govGame.howItWorks")}</div>
               <p style={{ color: "#94a3b8", lineHeight: 1.7, fontSize: 14 }}>A crisis unfolds. You step into four institutional roles — each with <strong style={{ color: "#e2e8f0" }}>private intelligence</strong> the others can't see. Commit each role's decision blind, then discover how your choices <strong style={{ color: "#e2e8f0" }}>interact</strong>.</p>
             </div>
 
@@ -656,11 +663,11 @@ textarea, input { font-family: 'DM Sans', sans-serif; }
                     <span style={{ fontFamily: "'Space Mono', monospace", fontSize: 10, fontWeight: 700, color: r.color, letterSpacing: 1 }}>{r.name}</span>
                   </div>
                   <div style={{ marginBottom: 6 }}>
-                    <div style={{ fontFamily: "'DM Mono', monospace", fontSize: 9, color: "#64748b", letterSpacing: 1, marginBottom: 3 }}>YOUR ROLE</div>
+                    <div style={{ fontFamily: "'DM Mono', monospace", fontSize: 9, color: "#64748b", letterSpacing: 1, marginBottom: 3 }}>{t("govGame.yourRole")}</div>
                     <div style={{ fontSize: 11, color: "#e2e8f0", lineHeight: 1.4 }}>{r.role}</div>
                   </div>
                   <div>
-                    <div style={{ fontFamily: "'DM Mono', monospace", fontSize: 9, color: "#f59e0b", letterSpacing: 1, marginBottom: 3 }}>YOUR INCENTIVES</div>
+                    <div style={{ fontFamily: "'DM Mono', monospace", fontSize: 9, color: "#f59e0b", letterSpacing: 1, marginBottom: 3 }}>{t("govGame.yourIncentives")}</div>
                     <div style={{ fontSize: 11, color: "#94a3b8", lineHeight: 1.4 }}>{r.incentive}</div>
                   </div>
                 </div>
@@ -668,7 +675,7 @@ textarea, input { font-family: 'DM Sans', sans-serif; }
             </div>
 
             <button onClick={() => setPhase("select")} style={{ width: "100%", padding: "14px 24px", background: "linear-gradient(135deg, #06b6d4, #0ea5e9)", color: "#fff", border: "none", borderRadius: 8, cursor: "pointer", fontFamily: "'Space Mono', monospace", fontSize: 14, fontWeight: 700, letterSpacing: 2, textTransform: "uppercase" }}>
-              Choose Scenarios →
+              {t("govGame.scenarioSelection")} →
             </button>
           </div>
         </div>
@@ -717,7 +724,7 @@ textarea, input { font-family: 'DM Sans', sans-serif; }
           <div className="fade-up" style={{ marginBottom: 24 }}>
             <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-end", marginBottom: 16 }}>
               <div>
-                <div style={{ fontFamily: "'Space Mono', monospace", fontSize: 10, letterSpacing: 2, color: "#64748b", marginBottom: 4 }}>SCENARIO SELECTION</div>
+                <div style={{ fontFamily: "'Space Mono', monospace", fontSize: 10, letterSpacing: 2, color: "#64748b", marginBottom: 4 }}>{t("govGame.scenarioSelection")}</div>
                 <h2 style={{ fontFamily: "'Instrument Serif', serif", fontSize: 26, fontWeight: 400 }}>Choose your scenarios</h2>
               </div>
               <div style={{ display: "flex", gap: 10, flexWrap: "wrap" as const, justifyContent: "flex-end" }}>
@@ -727,10 +734,10 @@ textarea, input { font-family: 'DM Sans', sans-serif; }
                   </button>
                 )}
                 <button onClick={() => startQueue(crises.map((c: any) => c.id))} style={{ padding: "10px 18px", background: "#1e293b", color: "#94a3b8", border: "1px solid #334155", borderRadius: 8, cursor: "pointer", fontFamily: "'Space Mono', monospace", fontSize: 10, letterSpacing: 1 }}>
-                  Play All ({crises.length})
+                  {t("govGame.playAll")} ({crises.length})
                 </button>
                 <button onClick={() => { if (selectedIds.size > 0) startQueue([...selectedIds]); }} disabled={selectedIds.size === 0} style={{ padding: "10px 18px", background: selectedIds.size > 0 ? "linear-gradient(135deg, #06b6d4, #0ea5e9)" : "#1e293b", color: selectedIds.size > 0 ? "#fff" : "#334155", border: "none", borderRadius: 8, cursor: selectedIds.size > 0 ? "pointer" : "not-allowed", fontFamily: "'Space Mono', monospace", fontSize: 10, fontWeight: 700, letterSpacing: 1 }}>
-                  Play Selected ({selectedIds.size}) →
+                  {t("govGame.playSelected")} ({selectedIds.size}) →
                 </button>
               </div>
             </div>
@@ -738,11 +745,11 @@ textarea, input { font-family: 'DM Sans', sans-serif; }
             {/* CORE SCENARIOS */}
             <div style={{ marginBottom: 24 }}>
               <div style={{ fontFamily: "'Space Mono', monospace", fontSize: 10, letterSpacing: 2, color: "#64748b", marginBottom: 10, display: "flex", alignItems: "center", gap: 8 }}>
-                CORE SCENARIOS
+                {t("govGame.coreScenarios")}
                 <span style={{ background: "#1e293b", borderRadius: 4, padding: "2px 6px", fontSize: 9 }}>{coreCrises.length}</span>
               </div>
               <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12 }}>
-                {coreCrises.map((c: any) => <ScenarioCard key={c.id} c={c} typeLabel="BUILT-IN" typeColor="#64748b" />)}
+                {coreCrises.map((c: any) => <ScenarioCard key={c.id} c={c} typeLabel={t("govGame.builtIn")} typeColor="#64748b" />)}
               </div>
             </div>
 
@@ -750,14 +757,14 @@ textarea, input { font-family: 'DM Sans', sans-serif; }
             {workshopCrises.length > 0 && (
               <div style={{ marginBottom: 24 }}>
                 <div style={{ fontFamily: "'Space Mono', monospace", fontSize: 10, letterSpacing: 2, color: "#06b6d4", marginBottom: 10, display: "flex", alignItems: "center", gap: 8 }}>
-                  WORKSHOP LIFECYCLE
+                  {t("govGame.workshopLifecycle")}
                   <span style={{ background: "#06b6d418", borderRadius: 4, padding: "2px 6px", fontSize: 9 }}>{workshopCrises.length}</span>
                   <button onClick={() => startQueue(workshopIds)} style={{ marginLeft: "auto", padding: "4px 12px", background: "#06b6d418", color: "#06b6d4", border: "1px solid #06b6d433", borderRadius: 6, cursor: "pointer", fontFamily: "'Space Mono', monospace", fontSize: 9, fontWeight: 700, letterSpacing: 1 }}>
-                    Play Lifecycle Arc →
+                    {t("govGame.playLifecycleArc")} →
                   </button>
                 </div>
                 <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12 }}>
-                  {workshopCrises.map((c: any) => <ScenarioCard key={c.id} c={c} typeLabel="WORKSHOP" typeColor="#06b6d4" />)}
+                  {workshopCrises.map((c: any) => <ScenarioCard key={c.id} c={c} typeLabel={t("govGame.workshop")} typeColor="#06b6d4" />)}
                 </div>
               </div>
             )}
@@ -766,11 +773,11 @@ textarea, input { font-family: 'DM Sans', sans-serif; }
             {aiCrises.length > 0 && (
               <div style={{ marginBottom: 24 }}>
                 <div style={{ fontFamily: "'Space Mono', monospace", fontSize: 10, letterSpacing: 2, color: "#a855f7", marginBottom: 10, display: "flex", alignItems: "center", gap: 8 }}>
-                  AI-GENERATED
+                  {t("govGame.aiGenerated")}
                   <span style={{ background: "#a855f718", borderRadius: 4, padding: "2px 6px", fontSize: 9 }}>{aiCrises.length}</span>
                 </div>
                 <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12 }}>
-                  {aiCrises.map((c: any) => <ScenarioCard key={c.id} c={c} typeLabel="AI-GENERATED" typeColor="#a855f7" />)}
+                  {aiCrises.map((c: any) => <ScenarioCard key={c.id} c={c} typeLabel={t("govGame.aiGenerated")} typeColor="#a855f7" />)}
                 </div>
               </div>
             )}
@@ -800,12 +807,12 @@ textarea, input { font-family: 'DM Sans', sans-serif; }
               <p style={{ color: "#e2e8f0", lineHeight: 1.7, fontSize: 14 }}>{crisis.publicBriefing}</p>
             </div>
             <div style={{ background: "#0c0f14", borderRadius: 8, padding: 14, marginBottom: 16, border: "1px solid #f59e0b33" }}>
-              <div style={{ fontFamily: "'Space Mono', monospace", fontSize: 10, letterSpacing: 1.5, color: "#f59e0b", marginBottom: 4 }}>WHAT'S AT STAKE</div>
+              <div style={{ fontFamily: "'Space Mono', monospace", fontSize: 10, letterSpacing: 1.5, color: "#f59e0b", marginBottom: 4 }}>{t("govGame.whatsAtStake")}</div>
               <p style={{ fontSize: 13, color: "#f59e0b", lineHeight: 1.5 }}>{crisis.stakes}</p>
             </div>
             {crisis.designNote && (
               <div style={{ background: "#0c0f14", borderRadius: 8, padding: 14, marginBottom: 16, border: "1px solid #a855f733" }}>
-                <div style={{ fontFamily: "'Space Mono', monospace", fontSize: 10, letterSpacing: 1.5, color: "#a855f7", marginBottom: 4 }}>🎯 DESIGN NOTE</div>
+                <div style={{ fontFamily: "'Space Mono', monospace", fontSize: 10, letterSpacing: 1.5, color: "#a855f7", marginBottom: 4 }}>🎯 {t("govGame.designNote")}</div>
                 <p style={{ fontSize: 12, color: "#94a3b8", lineHeight: 1.5 }}>{crisis.designNote}</p>
               </div>
             )}
@@ -813,7 +820,7 @@ textarea, input { font-family: 'DM Sans', sans-serif; }
               <div style={{ fontFamily: "'DM Mono', monospace", fontSize: 10, color: "#06b6d4", lineHeight: 1.5 }}>📊 SCORING: Each option shows its trade-off (e.g. "INTEGRITY ↑ TRUST ↓"). Your individual choices matter, but <strong>interactions between roles</strong> generate the biggest score swings — for better or worse.</div>
             </div>
             <button onClick={() => { setRoleIdx(0); setPhase("roleplay"); }} style={{ width: "100%", padding: "14px", background: ROLES[0].color, color: "#0c0f14", border: "none", borderRadius: 8, cursor: "pointer", fontFamily: "'Space Mono', monospace", fontSize: 13, fontWeight: 700, letterSpacing: 2, textTransform: "uppercase" }}>
-              Begin as {ROLES[0].name} →
+              {t("govGame.beginAs")} {ROLES[0].name} →
             </button>
           </div>
         </div>
@@ -838,18 +845,18 @@ textarea, input { font-family: 'DM Sans', sans-serif; }
                 <div style={{ flex: 1 }}>
                   <div style={{ fontFamily: "'Space Mono', monospace", fontSize: 12, fontWeight: 700, color: role.color, letterSpacing: 1, marginBottom: 8 }}>{role.name.toUpperCase()}</div>
                   <div style={{ marginBottom: 6 }}>
-                    <div style={{ fontFamily: "'DM Mono', monospace", fontSize: 9, color: "#64748b", letterSpacing: 1, marginBottom: 3 }}>YOUR ROLE</div>
+                    <div style={{ fontFamily: "'DM Mono', monospace", fontSize: 9, color: "#64748b", letterSpacing: 1, marginBottom: 3 }}>{t("govGame.yourRole")}</div>
                     <div style={{ fontSize: 12, color: "#e2e8f0", lineHeight: 1.4 }}>{role.role}</div>
                   </div>
                   <div>
-                    <div style={{ fontFamily: "'DM Mono', monospace", fontSize: 9, color: "#f59e0b", letterSpacing: 1, marginBottom: 3 }}>YOUR INCENTIVES</div>
+                    <div style={{ fontFamily: "'DM Mono', monospace", fontSize: 9, color: "#f59e0b", letterSpacing: 1, marginBottom: 3 }}>{t("govGame.yourIncentives")}</div>
                     <div style={{ fontSize: 12, color: "#94a3b8", lineHeight: 1.4 }}>{role.incentive}</div>
                   </div>
                 </div>
               </div>
             </div>
             <div style={{ background: "#141820", border: "1px solid #1e2533", borderRadius: 12, padding: 20, marginBottom: 16 }}>
-              <div style={{ fontFamily: "'Space Mono', monospace", fontSize: 10, letterSpacing: 2, color: role.color, marginBottom: 4 }}>🔒 PRIVATE INTELLIGENCE</div>
+              <div style={{ fontFamily: "'Space Mono', monospace", fontSize: 10, letterSpacing: 2, color: role.color, marginBottom: 4 }}>🔒 {t("govGame.privateIntel")}</div>
               <div style={{ fontFamily: "'DM Mono', monospace", fontSize: 9, color: "#64748b", marginBottom: 12 }}>{intel.classification}</div>
               {intel.bullets.map((b: string, i: number) => (
                 <div key={i} style={{ display: "flex", gap: 10, marginBottom: 10, paddingBottom: 10, borderBottom: i < intel.bullets.length - 1 ? "1px solid #1e2533" : "none" }}>
@@ -859,21 +866,21 @@ textarea, input { font-family: 'DM Sans', sans-serif; }
               ))}
             </div>
             <div style={{ background: "#141820", border: "1px solid #1e2533", borderRadius: 12, padding: 20 }}>
-              <div style={{ fontFamily: "'Space Mono', monospace", fontSize: 10, letterSpacing: 2, color: "#64748b", marginBottom: 12 }}>YOUR RESPONSE — CHOOSE ONE</div>
+              <div style={{ fontFamily: "'Space Mono', monospace", fontSize: 10, letterSpacing: 2, color: "#64748b", marginBottom: 12 }}>{t("govGame.yourResponse")}</div>
               <div style={{ display: "flex", flexDirection: "column", gap: 10, marginBottom: 16 }}>
                 {opts.map((opt: any) => (
                   <button key={opt.id} className="option-btn" onClick={() => setSelectedOption(opt.id)} style={{ background: selectedOption === opt.id ? role.bg : "#0c0f14", border: `2px solid ${selectedOption === opt.id ? role.color : "#1e2533"}`, borderRadius: 10, padding: 16, cursor: "pointer", textAlign: "left" }}>
                     <div style={{ fontFamily: "'Space Mono', monospace", fontSize: 12, fontWeight: 700, color: selectedOption === opt.id ? role.color : "#e2e8f0", marginBottom: 4 }}>{opt.label}</div>
                     <p style={{ color: "#94a3b8", lineHeight: 1.5, fontSize: 12, marginBottom: 8 }}>{opt.detail}</p>
                     <div style={{ fontFamily: "'DM Mono', monospace", fontSize: 10, color: "#94a3b8", lineHeight: 1.4, padding: "6px 10px", background: "#1e293b", borderRadius: 4, borderLeft: "2px solid #334155" }}>
-                      <span style={{ color: "#64748b", letterSpacing: 1, fontSize: 9 }}>TENSION: </span>
+                      <span style={{ color: "#64748b", letterSpacing: 1, fontSize: 9 }}>{t("govGame.tension")}: </span>
                       {opt.tension || opt.detail}
                     </div>
                   </button>
                 ))}
               </div>
               <button onClick={commitDecision} disabled={!selectedOption} style={{ width: "100%", padding: "14px", background: selectedOption ? role.color : "#1e293b", color: selectedOption ? "#0c0f14" : "#64748b", border: "none", borderRadius: 8, cursor: selectedOption ? "pointer" : "not-allowed", fontFamily: "'Space Mono', monospace", fontSize: 13, fontWeight: 700, letterSpacing: 2, textTransform: "uppercase", opacity: selectedOption ? 1 : 0.5 }}>
-                {roleIdx < ROLES.length - 1 ? `Lock In → ${ROLES[roleIdx + 1].name}` : "Lock In → See Outcome"}
+                {roleIdx < ROLES.length - 1 ? `${t("govGame.lockIn")} → ${ROLES[roleIdx + 1].name}` : `${t("govGame.lockIn")} → ${t("govGame.seeOutcome")}`}
               </button>
             </div>
           </div>
@@ -892,7 +899,7 @@ textarea, input { font-family: 'DM Sans', sans-serif; }
       <div style={S}><style>{css}</style>{hdr}
         <div style={{ maxWidth: 760, margin: "0 auto" }}>
           <div className="fade-up" style={{ background: "#141820", border: `1px solid ${gradeColor}33`, borderRadius: 12, padding: 28, marginBottom: 16, textAlign: "center" }}>
-            <div style={{ fontFamily: "'Space Mono', monospace", fontSize: 10, letterSpacing: 3, color: "#64748b", marginBottom: 8 }}>COORDINATION GRADE</div>
+            <div style={{ fontFamily: "'Space Mono', monospace", fontSize: 10, letterSpacing: 3, color: "#64748b", marginBottom: 8 }}>{t("govGame.coordinationGrade")}</div>
             <div style={{ fontFamily: "'Instrument Serif', serif", fontSize: 72, fontWeight: 400, lineHeight: 1, color: gradeColor }}>{outcome.coordinationGrade}</div>
             <p style={{ fontSize: 14, color: "#94a3b8", marginTop: 8 }}>{outcome.coordinationDesc}</p>
           </div>
@@ -917,12 +924,12 @@ textarea, input { font-family: 'DM Sans', sans-serif; }
 
           {outcome.triggeredInteractions.length > 0 && (
             <div style={{ marginBottom: 16 }}>
-              <div style={{ fontFamily: "'Space Mono', monospace", fontSize: 10, letterSpacing: 2, color: "#64748b", marginBottom: 10 }}>INSTITUTIONAL INTERACTIONS</div>
+              <div style={{ fontFamily: "'Space Mono', monospace", fontSize: 10, letterSpacing: 2, color: "#64748b", marginBottom: 10 }}>{t("govGame.institutionalInteractions")}</div>
               {outcome.triggeredInteractions.map((inter: any, i: number) => (
                 <div key={i} className="fade-up" style={{ background: "#141820", border: `1px solid ${inter.type === "synergy" ? "#10b981" : "#ef4444"}33`, borderRadius: 10, padding: 16, marginBottom: 10, borderLeft: `3px solid ${inter.type === "synergy" ? "#10b981" : "#ef4444"}`, animationDelay: `${i * 0.15}s` }}>
                   <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 6 }}>
                     <span style={{ fontSize: 14 }}>{inter.type === "synergy" ? "🤝" : "💥"}</span>
-                    <span style={{ fontFamily: "'Space Mono', monospace", fontSize: 11, fontWeight: 700, color: inter.type === "synergy" ? "#10b981" : "#ef4444" }}>{inter.type.toUpperCase()}: {inter.label}</span>
+                    <span style={{ fontFamily: "'Space Mono', monospace", fontSize: 11, fontWeight: 700, color: inter.type === "synergy" ? "#10b981" : "#ef4444" }}>{inter.type === "synergy" ? t("govGame.synergy") : t("govGame.conflict")}: {inter.label}</span>
                   </div>
                   <p style={{ color: "#94a3b8", lineHeight: 1.6, fontSize: 13 }}>{inter.desc}</p>
                 </div>
@@ -931,13 +938,13 @@ textarea, input { font-family: 'DM Sans', sans-serif; }
           )}
 
           <div style={{ background: "#141820", border: "1px solid #1e2533", borderRadius: 12, padding: 20, marginBottom: 16 }}>
-            <div style={{ fontFamily: "'Space Mono', monospace", fontSize: 10, letterSpacing: 2, color: "#64748b", marginBottom: 12 }}>COLLECTIVE IMPACT</div>
-            {METRICS_INFO.map(m => <MetricBar key={m.key} label={m.label} value={outcome.scores[m.key]} icon={m.icon} color={m.color} />)}
+            <div style={{ fontFamily: "'Space Mono', monospace", fontSize: 10, letterSpacing: 2, color: "#64748b", marginBottom: 12 }}>{t("govGame.collectiveImpact")}</div>
+            {METRICS_INFO.map(m => <MetricBar key={m.key} label={t(`metrics.${m.key}`)} value={outcome.scores[m.key]} icon={m.icon} color={m.color} />)}
           </div>
 
           <div style={{ marginBottom: 16 }}>
             <button onClick={() => setShowCounterfactuals(!showCounterfactuals)} style={{ width: "100%", padding: "12px", background: "#1e293b", color: "#94a3b8", border: "1px solid #334155", borderRadius: 8, cursor: "pointer", fontFamily: "'Space Mono', monospace", fontSize: 11, letterSpacing: 1 }}>
-              {showCounterfactuals ? "▾ HIDE" : "▸ SHOW"} WHAT COULD HAVE GONE BETTER? — Largest improvement opportunities
+              {showCounterfactuals ? "▾ HIDE" : "▸ SHOW"} {t("govGame.whatCouldBeBetter")}
             </button>
             {showCounterfactuals && (
               <div style={{ marginTop: 10 }}>
@@ -962,7 +969,7 @@ textarea, input { font-family: 'DM Sans', sans-serif; }
                 ))}
                 {counterfactuals.length === 0 && (
                   <div style={{ marginTop: 10, padding: 14, background: "#141820", border: "1px solid #10b98133", borderRadius: 10, borderLeft: "3px solid #10b981" }}>
-                    <span style={{ fontFamily: "'Space Mono', monospace", fontSize: 11, color: "#10b981" }}>✓ No single-role change would have improved the outcome. Your choices were collectively near-optimal for this scenario.</span>
+                    <span style={{ fontFamily: "'Space Mono', monospace", fontSize: 11, color: "#10b981" }}>✓ {t("govGame.noImprovement")}</span>
                   </div>
                 )}
               </div>
@@ -971,7 +978,7 @@ textarea, input { font-family: 'DM Sans', sans-serif; }
 
           <div style={{ marginBottom: 16 }}>
             <button onClick={() => setShowAllIntel(!showAllIntel)} style={{ width: "100%", padding: "12px", background: "#1e293b", color: "#94a3b8", border: "1px solid #334155", borderRadius: 8, cursor: "pointer", fontFamily: "'Space Mono', monospace", fontSize: 11, letterSpacing: 1 }}>
-              {showAllIntel ? "▾ HIDE" : "▸ REVEAL"} ALL PRIVATE INTELLIGENCE
+              {showAllIntel ? `▾ ${t("govGame.hideIntel")}` : `▸ ${t("govGame.revealIntel")}`}
             </button>
             {showAllIntel && (
               <div style={{ marginTop: 10 }}>
@@ -994,7 +1001,7 @@ textarea, input { font-family: 'DM Sans', sans-serif; }
               </button>
             )}
             <button onClick={() => setPhase("select")} style={{ flex: 1, padding: "14px", background: "#141820", color: "#e2e8f0", border: "1px solid #1e2533", borderRadius: 8, cursor: "pointer", fontFamily: "'Space Mono', monospace", fontSize: 13, fontWeight: 700, letterSpacing: 2, textTransform: "uppercase" as const }}>
-              ← Back to Scenarios
+              ← {t("govGame.backToScenarios")}
             </button>
           </div>
         </div>
@@ -1028,7 +1035,7 @@ textarea, input { font-family: 'DM Sans', sans-serif; }
         <div style={{ maxWidth: 720, margin: "0 auto" }}>
           <div className="fade-up" style={{ background: "#141820", border: `1px solid ${gradeColor}33`, borderRadius: 12, padding: 32, marginBottom: 20 }}>
             <div style={{ fontFamily: "'Space Mono', monospace", fontSize: 10, letterSpacing: 3, color: gradeColor, marginBottom: 8 }}>
-              SIMULATION OUTCOME — {grades.length} of {crises.length} SCENARIOS PLAYED
+              {t("govGame.simulationOutcome")} — {grades.length} {t("govGame.of")} {crises.length} {t("govGame.scenariosPlayed")}
             </div>
             <h2 style={{ fontFamily: "'Instrument Serif', serif", fontSize: 32, fontWeight: 400, color: gradeColor, marginBottom: 12 }}>{archetype}</h2>
             <p style={{ color: "#94a3b8", lineHeight: 1.7, fontSize: 14 }}>{archetypeDesc}</p>
@@ -1037,21 +1044,21 @@ textarea, input { font-family: 'DM Sans', sans-serif; }
           <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: 12, marginBottom: 20 }}>
             <div style={{ background: "#141820", border: "1px solid #1e2533", borderRadius: 10, padding: 16, textAlign: "center" }}>
               <div style={{ fontFamily: "'Instrument Serif', serif", fontSize: 40, color: gradeColor }}>{overallGrade}</div>
-              <div style={{ fontFamily: "'DM Mono', monospace", fontSize: 10, color: "#64748b" }}>OVERALL GRADE</div>
+              <div style={{ fontFamily: "'DM Mono', monospace", fontSize: 10, color: "#64748b" }}>{t("govGame.overallGrade")}</div>
             </div>
             <div style={{ background: "#141820", border: "1px solid #1e2533", borderRadius: 10, padding: 16, textAlign: "center" }}>
               <div style={{ fontFamily: "'Space Mono', monospace", fontSize: 32, color: "#10b981" }}>{totalSynergies}</div>
-              <div style={{ fontFamily: "'DM Mono', monospace", fontSize: 10, color: "#64748b" }}>SYNERGIES</div>
+              <div style={{ fontFamily: "'DM Mono', monospace", fontSize: 10, color: "#64748b" }}>{t("govGame.synergies")}</div>
             </div>
             <div style={{ background: "#141820", border: "1px solid #1e2533", borderRadius: 10, padding: 16, textAlign: "center" }}>
               <div style={{ fontFamily: "'Space Mono', monospace", fontSize: 32, color: "#ef4444" }}>{totalConflicts}</div>
-              <div style={{ fontFamily: "'DM Mono', monospace", fontSize: 10, color: "#64748b" }}>CONFLICTS</div>
+              <div style={{ fontFamily: "'DM Mono', monospace", fontSize: 10, color: "#64748b" }}>{t("govGame.conflicts")}</div>
             </div>
           </div>
 
           <div style={{ background: "#141820", border: "1px solid #1e2533", borderRadius: 12, padding: 20, marginBottom: 20 }}>
-            <div style={{ fontFamily: "'Space Mono', monospace", fontSize: 10, letterSpacing: 2, color: "#64748b", marginBottom: 12 }}>CUMULATIVE IMPACT</div>
-            {METRICS_INFO.map(m => <MetricBar key={m.key} label={m.label} value={totalScores[m.key]} icon={m.icon} color={m.color} />)}
+            <div style={{ fontFamily: "'Space Mono', monospace", fontSize: 10, letterSpacing: 2, color: "#64748b", marginBottom: 12 }}>{t("govGame.cumulativeImpact")}</div>
+            {METRICS_INFO.map(m => <MetricBar key={m.key} label={t(`metrics.${m.key}`)} value={totalScores[m.key]} icon={m.icon} color={m.color} />)}
           </div>
 
           {crises.map((c: any) => {
@@ -1068,7 +1075,7 @@ textarea, input { font-family: 'DM Sans', sans-serif; }
                   {o ? (
                     <span style={{ fontFamily: "'Space Mono', monospace", fontSize: 18, fontWeight: 700, color: gc! }}>{o.coordinationGrade}</span>
                   ) : (
-                    <span style={{ fontFamily: "'DM Mono', monospace", fontSize: 9, color: "#334155", background: "#1e293b", padding: "3px 8px", borderRadius: 4 }}>NOT PLAYED</span>
+                    <span style={{ fontFamily: "'DM Mono', monospace", fontSize: 9, color: "#334155", background: "#1e293b", padding: "3px 8px", borderRadius: 4 }}>{t("govGame.notPlayed")}</span>
                   )}
                 </div>
                 {o && (
@@ -1162,7 +1169,7 @@ textarea, input { font-family: 'DM Sans', sans-serif; }
             return (
               <>
                 <div style={{ background: "#141820", border: "1px solid #1e2533", borderRadius: 12, padding: 24, marginBottom: 20 }}>
-                  <div style={{ fontFamily: "'Space Mono', monospace", fontSize: 10, letterSpacing: 2, color: "#06b6d4", marginBottom: 12 }}>SHARE YOUR RESULT</div>
+                  <div style={{ fontFamily: "'Space Mono', monospace", fontSize: 10, letterSpacing: 2, color: "#06b6d4", marginBottom: 12 }}>{t("share.shareResult")}</div>
                   <div style={{ background: "#0c0f14", border: `1px solid ${gradeColor}33`, borderRadius: 10, padding: 20, marginBottom: 16 }}>
                     <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: 12 }}>
                       <div>
@@ -1195,7 +1202,7 @@ textarea, input { font-family: 'DM Sans', sans-serif; }
                     </div>
                   </div>
                   <button onClick={copyResult} style={{ width: "100%", padding: "12px", background: copied ? "#10b981" : "#1e293b", color: copied ? "#0c0f14" : "#94a3b8", border: "1px solid #334155", borderRadius: 8, cursor: "pointer", fontFamily: "'Space Mono', monospace", fontSize: 11, fontWeight: 700, letterSpacing: 1, transition: "all 0.3s ease" }}>
-                    {copied ? "COPIED TO CLIPBOARD" : "COPY RESULT TO SHARE"}
+                    {copied ? t("share.copiedToClipboard") : t("share.copyResult")}
                   </button>
                 </div>
 
@@ -1207,40 +1214,40 @@ textarea, input { font-family: 'DM Sans', sans-serif; }
                     <input type="hidden" name="archetype" value={archetype} />
                     <input type="hidden" name="grade" value={overallGrade} />
                     <input name="bot-field" style={{ display: "none" }} />
-                    <div style={{ fontFamily: "'Space Mono', monospace", fontSize: 10, letterSpacing: 2, color: "#f59e0b", marginBottom: 16 }}>QUICK FEEDBACK — HELP US IMPROVE</div>
+                    <div style={{ fontFamily: "'Space Mono', monospace", fontSize: 10, letterSpacing: 2, color: "#f59e0b", marginBottom: 16 }}>{t("feedback.title")}</div>
                     <div style={{ marginBottom: 16 }}>
-                      <p style={{ color: "#e2e8f0", fontSize: 13, fontWeight: 700, marginBottom: 8 }}>Did this change how you think about AI governance?</p>
+                      <p style={{ color: "#e2e8f0", fontSize: 13, fontWeight: 700, marginBottom: 8 }}>{t("feedback.changedThinking")}</p>
                       <div style={{ display: "flex", gap: 8, flexWrap: "wrap" as const }}>
-                        {["Yes, significantly", "Somewhat", "Not really"].map(opt => (
+                        {[t("feedback.yesSignificantly"), t("feedback.somewhat"), t("feedback.notReally")].map(opt => (
                           <button type="button" key={opt} onClick={() => setFeedbackThinking(opt)} style={{ padding: "8px 14px", background: feedbackThinking === opt ? "#f59e0b22" : "#0c0f14", border: `1px solid ${feedbackThinking === opt ? "#f59e0b" : "#1e2533"}`, borderRadius: 6, color: feedbackThinking === opt ? "#f59e0b" : "#94a3b8", cursor: "pointer", fontFamily: "'DM Mono', monospace", fontSize: 11, transition: "all 0.2s ease" }}>{opt}</button>
                         ))}
                       </div>
                       <input type="hidden" name="changed-thinking" value={feedbackThinking || ""} />
                     </div>
                     <div style={{ marginBottom: 16 }}>
-                      <p style={{ color: "#e2e8f0", fontSize: 13, fontWeight: 700, marginBottom: 8 }}>Would you use this in a group setting?</p>
+                      <p style={{ color: "#e2e8f0", fontSize: 13, fontWeight: 700, marginBottom: 8 }}>{t("feedback.groupSetting")}</p>
                       <div style={{ display: "flex", gap: 8, flexWrap: "wrap" as const }}>
-                        {["Yes, with my team", "Yes, in a class", "Yes, at a workshop", "Just exploring"].map(opt => (
+                        {[t("feedback.withTeam"), t("feedback.inClass"), t("feedback.atWorkshop"), t("feedback.justExploring")].map(opt => (
                           <button type="button" key={opt} onClick={() => setFeedbackUseCase(opt)} style={{ padding: "8px 14px", background: feedbackUseCase === opt ? "#06b6d422" : "#0c0f14", border: `1px solid ${feedbackUseCase === opt ? "#06b6d4" : "#1e2533"}`, borderRadius: 6, color: feedbackUseCase === opt ? "#06b6d4" : "#94a3b8", cursor: "pointer", fontFamily: "'DM Mono', monospace", fontSize: 11, transition: "all 0.2s ease" }}>{opt}</button>
                         ))}
                       </div>
                       <input type="hidden" name="use-case" value={feedbackUseCase || ""} />
                     </div>
                     <div style={{ marginBottom: 16 }}>
-                      <p style={{ color: "#e2e8f0", fontSize: 13, fontWeight: 700, marginBottom: 4 }}>Want the facilitator's guide when it's ready?</p>
-                      <p style={{ color: "#64748b", fontSize: 11, marginBottom: 8 }}>Optional — includes workshop formats, printable role cards, and new scenario alerts.</p>
-                      <input type="email" name="email" value={feedbackEmail} onChange={e => setFeedbackEmail(e.target.value)} placeholder="your@email.com (optional)" style={{ width: "100%", padding: "10px 14px", background: "#0c0f14", border: "1px solid #1e2533", borderRadius: 8, color: "#e2e8f0", fontSize: 13, outline: "none", fontFamily: "'DM Sans', sans-serif" }} />
+                      <p style={{ color: "#e2e8f0", fontSize: 13, fontWeight: 700, marginBottom: 4 }}>{t("feedback.facilitatorGuide")}</p>
+                      <p style={{ color: "#64748b", fontSize: 11, marginBottom: 8 }}>{t("feedback.facilitatorGuideDesc")}</p>
+                      <input type="email" name="email" value={feedbackEmail} onChange={e => setFeedbackEmail(e.target.value)} placeholder={t("feedback.emailPlaceholder")} style={{ width: "100%", padding: "10px 14px", background: "#0c0f14", border: "1px solid #1e2533", borderRadius: 8, color: "#e2e8f0", fontSize: 13, outline: "none", fontFamily: "'DM Sans', sans-serif" }} />
                     </div>
                     <button type="submit" disabled={(!feedbackThinking && !feedbackUseCase && !feedbackEmail) || feedbackSubmitting} style={{ width: "100%", padding: "12px", background: (feedbackThinking || feedbackUseCase || feedbackEmail) ? "linear-gradient(135deg, #f59e0b, #06b6d4)" : "#1e293b", color: (feedbackThinking || feedbackUseCase || feedbackEmail) ? "#0c0f14" : "#334155", border: "none", borderRadius: 8, cursor: (feedbackThinking || feedbackUseCase || feedbackEmail) ? "pointer" : "not-allowed", fontFamily: "'Space Mono', monospace", fontSize: 11, fontWeight: 700, letterSpacing: 1, opacity: feedbackSubmitting ? 0.6 : 1 }}>
-                      {feedbackSubmitting ? "SENDING..." : "SUBMIT FEEDBACK"}
+                      {feedbackSubmitting ? t("feedback.sending") : t("feedback.submit")}
                     </button>
                   </form>
                 ) : (
                   <div style={{ background: "#141820", border: "1px solid #10b98133", borderRadius: 12, padding: 20, marginBottom: 20, textAlign: "center" as const }}>
                     <span style={{ fontSize: 24 }}>🙏</span>
-                    <p style={{ color: "#10b981", fontFamily: "'Space Mono', monospace", fontSize: 12, fontWeight: 700, marginTop: 8 }}>Thank you for your feedback!</p>
+                    <p style={{ color: "#10b981", fontFamily: "'Space Mono', monospace", fontSize: 12, fontWeight: 700, marginTop: 8 }}>{t("feedback.thankYou")}</p>
                     <p style={{ color: "#64748b", fontSize: 11, marginTop: 4 }}>
-                      {feedbackEmail ? "We'll send you the facilitator's guide when it's ready." : "Your input helps us make these tools more effective."}
+                      {feedbackEmail ? t("feedback.willSendGuide") : t("feedback.inputHelps")}
                     </p>
                   </div>
                 )}
@@ -1265,10 +1272,10 @@ textarea, input { font-family: 'DM Sans', sans-serif; }
               ↩ Scenarios
             </button>
             <button onClick={restart} style={{ flex: 1, padding: "14px 24px", background: "#0c0f14", color: "#64748b", border: "1px solid #1e2533", borderRadius: 8, cursor: "pointer", fontFamily: "'Space Mono', monospace", fontSize: 13, letterSpacing: 2, textTransform: "uppercase" as const }}>
-              ↻ Restart
+              ↻ {t("pacing.runAgain")}
             </button>
             <button onClick={onBack} style={{ flex: 1, padding: "14px 24px", background: "#0c0f14", color: "#64748b", border: "1px solid #1e2533", borderRadius: 8, cursor: "pointer", fontFamily: "'Space Mono', monospace", fontSize: 13, letterSpacing: 2, textTransform: "uppercase" as const }}>
-              ← Home
+              ← {t("nav.backToHome")}
             </button>
           </div>
         </div>

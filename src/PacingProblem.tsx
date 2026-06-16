@@ -1,5 +1,7 @@
 import { useState, useEffect, useCallback } from "react";
+import { useTranslation } from "react-i18next";
 import { track } from "./analytics";
+import LanguageToggle from "./LanguageToggle";
 
 const EVENTS = [
   {
@@ -154,6 +156,7 @@ function SpectrumSlider({ value, onChange, disabled }: any) {
 }
 
 export default function PacingProblem({ onBack }: { onBack: () => void }) {
+  const { t } = useTranslation();
   const [phase, setPhase] = useState("intro");
   const [currentEvent, setCurrentEvent] = useState(0);
   const [sliderValue, setSliderValue] = useState(50);
@@ -265,22 +268,25 @@ export default function PacingProblem({ onBack }: { onBack: () => void }) {
         <button onClick={onBack} style={{ background: "none", border: "1px solid #1e2533", borderRadius: 6, color: "#64748b", cursor: "pointer", fontFamily: "'Space Mono', monospace", fontSize: 10, letterSpacing: 1, padding: "6px 12px", transition: "all 0.2s" }}
           onMouseEnter={e => { (e.target as HTMLElement).style.borderColor = "#334155"; (e.target as HTMLElement).style.color = "#94a3b8"; }}
           onMouseLeave={e => { (e.target as HTMLElement).style.borderColor = "#1e2533"; (e.target as HTMLElement).style.color = "#64748b"; }}>
-          ← HOME
+          ← {t("nav.backToHome")}
         </button>
         <div>
-          <div style={{ fontFamily: "'Space Mono', monospace", fontSize: 10, letterSpacing: 3, color: "#f97316", marginBottom: 4 }}>AGI STRATEGY</div>
-          <h1 style={{ fontFamily: "'Instrument Serif', serif", fontSize: 26, fontWeight: 400, lineHeight: 1.1, color: "#e2e8f0" }}>Institutional Stress Test</h1>
-          <div style={{ fontFamily: "'DM Mono', monospace", fontSize: 11, color: "#64748b", marginTop: 4 }}>The Pacing Problem Simulator</div>
+          <div style={{ fontFamily: "'Space Mono', monospace", fontSize: 10, letterSpacing: 3, color: "#f97316", marginBottom: 4 }}>{t("pacing.suiteLabel")}</div>
+          <h1 style={{ fontFamily: "'Instrument Serif', serif", fontSize: 26, fontWeight: 400, lineHeight: 1.1, color: "#e2e8f0" }}>{t("pacing.title")}</h1>
+          <div style={{ fontFamily: "'DM Mono', monospace", fontSize: 11, color: "#64748b", marginTop: 4 }}>{t("pacing.subtitle")}</div>
         </div>
       </div>
-      {phase !== "intro" && (
-        <div style={{ textAlign: "right" as const }}>
-          <div style={{ fontFamily: "'DM Mono', monospace", fontSize: 11, color: "#64748b" }}>SCENARIO</div>
-          <div style={{ fontFamily: "'Space Mono', monospace", fontSize: 22, fontWeight: 700, color: "#e2e8f0" }}>
-            {phase === "debrief" ? "DEBRIEF" : `${currentEvent + 1} / ${EVENTS.length}`}
+      <div style={{ display: "flex", alignItems: "center", gap: 24 }}>
+        {phase !== "intro" && (
+          <div style={{ textAlign: "right" as const }}>
+            <div style={{ fontFamily: "'DM Mono', monospace", fontSize: 11, color: "#64748b" }}>{phase === "debrief" ? t("pacing.debrief") : t("pacing.scenario")}</div>
+            <div style={{ fontFamily: "'Space Mono', monospace", fontSize: 22, fontWeight: 700, color: "#e2e8f0" }}>
+              {phase === "debrief" ? t("pacing.debrief") : `${currentEvent + 1} / ${EVENTS.length}`}
+            </div>
           </div>
-        </div>
-      )}
+        )}
+        <LanguageToggle />
+      </div>
     </div>
   );
 
@@ -291,22 +297,22 @@ export default function PacingProblem({ onBack }: { onBack: () => void }) {
         <div style={{ maxWidth: 640, margin: "0 auto", paddingTop: 32 }}>
           <div style={{ background: "#141820", border: "1px solid #1e2533", borderRadius: 12, padding: 32, animation: "fadeUp 0.5s ease forwards" }}>
             <div style={{ fontSize: 48, marginBottom: 16 }}>🏛️</div>
-            <h2 style={{ fontFamily: "'Instrument Serif', serif", fontSize: 28, fontWeight: 400, marginBottom: 16 }}>You are the Director.</h2>
+            <h2 style={{ fontFamily: "'Instrument Serif', serif", fontSize: 28, fontWeight: 400, marginBottom: 16 }}>{t("pacing.youAreDirector")}</h2>
             <p style={{ color: "#94a3b8", lineHeight: 1.7, fontSize: 15, marginBottom: 20 }}>
-              You've been appointed to lead a national AI regulatory body during a period of unprecedented technological acceleration. Your institution has limited bandwidth, imperfect information, and a public that expects both safety and speed.
+              {t("pacing.introText")}
             </p>
             <div style={{ background: "#1e293b", borderRadius: 8, padding: 16, marginBottom: 20 }}>
-              <div style={{ fontFamily: "'Space Mono', monospace", fontSize: 11, letterSpacing: 1.5, color: "#f97316", marginBottom: 10 }}>THE PACING PROBLEM</div>
+              <div style={{ fontFamily: "'Space Mono', monospace", fontSize: 11, letterSpacing: 1.5, color: "#f97316", marginBottom: 10 }}>{t("pacing.pacingProblem")}</div>
               <p style={{ color: "#94a3b8", lineHeight: 1.7, fontSize: 14 }}>
-                Technology evolves faster than institutions can adapt. Act too quickly and you risk errors, industry capture, and legitimacy crises. Act too slowly and your rules become irrelevant before they're published. There is no "correct" answer — only trade-offs.
+                {t("pacing.pacingProblemText")}
               </p>
             </div>
             <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12, marginBottom: 24 }}>
               {[
-                { icon: "⚡", label: "Speed", desc: "Fast action risks regulatory capture and errors", color: "#f97316" },
-                { icon: "🔬", label: "Rigour", desc: "Thorough process risks institutional obsolescence", color: "#3b82f6" },
-                { icon: "📊", label: "Bandwidth", desc: "Every response consumes limited resources", color: "#10b981" },
-                { icon: "🏛️", label: "Credibility", desc: "Your institution's ability to shape policy", color: "#f59e0b" }
+                { icon: "⚡", label: t("pacing.speed"), desc: t("pacing.speedDesc"), color: "#f97316" },
+                { icon: "🔬", label: t("pacing.rigour"), desc: t("pacing.rigourDesc"), color: "#3b82f6" },
+                { icon: "📊", label: t("pacing.bandwidth"), desc: t("pacing.bandwidthDesc"), color: "#10b981" },
+                { icon: "🏛️", label: t("pacing.credibility"), desc: t("pacing.credibilityDesc"), color: "#f59e0b" }
               ].map((item, i) => (
                 <div key={i} style={{ background: "#0c0f14", borderRadius: 8, padding: 12, border: "1px solid #1e2533" }}>
                   <div style={{ fontSize: 20, marginBottom: 4 }}>{item.icon}</div>
@@ -316,7 +322,7 @@ export default function PacingProblem({ onBack }: { onBack: () => void }) {
               ))}
             </div>
             <button onClick={() => { track("pacing_start"); setPhase("event"); }} style={{ width: "100%", padding: "14px 24px", background: "linear-gradient(135deg, #f97316, #a855f7)", color: "#fff", border: "none", borderRadius: 8, cursor: "pointer", fontFamily: "'Space Mono', monospace", fontSize: 14, fontWeight: 700, letterSpacing: 2, textTransform: "uppercase" as const }}>
-              Begin Simulation →
+              {t("pacing.beginSimulation")} →
             </button>
           </div>
         </div>
@@ -399,13 +405,13 @@ export default function PacingProblem({ onBack }: { onBack: () => void }) {
         {headerBar}
         <div style={{ maxWidth: 680, margin: "0 auto" }}>
           <div style={{ background: "#141820", border: `1px solid ${archetypeColor}33`, borderRadius: 12, padding: 32, marginBottom: 20, animation: "fadeUp 0.5s ease forwards" }}>
-            <div style={{ fontFamily: "'Space Mono', monospace", fontSize: 10, letterSpacing: 3, color: archetypeColor, marginBottom: 8 }}>YOUR INSTITUTIONAL OUTCOME</div>
+            <div style={{ fontFamily: "'Space Mono', monospace", fontSize: 10, letterSpacing: 3, color: archetypeColor, marginBottom: 8 }}>{t("pacing.institutionalOutcome")}</div>
             <h2 style={{ fontFamily: "'Instrument Serif', serif", fontSize: 32, fontWeight: 400, color: archetypeColor, marginBottom: 12 }}>{archetype}</h2>
             <p style={{ color: "#94a3b8", lineHeight: 1.7, fontSize: 14 }}>{archetypeDesc}</p>
           </div>
           <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12, marginBottom: 20 }}>
             <div style={{ background: "#141820", border: "1px solid #1e2533", borderRadius: 12, padding: 20 }}>
-              <div style={{ fontFamily: "'Space Mono', monospace", fontSize: 10, letterSpacing: 2, color: "#64748b", marginBottom: 12 }}>FINAL METRICS</div>
+              <div style={{ fontFamily: "'Space Mono', monospace", fontSize: 10, letterSpacing: 2, color: "#64748b", marginBottom: 12 }}>{t("pacing.finalMetrics")}</div>
               <GaugeBar label="Bandwidth" value={state.bandwidth} color="#10b981" icon="📊" />
               <GaugeBar label="Credibility" value={state.credibility} color="#f59e0b" icon="🏛️" />
               <GaugeBar label="Public Trust" value={state.publicTrust} color="#3b82f6" icon="👥" />
@@ -413,10 +419,10 @@ export default function PacingProblem({ onBack }: { onBack: () => void }) {
               <GaugeBar label="Obsolescence" value={state.obsolescenceRisk} color="#8b5cf6" icon="⏳" />
             </div>
             <div style={{ background: "#141820", border: "1px solid #1e2533", borderRadius: 12, padding: 20 }}>
-              <div style={{ fontFamily: "'Space Mono', monospace", fontSize: 10, letterSpacing: 2, color: "#64748b", marginBottom: 12 }}>DECISION PATTERN</div>
+              <div style={{ fontFamily: "'Space Mono', monospace", fontSize: 10, letterSpacing: 2, color: "#64748b", marginBottom: 12 }}>{t("pacing.decisionPattern")}</div>
               {state.history.map((h, i) => (
                 <div key={i} style={{ marginBottom: 12, paddingBottom: 12, borderBottom: i < state.history.length - 1 ? "1px solid #1e2533" : "none" }}>
-                  <div style={{ fontFamily: "'DM Mono', monospace", fontSize: 11, color: "#64748b" }}>Event {i + 1}</div>
+                  <div style={{ fontFamily: "'DM Mono', monospace", fontSize: 11, color: "#64748b" }}>{t("pacing.event")} {i + 1}</div>
                   <div style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 13, fontWeight: 700, color: "#e2e8f0", marginTop: 2 }}>{h.event}</div>
                   <div style={{ display: "flex", alignItems: "center", gap: 8, marginTop: 4 }}>
                     <span style={{ fontFamily: "'Space Mono', monospace", fontSize: 10, letterSpacing: 1, fontWeight: 700, padding: "2px 8px", borderRadius: 4, background: h.bias === "speed" ? "#f9731622" : h.bias === "rigour" ? "#3b82f622" : "#a855f722", color: h.bias === "speed" ? "#f97316" : h.bias === "rigour" ? "#3b82f6" : "#a855f7" }}>
@@ -427,7 +433,7 @@ export default function PacingProblem({ onBack }: { onBack: () => void }) {
                 </div>
               ))}
               <div style={{ marginTop: 12, padding: 12, background: "#1e293b", borderRadius: 8 }}>
-                <div style={{ fontFamily: "'DM Mono', monospace", fontSize: 11, color: "#64748b" }}>Bias distribution</div>
+                <div style={{ fontFamily: "'DM Mono', monospace", fontSize: 11, color: "#64748b" }}>{t("pacing.biasDistribution")}</div>
                 <div style={{ display: "flex", gap: 12, marginTop: 6 }}>
                   <span style={{ fontFamily: "'Space Mono', monospace", fontSize: 13, color: "#f97316" }}>⚡ {speedChoices}</span>
                   <span style={{ fontFamily: "'Space Mono', monospace", fontSize: 13, color: "#a855f7" }}>⚖️ {balancedChoices}</span>
@@ -437,7 +443,7 @@ export default function PacingProblem({ onBack }: { onBack: () => void }) {
             </div>
           </div>
           <div style={{ background: "#141820", border: "1px solid #1e2533", borderRadius: 12, padding: 24, marginBottom: 20 }}>
-            <div style={{ fontFamily: "'Space Mono', monospace", fontSize: 10, letterSpacing: 2, color: "#f97316", marginBottom: 10 }}>THE CORE INSIGHT</div>
+            <div style={{ fontFamily: "'Space Mono', monospace", fontSize: 10, letterSpacing: 2, color: "#f97316", marginBottom: 10 }}>{t("pacing.coreInsight")}</div>
             <p style={{ color: "#94a3b8", lineHeight: 1.8, fontSize: 14 }}>
               The pacing problem is not a puzzle to solve — it's a tension to manage. Every institution faces the same fundamental trade-off: act quickly enough to matter, or carefully enough to be right. The simulation demonstrates why "just regulate AI" is insufficient as a strategy. The <em style={{ color: "#e2e8f0" }}>how</em> of governance matters as much as the <em style={{ color: "#e2e8f0" }}>whether</em>, and the costs of both action and inaction are real and measurable.
             </p>
@@ -445,11 +451,11 @@ export default function PacingProblem({ onBack }: { onBack: () => void }) {
 
           {/* ─── SHAREABLE RESULTS CARD ─── */}
           <div style={{ background: "#141820", border: "1px solid #1e2533", borderRadius: 12, padding: 24, marginBottom: 20 }}>
-            <div style={{ fontFamily: "'Space Mono', monospace", fontSize: 10, letterSpacing: 2, color: "#f97316", marginBottom: 12 }}>SHARE YOUR RESULT</div>
+            <div style={{ fontFamily: "'Space Mono', monospace", fontSize: 10, letterSpacing: 2, color: "#f97316", marginBottom: 12 }}>{t("share.shareResult")}</div>
             <div style={{ background: "#0c0f14", border: `1px solid ${archetypeColor}33`, borderRadius: 10, padding: 20, marginBottom: 16 }}>
               <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: 12 }}>
                 <div>
-                  <div style={{ fontFamily: "'DM Mono', monospace", fontSize: 9, color: "#64748b", letterSpacing: 1 }}>MY INSTITUTIONAL ARCHETYPE</div>
+                  <div style={{ fontFamily: "'DM Mono', monospace", fontSize: 9, color: "#64748b", letterSpacing: 1 }}>{t("pacing.myArchetype")}</div>
                   <div style={{ fontFamily: "'Instrument Serif', serif", fontSize: 20, color: archetypeColor, marginTop: 4 }}>{archetype}</div>
                 </div>
               </div>
@@ -473,7 +479,7 @@ export default function PacingProblem({ onBack }: { onBack: () => void }) {
               </div>
             </div>
             <button onClick={copyResult} style={{ width: "100%", padding: "12px", background: copied ? "#10b981" : "#1e293b", color: copied ? "#0c0f14" : "#94a3b8", border: "1px solid #334155", borderRadius: 8, cursor: "pointer", fontFamily: "'Space Mono', monospace", fontSize: 11, fontWeight: 700, letterSpacing: 1, transition: "all 0.3s ease" }}>
-              {copied ? "COPIED TO CLIPBOARD" : "COPY RESULT TO SHARE"}
+              {copied ? t("share.copiedToClipboard") : t("share.copyResult")}
             </button>
           </div>
 
@@ -484,40 +490,40 @@ export default function PacingProblem({ onBack }: { onBack: () => void }) {
               <input type="hidden" name="tool" value="pacing-problem" />
               <input type="hidden" name="archetype" value={archetype} />
               <input name="bot-field" style={{ display: "none" }} />
-              <div style={{ fontFamily: "'Space Mono', monospace", fontSize: 10, letterSpacing: 2, color: "#f59e0b", marginBottom: 16 }}>QUICK FEEDBACK — HELP US IMPROVE</div>
+              <div style={{ fontFamily: "'Space Mono', monospace", fontSize: 10, letterSpacing: 2, color: "#f59e0b", marginBottom: 16 }}>{t("feedback.title")}</div>
               <div style={{ marginBottom: 16 }}>
-                <p style={{ color: "#e2e8f0", fontSize: 13, fontWeight: 700, marginBottom: 8 }}>Did this change how you think about AI governance?</p>
+                <p style={{ color: "#e2e8f0", fontSize: 13, fontWeight: 700, marginBottom: 8 }}>{t("feedback.changedThinking")}</p>
                 <div style={{ display: "flex", gap: 8, flexWrap: "wrap" as const }}>
-                  {["Yes, significantly", "Somewhat", "Not really"].map(opt => (
+                  {[t("feedback.yesSignificantly"), t("feedback.somewhat"), t("feedback.notReally")].map(opt => (
                     <button type="button" key={opt} onClick={() => setFeedbackThinking(opt)} style={{ padding: "8px 14px", background: feedbackThinking === opt ? "#f59e0b22" : "#0c0f14", border: `1px solid ${feedbackThinking === opt ? "#f59e0b" : "#1e2533"}`, borderRadius: 6, color: feedbackThinking === opt ? "#f59e0b" : "#94a3b8", cursor: "pointer", fontFamily: "'DM Mono', monospace", fontSize: 11, transition: "all 0.2s ease" }}>{opt}</button>
                   ))}
                 </div>
                 <input type="hidden" name="changed-thinking" value={feedbackThinking || ""} />
               </div>
               <div style={{ marginBottom: 16 }}>
-                <p style={{ color: "#e2e8f0", fontSize: 13, fontWeight: 700, marginBottom: 8 }}>Would you use this in a group setting?</p>
+                <p style={{ color: "#e2e8f0", fontSize: 13, fontWeight: 700, marginBottom: 8 }}>{t("feedback.groupSetting")}</p>
                 <div style={{ display: "flex", gap: 8, flexWrap: "wrap" as const }}>
-                  {["Yes, with my team", "Yes, in a class", "Yes, at a workshop", "Just exploring"].map(opt => (
+                  {[t("feedback.withTeam"), t("feedback.inClass"), t("feedback.atWorkshop"), t("feedback.justExploring")].map(opt => (
                     <button type="button" key={opt} onClick={() => setFeedbackUseCase(opt)} style={{ padding: "8px 14px", background: feedbackUseCase === opt ? "#06b6d422" : "#0c0f14", border: `1px solid ${feedbackUseCase === opt ? "#06b6d4" : "#1e2533"}`, borderRadius: 6, color: feedbackUseCase === opt ? "#06b6d4" : "#94a3b8", cursor: "pointer", fontFamily: "'DM Mono', monospace", fontSize: 11, transition: "all 0.2s ease" }}>{opt}</button>
                   ))}
                 </div>
                 <input type="hidden" name="use-case" value={feedbackUseCase || ""} />
               </div>
               <div style={{ marginBottom: 16 }}>
-                <p style={{ color: "#e2e8f0", fontSize: 13, fontWeight: 700, marginBottom: 4 }}>Want the facilitator's guide when it's ready?</p>
-                <p style={{ color: "#64748b", fontSize: 11, marginBottom: 8 }}>Optional — includes workshop formats, printable role cards, and new scenario alerts.</p>
-                <input type="email" name="email" value={feedbackEmail} onChange={e => setFeedbackEmail(e.target.value)} placeholder="your@email.com (optional)" style={{ width: "100%", padding: "10px 14px", background: "#0c0f14", border: "1px solid #1e2533", borderRadius: 8, color: "#e2e8f0", fontSize: 13, outline: "none", fontFamily: "'DM Sans', sans-serif" }} />
+                <p style={{ color: "#e2e8f0", fontSize: 13, fontWeight: 700, marginBottom: 4 }}>{t("feedback.facilitatorGuide")}</p>
+                <p style={{ color: "#64748b", fontSize: 11, marginBottom: 8 }}>{t("feedback.facilitatorGuideDesc")}</p>
+                <input type="email" name="email" value={feedbackEmail} onChange={e => setFeedbackEmail(e.target.value)} placeholder={t("feedback.emailPlaceholder")} style={{ width: "100%", padding: "10px 14px", background: "#0c0f14", border: "1px solid #1e2533", borderRadius: 8, color: "#e2e8f0", fontSize: 13, outline: "none", fontFamily: "'DM Sans', sans-serif" }} />
               </div>
               <button type="submit" disabled={(!feedbackThinking && !feedbackUseCase && !feedbackEmail) || feedbackSubmitting} style={{ width: "100%", padding: "12px", background: (feedbackThinking || feedbackUseCase || feedbackEmail) ? "linear-gradient(135deg, #f59e0b, #06b6d4)" : "#1e293b", color: (feedbackThinking || feedbackUseCase || feedbackEmail) ? "#0c0f14" : "#334155", border: "none", borderRadius: 8, cursor: (feedbackThinking || feedbackUseCase || feedbackEmail) ? "pointer" : "not-allowed", fontFamily: "'Space Mono', monospace", fontSize: 11, fontWeight: 700, letterSpacing: 1, opacity: feedbackSubmitting ? 0.6 : 1 }}>
-                {feedbackSubmitting ? "SENDING..." : "SUBMIT FEEDBACK"}
+                {feedbackSubmitting ? t("feedback.sending") : t("feedback.submit")}
               </button>
             </form>
           ) : (
             <div style={{ background: "#141820", border: "1px solid #10b98133", borderRadius: 12, padding: 20, marginBottom: 20, textAlign: "center" as const }}>
               <span style={{ fontSize: 24 }}>🙏</span>
-              <p style={{ color: "#10b981", fontFamily: "'Space Mono', monospace", fontSize: 12, fontWeight: 700, marginTop: 8 }}>Thank you for your feedback!</p>
+              <p style={{ color: "#10b981", fontFamily: "'Space Mono', monospace", fontSize: 12, fontWeight: 700, marginTop: 8 }}>{t("feedback.thankYou")}</p>
               <p style={{ color: "#64748b", fontSize: 11, marginTop: 4 }}>
-                {feedbackEmail ? "We'll send you the facilitator's guide when it's ready." : "Your input helps us make these tools more effective."}
+                {feedbackEmail ? t("feedback.willSendGuide") : t("feedback.inputHelps")}
               </p>
             </div>
           )}
@@ -536,10 +542,10 @@ export default function PacingProblem({ onBack }: { onBack: () => void }) {
 
           <div style={{ display: "flex", gap: 12 }}>
             <button onClick={restart} style={{ flex: 1, padding: "14px 24px", background: "#141820", color: "#e2e8f0", border: "1px solid #1e2533", borderRadius: 8, cursor: "pointer", fontFamily: "'Space Mono', monospace", fontSize: 13, fontWeight: 700, letterSpacing: 2, textTransform: "uppercase" as const }}>
-              ↻ Run Again
+              ↻ {t("pacing.runAgain")}
             </button>
             <button onClick={onBack} style={{ flex: 1, padding: "14px 24px", background: "#0c0f14", color: "#64748b", border: "1px solid #1e2533", borderRadius: 8, cursor: "pointer", fontFamily: "'Space Mono', monospace", fontSize: 13, letterSpacing: 2, textTransform: "uppercase" as const }}>
-              ← Home
+              ← {t("nav.backToHome")}
             </button>
           </div>
         </div>
@@ -557,12 +563,12 @@ export default function PacingProblem({ onBack }: { onBack: () => void }) {
       <div style={{ display: "grid", gridTemplateColumns: "280px 1fr", gap: 20, maxWidth: 960, margin: "0 auto" }} className="event-layout">
         <div>
           <div style={{ background: "#141820", border: "1px solid #1e2533", borderRadius: 12, padding: 20, position: "sticky" as const, top: 24 }}>
-            <div style={{ fontFamily: "'Space Mono', monospace", fontSize: 10, letterSpacing: 2, color: "#64748b", marginBottom: 16 }}>INSTITUTIONAL HEALTH</div>
+            <div style={{ fontFamily: "'Space Mono', monospace", fontSize: 10, letterSpacing: 2, color: "#64748b", marginBottom: 16 }}>{t("pacing.institutionalHealth")}</div>
             <GaugeBar label="Bandwidth" value={state.bandwidth} color="#10b981" icon="📊" subtitle={getStatusLabel(state.bandwidth, "bandwidth")} />
             <GaugeBar label="Credibility" value={state.credibility} color="#f59e0b" icon="🏛️" subtitle={getStatusLabel(state.credibility, "credibility")} />
             <GaugeBar label="Public Trust" value={state.publicTrust} color="#3b82f6" icon="👥" subtitle={getStatusLabel(state.publicTrust, "publicTrust")} />
             <div style={{ borderTop: "1px solid #1e2533", marginTop: 12, paddingTop: 12 }}>
-              <div style={{ fontFamily: "'Space Mono', monospace", fontSize: 10, letterSpacing: 2, color: "#ef4444", marginBottom: 12 }}>⚠ THREAT LEVELS</div>
+              <div style={{ fontFamily: "'Space Mono', monospace", fontSize: 10, letterSpacing: 2, color: "#ef4444", marginBottom: 12 }}>⚠ {t("pacing.threatLevels")}</div>
               <GaugeBar label="Capture Risk" value={state.captureRisk} color="#ef4444" icon="🎯" subtitle={getStatusLabel(state.captureRisk, "captureRisk")} />
               <GaugeBar label="Obsolescence" value={state.obsolescenceRisk} color="#8b5cf6" icon="⏳" subtitle={getStatusLabel(state.obsolescenceRisk, "obsolescenceRisk")} />
             </div>
@@ -592,28 +598,28 @@ export default function PacingProblem({ onBack }: { onBack: () => void }) {
                 </div>
                 <p style={{ color: "#94a3b8", lineHeight: 1.7, fontSize: 14 }}>{ev.description}</p>
                 <div style={{ display: "flex", gap: 8, marginTop: 12 }}>
-                  <span style={{ fontFamily: "'DM Mono', monospace", fontSize: 10, color: "#10b981", background: "#10b98122", padding: "3px 8px", borderRadius: 4 }}>BANDWIDTH COST: {ev.bandwidthCost}%</span>
+                  <span style={{ fontFamily: "'DM Mono', monospace", fontSize: 10, color: "#10b981", background: "#10b98122", padding: "3px 8px", borderRadius: 4 }}>{t("pacing.bandwidthCost")}: {ev.bandwidthCost}%</span>
                 </div>
               </div>
               <div style={{ background: "#141820", border: "1px solid #1e2533", borderRadius: 12, padding: 28 }}>
-                <div style={{ fontFamily: "'Space Mono', monospace", fontSize: 10, letterSpacing: 2, color: "#64748b", marginBottom: 8 }}>YOUR RESPONSE</div>
+                <div style={{ fontFamily: "'Space Mono', monospace", fontSize: 10, letterSpacing: 2, color: "#64748b", marginBottom: 8 }}>{t("pacing.yourResponse")}</div>
                 <SpectrumSlider value={sliderValue} onChange={setSliderValue} disabled={false} />
                 <div style={{ background: "#1e293b", borderRadius: 8, padding: 16, marginTop: 16, marginBottom: 20, borderLeft: `3px solid ${sliderValue < 35 ? "#f97316" : sliderValue > 65 ? "#3b82f6" : "#a855f7"}` }}>
                   <div style={{ fontFamily: "'Space Mono', monospace", fontSize: 12, fontWeight: 700, color: sliderValue < 35 ? "#f97316" : sliderValue > 65 ? "#3b82f6" : "#a855f7", marginBottom: 6 }}>{choiceLabel}</div>
                   <p style={{ color: "#94a3b8", lineHeight: 1.6, fontSize: 13 }}>{choiceDetail}</p>
                 </div>
                 <button onClick={submitChoice} style={{ width: "100%", padding: "14px", background: sliderValue < 35 ? "#f97316" : sliderValue > 65 ? "#3b82f6" : "#a855f7", color: "#fff", border: "none", borderRadius: 8, cursor: "pointer", fontFamily: "'Space Mono', monospace", fontSize: 13, fontWeight: 700, letterSpacing: 2, textTransform: "uppercase" as const }}>
-                  Commit Decision →
+                  {t("pacing.commitDecision")} →
                 </button>
               </div>
             </div>
           ) : (
             <div style={{ animation: "fadeUp 0.5s ease forwards" }}>
               <div style={{ background: "#141820", border: "1px solid #1e2533", borderRadius: 12, padding: 28, marginBottom: 16, borderTop: `3px solid ${sliderValue < 35 ? "#f97316" : sliderValue > 65 ? "#3b82f6" : "#a855f7"}` }}>
-                <div style={{ fontFamily: "'Space Mono', monospace", fontSize: 10, letterSpacing: 2, color: "#64748b", marginBottom: 8 }}>IMMEDIATE CONSEQUENCE</div>
+                <div style={{ fontFamily: "'Space Mono', monospace", fontSize: 10, letterSpacing: 2, color: "#64748b", marginBottom: 8 }}>{t("pacing.immediateConsequence")}</div>
                 <h3 style={{ fontFamily: "'Instrument Serif', serif", fontSize: 20, fontWeight: 400, marginBottom: 12 }}>{outcomeData.label}</h3>
                 <div style={{ background: "#1e293b", borderRadius: 8, padding: 16, marginBottom: 16, borderLeft: "3px solid #f59e0b" }}>
-                  <div style={{ fontFamily: "'DM Mono', monospace", fontSize: 10, color: "#f59e0b", marginBottom: 6, letterSpacing: 1 }}>📰 HEADLINE</div>
+                  <div style={{ fontFamily: "'DM Mono', monospace", fontSize: 10, color: "#f59e0b", marginBottom: 6, letterSpacing: 1 }}>📰 {t("pacing.headline")}</div>
                   <p style={{ color: "#e2e8f0", lineHeight: 1.6, fontSize: 14, fontStyle: "italic" as const }}>"{outcomeData.headline}"</p>
                 </div>
                 <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 10 }}>
@@ -637,7 +643,7 @@ export default function PacingProblem({ onBack }: { onBack: () => void }) {
                 </div>
               </div>
               <button onClick={nextEvent} style={{ width: "100%", padding: "14px", background: "#141820", color: "#e2e8f0", border: "1px solid #1e2533", borderRadius: 8, cursor: "pointer", fontFamily: "'Space Mono', monospace", fontSize: 13, fontWeight: 700, letterSpacing: 2, textTransform: "uppercase" as const }}>
-                {currentEvent >= EVENTS.length - 1 ? "View Debrief →" : "Next Crisis →"}
+                {currentEvent >= EVENTS.length - 1 ? `${t("pacing.viewDebrief")} →` : `${t("pacing.nextCrisis")} →`}
               </button>
             </div>
           )}

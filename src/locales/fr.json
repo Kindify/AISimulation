@@ -228,12 +228,28 @@
     "copiedToClipboard": "COPIÉ DANS LE PRESSE-PAPIERS",
     "copyResult": "COPIER LE RÉSULTAT POUR PARTAGER"
   },
-  "roles": {
-    "regulator": "Le régulateur",
-    "platform": "La plateforme",
-    "journalist": "Le journaliste",
-    "ailab": "Le laboratoire d'IA"
+"roles": {
+  "regulator": {
+    "name": "Le régulateur",
+    "role": "Vous définissez les politiques et disposez de l'autorité formelle pour agir. Votre objectif est la sécurité publique et la crédibilité institutionnelle.",
+    "incentive": "Pression politique d'agir vite OU de paraître mesuré. Votre légitimité dépend de la procédure régulière, mais la crise n'attendra pas la procédure."
   },
+  "platform": {
+    "name": "La plateforme",
+    "role": "Vous contrôlez la distribution du contenu et l'accès des utilisateurs. Votre objectif est un écosystème de plateforme sûr et digne de confiance.",
+    "incentive": "Les revenus dépendent de l'engagement et de la croissance. La responsabilité juridique pousse à la prudence. Agir seul pendant que les concurrents n'agissent pas vous coûte des utilisateurs."
+  },
+  "journalist": {
+    "name": "Le journaliste",
+    "role": "Vous façonnez le récit public par l'enquête et le reportage. Votre objectif est d'informer le public avec exactitude.",
+    "incentive": "Pression éditoriale de publier vite et en premier. Des médias concurrents travaillent sur la même histoire. La rapidité et l'exactitude tirent dans des directions opposées."
+  },
+  "ailab": {
+    "name": "Le laboratoire d'IA",
+    "role": "Vous développez la technologie et détenez des connaissances techniques uniques. Votre objectif est un développement et un déploiement responsables.",
+    "incentive": "La transparence a des coûts concurrentiels. Les concurrents qui ne partagent pas leurs résultats de sécurité gagnent un avantage. L'exposition juridique augmente avec la divulgation."
+  }
+},
   "common": {
     "runAgain": "Relancer la simulation",
     "playNow": "JOUER MAINTENANT",

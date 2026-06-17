@@ -328,9 +328,9 @@ export default function QuickPlay({ onBack, onFullPlay }: Props) {
         {/* Grade header */}
         <div className="fade-up" style={{ background: "#141820", border: `1px solid ${gc}33`, borderRadius: 12, padding: 24, marginBottom: 16, display: "flex", justifyContent: "space-between", alignItems: "flex-start" }}>
           <div>
-            <div style={{ fontFamily: "'Space Mono', monospace", fontSize: 9, letterSpacing: 3, color: "#64748b", marginBottom: 6 }}>CRISIS OUTCOME</div>
+            <div style={{ fontFamily: "'Space Mono', monospace", fontSize: 9, letterSpacing: 3, color: "#64748b", marginBottom: 6 }}>{t("quickPlay.crisisOutcome")}</div>
             <div style={{ fontFamily: "'Instrument Serif', serif", fontSize: 22, color: "#e2e8f0", marginBottom: 4 }}>{crisis.icon} {crisis.title}</div>
-            <div style={{ fontFamily: "'DM Mono', monospace", fontSize: 11, color: "#64748b" }}>Your role: <span style={{ color: role.color }}>{role.icon} {role.name}</span></div>
+            <div style={{ fontFamily: "'DM Mono', monospace", fontSize: 11, color: "#64748b" }}>{t("quickPlay.yourRoleLabel")} <span style={{ color: role.color }}>{role.icon} {role.name}</span></div>
           </div>
           <div style={{ textAlign: "right" as const, display: "flex", flexDirection: "column" as const, alignItems: "flex-end", gap: 8 }}>
             <LanguageToggle />
@@ -367,7 +367,7 @@ export default function QuickPlay({ onBack, onFullPlay }: Props) {
                 <div style={{ fontSize: 13, fontWeight: 700, color: "#e2e8f0", marginBottom: 4 }}>{opt?.label}</div>
                 {!isMe && <div style={{ fontFamily: "'DM Mono', monospace", fontSize: 9, color: "#475569" }}>{t("quickPlay.decidedIndependently")}</div>}
                 <span style={{ fontFamily: "'DM Mono', monospace", fontSize: 9, letterSpacing: 1, padding: "2px 6px", borderRadius: 3, marginTop: 6, display: "inline-block", background: opt?.stance === "transparent" ? "#10b98122" : opt?.stance === "restrictive" ? "#ef444422" : "#f59e0b22", color: opt?.stance === "transparent" ? "#10b981" : opt?.stance === "restrictive" ? "#ef4444" : "#f59e0b" }}>
-                  {opt?.stance?.toUpperCase()}
+                  {opt?.stance?.toUpperCase() ? t(`stances.${opt.stance}`) : null}
                 </span>
               </div>
             );
@@ -406,8 +406,8 @@ export default function QuickPlay({ onBack, onFullPlay }: Props) {
         <div className="fade-up" style={{ background: "#141820", border: "1px solid #06b6d433", borderRadius: 12, padding: 20, marginBottom: 16 }}>
           <div style={{ fontFamily: "'Space Mono', monospace", fontSize: 9, letterSpacing: 2, color: "#06b6d4", marginBottom: 10 }}>{t("quickPlay.keyInsight")}</div>
           <p style={{ color: "#94a3b8", lineHeight: 1.75, fontSize: 14 }}>
-            {t("quickPlay.keyInsightText").split("interactions between choices").map((part, i) =>
-              i === 0 ? <span key={i}>{part}<em style={{ color: "#e2e8f0", fontStyle: "normal", fontWeight: 700 }}>interactions between choices</em></span> : <span key={i}>{part}</span>
+            {t("quickPlay.keyInsightText").split(t("quickPlay.keyInsightBold")).map((part, i) =>
+              i === 0 ? <span key={i}>{part}<em style={{ color: "#e2e8f0", fontStyle: "normal", fontWeight: 700 }}>{t("quickPlay.keyInsightBold")}</em></span> : <span key={i}>{part}</span>
             )}
           </p>
         </div>
@@ -425,7 +425,7 @@ export default function QuickPlay({ onBack, onFullPlay }: Props) {
               <div style={{ fontFamily: "'Instrument Serif', serif", fontSize: 40, color: gc, lineHeight: 1 }}>{outcome.coordinationGrade}</div>
             </div>
             <div style={{ fontFamily: "'DM Mono', monospace", fontSize: 11, color: "#94a3b8", marginBottom: 8 }}>
-              My decision: <span style={{ color: "#e2e8f0" }}>{selectedOpt?.label}</span>
+              {t("quickPlay.myDecision")}: <span style={{ color: "#e2e8f0" }}>{selectedOpt?.label}</span>
             </div>
             {outcome.triggeredInteractions.length > 0 && (
               <div style={{ display: "flex", gap: 6, flexWrap: "wrap" as const, marginBottom: 8 }}>
@@ -465,7 +465,7 @@ export default function QuickPlay({ onBack, onFullPlay }: Props) {
                 </button>
               ))}
             </div>
-            <p style={{ color: "#e2e8f0", fontSize: 13, fontWeight: 700, marginBottom: 6 }}>Want updates on new scenarios?</p>
+            <p style={{ color: "#e2e8f0", fontSize: 13, fontWeight: 700, marginBottom: 6 }}>{t("quickPlay.wantUpdates")}</p>
             <div style={{ display: "flex", gap: 8 }}>
               <input
                 type="email"
@@ -493,7 +493,7 @@ export default function QuickPlay({ onBack, onFullPlay }: Props) {
         {/* Full play CTA */}
         <div style={{ background: "linear-gradient(135deg, #06b6d411, #0ea5e911)", border: "1px solid #06b6d433", borderRadius: 12, padding: 24, marginBottom: 20, textAlign: "center" as const }}>
           <div style={{ fontFamily: "'Space Mono', monospace", fontSize: 9, letterSpacing: 2, color: "#06b6d4", marginBottom: 10 }}>{t("quickPlay.wantGoDeeper")}</div>
-          <div style={{ fontFamily: "'Instrument Serif', serif", fontSize: 20, color: "#e2e8f0", marginBottom: 10 }}>Play all 4 roles in The AI Governance Game</div>
+          <div style={{ fontFamily: "'Instrument Serif', serif", fontSize: 20, color: "#e2e8f0", marginBottom: 10 }}>{t("quickPlay.deeperTitle")}</div>
           <p style={{ color: "#94a3b8", fontSize: 13, lineHeight: 1.6, marginBottom: 16, maxWidth: 420, margin: "0 auto 16px" }}>
             {t("quickPlay.deeperDesc")}
           </p>

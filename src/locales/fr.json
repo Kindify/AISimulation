@@ -69,7 +69,18 @@
     "wantGoDeeper": "ENVIE D'ALLER PLUS LOIN ?",
     "deeperDesc": "Incarnez les 4 rôles dans la simulation complète. Voyez comment VOS choix interagissent quand VOUS pilotez la coordination.",
     "playGovGame": "JOUER AU JEU DE LA GOUVERNANCE →",
-    "playAgain": "Rejouer (nouveau scénario)"
+    "playAgain": "Rejouer (nouveau scénario)",
+    "crisisOutcome": "RÉSULTAT DE CRISE",
+    "yourRoleLabel": "Votre rôle :",
+    "myDecision": "Ma décision :",
+    "wantUpdates": "Recevoir les mises à jour sur les nouveaux scénarios ?",
+    "deeperTitle": "Incarnez les 4 rôles dans Le jeu de la gouvernance de l'IA",
+    "keyInsightBold": "l'interaction entre les choix"
+  },
+  "stances": {
+    "transparent": "TRANSPARENT",
+    "restrictive": "RESTRICTIF",
+    "cautious": "PRUDENT"
   },
   "pacing": {
     "suiteLabel": "STRATÉGIE AGI",

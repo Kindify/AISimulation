@@ -69,7 +69,18 @@
     "wantGoDeeper": "WANT TO GO DEEPER?",
     "deeperDesc": "Play all 4 roles in the full simulation. See how YOUR choices interact when YOU control the coordination.",
     "playGovGame": "PLAY THE AI GOVERNANCE GAME →",
-    "playAgain": "Play again (new scenario)"
+    "playAgain": "Play again (new scenario)",
+    "crisisOutcome": "CRISIS OUTCOME",
+    "yourRoleLabel": "Your role:",
+    "myDecision": "My decision:",
+    "wantUpdates": "Want updates on new scenarios?",
+    "deeperTitle": "Play all 4 roles in The AI Governance Game",
+    "keyInsightBold": "interactions between choices"
+  },
+  "stances": {
+    "transparent": "TRANSPARENT",
+    "restrictive": "RESTRICTIVE",
+    "cautious": "CAUTIOUS"
   },
   "pacing": {
     "suiteLabel": "AGI STRATEGY",

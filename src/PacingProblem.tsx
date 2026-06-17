@@ -194,10 +194,8 @@ export default function PacingProblem({ onBack }: { onBack: () => void }) {
 
   const submitChoice = useCallback(() => {
     const ev = EVENTS[currentEvent];
-    let outcome: any;
-    if (sliderValue < 35) outcome = ev.speedOutcome;
-    else if (sliderValue > 65) outcome = ev.rigourOutcome;
-    else outcome = ev.balancedOutcome;
+    const outcomeType = sliderValue < 35 ? "speedOutcome" : sliderValue > 65 ? "rigourOutcome" : "balancedOutcome";
+    const outcome: any = ev[outcomeType as keyof typeof ev];
 
     track("pacing_decision", {
       event_id: ev.id,
@@ -214,10 +212,10 @@ export default function PacingProblem({ onBack }: { onBack: () => void }) {
       captureRisk: clamp(prev.captureRisk + outcome.capture, 0, 100),
       obsolescenceRisk: clamp(prev.obsolescenceRisk + outcome.obsolescence, 0, 100),
       publicTrust: clamp(prev.publicTrust + outcome.publicTrust, 0, 100),
-      history: [...prev.history, { event: ev.title, choice: outcome.label, slider: sliderValue, bias: sliderValue < 35 ? "speed" : sliderValue > 65 ? "rigour" : "balanced" }],
+      history: [...prev.history, { event: ev.title, choice: outcome.label, slider: sliderValue, bias: sliderValue < 35 ? "speed" : sliderValue > 65 ? "rigour" : "balanced", eventId: ev.id, outcomeType }],
       turn: prev.turn + 1
     }));
-    setOutcomeData(outcome);
+    setOutcomeData({ ...outcome, _eventId: ev.id, _type: outcomeType });
     setShowOutcome(true);
   }, [currentEvent, sliderValue]);
 
@@ -423,12 +421,12 @@ export default function PacingProblem({ onBack }: { onBack: () => void }) {
               {state.history.map((h, i) => (
                 <div key={i} style={{ marginBottom: 12, paddingBottom: 12, borderBottom: i < state.history.length - 1 ? "1px solid #1e2533" : "none" }}>
                   <div style={{ fontFamily: "'DM Mono', monospace", fontSize: 11, color: "#64748b" }}>{t("pacing.event")} {i + 1}</div>
-                  <div style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 13, fontWeight: 700, color: "#e2e8f0", marginTop: 2 }}>{h.event}</div>
+                  <div style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 13, fontWeight: 700, color: "#e2e8f0", marginTop: 2 }}>{t(`scenarios.pacing_event_${h.eventId ?? 0}.title`, h.event)}</div>
                   <div style={{ display: "flex", alignItems: "center", gap: 8, marginTop: 4 }}>
                     <span style={{ fontFamily: "'Space Mono', monospace", fontSize: 10, letterSpacing: 1, fontWeight: 700, padding: "2px 8px", borderRadius: 4, background: h.bias === "speed" ? "#f9731622" : h.bias === "rigour" ? "#3b82f622" : "#a855f722", color: h.bias === "speed" ? "#f97316" : h.bias === "rigour" ? "#3b82f6" : "#a855f7" }}>
                       {h.bias === "speed" ? "⚡ SPEED" : h.bias === "rigour" ? "🔬 RIGOUR" : "⚖️ BALANCED"}
                     </span>
-                    <span style={{ fontFamily: "'DM Mono', monospace", fontSize: 11, color: "#64748b" }}>{h.choice}</span>
+                    <span style={{ fontFamily: "'DM Mono', monospace", fontSize: 11, color: "#64748b" }}>{t(`scenarios.pacing_event_${h.eventId ?? 0}.${h.outcomeType ?? "speedOutcome"}.label`, h.choice)}</span>
                   </div>
                 </div>
               ))}
@@ -554,8 +552,10 @@ export default function PacingProblem({ onBack }: { onBack: () => void }) {
   }
 
   const ev = EVENTS[currentEvent];
-  const choiceLabel = sliderValue < 35 ? ev.speedOutcome.label : sliderValue > 65 ? ev.rigourOutcome.label : ev.balancedOutcome.label;
-  const choiceDetail = sliderValue < 35 ? ev.speedOutcome.detail : sliderValue > 65 ? ev.rigourOutcome.detail : ev.balancedOutcome.detail;
+  const eventOutcomeType = sliderValue < 35 ? "speedOutcome" : sliderValue > 65 ? "rigourOutcome" : "balancedOutcome";
+  const rawOutcome = ev[eventOutcomeType as keyof typeof ev] as any;
+  const choiceLabel = t(`scenarios.pacing_event_${ev.id}.${eventOutcomeType}.label`, rawOutcome.label);
+  const choiceDetail = t(`scenarios.pacing_event_${ev.id}.${eventOutcomeType}.detail`, rawOutcome.detail);
 
   return (
     <div style={S}>
@@ -578,7 +578,7 @@ export default function PacingProblem({ onBack }: { onBack: () => void }) {
                 {state.history.map((h, i) => (
                   <div key={i} style={{ display: "flex", alignItems: "center", gap: 6, marginBottom: 4 }}>
                     <span style={{ fontSize: 10 }}>{h.bias === "speed" ? "⚡" : h.bias === "rigour" ? "🔬" : "⚖️"}</span>
-                    <span style={{ fontFamily: "'DM Mono', monospace", fontSize: 10, color: "#64748b" }}>{h.choice}</span>
+                    <span style={{ fontFamily: "'DM Mono', monospace", fontSize: 10, color: "#64748b" }}>{t(`scenarios.pacing_event_${h.eventId ?? 0}.${h.outcomeType ?? "speedOutcome"}.label`, h.choice)}</span>
                   </div>
                 ))}
               </div>
@@ -593,10 +593,10 @@ export default function PacingProblem({ onBack }: { onBack: () => void }) {
                   <span style={{ fontSize: 32 }}>{ev.icon}</span>
                   <div>
                     <div style={{ fontFamily: "'Space Mono', monospace", fontSize: 10, letterSpacing: 2, color: "#f97316" }}>{ev.category}</div>
-                    <h2 style={{ fontFamily: "'Instrument Serif', serif", fontSize: 24, fontWeight: 400 }}>{ev.title}</h2>
+                    <h2 style={{ fontFamily: "'Instrument Serif', serif", fontSize: 24, fontWeight: 400 }}>{t(`scenarios.pacing_event_${ev.id}.title`, ev.title)}</h2>
                   </div>
                 </div>
-                <p style={{ color: "#94a3b8", lineHeight: 1.7, fontSize: 14 }}>{ev.description}</p>
+                <p style={{ color: "#94a3b8", lineHeight: 1.7, fontSize: 14 }}>{t(`scenarios.pacing_event_${ev.id}.description`, ev.description)}</p>
                 <div style={{ display: "flex", gap: 8, marginTop: 12 }}>
                   <span style={{ fontFamily: "'DM Mono', monospace", fontSize: 10, color: "#10b981", background: "#10b98122", padding: "3px 8px", borderRadius: 4 }}>{t("pacing.bandwidthCost")}: {ev.bandwidthCost}%</span>
                 </div>
@@ -617,10 +617,10 @@ export default function PacingProblem({ onBack }: { onBack: () => void }) {
             <div style={{ animation: "fadeUp 0.5s ease forwards" }}>
               <div style={{ background: "#141820", border: "1px solid #1e2533", borderRadius: 12, padding: 28, marginBottom: 16, borderTop: `3px solid ${sliderValue < 35 ? "#f97316" : sliderValue > 65 ? "#3b82f6" : "#a855f7"}` }}>
                 <div style={{ fontFamily: "'Space Mono', monospace", fontSize: 10, letterSpacing: 2, color: "#64748b", marginBottom: 8 }}>{t("pacing.immediateConsequence")}</div>
-                <h3 style={{ fontFamily: "'Instrument Serif', serif", fontSize: 20, fontWeight: 400, marginBottom: 12 }}>{outcomeData.label}</h3>
+                <h3 style={{ fontFamily: "'Instrument Serif', serif", fontSize: 20, fontWeight: 400, marginBottom: 12 }}>{t(`scenarios.pacing_event_${outcomeData._eventId}.${outcomeData._type}.label`, outcomeData.label)}</h3>
                 <div style={{ background: "#1e293b", borderRadius: 8, padding: 16, marginBottom: 16, borderLeft: "3px solid #f59e0b" }}>
                   <div style={{ fontFamily: "'DM Mono', monospace", fontSize: 10, color: "#f59e0b", marginBottom: 6, letterSpacing: 1 }}>📰 {t("pacing.headline")}</div>
-                  <p style={{ color: "#e2e8f0", lineHeight: 1.6, fontSize: 14, fontStyle: "italic" as const }}>"{outcomeData.headline}"</p>
+                  <p style={{ color: "#e2e8f0", lineHeight: 1.6, fontSize: 14, fontStyle: "italic" as const }}>"{t(`scenarios.pacing_event_${outcomeData._eventId}.${outcomeData._type}.headline`, outcomeData.headline)}"</p>
                 </div>
                 <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 10 }}>
                   {[

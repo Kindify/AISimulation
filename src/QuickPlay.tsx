@@ -169,7 +169,7 @@ export default function QuickPlay({ onBack, onFullPlay }: Props) {
           <div className="fade-up" style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 28 }}>
             <div>
               <div style={{ fontFamily: "'Space Mono', monospace", fontSize: 9, letterSpacing: 3, color: "#06b6d4", marginBottom: 4 }}>{t("quickPlay.title")}</div>
-              <div style={{ fontFamily: "'Instrument Serif', serif", fontSize: 22, fontWeight: 400, color: "#e2e8f0", lineHeight: 1.2 }}>{crisis.icon} {crisis.title}</div>
+              <div style={{ fontFamily: "'Instrument Serif', serif", fontSize: 22, fontWeight: 400, color: "#e2e8f0", lineHeight: 1.2 }}>{crisis.icon} {t(`scenarios.${crisis.id}.title`, crisis.title)}</div>
               <div style={{ fontFamily: "'DM Mono', monospace", fontSize: 10, color: "#64748b", marginTop: 4, letterSpacing: 1 }}>{crisis.category}</div>
             </div>
             <div style={{ display: "flex", flexDirection: "column" as const, alignItems: "flex-end", gap: 8 }}>
@@ -194,10 +194,10 @@ export default function QuickPlay({ onBack, onFullPlay }: Props) {
           {/* Situation */}
           <div className="fade-up" style={{ background: "#141820", border: "1px solid #1e2533", borderRadius: 12, padding: 20, marginBottom: 16 }}>
             <div style={{ fontFamily: "'Space Mono', monospace", fontSize: 9, letterSpacing: 2, color: "#94a3b8", marginBottom: 10 }}>{t("quickPlay.situation")}</div>
-            <p style={{ color: "#cbd5e1", fontSize: 14, lineHeight: 1.7 }}>{crisis.publicBriefing}</p>
+            <p style={{ color: "#cbd5e1", fontSize: 14, lineHeight: 1.7 }}>{t(`scenarios.${crisis.id}.publicBriefing`, crisis.publicBriefing)}</p>
             {crisis.stakes && (
               <div style={{ marginTop: 12, paddingTop: 12, borderTop: "1px solid #1e2533", fontFamily: "'DM Mono', monospace", fontSize: 11, color: "#f59e0b" }}>
-                {t("quickPlay.stakes")}: {crisis.stakes}
+                {t("quickPlay.stakes")}: {t(`scenarios.${crisis.id}.stakes`, crisis.stakes)}
               </div>
             )}
           </div>
@@ -210,11 +210,11 @@ export default function QuickPlay({ onBack, onFullPlay }: Props) {
             </div>
             {crisis.roleIntel?.[role.id] && (
               <>
-                <div style={{ fontFamily: "'DM Mono', monospace", fontSize: 9, color: "#475569", letterSpacing: 1, marginBottom: 10 }}>{crisis.roleIntel[role.id].classification}</div>
+                <div style={{ fontFamily: "'DM Mono', monospace", fontSize: 9, color: "#475569", letterSpacing: 1, marginBottom: 10 }}>{t(`scenarios.${crisis.id}.roleIntel.${role.id}.classification`, crisis.roleIntel[role.id].classification)}</div>
                 {crisis.roleIntel[role.id].bullets.map((b: string, i: number) => (
                   <div key={i} style={{ display: "flex", gap: 10, marginBottom: 8 }}>
                     <span style={{ color: role.color, fontSize: 12, flexShrink: 0, marginTop: 2 }}>▸</span>
-                    <p style={{ color: "#94a3b8", fontSize: 13, lineHeight: 1.55 }}>{b}</p>
+                    <p style={{ color: "#94a3b8", fontSize: 13, lineHeight: 1.55 }}>{t(`scenarios.${crisis.id}.roleIntel.${role.id}.bullets.${i}`, b)}</p>
                   </div>
                 ))}
               </>
@@ -240,13 +240,13 @@ export default function QuickPlay({ onBack, onFullPlay }: Props) {
                   }}
                 >
                   <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: 6 }}>
-                    <div style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 15, fontWeight: 700, color: isSelected ? role.color : "#e2e8f0", flex: 1 }}>{opt.label}</div>
+                    <div style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 15, fontWeight: 700, color: isSelected ? role.color : "#e2e8f0", flex: 1 }}>{t(`scenarios.${crisis.id}.options.${role.id}.${opt.id}.label`, opt.label)}</div>
                     {isSelected && <span style={{ color: role.color, fontSize: 16, marginLeft: 8 }}>✓</span>}
                   </div>
-                  <p style={{ color: "#94a3b8", fontSize: 13, lineHeight: 1.5, marginBottom: 10 }}>{opt.detail}</p>
+                  <p style={{ color: "#94a3b8", fontSize: 13, lineHeight: 1.5, marginBottom: 10 }}>{t(`scenarios.${crisis.id}.options.${role.id}.${opt.id}.detail`, opt.detail)}</p>
                   <div style={{ fontFamily: "'DM Mono', monospace", fontSize: 10, color: "#94a3b8", lineHeight: 1.4, padding: "6px 10px", background: "#1e293b", borderRadius: 4, borderLeft: "2px solid #334155" }}>
                     <span style={{ color: "#64748b", letterSpacing: 1, fontSize: 9 }}>{t("quickPlay.tension")}: </span>
-                    {opt.tension || opt.detail}
+                    {t(`scenarios.${crisis.id}.options.${role.id}.${opt.id}.tension`, opt.tension) || t(`scenarios.${crisis.id}.options.${role.id}.${opt.id}.detail`, opt.detail)}
                   </div>
                 </div>
               );
@@ -329,7 +329,7 @@ export default function QuickPlay({ onBack, onFullPlay }: Props) {
         <div className="fade-up" style={{ background: "#141820", border: `1px solid ${gc}33`, borderRadius: 12, padding: 24, marginBottom: 16, display: "flex", justifyContent: "space-between", alignItems: "flex-start" }}>
           <div>
             <div style={{ fontFamily: "'Space Mono', monospace", fontSize: 9, letterSpacing: 3, color: "#64748b", marginBottom: 6 }}>{t("quickPlay.crisisOutcome")}</div>
-            <div style={{ fontFamily: "'Instrument Serif', serif", fontSize: 22, color: "#e2e8f0", marginBottom: 4 }}>{crisis.icon} {crisis.title}</div>
+            <div style={{ fontFamily: "'Instrument Serif', serif", fontSize: 22, color: "#e2e8f0", marginBottom: 4 }}>{crisis.icon} {t(`scenarios.${crisis.id}.title`, crisis.title)}</div>
             <div style={{ fontFamily: "'DM Mono', monospace", fontSize: 11, color: "#64748b" }}>{t("quickPlay.yourRoleLabel")} <span style={{ color: role.color }}>{role.icon} {role.name}</span></div>
           </div>
           <div style={{ textAlign: "right" as const, display: "flex", flexDirection: "column" as const, alignItems: "flex-end", gap: 8 }}>
@@ -364,7 +364,7 @@ export default function QuickPlay({ onBack, onFullPlay }: Props) {
                   <span style={{ fontFamily: "'Space Mono', monospace", fontSize: 9, fontWeight: 700, color: r.color, letterSpacing: 1 }}>{r.name}</span>
                   {isMe && <span style={{ fontFamily: "'DM Mono', monospace", fontSize: 8, color: r.color, background: `${r.color}22`, padding: "1px 5px", borderRadius: 3, marginLeft: "auto" }}>{t("quickPlay.you")}</span>}
                 </div>
-                <div style={{ fontSize: 13, fontWeight: 700, color: "#e2e8f0", marginBottom: 4 }}>{opt?.label}</div>
+                <div style={{ fontSize: 13, fontWeight: 700, color: "#e2e8f0", marginBottom: 4 }}>{opt ? t(`scenarios.${crisis.id}.options.${r.id}.${decisionId}.label`, opt.label) : null}</div>
                 {!isMe && <div style={{ fontFamily: "'DM Mono', monospace", fontSize: 9, color: "#475569" }}>{t("quickPlay.decidedIndependently")}</div>}
                 <span style={{ fontFamily: "'DM Mono', monospace", fontSize: 9, letterSpacing: 1, padding: "2px 6px", borderRadius: 3, marginTop: 6, display: "inline-block", background: opt?.stance === "transparent" ? "#10b98122" : opt?.stance === "restrictive" ? "#ef444422" : "#f59e0b22", color: opt?.stance === "transparent" ? "#10b981" : opt?.stance === "restrictive" ? "#ef4444" : "#f59e0b" }}>
                   {opt?.stance?.toUpperCase() ? t(`stances.${opt.stance}`) : null}
@@ -382,9 +382,9 @@ export default function QuickPlay({ onBack, onFullPlay }: Props) {
               <div key={i} className="fade-up" style={{ background: "#141820", border: `1px solid ${inter.type === "synergy" ? "#10b981" : "#ef4444"}33`, borderRadius: 10, padding: 16, marginBottom: 10, borderLeft: `3px solid ${inter.type === "synergy" ? "#10b981" : "#ef4444"}` }}>
                 <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 6 }}>
                   <span style={{ fontSize: 14 }}>{inter.type === "synergy" ? "🤝" : "💥"}</span>
-                  <span style={{ fontFamily: "'Space Mono', monospace", fontSize: 11, fontWeight: 700, color: inter.type === "synergy" ? "#10b981" : "#ef4444" }}>{inter.type === "synergy" ? t("govGame.synergy") : t("govGame.conflict")}: {inter.label}</span>
+                  <span style={{ fontFamily: "'Space Mono', monospace", fontSize: 11, fontWeight: 700, color: inter.type === "synergy" ? "#10b981" : "#ef4444" }}>{inter.type === "synergy" ? t("govGame.synergy") : t("govGame.conflict")}: {t(`scenarios.${crisis.id}.interactions.${inter._idx}.label`, inter.label)}</span>
                 </div>
-                <p style={{ color: "#94a3b8", lineHeight: 1.6, fontSize: 13 }}>{inter.desc}</p>
+                <p style={{ color: "#94a3b8", lineHeight: 1.6, fontSize: 13 }}>{t(`scenarios.${crisis.id}.interactions.${inter._idx}.desc`, inter.desc)}</p>
               </div>
             ))}
           </div>
@@ -419,13 +419,13 @@ export default function QuickPlay({ onBack, onFullPlay }: Props) {
             <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: 10 }}>
               <div>
                 <div style={{ fontFamily: "'DM Mono', monospace", fontSize: 9, color: "#64748b" }}>{t("quickPlay.quickPlayResult")}</div>
-                <div style={{ fontFamily: "'Instrument Serif', serif", fontSize: 16, color: "#e2e8f0", marginTop: 4 }}>{crisis.title}</div>
+                <div style={{ fontFamily: "'Instrument Serif', serif", fontSize: 16, color: "#e2e8f0", marginTop: 4 }}>{t(`scenarios.${crisis.id}.title`, crisis.title)}</div>
                 <div style={{ fontFamily: "'DM Mono', monospace", fontSize: 11, color: role.color, marginTop: 2 }}>{role.icon} {role.name}</div>
               </div>
               <div style={{ fontFamily: "'Instrument Serif', serif", fontSize: 40, color: gc, lineHeight: 1 }}>{outcome.coordinationGrade}</div>
             </div>
             <div style={{ fontFamily: "'DM Mono', monospace", fontSize: 11, color: "#94a3b8", marginBottom: 8 }}>
-              {t("quickPlay.myDecision")}: <span style={{ color: "#e2e8f0" }}>{selectedOpt?.label}</span>
+              {t("quickPlay.myDecision")}: <span style={{ color: "#e2e8f0" }}>{selectedOpt ? t(`scenarios.${crisis.id}.options.${role.id}.${selectedOpt.id}.label`, selectedOpt.label) : null}</span>
             </div>
             {outcome.triggeredInteractions.length > 0 && (
               <div style={{ display: "flex", gap: 6, flexWrap: "wrap" as const, marginBottom: 8 }}>

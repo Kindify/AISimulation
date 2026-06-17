@@ -229,9 +229,10 @@ function computeOutcome(crisis: any, decisions: any) {
     }
   }
   const chosenIds = Object.values(decisions);
-  for (const interaction of (crisis.interactions || [])) {
+  for (let interIdx = 0; interIdx < (crisis.interactions || []).length; interIdx++) {
+    const interaction = crisis.interactions[interIdx];
     if (chosenIds.includes(interaction.pair[0]) && chosenIds.includes(interaction.pair[1])) {
-      triggeredInteractions.push(interaction);
+      triggeredInteractions.push({ ...interaction, _idx: interIdx });
       for (const k of Object.keys(scores)) scores[k] += (interaction.mod[k] || 0);
     }
   }
@@ -291,6 +292,8 @@ function computeCounterfactuals(crisis: any, decisions: any, currentOutcome: any
           roleName: role!.name,
           roleIcon: role!.icon,
           roleColor: role!.color,
+          fromOptId: currentOptId,
+          toOptId: opt.id,
           fromLabel: currentOutcome.chosenOptions[roleId]?.label,
           toLabel: opt.label,
           diff,
@@ -705,11 +708,11 @@ textarea, input { font-family: 'DM Sans', sans-serif; }
           <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 8 }}>
             <span style={{ fontSize: 26 }}>{c.icon}</span>
             <div style={{ flex: 1, paddingRight: isCompleted ? 44 : 0 }}>
-              <div style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 14, fontWeight: 700, color: "#e2e8f0", lineHeight: 1.2 }}>{c.title}</div>
+              <div style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 14, fontWeight: 700, color: "#e2e8f0", lineHeight: 1.2 }}>{t(`scenarios.${c.id}.title`, c.title)}</div>
               <div style={{ fontFamily: "'DM Mono', monospace", fontSize: 9, color: "#64748b", marginTop: 2 }}>{c.category}</div>
             </div>
           </div>
-          {c.stakes && <p style={{ color: "#64748b", fontSize: 11, lineHeight: 1.5, marginBottom: 8 }}>{c.stakes}</p>}
+          {c.stakes && <p style={{ color: "#64748b", fontSize: 11, lineHeight: 1.5, marginBottom: 8 }}>{t(`scenarios.${c.id}.stakes`, c.stakes)}</p>}
           <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
             <span style={{ fontFamily: "'DM Mono', monospace", fontSize: 9, color: typeColor, background: `${typeColor}18`, padding: "2px 8px", borderRadius: 4 }}>{typeLabel}</span>
             {isCompleted && <span style={{ fontFamily: "'DM Mono', monospace", fontSize: 9, color: "#10b981" }}>PLAYED</span>}
@@ -799,21 +802,21 @@ textarea, input { font-family: 'DM Sans', sans-serif; }
               <span style={{ fontSize: 36 }}>{crisis.icon}</span>
               <div>
                 <div style={{ fontFamily: "'Space Mono', monospace", fontSize: 10, letterSpacing: 2, color: "#ef4444" }}>{crisis.category}</div>
-                <h2 style={{ fontFamily: "'Instrument Serif', serif", fontSize: 26, fontWeight: 400 }}>{crisis.title}</h2>
+                <h2 style={{ fontFamily: "'Instrument Serif', serif", fontSize: 26, fontWeight: 400 }}>{t(`scenarios.${crisis.id}.title`, crisis.title)}</h2>
               </div>
             </div>
             <div style={{ background: "#1e293b", borderRadius: 8, padding: 16, marginBottom: 16, borderLeft: "3px solid #ef4444" }}>
               <div style={{ fontFamily: "'DM Mono', monospace", fontSize: 10, color: "#ef4444", letterSpacing: 1, marginBottom: 8 }}>📡 PUBLIC BRIEFING — ALL ACTORS</div>
-              <p style={{ color: "#e2e8f0", lineHeight: 1.7, fontSize: 14 }}>{crisis.publicBriefing}</p>
+              <p style={{ color: "#e2e8f0", lineHeight: 1.7, fontSize: 14 }}>{t(`scenarios.${crisis.id}.publicBriefing`, crisis.publicBriefing)}</p>
             </div>
             <div style={{ background: "#0c0f14", borderRadius: 8, padding: 14, marginBottom: 16, border: "1px solid #f59e0b33" }}>
               <div style={{ fontFamily: "'Space Mono', monospace", fontSize: 10, letterSpacing: 1.5, color: "#f59e0b", marginBottom: 4 }}>{t("govGame.whatsAtStake")}</div>
-              <p style={{ fontSize: 13, color: "#f59e0b", lineHeight: 1.5 }}>{crisis.stakes}</p>
+              <p style={{ fontSize: 13, color: "#f59e0b", lineHeight: 1.5 }}>{t(`scenarios.${crisis.id}.stakes`, crisis.stakes)}</p>
             </div>
             {crisis.designNote && (
               <div style={{ background: "#0c0f14", borderRadius: 8, padding: 14, marginBottom: 16, border: "1px solid #a855f733" }}>
                 <div style={{ fontFamily: "'Space Mono', monospace", fontSize: 10, letterSpacing: 1.5, color: "#a855f7", marginBottom: 4 }}>🎯 {t("govGame.designNote")}</div>
-                <p style={{ fontSize: 12, color: "#94a3b8", lineHeight: 1.5 }}>{crisis.designNote}</p>
+                <p style={{ fontSize: 12, color: "#94a3b8", lineHeight: 1.5 }}>{t(`scenarios.${crisis.id}.designNote`, crisis.designNote)}</p>
               </div>
             )}
             <div style={{ background: "#06b6d411", borderRadius: 8, padding: 12, marginBottom: 20, border: "1px solid #06b6d433" }}>
@@ -857,11 +860,11 @@ textarea, input { font-family: 'DM Sans', sans-serif; }
             </div>
             <div style={{ background: "#141820", border: "1px solid #1e2533", borderRadius: 12, padding: 20, marginBottom: 16 }}>
               <div style={{ fontFamily: "'Space Mono', monospace", fontSize: 10, letterSpacing: 2, color: role.color, marginBottom: 4 }}>🔒 {t("govGame.privateIntel")}</div>
-              <div style={{ fontFamily: "'DM Mono', monospace", fontSize: 9, color: "#64748b", marginBottom: 12 }}>{intel.classification}</div>
+              <div style={{ fontFamily: "'DM Mono', monospace", fontSize: 9, color: "#64748b", marginBottom: 12 }}>{t(`scenarios.${crisis.id}.roleIntel.${role.id}.classification`, intel.classification)}</div>
               {intel.bullets.map((b: string, i: number) => (
                 <div key={i} style={{ display: "flex", gap: 10, marginBottom: 10, paddingBottom: 10, borderBottom: i < intel.bullets.length - 1 ? "1px solid #1e2533" : "none" }}>
                   <span style={{ fontFamily: "'DM Mono', monospace", fontSize: 10, color: role.color, flexShrink: 0, marginTop: 2 }}>▸</span>
-                  <p style={{ color: "#e2e8f0", lineHeight: 1.6, fontSize: 13 }}>{b}</p>
+                  <p style={{ color: "#e2e8f0", lineHeight: 1.6, fontSize: 13 }}>{t(`scenarios.${crisis.id}.roleIntel.${role.id}.bullets.${i}`, b)}</p>
                 </div>
               ))}
             </div>
@@ -870,11 +873,11 @@ textarea, input { font-family: 'DM Sans', sans-serif; }
               <div style={{ display: "flex", flexDirection: "column", gap: 10, marginBottom: 16 }}>
                 {opts.map((opt: any) => (
                   <button key={opt.id} className="option-btn" onClick={() => setSelectedOption(opt.id)} style={{ background: selectedOption === opt.id ? role.bg : "#0c0f14", border: `2px solid ${selectedOption === opt.id ? role.color : "#1e2533"}`, borderRadius: 10, padding: 16, cursor: "pointer", textAlign: "left" }}>
-                    <div style={{ fontFamily: "'Space Mono', monospace", fontSize: 12, fontWeight: 700, color: selectedOption === opt.id ? role.color : "#e2e8f0", marginBottom: 4 }}>{opt.label}</div>
-                    <p style={{ color: "#94a3b8", lineHeight: 1.5, fontSize: 12, marginBottom: 8 }}>{opt.detail}</p>
+                    <div style={{ fontFamily: "'Space Mono', monospace", fontSize: 12, fontWeight: 700, color: selectedOption === opt.id ? role.color : "#e2e8f0", marginBottom: 4 }}>{t(`scenarios.${crisis.id}.options.${role.id}.${opt.id}.label`, opt.label)}</div>
+                    <p style={{ color: "#94a3b8", lineHeight: 1.5, fontSize: 12, marginBottom: 8 }}>{t(`scenarios.${crisis.id}.options.${role.id}.${opt.id}.detail`, opt.detail)}</p>
                     <div style={{ fontFamily: "'DM Mono', monospace", fontSize: 10, color: "#94a3b8", lineHeight: 1.4, padding: "6px 10px", background: "#1e293b", borderRadius: 4, borderLeft: "2px solid #334155" }}>
                       <span style={{ color: "#64748b", letterSpacing: 1, fontSize: 9 }}>{t("govGame.tension")}: </span>
-                      {opt.tension || opt.detail}
+                      {t(`scenarios.${crisis.id}.options.${role.id}.${opt.id}.tension`, opt.tension) || t(`scenarios.${crisis.id}.options.${role.id}.${opt.id}.detail`, opt.detail)}
                     </div>
                   </button>
                 ))}
@@ -913,9 +916,9 @@ textarea, input { font-family: 'DM Sans', sans-serif; }
                     <span style={{ fontSize: 18 }}>{r.icon}</span>
                     <span style={{ fontFamily: "'Space Mono', monospace", fontSize: 10, fontWeight: 700, color: r.color, letterSpacing: 1 }}>{r.name}</span>
                   </div>
-                  <div style={{ fontSize: 13, fontWeight: 700, color: "#e2e8f0" }}>{opt?.label}</div>
+                  <div style={{ fontSize: 13, fontWeight: 700, color: "#e2e8f0" }}>{opt ? t(`scenarios.${crisis.id}.options.${r.id}.${opt.id}.label`, opt.label) : null}</div>
                   <span style={{ fontFamily: "'DM Mono', monospace", fontSize: 9, letterSpacing: 1, padding: "2px 6px", borderRadius: 3, marginTop: 4, display: "inline-block", background: opt?.stance === "transparent" ? "#10b98122" : opt?.stance === "restrictive" ? "#ef444422" : "#f59e0b22", color: opt?.stance === "transparent" ? "#10b981" : opt?.stance === "restrictive" ? "#ef4444" : "#f59e0b" }}>
-                    {opt?.stance?.toUpperCase()}
+                    {opt?.stance ? t(`stances.${opt.stance}`) : null}
                   </span>
                 </div>
               );
@@ -929,9 +932,9 @@ textarea, input { font-family: 'DM Sans', sans-serif; }
                 <div key={i} className="fade-up" style={{ background: "#141820", border: `1px solid ${inter.type === "synergy" ? "#10b981" : "#ef4444"}33`, borderRadius: 10, padding: 16, marginBottom: 10, borderLeft: `3px solid ${inter.type === "synergy" ? "#10b981" : "#ef4444"}`, animationDelay: `${i * 0.15}s` }}>
                   <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 6 }}>
                     <span style={{ fontSize: 14 }}>{inter.type === "synergy" ? "🤝" : "💥"}</span>
-                    <span style={{ fontFamily: "'Space Mono', monospace", fontSize: 11, fontWeight: 700, color: inter.type === "synergy" ? "#10b981" : "#ef4444" }}>{inter.type === "synergy" ? t("govGame.synergy") : t("govGame.conflict")}: {inter.label}</span>
+                    <span style={{ fontFamily: "'Space Mono', monospace", fontSize: 11, fontWeight: 700, color: inter.type === "synergy" ? "#10b981" : "#ef4444" }}>{inter.type === "synergy" ? t("govGame.synergy") : t("govGame.conflict")}: {t(`scenarios.${crisis.id}.interactions.${inter._idx}.label`, inter.label)}</span>
                   </div>
-                  <p style={{ color: "#94a3b8", lineHeight: 1.6, fontSize: 13 }}>{inter.desc}</p>
+                  <p style={{ color: "#94a3b8", lineHeight: 1.6, fontSize: 13 }}>{t(`scenarios.${crisis.id}.interactions.${inter._idx}.desc`, inter.desc)}</p>
                 </div>
               ))}
             </div>
@@ -955,7 +958,7 @@ textarea, input { font-family: 'DM Sans', sans-serif; }
                       <span style={{ fontFamily: "'Space Mono', monospace", fontSize: 10, fontWeight: 700, color: cf.roleColor }}>{cf.roleName}</span>
                     </div>
                     <p style={{ color: "#e2e8f0", fontSize: 13, marginBottom: 4 }}>
-                      If they had chosen <strong style={{ color: cf.roleColor }}>{cf.toLabel}</strong> instead of <span style={{ color: "#64748b" }}>{cf.fromLabel}</span>:
+                      If they had chosen <strong style={{ color: cf.roleColor }}>{t(`scenarios.${crisis.id}.options.${cf.roleId}.${cf.toOptId}.label`, cf.toLabel)}</strong> instead of <span style={{ color: "#64748b" }}>{t(`scenarios.${crisis.id}.options.${cf.roleId}.${cf.fromOptId}.label`, cf.fromLabel)}</span>:
                     </p>
                     <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
                       <span style={{ fontFamily: "'Space Mono', monospace", fontSize: 16, fontWeight: 700, color: "#10b981" }}>
@@ -986,7 +989,7 @@ textarea, input { font-family: 'DM Sans', sans-serif; }
                   <div key={r.id} style={{ background: "#141820", border: `1px solid ${r.color}22`, borderRadius: 10, padding: 14, marginBottom: 8 }}>
                     <div style={{ fontFamily: "'Space Mono', monospace", fontSize: 10, color: r.color, letterSpacing: 1, marginBottom: 8 }}>{r.icon} {r.name.toUpperCase()}</div>
                     {crisis.roleIntel[r.id].bullets.map((b: string, i: number) => (
-                      <p key={i} style={{ color: "#94a3b8", fontSize: 12, lineHeight: 1.5, marginBottom: 6, paddingLeft: 12, borderLeft: `2px solid ${r.color}33` }}>{b}</p>
+                      <p key={i} style={{ color: "#94a3b8", fontSize: 12, lineHeight: 1.5, marginBottom: 6, paddingLeft: 12, borderLeft: `2px solid ${r.color}33` }}>{t(`scenarios.${crisis.id}.roleIntel.${r.id}.bullets.${i}`, b)}</p>
                     ))}
                   </div>
                 ))}
@@ -1070,7 +1073,7 @@ textarea, input { font-family: 'DM Sans', sans-serif; }
                 <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: o ? 8 : 0 }}>
                   <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
                     <span style={{ fontSize: 20 }}>{c.icon}</span>
-                    <span style={{ fontFamily: "'Instrument Serif', serif", fontSize: 16 }}>{c.title}</span>
+                    <span style={{ fontFamily: "'Instrument Serif', serif", fontSize: 16 }}>{t(`scenarios.${c.id}.title`, c.title)}</span>
                   </div>
                   {o ? (
                     <span style={{ fontFamily: "'Space Mono', monospace", fontSize: 18, fontWeight: 700, color: gc! }}>{o.coordinationGrade}</span>
@@ -1082,7 +1085,7 @@ textarea, input { font-family: 'DM Sans', sans-serif; }
                   <div style={{ display: "flex", gap: 6, flexWrap: "wrap" }}>
                     {o.triggeredInteractions.map((inter: any, i: number) => (
                       <span key={i} style={{ fontFamily: "'DM Mono', monospace", fontSize: 9, padding: "3px 8px", borderRadius: 4, background: inter.type === "synergy" ? "#10b98122" : "#ef444422", color: inter.type === "synergy" ? "#10b981" : "#ef4444" }}>
-                        {inter.type === "synergy" ? "🤝" : "💥"} {inter.label}
+                        {inter.type === "synergy" ? "🤝" : "💥"} {t(`scenarios.${c.id}.interactions.${inter._idx}.label`, inter.label)}
                       </span>
                     ))}
                     {o.triggeredInteractions.length === 0 && <span style={{ fontFamily: "'DM Mono', monospace", fontSize: 9, color: "#64748b" }}>No interactions — isolated action</span>}

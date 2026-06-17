@@ -849,14 +849,14 @@ textarea, input { font-family: 'DM Sans', sans-serif; }
               <div style={{ display: "flex", alignItems: "flex-start", gap: 10 }}>
                 <span style={{ fontSize: 32, flexShrink: 0 }}>{role.icon}</span>
                 <div style={{ flex: 1 }}>
-                  <div style={{ fontFamily: "'Space Mono', monospace", fontSize: 12, fontWeight: 700, color: role.color, letterSpacing: 1, marginBottom: 8 }}>{role.name.toUpperCase()}</div>
+                  <div style={{ fontFamily: "'Space Mono', monospace", fontSize: 12, fontWeight: 700, color: role.color, letterSpacing: 1, marginBottom: 8 }}>{t(roles.${role.id}.name, role.name)}</div>
                   <div style={{ marginBottom: 6 }}>
                     <div style={{ fontFamily: "'DM Mono', monospace", fontSize: 9, color: "#64748b", letterSpacing: 1, marginBottom: 3 }}>{t("govGame.yourRole")}</div>
                     <div style={{ fontSize: 12, color: "#e2e8f0", lineHeight: 1.4 }}>{t(roles.${role.id}.role, role.role)}</div>
                   </div>
                   <div>
                     <div style={{ fontFamily: "'DM Mono', monospace", fontSize: 9, color: "#f59e0b", letterSpacing: 1, marginBottom: 3 }}>{t("govGame.yourIncentives")}</div>
-                    <div style={{ fontSize: 12, color: "#94a3b8", lineHeight: 1.4 }}>{role.incentive}</div>
+                    <div style={{ fontSize: 12, color: "#94a3b8", lineHeight: 1.4 }}>{t(roles.${role.id}.incentive, role.incentive)}</div>
                   </div>
                 </div>
               </div>

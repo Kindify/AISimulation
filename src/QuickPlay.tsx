@@ -297,19 +297,18 @@ export default function QuickPlay({ onBack, onFullPlay }: Props) {
   const gc = gradeColor(outcome.coordinationGrade);
 
   const resultText = [
-    `QUICK PLAY — AI Governance Simulation`,
+    `${t("quickPlay.title")} — ${t("home.suiteTitle")}`,
     ``,
-    `Crisis: ${crisis.title}`,
-    `My Role: ${role.icon} ${t(`roles.${role.id}.name`, role.name)}`,
-    `My Decision: ${selectedOpt?.label || ""}`,
-    `Coordination Grade: ${outcome.coordinationGrade}`,
+    `${t("quickPlay.crisis")}: ${tc?.title ?? crisis.title}`,
+    `${t("quickPlay.yourRole")}: ${role.icon} ${t(`roles.${role.id}.name`, role.name)}`,
+    `${t("quickPlay.myDecision")}: ${tc?.options?.[role.id]?.find?.((o: any) => o.id === selectedOption)?.label ?? selectedOpt?.label ?? ""}`,
+    `${t("quickPlay.coordinationGrade")}: ${outcome.coordinationGrade}`,
     ``,
     ...(outcome.triggeredInteractions.length > 0
-      ? outcome.triggeredInteractions.map((i: any) => `${i.type === "synergy" ? "🤝" : "💥"} ${i.label}`)
-      : ["No interactions triggered — isolated action."]),
+      ? outcome.triggeredInteractions.map((i: any) => `${i.type === "synergy" ? "🤝" : "💥"} ${tc?.interactions?.[i._idx]?.label ?? i.label}`)
+      : [t("quickPlay.noInteractions")]),
     ``,
-    `I controlled one institution. Three others decided independently.`,
-    `The outcome was shaped by coordination, not individual choices.`,
+    t("quickPlay.keyInsightText"),
     ``,
     `Try it (3 min): strategy.mobilis.studio`,
   ].join("\n");
@@ -427,13 +426,13 @@ export default function QuickPlay({ onBack, onFullPlay }: Props) {
               <div style={{ fontFamily: "'Instrument Serif', serif", fontSize: 40, color: gc, lineHeight: 1 }}>{outcome.coordinationGrade}</div>
             </div>
             <div style={{ fontFamily: "'DM Mono', monospace", fontSize: 11, color: "#94a3b8", marginBottom: 8 }}>
-              {t("quickPlay.myDecision")}: <span style={{ color: "#e2e8f0" }}>{selectedOpt?.label ?? null}</span>
+              {t("quickPlay.myDecision")}: <span style={{ color: "#e2e8f0" }}>{tc?.options?.[role.id]?.find?.((o: any) => o.id === selectedOption)?.label ?? selectedOpt?.label ?? null}</span>
             </div>
             {outcome.triggeredInteractions.length > 0 && (
               <div style={{ display: "flex", gap: 6, flexWrap: "wrap" as const, marginBottom: 8 }}>
                 {outcome.triggeredInteractions.map((i: any, idx: number) => (
                   <span key={idx} style={{ fontFamily: "'DM Mono', monospace", fontSize: 9, padding: "3px 8px", borderRadius: 4, background: i.type === "synergy" ? "#10b98122" : "#ef444422", color: i.type === "synergy" ? "#10b981" : "#ef4444" }}>
-                    {i.type === "synergy" ? "🤝" : "💥"} {i.label}
+                    {i.type === "synergy" ? "🤝" : "💥"} {tc?.interactions?.[i._idx]?.label ?? i.label}
                   </span>
                 ))}
               </div>

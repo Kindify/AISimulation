@@ -172,7 +172,7 @@ export default function QuickPlay({ onBack, onFullPlay }: Props) {
             <div>
               <div style={{ fontFamily: "'Space Mono', monospace", fontSize: 9, letterSpacing: 3, color: "#06b6d4", marginBottom: 4 }}>{t("quickPlay.title")}</div>
               <div style={{ fontFamily: "'Instrument Serif', serif", fontSize: 22, fontWeight: 400, color: "#e2e8f0", lineHeight: 1.2 }}>{crisis.icon} {tc.title}</div>
-              <div style={{ fontFamily: "'DM Mono', monospace", fontSize: 10, color: "#64748b", marginTop: 4, letterSpacing: 1 }}>{crisis.category}</div>
+              <div style={{ fontFamily: "'DM Mono', monospace", fontSize: 10, color: "#64748b", marginTop: 4, letterSpacing: 1 }}>{tc.category}</div>
             </div>
             <div style={{ display: "flex", flexDirection: "column" as const, alignItems: "flex-end", gap: 8 }}>
               <LanguageToggle />

@@ -183,11 +183,11 @@ export default function QuickPlay({ onBack, onFullPlay }: Props) {
                 </div>
                 <div style={{ marginBottom: 4 }}>
                   <div style={{ fontFamily: "'DM Mono', monospace", fontSize: 8, color: "#64748b", letterSpacing: 1, marginBottom: 2 }}>{t("quickPlay.yourRole")}</div>
-                  <div style={{ fontSize: 10, color: "#e2e8f0", lineHeight: 1.4 }}>{role.role}</div>
+                  <div style={{ fontSize: 10, color: "#e2e8f0", lineHeight: 1.4 }}>{t(`roles.${role.id}.role`, role.role)}</div>
                 </div>
                 <div>
                   <div style={{ fontFamily: "'DM Mono', monospace", fontSize: 8, color: "#f59e0b", letterSpacing: 1, marginBottom: 2 }}>{t("quickPlay.yourIncentives")}</div>
-                  <div style={{ fontSize: 10, color: "#94a3b8", lineHeight: 1.4 }}>{role.incentive}</div>
+                  <div style={{ fontSize: 10, color: "#94a3b8", lineHeight: 1.4 }}>{t(`roles.${role.id}.incentive`, role.incentive)}</div>
                 </div>
               </div>
             </div>

@@ -300,7 +300,7 @@ export default function QuickPlay({ onBack, onFullPlay }: Props) {
     `QUICK PLAY — AI Governance Simulation`,
     ``,
     `Crisis: ${crisis.title}`,
-    `My Role: ${role.icon} ${t(roles.${role.id}.name, role.name)}`,
+    `My Role: ${role.icon} ${t(`roles.${role.id}.name`, role.name)}`,
     `My Decision: ${selectedOpt?.label || ""}`,
     `Coordination Grade: ${outcome.coordinationGrade}`,
     ``,
@@ -332,7 +332,7 @@ export default function QuickPlay({ onBack, onFullPlay }: Props) {
           <div>
             <div style={{ fontFamily: "'Space Mono', monospace", fontSize: 9, letterSpacing: 3, color: "#64748b", marginBottom: 6 }}>{t("quickPlay.crisisOutcome")}</div>
             <div style={{ fontFamily: "'Instrument Serif', serif", fontSize: 22, color: "#e2e8f0", marginBottom: 4 }}>{crisis.icon} {tc.title}</div>
-            <div style={{ fontFamily: "'DM Mono', monospace", fontSize: 11, color: "#64748b" }}>{t("quickPlay.yourRoleLabel")} <span style={{ color: role.color }}>{role.icon} {t(roles.${role.id}.name, role.name)}</span></div>
+            <div style={{ fontFamily: "'DM Mono', monospace", fontSize: 11, color: "#64748b" }}>{t("quickPlay.yourRoleLabel")} <span style={{ color: role.color }}>{role.icon} {t(`roles.${role.id}.name`, role.name)}</span></div>
           </div>
           <div style={{ textAlign: "right" as const, display: "flex", flexDirection: "column" as const, alignItems: "flex-end", gap: 8 }}>
             <LanguageToggle />
@@ -422,7 +422,7 @@ export default function QuickPlay({ onBack, onFullPlay }: Props) {
               <div>
                 <div style={{ fontFamily: "'DM Mono', monospace", fontSize: 9, color: "#64748b" }}>{t("quickPlay.quickPlayResult")}</div>
                 <div style={{ fontFamily: "'Instrument Serif', serif", fontSize: 16, color: "#e2e8f0", marginTop: 4 }}>{tc.title}</div>
-                <div style={{ fontFamily: "'DM Mono', monospace", fontSize: 11, color: role.color, marginTop: 2 }}>{role.icon} {t(roles.${role.id}.name, role.name)}</div>
+                <div style={{ fontFamily: "'DM Mono', monospace", fontSize: 11, color: role.color, marginTop: 2 }}>{role.icon} {t(`roles.${role.id}.name`, role.name)}</div>
               </div>
               <div style={{ fontFamily: "'Instrument Serif', serif", fontSize: 40, color: gc, lineHeight: 1 }}>{outcome.coordinationGrade}</div>
             </div>

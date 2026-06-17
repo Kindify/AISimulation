@@ -179,7 +179,7 @@ export default function QuickPlay({ onBack, onFullPlay }: Props) {
               <div style={{ background: role.bg, border: `1px solid ${role.color}44`, borderRadius: 10, padding: "12px 14px", display: "inline-block", maxWidth: 200, textAlign: "left" as const }}>
                 <div style={{ display: "flex", alignItems: "center", gap: 6, marginBottom: 6 }}>
                   <span style={{ fontSize: 18 }}>{role.icon}</span>
-                  <div style={{ fontFamily: "'Space Mono', monospace", fontSize: 9, fontWeight: 700, color: role.color, letterSpacing: 1, whiteSpace: "nowrap" as const }}>{role.name}</div>
+                  <div style={{ fontFamily: "'Space Mono', monospace", fontSize: 9, fontWeight: 700, color: role.color, letterSpacing: 1, whiteSpace: "nowrap" as const }}>{t(roles.${role.id}.name, role.name)}</div>
                 </div>
                 <div style={{ marginBottom: 4 }}>
                   <div style={{ fontFamily: "'DM Mono', monospace", fontSize: 8, color: "#64748b", letterSpacing: 1, marginBottom: 2 }}>{t("quickPlay.yourRole")}</div>

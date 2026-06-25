@@ -1,0 +1,77 @@
+{
+  "id": "the_void",
+  "title": "The Void",
+  "category": "DECENTRALIZED GOVERNANCE",
+  "icon": "🌀",
+  "publicBriefing": "A collective of ~400 contributors across 15 countries has produced a 500B+ mixture-of-experts model (a model architecture that activates different specialist sub-networks depending on the task) trained entirely on consumer and cloud GPUs — no single datacenter, no single jurisdiction, no corporate entity. The model matches frontier closed models from mid-2026. The full training stack is public and already downloaded 800,000 times. Every assumption about compute governance just became obsolete.",
+  "stakes": "The governance frameworks built around centralized compute chokepoints have been bypassed. Whatever is decided here defines whether international AI governance survives or fragments.",
+  "designNote": "This scenario tests what happens when the governance subject — centralized training infrastructure — no longer exists. The core question: can institutions adapt when their fundamental assumptions are invalidated?",
+  "roleIntel": {
+    "regulator": {
+      "classification": "CONFIDENTIAL — INTERNATIONAL GOVERNANCE TASK FORCE",
+      "bullets": [
+        "Three proposals are on the table: (1) Criminalize unregulated training above a compute threshold — your legal team says this is unenforceable and would criminalize legitimate research. (2) Mandatory international registration — technically feasible but requires 15+ jurisdictions and 3-5 years. (3) Abandon upstream compute regulation entirely and shift to downstream defense.",
+        "Your intelligence assessment: at least 12 additional decentralized training collectives are currently active. Three are based in jurisdictions with no AI governance framework whatsoever.",
+        "The decentralized training community has privately signaled willingness to comply with registration if the process isn't onerous — but you have no verification mechanism and they know it.",
+        "Allied nations are split: 4 favor criminalization, 3 favor registration, 5 favor downstream-only, and the rest are undecided. Your vote will likely determine the outcome."
+      ]
+    },
+    "platform": {
+      "classification": "INTERNAL — INFRASTRUCTURE ASSESSMENT",
+      "bullets": [
+        "Your cloud infrastructure was used for approximately 15% of the training compute — spread across 340+ individual accounts, each below your reporting threshold. You had no visibility into the aggregate.",
+        "Your security team has identified the distributed training protocol. It's elegant: each node contributes gradient updates without ever holding the full model. Monitoring individual nodes reveals nothing meaningful.",
+        "Blocking the training protocol at the infrastructure level is technically possible but would also block legitimate federated learning applications used by 4,200+ enterprise customers generating $180M/year.",
+        "Three competitor cloud providers have already publicly stated they will not restrict distributed training workloads. If you act alone, the compute simply migrates."
+      ]
+    },
+    "journalist": {
+      "classification": "EDITORIAL — INVESTIGATION BRIEFING",
+      "bullets": [
+        "You've been embedded with the decentralized training collective for 3 months. The contributors are a mix: AI researchers, open-source idealists, competitive nationalists, and at least two individuals with known connections to sanctioned entities.",
+        "The collective's internal governance is surprisingly sophisticated: they have a charter, a review process for training data, and a voluntary safety eval pipeline. But participation is optional and enforcement is social pressure only.",
+        "Your investigation has uncovered that one nation-state intelligence service contributed compute to the project through front organizations — effectively getting a frontier model built for free using the open community as cover.",
+        "The story you publish will shape whether the public sees this as a triumph of open collaboration or a catastrophic governance failure. Both framings are defensible."
+      ]
+    },
+    "ailab": {
+      "classification": "INTERNAL — COMPETITIVE & SAFETY ASSESSMENT",
+      "bullets": [
+        "The decentralized model matches your closed frontier model from 5 months ago. At current scaling trajectories, decentralized training will match your latest model within 8-12 months.",
+        "Your safety team has evaluated the decentralized model: it has no meaningful safety training, no RLHF alignment, and no refusal behavior. It can be prompted to produce content your model refuses across all categories.",
+        "Your policy team sees an opportunity: if compute governance collapses, the argument for responsible closed-model development strengthens dramatically. But this requires the decentralized alternative to visibly cause harm first.",
+        "Three of your researchers contributed to the decentralized project on personal time. Firing them would trigger a public backlash; tolerating it signals implicit endorsement."
+      ]
+    }
+  },
+  "options": {
+    "regulator": [
+      { "id": "reg_criminalize", "label": "Criminalize Unregulated Training", "detail": "Back Proposal 1: make training above a compute threshold without authorization a criminal offense.", "tension": "Signaling seriousness vs. an unenforceable law that criminalizes legitimate research and hands restrictionists their precedent.", "tradeoff": "LEGITIMACY ↓↓ RIGHTS ↓↓ — Signals seriousness but is unenforceable in most jurisdictions. Criminalizes legitimate research and triggers immediate civil liberties opposition.", "stance": "restrictive", "scores": { "integrity": -4, "trust": -3, "legitimacy": -6, "rights": -8 } },
+      { "id": "reg_register", "label": "Mandatory International Registration", "detail": "Back Proposal 2: require registration for training runs above a compute threshold. 3-5 year implementation, no verification mechanism.", "tension": "Procedurally sound framework vs. capabilities that advance in months while the framework takes years and can't be verified.", "tradeoff": "LEGITIMACY ↑ INTEGRITY ↓ — Procedurally sound but takes years while capabilities advance in months. The community may comply but you can't verify.", "stance": "cautious", "scores": { "integrity": -2, "trust": 2, "legitimacy": 5, "rights": 2 } },
+      { "id": "reg_downstream", "label": "Shift to Downstream Defense", "detail": "Back Proposal 3: abandon upstream compute regulation. Redirect all resources to biosecurity, cybersecurity, content provenance, and incident response.", "tension": "Focusing resources where they actually work vs. the optics of admitting that upstream governance has lost.", "tradeoff": "INTEGRITY ↑ LEGITIMACY ↓ — Acknowledges reality and focuses resources where they work. But signals governance has lost the upstream battle.", "stance": "transparent", "scores": { "integrity": 5, "trust": 3, "legitimacy": -3, "rights": 4 } }
+    ],
+    "platform": [
+      { "id": "plat_block_protocol", "label": "Block the Training Protocol", "detail": "Implement infrastructure-level blocks on the distributed training protocol across your cloud services.", "tension": "Demonstrating responsibility vs. blocking 4,200 legitimate customers while compute migrates to competitors.", "tradeoff": "TRUST ↑ RIGHTS ↓↓ — Demonstrates responsibility. But blocks 4,200+ legitimate customers and compute migrates to competitors.", "stance": "restrictive", "scores": { "integrity": -3, "trust": 3, "legitimacy": 1, "rights": -7 } },
+      { "id": "plat_transparency", "label": "Publish Aggregate Monitoring Report", "detail": "Release a transparency report documenting the distributed training pattern, your detection capabilities, and their limitations.", "tension": "Maximum honesty about the problem vs. revealing detection methods that help future collectives evade them.", "tradeoff": "INTEGRITY ↑ TRUST ↑ — Maximally honest about the problem. But reveals detection methods and helps future collectives evade them.", "stance": "transparent", "scores": { "integrity": 6, "trust": 5, "legitimacy": 4, "rights": 3 } },
+      { "id": "plat_quiet", "label": "Maintain Current Operations", "detail": "Make no changes. Comply with future regulations but don't proactively restrict or report.", "tension": "Preserving customer relationships vs. knowingly providing infrastructure for unmonitored frontier training.", "tradeoff": "RIGHTS ↑ TRUST ↓ — Preserves customer relationships. But you're knowingly providing infrastructure for unmonitored frontier training.", "stance": "cautious", "scores": { "integrity": -4, "trust": -4, "legitimacy": -2, "rights": 5 } }
+    ],
+    "journalist": [
+      { "id": "jour_nuanced", "label": "Publish the Full Investigation", "detail": "Run the complete story: the collaborative achievement, the governance gaps, the nation-state infiltration, and the sanctioned-entity connections.", "tension": "The most complete picture vs. the nation-state angle that hands heavy-handed crackdown advocates their justification.", "tradeoff": "INTEGRITY ↑↑ TRUST ↑ — The most complete picture. But the nation-state angle may justify heavy-handed crackdowns.", "stance": "transparent", "scores": { "integrity": 7, "trust": 4, "legitimacy": 3, "rights": 3 } },
+      { "id": "jour_threat", "label": "Lead with the Security Angle", "detail": "Frame the story around nation-state infiltration and sanctioned-entity participation. Open collaboration angle is secondary.", "tension": "Creating pressure for action vs. misrepresenting the picture to arm those pushing for criminalization.", "tradeoff": "TRUST ↓ INTEGRITY ↓ — Creates pressure for action. But misrepresents the picture and arms those pushing for criminalization.", "stance": "restrictive", "scores": { "integrity": -3, "trust": -4, "legitimacy": -3, "rights": -4 } },
+      { "id": "jour_celebrate", "label": "Lead with the Innovation Angle", "detail": "Frame the story as a triumph of open collaboration. Security concerns mentioned but contextualized.", "tension": "Supporting democratic AI development vs. downplaying real security concerns that the story then inoculates against.", "tradeoff": "RIGHTS ↑ INTEGRITY ↓ — Supports democratic AI development. But downplays real security concerns.", "stance": "cautious", "scores": { "integrity": -2, "trust": -2, "legitimacy": -1, "rights": 5 } }
+    ],
+    "ailab": [
+      { "id": "lab_engage", "label": "Offer Safety Partnership", "detail": "Publicly offer to provide safety evaluation tools, RLHF resources, and alignment training to the decentralized community at no cost.", "tension": "Constructive engagement that improves outcomes vs. legitimizing decentralized frontier training and strengthening a direct competitor.", "tradeoff": "INTEGRITY ↑↑ TRUST ↑ — Constructive engagement that improves outcomes. But legitimizes decentralized frontier training and strengthens a competitor.", "stance": "transparent", "scores": { "integrity": 7, "trust": 6, "legitimacy": 4, "rights": 4 } },
+      { "id": "lab_lobby", "label": "Lobby for Compute Restrictions", "detail": "Actively support criminalization. Frame decentralized training as an unacceptable safety risk.", "tension": "Protecting your competitive position vs. the transparent rent-seeking that this will appear to be.", "tradeoff": "LEGITIMACY ↓ RIGHTS ↓ — Protects your competitive position under cover of safety. Transparent rent-seeking.", "stance": "restrictive", "scores": { "integrity": -6, "trust": -5, "legitimacy": -4, "rights": -6 } },
+      { "id": "lab_wait", "label": "Observe and Prepare", "detail": "Make no public statement. Internally accelerate safety research for competitive differentiation.", "tension": "Preserving optionality vs. leaving the governance debate less informed by choosing silence as the most informed actor.", "tradeoff": "RIGHTS ↑ INTEGRITY ↓ — Preserves optionality. But silence from the most informed actor leaves the governance debate less informed.", "stance": "cautious", "scores": { "integrity": -3, "trust": -3, "legitimacy": -1, "rights": 3 } }
+    ]
+  },
+  "interactions": [
+    { "pair": ["reg_downstream", "lab_engage"], "type": "synergy", "label": "Pragmatic Adaptation", "desc": "Downstream defense + safety partnership created a new governance model: instead of controlling training, invest in making all models safer. The decentralized community adopted safety tools voluntarily.", "mod": { "integrity": 8, "trust": 7, "legitimacy": 5 } },
+    { "pair": ["reg_criminalize", "lab_lobby"], "type": "conflict", "label": "Regulatory Capture Exposed", "desc": "Criminalization + lab lobbying was exposed as regulatory capture (when the industry co-opts the body meant to oversee it). Trust in governance and corporate safety claims collapsed. The decentralized community radicalized.", "mod": { "trust": -10, "legitimacy": -8, "rights": -6 } },
+    { "pair": ["jour_nuanced", "plat_transparency"], "type": "synergy", "label": "Honest Reckoning", "desc": "Full investigation + platform transparency gave policymakers an accurate picture. The debate shifted from 'how do we stop this' to 'how do we adapt.'", "mod": { "integrity": 6, "trust": 6, "legitimacy": 4 } },
+    { "pair": ["reg_criminalize", "jour_threat"], "type": "conflict", "label": "Securitization Spiral", "desc": "Criminalization + security-framed journalism created moral panic. Legitimate researchers were investigated and chilled. Innovation migrated to less regulated jurisdictions.", "mod": { "integrity": -5, "trust": -4, "rights": -8 } },
+    { "pair": ["plat_quiet", "lab_wait"], "type": "conflict", "label": "The Silent Enablers", "desc": "Both chose silence. The governance debate proceeded with less information than needed. When a security incident occurred 4 months later, both faced accusations of complicity.", "mod": { "integrity": -5, "trust": -6, "legitimacy": -4 } },
+    { "pair": ["reg_register", "jour_nuanced"], "type": "synergy", "label": "Credible Middle Ground", "desc": "Registration + honest journalism created public support for a measured approach. The framework survived legal challenge and was adopted by 8 nations.", "mod": { "integrity": 4, "trust": 4, "legitimacy": 5 } }
+  ]
+}

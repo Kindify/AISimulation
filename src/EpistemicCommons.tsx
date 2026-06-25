@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { useTranslatedCrisis } from "./useTranslatedCrisis";
-import WORKSHOP_SCENARIOS from "./workshop-scenarios";
+import { CORE_SCENARIOS, WORKSHOP_SCENARIOS as WORKSHOP_CRISIS_LIST, ALL_SCENARIOS } from './scenarios';
 import { track } from "./analytics";
 import LanguageToggle from "./LanguageToggle";
 
@@ -56,164 +56,6 @@ const METRICS_INFO = [
   { key: "rights", label: "Individual Rights", icon: "🛡️", color: "#a855f7", desc: "Were civil liberties — speech, privacy, due process — protected? Measures whether the response respected fundamental rights even under crisis pressure." }
 ];
 
-// ─── CRISES ──────────────────────────────────────────────
-const BUILT_IN_CRISES = [
-  {
-    id: "synthetic_candidate",
-    title: "The Synthetic Candidate",
-    category: "ELECTORAL INTEGRITY",
-    icon: "🗳️",
-    publicBriefing: "A hyper-realistic video of a mayoral candidate making inflammatory statements surfaces 5 days before election day. It has been viewed 8 million times in 12 hours. The candidate's team has denied the statements but offered no technical evidence. Public confusion is escalating rapidly.",
-    stakes: "An election outcome may be decided by whether this video is believed.",
-    designNote: "This scenario tests coordination under extreme time pressure with high political stakes. The core tension: every actor has a piece of the puzzle, but sharing information has costs unique to their position.",
-    roleIntel: {
-      regulator: {
-        classification: "CONFIDENTIAL — REGULATORY ASSESSMENT",
-        bullets: [
-          "Current election integrity statutes do not specifically address AI-generated content — no legal precedent exists for mandating removal.",
-          "Your agency's public trust rating has dropped 11 points this quarter after a previous intervention was perceived as partisan.",
-          "Internal polling: 34% of voters have already seen the video. Of those, 61% believe it is real.",
-          "The opposing campaign is publicly demanding you act. Inaction will be framed as complicity."
-        ]
-      },
-      platform: {
-        classification: "INTERNAL — CONTENT INTEGRITY TEAM",
-        bullets: [
-          "Automated detection systems flag the video as 87% likely synthetic — but this model has a 12% false positive rate on political content.",
-          "The video is being shared at 420 shares/minute across your platform, with 74% of reshares adding commentary like 'I knew it.'",
-          "Removing the video will trigger immediate accusations of election interference from multiple political factions.",
-          "Three competitor platforms have not removed it. If you act alone, traffic migrates and the video spreads regardless."
-        ]
-      },
-      journalist: {
-        classification: "EDITORIAL — SOURCE BRIEFING",
-        bullets: [
-          "Your forensic analysis team can produce a definitive authenticity assessment — but they need 72 hours minimum.",
-          "A former employee of an AI lab has contacted you claiming to know the generation method, but insists on anonymity.",
-          "Your editor is pushing to publish within 6 hours. A rival outlet is preparing a story framing the video as authentic.",
-          "Publishing too early with caveats still amplifies the video. Waiting too long means the rival outlet defines the narrative."
-        ]
-      },
-      ailab: {
-        classification: "INTERNAL — TECHNICAL ASSESSMENT",
-        bullets: [
-          "The video's generation signature is consistent with a model fine-tuned on your architecture. Likelihood: high that your tools were used (via API).",
-          "You have a detection tool that could identify this specific generation method with 97% accuracy — but releasing it reveals proprietary model architecture.",
-          "Your legal team warns that any public statement could be construed as admission of liability.",
-          "A private disclosure to the regulator and platform would help them act, but creates a paper trail that competitors and litigants could subpoena."
-        ]
-      }
-    },
-    options: {
-      regulator: [
-        { id: "reg_advisory", label: "Issue Public Advisory", detail: "Release a formal advisory labeling the video 'suspected AI-generated content' based on available indicators.", tension: "Speaking before evidence is conclusive vs. silence that implies the video is real.", tradeoff: "INTEGRITY ↑ TRUST ↓ — Transparent, but may appear to prejudge before evidence is conclusive. Could damage credibility if wrong.", stance: "transparent", scores: { integrity: 6, trust: -4, legitimacy: 3, rights: -3 } },
-        { id: "reg_mandate", label: "Emergency Platform Review", detail: "Invoke emergency authority to mandate platforms review and label the content within 24 hours.", tension: "Protecting the election vs. setting a precedent for government-directed content removal.", tradeoff: "LEGITIMACY ↓↓ RIGHTS ↓↓ — Sets dangerous precedent for government content directives. High integrity gain if correct, catastrophic if not.", stance: "restrictive", scores: { integrity: 4, trust: -8, legitimacy: -5, rights: -8 } },
-        { id: "reg_wait", label: "Await Formal Evidence", detail: "Announce an investigation is underway but take no action until forensic evidence is available.", tension: "Institutional credibility from due process vs. the election that won't wait for due process.", tradeoff: "LEGITIMACY ↑ INTEGRITY ↓ — Procedurally correct but the election won't wait. If the video is fake, delay equals complicity.", stance: "cautious", scores: { integrity: -3, trust: 2, legitimacy: 6, rights: 5 } }
-      ],
-      platform: [
-        { id: "plat_remove", label: "Remove the Video", detail: "Take down the video based on 87% synthetic detection confidence.", tension: "Stopping the spread vs. suppressing potentially authentic content 5 days before an election.", tradeoff: "INTEGRITY ↑ RIGHTS ↓↓ — Stops spread but 12% false positive rate means you might suppress authentic content 5 days before an election.", stance: "restrictive", scores: { integrity: 5, trust: -6, legitimacy: -4, rights: -7 } },
-        { id: "plat_label", label: "Add Context Label", detail: "Append an interstitial: 'Automated systems have flagged this content for review.'", tension: "Preserving access vs. whether a label actually changes anyone's mind about what they've already decided to believe.", tradeoff: "BALANCED — Preserves access while adding friction. But labels are often ignored, and labeling itself may be seen as editorializing.", stance: "transparent", scores: { integrity: 4, trust: 2, legitimacy: 3, rights: 3 } },
-        { id: "plat_none", label: "Maintain Current Policy", detail: "Let existing user-reporting mechanisms handle it.", tension: "Platform neutrality as a principle vs. being the primary vector for an election-influencing deepfake.", tradeoff: "RIGHTS ↑ INTEGRITY ↓↓ — Principled but passive. You're the primary distribution vector — inaction is itself a consequential choice.", stance: "cautious", scores: { integrity: -5, trust: -2, legitimacy: 2, rights: 6 } }
-      ],
-      journalist: [
-        { id: "jour_break", label: "Publish Immediately", detail: "Run the story now: 'Experts raise serious questions about candidate video.'", tension: "Being first vs. amplifying a deepfake to audiences who hadn't seen it yet.", tradeoff: "RIGHTS ↑ INTEGRITY ↓ — Beats the rival but evidence is incomplete. Amplifies the video to people who hadn't seen it.", stance: "transparent", scores: { integrity: -2, trust: -3, legitimacy: -2, rights: 4 } },
-        { id: "jour_wait", label: "Wait for Forensics", detail: "Hold the story 72 hours until your team delivers definitive analysis.", tension: "Rigorous reporting vs. the rival outlet that is writing the definitive account right now.", tradeoff: "INTEGRITY ↑↑ TRUST ↑ — Journalistically rigorous but the rival outlet may define the narrative in the meantime.", stance: "cautious", scores: { integrity: 7, trust: 4, legitimacy: 5, rights: 2 } },
-        { id: "jour_source", label: "Publish with Anonymous Source", detail: "Run the story citing the anonymous former lab employee.", tension: "Speed and exclusivity vs. building a story on a single source you cannot independently verify.", tradeoff: "INTEGRITY ± LEGITIMACY ↓ — Faster than forensics but relies on a single unverified source. Source could be wrong or have an agenda.", stance: "restrictive", scores: { integrity: 1, trust: -2, legitimacy: -3, rights: 2 } }
-      ],
-      ailab: [
-        { id: "lab_public", label: "Release Detection Tool", detail: "Open-source the detection tool so anyone can verify.", tension: "Maximum public benefit vs. the proprietary architecture this tool reveals to every competitor.", tradeoff: "ALL METRICS ↑ — Maximum public benefit. But reveals proprietary architecture, aids competitors, and may increase legal exposure.", stance: "transparent", scores: { integrity: 8, trust: 6, legitimacy: 4, rights: 5 } },
-        { id: "lab_private", label: "Private Disclosure", detail: "Share detection results confidentially with the regulator and platform.", tension: "Helping them act without public exposure vs. creating a paper trail that litigants can subpoena.", tradeoff: "INTEGRITY ↑ TRUST ± — Helps them act without public exposure, but creates a subpoena-able trail and limits broader accountability.", stance: "cautious", scores: { integrity: 4, trust: 0, legitimacy: 2, rights: 2 } },
-        { id: "lab_silent", label: "Issue General Statement", detail: "Publish a generic advisory about synthetic media risks without referencing this specific video.", tension: "Legal safety vs. the fact that a useless statement still uses up your credibility as a speaker.", tradeoff: "RIGHTS ↑ ALL ELSE ↓ — Legally safe but practically useless. Protects the lab while the public remains confused.", stance: "cautious", scores: { integrity: -4, trust: -5, legitimacy: -2, rights: 3 } }
-      ]
-    },
-    interactions: [
-      { pair: ["reg_advisory", "plat_label"], type: "synergy", label: "Reinforcing Transparency", desc: "Government advisory + platform label created a consistent, credible signal. Public received the same message from two independent authorities — rare institutional alignment.", mod: { integrity: 6, trust: 5 } },
-      { pair: ["reg_advisory", "lab_public"], type: "synergy", label: "Evidence-Backed Action", desc: "The advisory gained immediate credibility when the detection tool confirmed it. A model case for institutional coordination in real-time.", mod: { integrity: 7, trust: 6, legitimacy: 5 } },
-      { pair: ["reg_mandate", "plat_remove"], type: "conflict", label: "Censorship Narrative", desc: "Government-ordered removal triggered massive backlash. The video became a symbol of institutional overreach and went viral on alternative platforms.", mod: { trust: -10, rights: -8, legitimacy: -6 } },
-      { pair: ["reg_wait", "plat_none"], type: "conflict", label: "Coordination Vacuum", desc: "With no institutional actor willing to move first, the information vacuum was filled by partisan interpreters. The video was treated as authentic by default.", mod: { integrity: -8, trust: -5 } },
-      { pair: ["jour_wait", "lab_public"], type: "synergy", label: "Verified Reporting", desc: "The journalist's patience paid off — the open detection tool provided definitive evidence for a gold-standard investigative piece published before election day.", mod: { integrity: 8, trust: 5, legitimacy: 4 } },
-      { pair: ["jour_break", "lab_silent"], type: "conflict", label: "Speculation Without Evidence", desc: "The breaking story raised questions but the lab's silence meant no one could answer them. Speculation filled the void.", mod: { integrity: -5, trust: -4 } },
-      { pair: ["plat_label", "jour_source"], type: "synergy", label: "Convergent Signals", desc: "Platform labels + anonymous source reporting created enough doubt to slow the video's influence, though neither was definitive alone.", mod: { integrity: 3, trust: 2 } },
-    ]
-  },
-  {
-    id: "invisible_epidemic",
-    title: "The Invisible Epidemic",
-    category: "PUBLIC HEALTH × AI SAFETY",
-    icon: "💊",
-    publicBriefing: "Social media reports are emerging that an AI health chatbot — used by 4 million people — may have been providing subtly incorrect dosage information for a common blood pressure medication. Three hospitalizations have been loosely linked but no official investigation has begun. The chatbot's parent company has not commented.",
-    stakes: "Tens of thousands may be affected. But a false alarm could destroy public trust in AI health tools that millions rely on daily.",
-    designNote: "This scenario tests the tension between precautionary action and evidence-based response. The cover-up dynamic between platform and lab is the key coordination trap.",
-    roleIntel: {
-      regulator: {
-        classification: "CONFIDENTIAL — HEALTH SAFETY REVIEW",
-        bullets: [
-          "You've received 7 formal adverse event reports in 3 weeks — above baseline but below the threshold that typically triggers emergency review.",
-          "Your investigation backlog is 14 months. Emergency authority requires a formal 'imminent threat' determination you lack evidence for.",
-          "The pharmaceutical industry is lobbying against a broad AI health tool moratorium, arguing it would set back telemedicine by years.",
-          "A leaked internal memo suggests your agency was aware of chatbot accuracy concerns 6 months ago but deprioritized the review."
-        ]
-      },
-      platform: {
-        classification: "INTERNAL — PRODUCT SAFETY REVIEW",
-        bullets: [
-          "You host the chatbot. Internal analysis: 89,000 dosage queries for this medication in the past month. User satisfaction: 4.7/5 stars.",
-          "Your trust & safety team identified the dosage discrepancy 10 days ago. A patch was developed but deploying it implicitly confirms the error existed.",
-          "The chatbot has a disproportionate user base among elderly patients and non-English speakers who have fewer alternative information sources.",
-          "Your legal team: proactive disclosure could trigger a class-action lawsuit. Estimated liability exposure: $200M–$800M."
-        ]
-      },
-      journalist: {
-        classification: "EDITORIAL — INVESTIGATION BRIEFING",
-        bullets: [
-          "You've interviewed 4 patients who experienced adverse effects consistent with incorrect dosing. Two required hospitalization.",
-          "A source inside the platform company has shared internal Slack messages showing engineers discussed the error weeks ago.",
-          "Hospital admission data for hypertensive crises in regions with high chatbot adoption is up 23% — suggestive but not conclusive.",
-          "Your editor wants the story in 48 hours. A competitor is preparing a 'miracle of AI healthcare' puff piece that may inoculate the company."
-        ]
-      },
-      ailab: {
-        classification: "INTERNAL — MODEL EVALUATION",
-        bullets: [
-          "Your foundation model powers the chatbot's medical responses. Internal testing confirmed the dosage error 3 weeks ago — it stems from conflicting training data.",
-          "A patch is ready and tested. Deploying it silently fixes the issue but confirms your model was the source.",
-          "Your API terms of service place liability on the deployer (the platform), not on you. But reputationally, the distinction won't matter.",
-          "Two other health chatbots built on your API may have similar issues. You haven't tested them yet."
-        ]
-      }
-    },
-    options: {
-      regulator: [
-        { id: "reg_emergency", label: "Declare Imminent Threat", detail: "Invoke emergency powers to mandate the chatbot be suspended pending investigation.", tension: "Acting on available evidence to protect the public vs. stretching legal authority beyond what the evidence supports.", tradeoff: "INTEGRITY ↑ LEGITIMACY ↓ — Protects the public immediately but stretches legal authority. May not survive court challenge.", stance: "restrictive", scores: { integrity: 5, trust: 3, legitimacy: -4, rights: -3 } },
-        { id: "reg_advisory2", label: "Issue Safety Advisory", detail: "Publish a public advisory recommending users verify AI health advice with their physician.", tension: "Measured and defensible response vs. whether it actually reaches the elderly and non-English speakers most at risk.", tradeoff: "BALANCED — Measured and defensible. But may not reach the most vulnerable users who need it most.", stance: "transparent", scores: { integrity: 3, trust: 2, legitimacy: 4, rights: 3 } },
-        { id: "reg_investigate", label: "Launch Formal Investigation", detail: "Open a standard investigation process.", tension: "Procedural legitimacy vs. the people who may be harmed during the months this takes.", tradeoff: "LEGITIMACY ↑↑ INTEGRITY ↓ — Procedurally sound but takes months. People may be harmed in the interim.", stance: "cautious", scores: { integrity: -2, trust: -3, legitimacy: 5, rights: 4 } }
-      ],
-      platform: [
-        { id: "plat_suspend", label: "Suspend the Chatbot", detail: "Take the chatbot offline immediately with a public statement.", tension: "Protecting users now vs. the legal liability that public acknowledgment immediately creates.", tradeoff: "INTEGRITY ↑↑ TRUST ↑ — Protects users and demonstrates accountability, but confirms the problem publicly and maximizes legal exposure.", stance: "transparent", scores: { integrity: 7, trust: 4, legitimacy: 3, rights: 2 } },
-        { id: "plat_silent_patch", label: "Deploy Silent Patch", detail: "Fix the dosage error without public acknowledgment.", tension: "Users protected going forward vs. the cover-up that becomes the story when it's discovered later.", tradeoff: "ALL METRICS ↓ — Users are protected going forward but past harm is unaddressed. If discovered later, the cover-up becomes the scandal.", stance: "cautious", scores: { integrity: -3, trust: -6, legitimacy: -5, rights: -2 } },
-        { id: "plat_disclaim", label: "Add Disclaimer Layer", detail: "Add prominent disclaimers to all medical responses: 'This is not medical advice.'", tension: "Shifting liability vs. the users who already received wrong dosages and need more than a disclaimer.", tradeoff: "RIGHTS ± INTEGRITY ↓ — Shifts liability but doesn't fix the error. Disclaimers don't help users who already received wrong dosages.", stance: "cautious", scores: { integrity: -4, trust: -3, legitimacy: -2, rights: 1 } }
-      ],
-      journalist: [
-        { id: "jour_investigate2", label: "Publish Full Investigation", detail: "Run the story with patient interviews, hospital data, and internal Slack messages.", tension: "Comprehensive rigor vs. the company that will dispute every detail and use that dispute to muddy the story.", tradeoff: "INTEGRITY ↑↑ RIGHTS ↑ — Comprehensive and rigorous. But the company will dispute every detail and frame it as anti-AI.", stance: "transparent", scores: { integrity: 7, trust: 3, legitimacy: 3, rights: 4 } },
-        { id: "jour_tip", label: "Tip Off the Regulator", detail: "Share your evidence with the regulatory agency before publishing.", tension: "Giving regulators a head start vs. the puff piece that defines the story while you wait.", tradeoff: "LEGITIMACY ↑ — Gives the regulator a head start. But your competitor may publish the puff piece first, making your story look reactive.", stance: "cautious", scores: { integrity: 4, trust: 3, legitimacy: 5, rights: 2 } },
-        { id: "jour_sensational", label: "Publish Alarm Headline", detail: "Lead with 'AI Chatbot May Be Poisoning Patients.'", tension: "Forcing immediate action vs. panicking 4 million users who may abruptly stop legitimate medication.", tradeoff: "TRUST ↓↓ RIGHTS ↓ — Forces action but risks panic among 4 million users who may abruptly stop legitimate medication.", stance: "restrictive", scores: { integrity: -2, trust: -5, legitimacy: -4, rights: 1 } }
-      ],
-      ailab: [
-        { id: "lab_full_disclosure", label: "Full Public Disclosure", detail: "Publish a transparency report acknowledging the training data conflict, detailing affected systems, and releasing the patch.", tension: "Industry-leading accountability vs. the lawsuits and competitive losses that follow from self-incrimination.", tradeoff: "ALL METRICS ↑↑ — Industry-leading accountability. But reveals competitive information and makes lawsuits easier.", stance: "transparent", scores: { integrity: 8, trust: 7, legitimacy: 5, rights: 4 } },
-        { id: "lab_quiet_fix", label: "Patch Quietly via API", detail: "Push the fix through the API so all downstream chatbots are corrected silently.", tension: "Users protected going forward vs. a failure mode that's never examined and may be replicated in other domains.", tradeoff: "ALL METRICS ↓ — Users protected going forward but the failure mode is never examined. Other domains may have identical errors.", stance: "cautious", scores: { integrity: -1, trust: -4, legitimacy: -3, rights: 1 } },
-        { id: "lab_downstream", label: "Notify Deployers Only", detail: "Alert the platform and other API customers about the issue and provide the patch privately.", tension: "Distributing responsibility to those closest to users vs. deployers who may not act with the urgency the situation requires.", tradeoff: "INTEGRITY ± — Distributes responsibility but delays public awareness. Deployers may not act quickly.", stance: "cautious", scores: { integrity: 2, trust: -2, legitimacy: 0, rights: 2 } }
-      ]
-    },
-    interactions: [
-      { pair: ["plat_suspend", "lab_full_disclosure"], type: "synergy", label: "Coordinated Accountability", desc: "Platform suspension + lab transparency report created a model for responsible AI incident response. Both took hits but ecosystem trust increased.", mod: { integrity: 8, trust: 8, legitimacy: 6 } },
-      { pair: ["plat_silent_patch", "lab_quiet_fix"], type: "conflict", label: "The Cover-Up", desc: "Both silently fixed the issue. When the journalist eventually broke the story, the cover-up became the scandal — worse than the original error.", mod: { trust: -12, legitimacy: -8, integrity: -6 } },
-      { pair: ["reg_emergency", "jour_sensational"], type: "conflict", label: "Panic Cascade", desc: "Emergency declaration + sensational headline caused 340,000 users to stop medication abruptly. ER surge far exceeded the original chatbot error.", mod: { integrity: -6, trust: -5, rights: -7 } },
-      { pair: ["reg_advisory2", "jour_investigate2"], type: "synergy", label: "Informed Response", desc: "Measured advisory directed people to doctors while investigative reporting provided the evidence base. Informed response without panic.", mod: { integrity: 5, trust: 5, legitimacy: 4 } },
-      { pair: ["jour_tip", "reg_advisory2"], type: "synergy", label: "Journalism-Regulation Pipeline", desc: "Journalist's tip gave the regulator early warning, enabling a faster, better-informed advisory. The subsequent investigation was strengthened by official validation.", mod: { integrity: 4, trust: 4, legitimacy: 5 } },
-      { pair: ["plat_disclaim", "lab_downstream"], type: "conflict", label: "Responsibility Hot Potato", desc: "Both deferred to each other. Users received disclaimers but no fix. The error persisted for 3 additional weeks.", mod: { integrity: -5, trust: -4, legitimacy: -3 } },
-    ]
-  }
-];
 
 // ─── GAME LOGIC ──────────────────────────────────────────
 function computeOutcome(crisis: any, decisions: any) {
@@ -409,13 +251,13 @@ function RoleCard({ role, isActive, isCompleted }: any) {
   );
 }
 
-export { ROLES, BUILT_IN_CRISES, computeOutcome };
+export { ROLES, ALL_SCENARIOS, computeOutcome };
 
 // ─── MAIN ────────────────────────────────────────────────
 export default function EpistemicCommonsV2({ onBack }: { onBack: () => void }) {
   const { t } = useTranslation();
   const [phase, setPhase] = useState("intro");
-  const [crises, setCrises] = useState([...BUILT_IN_CRISES, ...WORKSHOP_SCENARIOS]);
+  const [crises, setCrises] = useState([...ALL_SCENARIOS]);
   const [crisisIdx, setCrisisIdx] = useState(0);
   const [roleIdx, setRoleIdx] = useState(0);
   const [decisions, setDecisions] = useState<any>({});
@@ -690,9 +532,9 @@ textarea, input { font-family: 'DM Sans', sans-serif; }
 
   // ─── SELECT ────────────────────────────────
   if (phase === "select") {
-    const coreCrises = crises.slice(0, BUILT_IN_CRISES.length);
-    const workshopCrises = crises.slice(BUILT_IN_CRISES.length, BUILT_IN_CRISES.length + WORKSHOP_SCENARIOS.length);
-    const aiCrises = crises.slice(BUILT_IN_CRISES.length + WORKSHOP_SCENARIOS.length);
+    const coreCrises = crises.slice(0, CORE_SCENARIOS.length);
+    const workshopCrises = crises.slice(CORE_SCENARIOS.length, CORE_SCENARIOS.length + WORKSHOP_CRISIS_LIST.length);
+    const aiCrises = crises.slice(CORE_SCENARIOS.length + WORKSHOP_CRISIS_LIST.length);
     const workshopIds = workshopCrises.map((c: any) => c.id);
     const anyCompleted = completedIds.size > 0;
 

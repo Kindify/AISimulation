@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { useTranslatedCrisis } from "./useTranslatedCrisis";
-import { ROLES, BUILT_IN_CRISES, computeOutcome } from "./EpistemicCommons";
-import WORKSHOP_SCENARIOS from "./workshop-scenarios";
+import { ROLES, computeOutcome } from "./EpistemicCommons";
+import { ALL_SCENARIOS } from "./scenarios";
 import LanguageToggle from "./LanguageToggle";
 import { track } from "./analytics";
 
@@ -53,7 +53,7 @@ export default function QuickPlay({ onBack, onFullPlay }: Props) {
   const [feedbackSubmitted, setFeedbackSubmitted] = useState(false);
 
   const randomize = (isReroll = false) => {
-    const allCrises = [...BUILT_IN_CRISES, ...(WORKSHOP_SCENARIOS as any[])];
+    const allCrises = [...ALL_SCENARIOS];
     const randomCrisis = allCrises[Math.floor(Math.random() * allCrises.length)];
     const randomRole = ROLES[Math.floor(Math.random() * ROLES.length)];
     const others: any = {};

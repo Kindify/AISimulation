@@ -230,10 +230,26 @@
     "copyResult": "COPY RESULT TO SHARE"
   },
   "roles": {
-    "regulator": "The Regulator",
-    "platform": "The Platform",
-    "journalist": "The Journalist",
-    "ailab": "The AI Lab"
+    "regulator": {
+      "name": "The Regulator",
+      "role": "You set policy and have formal authority to act. Your objective is public safety and institutional credibility.",
+      "incentive": "Political pressure to act fast OR appear measured. Your legitimacy depends on due process, but the crisis won't wait for process."
+    },
+    "platform": {
+      "name": "The Platform",
+      "role": "You control content distribution and user access. Your objective is a safe, trustworthy platform ecosystem.",
+      "incentive": "Revenue depends on engagement and growth. Legal liability pushes toward caution. Acting alone while competitors don't costs you users."
+    },
+    "journalist": {
+      "name": "The Journalist",
+      "role": "You shape the public narrative through investigation and reporting. Your objective is informing the public accurately.",
+      "incentive": "Editorial pressure to publish fast and first. Competitor outlets are working the same story. Speed and accuracy pull in opposite directions."
+    },
+    "ailab": {
+      "name": "The AI Lab",
+      "role": "You develop the technology and hold unique technical knowledge. Your objective is responsible development and deployment.",
+      "incentive": "Transparency has competitive costs. Competitors who don't share safety findings gain an advantage. Legal exposure increases with disclosure."
+    }
   },
   "common": {
     "runAgain": "Run Simulation Again",

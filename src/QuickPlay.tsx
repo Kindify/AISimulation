@@ -179,15 +179,15 @@ export default function QuickPlay({ onBack, onFullPlay }: Props) {
               <div style={{ background: role.bg, border: `1px solid ${role.color}44`, borderRadius: 10, padding: "12px 14px", display: "inline-block", maxWidth: 200, textAlign: "left" as const }}>
                 <div style={{ display: "flex", alignItems: "center", gap: 6, marginBottom: 6 }}>
                   <span style={{ fontSize: 18 }}>{role.icon}</span>
-                  <div style={{ fontFamily: "'Space Mono', monospace", fontSize: 9, fontWeight: 700, color: role.color, letterSpacing: 1, whiteSpace: "nowrap" as const }}>{role.name}</div>
+                  <div style={{ fontFamily: "'Space Mono', monospace", fontSize: 9, fontWeight: 700, color: role.color, letterSpacing: 1, whiteSpace: "nowrap" as const }}>{t(`roles.${role.id}.name`, role.name)}</div>
                 </div>
                 <div style={{ marginBottom: 4 }}>
                   <div style={{ fontFamily: "'DM Mono', monospace", fontSize: 8, color: "#64748b", letterSpacing: 1, marginBottom: 2 }}>{t("quickPlay.yourRole")}</div>
-                  <div style={{ fontSize: 10, color: "#e2e8f0", lineHeight: 1.4 }}>{role.role}</div>
+                  <div style={{ fontSize: 10, color: "#e2e8f0", lineHeight: 1.4 }}>{t(`roles.${role.id}.role`, role.role)}</div>
                 </div>
                 <div>
                   <div style={{ fontFamily: "'DM Mono', monospace", fontSize: 8, color: "#f59e0b", letterSpacing: 1, marginBottom: 2 }}>{t("quickPlay.yourIncentives")}</div>
-                  <div style={{ fontSize: 10, color: "#94a3b8", lineHeight: 1.4 }}>{role.incentive}</div>
+                  <div style={{ fontSize: 10, color: "#94a3b8", lineHeight: 1.4 }}>{t(`roles.${role.id}.incentive`, role.incentive)}</div>
                 </div>
               </div>
             </div>
@@ -332,7 +332,7 @@ export default function QuickPlay({ onBack, onFullPlay }: Props) {
           <div>
             <div style={{ fontFamily: "'Space Mono', monospace", fontSize: 9, letterSpacing: 3, color: "#64748b", marginBottom: 6 }}>{t("quickPlay.crisisOutcome")}</div>
             <div style={{ fontFamily: "'Instrument Serif', serif", fontSize: 22, color: "#e2e8f0", marginBottom: 4 }}>{crisis.icon} {tc.title}</div>
-            <div style={{ fontFamily: "'DM Mono', monospace", fontSize: 11, color: "#64748b" }}>{t("quickPlay.yourRoleLabel")} <span style={{ color: role.color }}>{role.icon} {role.name}</span></div>
+            <div style={{ fontFamily: "'DM Mono', monospace", fontSize: 11, color: "#64748b" }}>{t("quickPlay.yourRoleLabel")} <span style={{ color: role.color }}>{role.icon} {t(`roles.${role.id}.name`, role.name)}</span></div>
           </div>
           <div style={{ textAlign: "right" as const, display: "flex", flexDirection: "column" as const, alignItems: "flex-end", gap: 8 }}>
             <LanguageToggle />
@@ -363,7 +363,7 @@ export default function QuickPlay({ onBack, onFullPlay }: Props) {
               >
                 <div style={{ display: "flex", alignItems: "center", gap: 6, marginBottom: 6 }}>
                   <span style={{ fontSize: 16 }}>{r.icon}</span>
-                  <span style={{ fontFamily: "'Space Mono', monospace", fontSize: 9, fontWeight: 700, color: r.color, letterSpacing: 1 }}>{r.name}</span>
+                  <span style={{ fontFamily: "'Space Mono', monospace", fontSize: 9, fontWeight: 700, color: r.color, letterSpacing: 1 }}>{t(`roles.${r.id}.name`, r.name)}</span>
                   {isMe && <span style={{ fontFamily: "'DM Mono', monospace", fontSize: 8, color: r.color, background: `${r.color}22`, padding: "1px 5px", borderRadius: 3, marginLeft: "auto" }}>{t("quickPlay.you")}</span>}
                 </div>
                 <div style={{ fontSize: 13, fontWeight: 700, color: "#e2e8f0", marginBottom: 4 }}>{opt ? (tc?.options?.[r.id]?.find((o: any) => o.id === decisionId)?.label ?? opt.label) : null}</div>
@@ -422,7 +422,7 @@ export default function QuickPlay({ onBack, onFullPlay }: Props) {
               <div>
                 <div style={{ fontFamily: "'DM Mono', monospace", fontSize: 9, color: "#64748b" }}>{t("quickPlay.quickPlayResult")}</div>
                 <div style={{ fontFamily: "'Instrument Serif', serif", fontSize: 16, color: "#e2e8f0", marginTop: 4 }}>{tc.title}</div>
-                <div style={{ fontFamily: "'DM Mono', monospace", fontSize: 11, color: role.color, marginTop: 2 }}>{role.icon} {role.name}</div>
+                <div style={{ fontFamily: "'DM Mono', monospace", fontSize: 11, color: role.color, marginTop: 2 }}>{role.icon} {t(`roles.${role.id}.name`, role.name)}</div>
               </div>
               <div style={{ fontFamily: "'Instrument Serif', serif", fontSize: 40, color: gc, lineHeight: 1 }}>{outcome.coordinationGrade}</div>
             </div>

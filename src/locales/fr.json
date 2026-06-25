@@ -230,10 +230,26 @@
     "copyResult": "COPIER LE RÉSULTAT POUR PARTAGER"
   },
   "roles": {
-    "regulator": "Le régulateur",
-    "platform": "La plateforme",
-    "journalist": "Le journaliste",
-    "ailab": "Le laboratoire d'IA"
+    "regulator": {
+      "name": "Le Régulateur",
+      "role": "Vous définissez la politique et avez l'autorité formelle d'agir. Votre objectif est la sécurité publique et la crédibilité institutionnelle.",
+      "incentive": "Pression politique pour agir vite OU paraître mesuré. Votre légitimité dépend du respect des procédures, mais la crise n'attend pas."
+    },
+    "platform": {
+      "name": "La Plateforme",
+      "role": "Vous contrôlez la distribution de contenu et l'accès des utilisateurs. Votre objectif est un écosystème de plateforme sûr et digne de confiance.",
+      "incentive": "Les revenus dépendent de l'engagement et de la croissance. La responsabilité juridique pousse à la prudence. Agir seul pendant que les concurrents ne le font pas vous coûte des utilisateurs."
+    },
+    "journalist": {
+      "name": "Le Journaliste",
+      "role": "Vous façonnez le récit public par l'investigation et le reportage. Votre objectif est d'informer le public avec précision.",
+      "incentive": "Pression éditoriale pour publier vite et en premier. Les médias concurrents travaillent sur la même histoire. Rapidité et exactitude tirent dans des directions opposées."
+    },
+    "ailab": {
+      "name": "Le Laboratoire d'IA",
+      "role": "Vous développez la technologie et détenez des connaissances techniques uniques. Votre objectif est un développement et un déploiement responsables.",
+      "incentive": "La transparence a un coût compétitif. Les concurrents qui ne partagent pas leurs résultats de sécurité prennent de l'avance. L'exposition juridique augmente avec la divulgation."
+    }
   },
   "common": {
     "runAgain": "Relancer la simulation",

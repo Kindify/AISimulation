@@ -241,7 +241,7 @@ function RoleCard({ role, isActive, isCompleted }: any) {
       <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
         <span style={{ fontSize: 20 }}>{role.icon}</span>
         <div>
-          <div style={{ fontFamily: "'Space Mono', monospace", fontSize: 10, fontWeight: 700, color: role.color, letterSpacing: 1 }}>{role.name}</div>
+          <div style={{ fontFamily: "'Space Mono', monospace", fontSize: 10, fontWeight: 700, color: role.color, letterSpacing: 1 }}>{t(`roles.${role.id}.name`, role.name)}</div>
           <div style={{ fontFamily: "'DM Mono', monospace", fontSize: 9, color: isCompleted ? "#10b981" : isActive ? role.color : "#64748b", marginTop: 1 }}>
             {isCompleted ? `✓ ${t("govGame.committed")}` : isActive ? `▸ ${t("govGame.yourTurn")}` : t("govGame.waiting")}
           </div>
@@ -507,15 +507,15 @@ textarea, input { font-family: 'DM Sans', sans-serif; }
                 <div key={r.id} style={{ background: r.bg, borderRadius: 8, padding: 14, border: `1px solid ${r.color}22` }}>
                   <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 8 }}>
                     <span style={{ fontSize: 18 }}>{r.icon}</span>
-                    <span style={{ fontFamily: "'Space Mono', monospace", fontSize: 10, fontWeight: 700, color: r.color, letterSpacing: 1 }}>{r.name}</span>
+                    <span style={{ fontFamily: "'Space Mono', monospace", fontSize: 10, fontWeight: 700, color: r.color, letterSpacing: 1 }}>{t(`roles.${r.id}.name`, r.name)}</span>
                   </div>
                   <div style={{ marginBottom: 6 }}>
                     <div style={{ fontFamily: "'DM Mono', monospace", fontSize: 9, color: "#64748b", letterSpacing: 1, marginBottom: 3 }}>{t("govGame.yourRole")}</div>
-                    <div style={{ fontSize: 11, color: "#e2e8f0", lineHeight: 1.4 }}>{r.role}</div>
+                    <div style={{ fontSize: 11, color: "#e2e8f0", lineHeight: 1.4 }}>{t(`roles.${r.id}.role`, r.role)}</div>
                   </div>
                   <div>
                     <div style={{ fontFamily: "'DM Mono', monospace", fontSize: 9, color: "#f59e0b", letterSpacing: 1, marginBottom: 3 }}>{t("govGame.yourIncentives")}</div>
-                    <div style={{ fontSize: 11, color: "#94a3b8", lineHeight: 1.4 }}>{r.incentive}</div>
+                    <div style={{ fontSize: 11, color: "#94a3b8", lineHeight: 1.4 }}>{t(`roles.${r.id}.incentive`, r.incentive)}</div>
                   </div>
                 </div>
               ))}
@@ -691,14 +691,14 @@ textarea, input { font-family: 'DM Sans', sans-serif; }
               <div style={{ display: "flex", alignItems: "flex-start", gap: 10 }}>
                 <span style={{ fontSize: 32, flexShrink: 0 }}>{role.icon}</span>
                 <div style={{ flex: 1 }}>
-                  <div style={{ fontFamily: "'Space Mono', monospace", fontSize: 12, fontWeight: 700, color: role.color, letterSpacing: 1, marginBottom: 8 }}>{role.name.toUpperCase()}</div>
+                  <div style={{ fontFamily: "'Space Mono', monospace", fontSize: 12, fontWeight: 700, color: role.color, letterSpacing: 1, marginBottom: 8 }}>{t(`roles.${role.id}.name`, role.name).toUpperCase()}</div>
                   <div style={{ marginBottom: 6 }}>
                     <div style={{ fontFamily: "'DM Mono', monospace", fontSize: 9, color: "#64748b", letterSpacing: 1, marginBottom: 3 }}>{t("govGame.yourRole")}</div>
-                    <div style={{ fontSize: 12, color: "#e2e8f0", lineHeight: 1.4 }}>{role.role}</div>
+                    <div style={{ fontSize: 12, color: "#e2e8f0", lineHeight: 1.4 }}>{t(`roles.${role.id}.role`, role.role)}</div>
                   </div>
                   <div>
                     <div style={{ fontFamily: "'DM Mono', monospace", fontSize: 9, color: "#f59e0b", letterSpacing: 1, marginBottom: 3 }}>{t("govGame.yourIncentives")}</div>
-                    <div style={{ fontSize: 12, color: "#94a3b8", lineHeight: 1.4 }}>{role.incentive}</div>
+                    <div style={{ fontSize: 12, color: "#94a3b8", lineHeight: 1.4 }}>{t(`roles.${role.id}.incentive`, role.incentive)}</div>
                   </div>
                 </div>
               </div>
@@ -759,7 +759,7 @@ textarea, input { font-family: 'DM Sans', sans-serif; }
                 <div key={r.id} style={{ background: "#141820", border: `1px solid ${r.color}22`, borderRadius: 10, padding: 14 }}>
                   <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 6 }}>
                     <span style={{ fontSize: 18 }}>{r.icon}</span>
-                    <span style={{ fontFamily: "'Space Mono', monospace", fontSize: 10, fontWeight: 700, color: r.color, letterSpacing: 1 }}>{r.name}</span>
+                    <span style={{ fontFamily: "'Space Mono', monospace", fontSize: 10, fontWeight: 700, color: r.color, letterSpacing: 1 }}>{t(`roles.${r.id}.name`, r.name)}</span>
                   </div>
                   <div style={{ fontSize: 13, fontWeight: 700, color: "#e2e8f0" }}>{opt ? (tc?.options?.[r.id]?.find((o: any) => o.id === opt.id)?.label ?? opt.label) : null}</div>
                   <span style={{ fontFamily: "'DM Mono', monospace", fontSize: 9, letterSpacing: 1, padding: "2px 6px", borderRadius: 3, marginTop: 4, display: "inline-block", background: opt?.stance === "transparent" ? "#10b98122" : opt?.stance === "restrictive" ? "#ef444422" : "#f59e0b22", color: opt?.stance === "transparent" ? "#10b981" : opt?.stance === "restrictive" ? "#ef4444" : "#f59e0b" }}>
@@ -832,7 +832,7 @@ textarea, input { font-family: 'DM Sans', sans-serif; }
               <div style={{ marginTop: 10 }}>
                 {ROLES.map(r => (
                   <div key={r.id} style={{ background: "#141820", border: `1px solid ${r.color}22`, borderRadius: 10, padding: 14, marginBottom: 8 }}>
-                    <div style={{ fontFamily: "'Space Mono', monospace", fontSize: 10, color: r.color, letterSpacing: 1, marginBottom: 8 }}>{r.icon} {r.name.toUpperCase()}</div>
+                    <div style={{ fontFamily: "'Space Mono', monospace", fontSize: 10, color: r.color, letterSpacing: 1, marginBottom: 8 }}>{r.icon} {t(`roles.${r.id}.name`, r.name).toUpperCase()}</div>
                     {crisis.roleIntel[r.id].bullets.map((b: string, i: number) => (
                       <p key={i} style={{ color: "#94a3b8", fontSize: 12, lineHeight: 1.5, marginBottom: 6, paddingLeft: 12, borderLeft: `2px solid ${r.color}33` }}>{tc?.roleIntel?.[r.id]?.bullets?.[i] ?? b}</p>
                     ))}

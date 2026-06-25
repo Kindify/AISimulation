@@ -749,7 +749,7 @@ textarea, input { font-family: 'DM Sans', sans-serif; }
           <div className="fade-up" style={{ background: "#141820", border: `1px solid ${gradeColor}33`, borderRadius: 12, padding: 28, marginBottom: 16, textAlign: "center" }}>
             <div style={{ fontFamily: "'Space Mono', monospace", fontSize: 10, letterSpacing: 3, color: "#64748b", marginBottom: 8 }}>{t("govGame.coordinationGrade")}</div>
             <div style={{ fontFamily: "'Instrument Serif', serif", fontSize: 72, fontWeight: 400, lineHeight: 1, color: gradeColor }}>{outcome.coordinationGrade}</div>
-            <p style={{ fontSize: 14, color: "#94a3b8", marginTop: 8 }}>{outcome.coordinationDesc}</p>
+            <p style={{ fontSize: 14, color: "#94a3b8", marginTop: 8 }}>{t(`grades.${outcome.coordinationGrade}`, outcome.coordinationDesc)}</p>
           </div>
 
           <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12, marginBottom: 16 }}>
@@ -803,14 +803,14 @@ textarea, input { font-family: 'DM Sans', sans-serif; }
                       <span style={{ fontFamily: "'Space Mono', monospace", fontSize: 10, fontWeight: 700, color: cf.roleColor }}>{cf.roleName}</span>
                     </div>
                     <p style={{ color: "#e2e8f0", fontSize: 13, marginBottom: 4 }}>
-                      If they had chosen <strong style={{ color: cf.roleColor }}>{tc?.options?.[cf.roleId]?.find((o: any) => o.id === cf.toOptId)?.label ?? cf.toLabel}</strong> instead of <span style={{ color: "#64748b" }}>{tc?.options?.[cf.roleId]?.find((o: any) => o.id === cf.fromOptId)?.label ?? cf.fromLabel}</span>:
+                      {t("counterfactual.ifChosen")} <strong style={{ color: cf.roleColor }}>{tc?.options?.[cf.roleId]?.find((o: any) => o.id === cf.toOptId)?.label ?? cf.toLabel}</strong> {t("counterfactual.insteadOf")} <span style={{ color: "#64748b" }}>{tc?.options?.[cf.roleId]?.find((o: any) => o.id === cf.fromOptId)?.label ?? cf.fromLabel}</span>:
                     </p>
                     <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
                       <span style={{ fontFamily: "'Space Mono', monospace", fontSize: 16, fontWeight: 700, color: "#10b981" }}>
-                        +{cf.diff} overall
+                        +{cf.diff} {t("counterfactual.overall")}
                       </span>
                       <span style={{ fontFamily: "'DM Mono', monospace", fontSize: 10, color: "#64748b" }}>
-                        Grade: {outcome.coordinationGrade} → {cf.newGrade}
+                        {t("counterfactual.gradeChange")}: {outcome.coordinationGrade} → {cf.newGrade}
                       </span>
                     </div>
                   </div>
@@ -869,11 +869,11 @@ textarea, input { font-family: 'DM Sans', sans-serif; }
     const overallGrade = avgGradeVal >= 3.75 ? "A" : avgGradeVal >= 3.25 ? "A-" : avgGradeVal >= 2.75 ? "B" : avgGradeVal >= 2.25 ? "B-" : avgGradeVal >= 1.75 ? "C" : avgGradeVal >= 1.25 ? "C-" : avgGradeVal >= 0.75 ? "D" : avgGradeVal >= 0.25 ? "D-" : "F";
     const gradeColor: any = { A: "#10b981", "A-": "#10b981", B: "#06b6d4", "B-": "#06b6d4", C: "#f59e0b", "C-": "#f59e0b", D: "#f97316", "D-": "#f97316", F: "#ef4444" }[overallGrade] || "#64748b";
 
-    let archetype, archetypeDesc;
-    if (overallGrade === "A") { archetype = "The Aligned Ecosystem"; archetypeDesc = "Your institutions found ways to reinforce each other. This is the aspiration of multi-stakeholder governance — achieved in practice by very few systems. The key factor wasn't any single actor's wisdom, but the communication architecture between them."; }
-    else if (overallGrade === "B") { archetype = "The Imperfect Coalition"; archetypeDesc = "More synergies than conflicts, but gaps remain. This mirrors most successful real-world governance — functional but fragile, with success depending on informal relationships rather than structural design."; }
-    else if (overallGrade === "C") { archetype = "The Fog of Governance"; archetypeDesc = "Actions occurred in parallel but didn't compose. Each institution did something reasonable in isolation, but the collective effect was incoherent. This is the default state of AI governance today."; }
-    else { archetype = "The Institutional Fragmentation"; archetypeDesc = "Your institutions actively undermined each other. Actions that made sense from one perspective created cascading problems from another — precisely the failure mode that asymmetric information produces under time pressure."; }
+    let archetype, archetypeDesc, archetypeKey: string;
+    if (overallGrade === "A" || overallGrade === "A-") { archetypeKey = "aligned"; archetype = "The Aligned Ecosystem"; archetypeDesc = "Your institutions found ways to reinforce each other. This is the aspiration of multi-stakeholder governance — achieved in practice by very few systems. The key factor wasn't any single actor's wisdom, but the communication architecture between them."; }
+    else if (overallGrade === "B" || overallGrade === "B-") { archetypeKey = "imperfect"; archetype = "The Imperfect Coalition"; archetypeDesc = "More synergies than conflicts, but gaps remain. This mirrors most successful real-world governance — functional but fragile, with success depending on informal relationships rather than structural design."; }
+    else if (overallGrade === "C" || overallGrade === "C-") { archetypeKey = "fog"; archetype = "The Fog of Governance"; archetypeDesc = "Actions occurred in parallel but didn't compose. Each institution did something reasonable in isolation, but the collective effect was incoherent. This is the default state of AI governance today."; }
+    else { archetypeKey = "fragmentation"; archetype = "The Institutional Fragmentation"; archetypeDesc = "Your institutions actively undermined each other. Actions that made sense from one perspective created cascading problems from another — precisely the failure mode that asymmetric information produces under time pressure."; }
 
     const totalSynergies = outcomes.reduce((s: number, o: any) => s + o.triggeredInteractions.filter((i: any) => i.type === "synergy").length, 0);
     const totalConflicts = outcomes.reduce((s: number, o: any) => s + o.triggeredInteractions.filter((i: any) => i.type === "conflict").length, 0);
@@ -885,8 +885,8 @@ textarea, input { font-family: 'DM Sans', sans-serif; }
             <div style={{ fontFamily: "'Space Mono', monospace", fontSize: 10, letterSpacing: 3, color: gradeColor, marginBottom: 8 }}>
               {t("govGame.simulationOutcome")} — {grades.length} {t("govGame.of")} {crises.length} {t("govGame.scenariosPlayed")}
             </div>
-            <h2 style={{ fontFamily: "'Instrument Serif', serif", fontSize: 32, fontWeight: 400, color: gradeColor, marginBottom: 12 }}>{archetype}</h2>
-            <p style={{ color: "#94a3b8", lineHeight: 1.7, fontSize: 14 }}>{archetypeDesc}</p>
+            <h2 style={{ fontFamily: "'Instrument Serif', serif", fontSize: 32, fontWeight: 400, color: gradeColor, marginBottom: 12 }}>{t(`archetypes.${archetypeKey}.name`, archetype)}</h2>
+            <p style={{ color: "#94a3b8", lineHeight: 1.7, fontSize: 14 }}>{t(`archetypes.${archetypeKey}.desc`, archetypeDesc)}</p>
           </div>
 
           <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: 12, marginBottom: 20 }}>

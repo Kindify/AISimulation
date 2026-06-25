@@ -195,7 +195,8 @@
     "asymmetricInfo": "plusieurs acteurs confrontés à une asymétrie de l'information (chaque entité détient des données exclusives)",
     "scoringNote_synergy": "synergie",
     "scoringNote_conflict": "conflit",
-    "scoringNote_grade": "note de coordination"
+    "scoringNote_grade": "note de coordination",
+    "of": "sur"
   },
   "metrics": {
     "integrity": "Intégrité de l'information",
@@ -238,6 +239,41 @@
     "runAgain": "Relancer la simulation",
     "playNow": "JOUER MAINTENANT",
     "backToHome": "Retour à l'accueil"
+  },
+  "grades": {
+    "A": "Coordination exceptionnelle. Les acteurs institutionnels se sont renforcés mutuellement et l'impact collectif a été fortement positif.",
+    "A-": "Forte coordination avec de bons résultats. Des lacunes mineures mais une efficacité globale élevée.",
+    "B": "Coordination positive. Plus de synergies que de conflits, bien que certains dommages se soient accumulés.",
+    "B-": "Coordination modérée. Intention positive mais résultats collectifs mitigés.",
+    "C": "Action isolée. Chaque institution a agi indépendamment. Les résultats reflètent des choix individuels, pas de la coordination.",
+    "C-": "Coordination faible avec dérive négative. L'action indépendante a produit de mauvais résultats collectifs.",
+    "D": "Coordination médiocre. Les actions ont principalement travaillé les unes contre les autres.",
+    "D-": "Très mauvaise coordination. Conflits institutionnels significatifs avec des résultats dommageables.",
+    "F": "Échec de coordination. Les actions se sont activement sapées mutuellement avec des conséquences graves."
+  },
+  "archetypes": {
+    "aligned": {
+      "name": "L'écosystème aligné",
+      "desc": "Vos institutions ont trouvé des moyens de se renforcer mutuellement. C'est l'aspiration de la gouvernance multipartite, réalisée en pratique par très peu de systèmes. Le facteur clé n'était pas la sagesse d'un acteur unique, mais l'architecture de communication entre eux."
+    },
+    "imperfect": {
+      "name": "La coalition imparfaite",
+      "desc": "Plus de synergies que de conflits, mais des lacunes persistent. Cela reflète la plupart des gouvernances réelles réussies : fonctionnelles mais fragiles, le succès dépendant de relations informelles plutôt que de conception structurelle."
+    },
+    "fog": {
+      "name": "Le brouillard de la gouvernance",
+      "desc": "Les actions se sont déroulées en parallèle sans se composer. Chaque institution a fait quelque chose de raisonnable isolément, mais l'effet collectif était incohérent. C'est l'état par défaut de la gouvernance de l'IA aujourd'hui."
+    },
+    "fragmentation": {
+      "name": "La fragmentation institutionnelle",
+      "desc": "Vos institutions se sont activement sapées mutuellement. Des actions qui avaient du sens d'un point de vue ont créé des problèmes en cascade d'un autre, précisément le mode de défaillance que l'information asymétrique produit sous pression temporelle."
+    }
+  },
+  "counterfactual": {
+    "ifChosen": "S'ils avaient choisi",
+    "insteadOf": "au lieu de",
+    "overall": "global",
+    "gradeChange": "Note"
   },
   "scenarios": {
 "synthetic_candidate": {

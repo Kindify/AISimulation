@@ -178,6 +178,7 @@
     "hideIntel": "HIDE ALL PRIVATE INTELLIGENCE",
     "simulationOutcome": "SIMULATION OUTCOME",
     "scenariosPlayed": "SCENARIOS PLAYED",
+    "of": "of",
     "overallGrade": "OVERALL GRADE",
     "synergies": "SYNERGIES",
     "conflicts": "CONFLICTS",
@@ -238,5 +239,40 @@
     "runAgain": "Run Simulation Again",
     "playNow": "PLAY NOW",
     "backToHome": "Back to home"
+  },
+  "grades": {
+    "A": "Exceptional coordination. Institutional actors reinforced each other and collective impact was strongly positive.",
+    "A-": "Strong coordination with good outcomes. Minor gaps but overall highly effective.",
+    "B": "Positive coordination. More synergies than conflicts, though some damage accumulated.",
+    "B-": "Moderate coordination. Positive intent but mixed collective outcomes.",
+    "C": "Isolated action. Each institution acted independently. Outcomes reflect individual choices, not coordination.",
+    "C-": "Weak coordination with negative drift. Independent action produced poor collective results.",
+    "D": "Poor coordination. Actions mostly worked against each other.",
+    "D-": "Very poor coordination. Significant institutional conflicts with damaging outcomes.",
+    "F": "Coordination failure. Actions actively undermined each other with severe consequences."
+  },
+  "archetypes": {
+    "aligned": {
+      "name": "The Aligned Ecosystem",
+      "desc": "Your institutions found ways to reinforce each other. This is the aspiration of multi-stakeholder governance, achieved in practice by very few systems. The key factor wasn't any single actor's wisdom, but the communication architecture between them."
+    },
+    "imperfect": {
+      "name": "The Imperfect Coalition",
+      "desc": "More synergies than conflicts, but gaps remain. This mirrors most successful real-world governance, functional but fragile, with success depending on informal relationships rather than structural design."
+    },
+    "fog": {
+      "name": "The Fog of Governance",
+      "desc": "Actions occurred in parallel but didn't compose. Each institution did something reasonable in isolation, but the collective effect was incoherent. This is the default state of AI governance today."
+    },
+    "fragmentation": {
+      "name": "The Institutional Fragmentation",
+      "desc": "Your institutions actively undermined each other. Actions that made sense from one perspective created cascading problems from another, precisely the failure mode that asymmetric information produces under time pressure."
+    }
+  },
+  "counterfactual": {
+    "ifChosen": "If they had chosen",
+    "insteadOf": "instead of",
+    "overall": "overall",
+    "gradeChange": "Grade"
   }
 }

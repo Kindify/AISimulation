@@ -292,576 +292,855 @@
     "gradeChange": "Note"
   },
   "scenarios": {
-"synthetic_candidate": {
-"title": "Le candidat synthétique",
-"category": "INTÉGRITÉ ÉLECTORALE",
-"publicBriefing": "Une vidéo hyper-réaliste d'un candidat à la mairie tenant des propos incendiaires fait surface 5 jours avant le scrutin. Elle a été vue 8 millions de fois en 12 heures. L'équipe du candidat a nié ces déclarations mais n'a fourni aucune preuve technique. La confusion publique s'amplifie rapidement.",
-"stakes": "Le résultat d'une élection pourrait dépendre de la crédibilité accordée à cette vidéo.",
-"designNote": "Ce scénario teste la coordination sous pression temporelle extrême avec des enjeux politiques élevés. La tension centrale : chaque acteur détient une pièce du puzzle, mais le partage d'information a un coût propre à chaque position.",
-"roleIntel": {
-"regulator": {
-"classification": "CONFIDENTIEL — ÉVALUATION RÉGLEMENTAIRE",
-"bullets": [
-"Les lois actuelles sur l'intégrité électorale ne traitent pas spécifiquement du contenu généré par l'IA. Aucun précédent juridique n'existe pour exiger un retrait.",
-"La cote de confiance de votre agence a chuté de 11 points ce trimestre après qu'une intervention précédente a été perçue comme partisane.",
-"Sondage interne : 34 % des électeurs ont déjà vu la vidéo. Parmi eux, 61 % croient qu'elle est authentique.",
-"La campagne adverse exige publiquement que vous agissiez. L'inaction sera présentée comme de la complicité."
-]
-},
-"platform": {
-"classification": "INTERNE — ÉQUIPE D'INTÉGRITÉ DU CONTENU",
-"bullets": [
-"Les systèmes de détection automatisés estiment la vidéo comme synthétique à 87 %, mais ce modèle a un taux de faux positifs de 12 % sur le contenu politique.",
-"La vidéo est partagée à un rythme de 420 partages par minute sur votre plateforme, avec 74 % des repartages accompagnés de commentaires comme « Je le savais ».",
-"Retirer la vidéo déclenchera immédiatement des accusations d'ingérence électorale de la part de plusieurs factions politiques.",
-"Trois plateformes concurrentes ne l'ont pas retirée. Si vous agissez seul, le trafic migre et la vidéo se propage quand même."
-]
-},
-"journalist": {
-"classification": "ÉDITORIAL — BRIEFING DES SOURCES",
-"bullets": [
-"Votre équipe d'analyse médico-légale peut produire une évaluation définitive de l'authenticité, mais elle a besoin d'au moins 72 heures.",
-"Un ancien employé d'un laboratoire d'IA vous a contacté en affirmant connaître la méthode de génération, mais il insiste sur l'anonymat.",
-"Votre rédacteur en chef pousse pour publier dans les 6 heures. Un média concurrent prépare un article présentant la vidéo comme authentique.",
-"Publier trop tôt avec des réserves amplifie quand même la vidéo. Attendre trop longtemps signifie que le concurrent définit le récit."
-]
-},
-"ailab": {
-"classification": "INTERNE — ÉVALUATION TECHNIQUE",
-"bullets": [
-"La signature de génération de la vidéo correspond à un modèle ajusté sur votre architecture. Forte probabilité que vos outils aient été utilisés via l'API.",
-"Vous disposez d'un outil de détection capable d'identifier cette méthode de génération avec 97 % de précision, mais le diffuser révèle votre architecture propriétaire.",
-"Votre équipe juridique avertit que toute déclaration publique pourrait être interprétée comme un aveu de responsabilité.",
-"Une divulgation privée au régulateur et à la plateforme les aiderait à agir, mais crée une trace documentaire exploitable par les concurrents et les plaignants."
-]
-}
-},
-"options": {
-"regulator": [
-{
-"id": "reg_advisory",
-"label": "Émettre un avis public",
-"detail": "Publier un avis formel qualifiant la vidéo de « contenu suspecté d'être généré par l'IA » selon les indicateurs disponibles.",
-"tension": "Transparence vs. crédibilité. Agir sur des preuves incomplètes risque votre autorité si vous avez tort."
-},
-{
-"id": "reg_mandate",
-"label": "Examen d'urgence des plateformes",
-"detail": "Invoquer l'autorité d'urgence pour obliger les plateformes à examiner et étiqueter le contenu dans les 24 heures.",
-"tension": "Action décisive vs. précédent. Les pouvoirs d'urgence envoient un message, mais créent un standard que d'autres peuvent exploiter."
-},
-{
-"id": "reg_wait",
-"label": "Attendre les preuves formelles",
-"detail": "Annoncer qu'une enquête est en cours mais ne prendre aucune mesure tant que les preuves médico-légales ne sont pas disponibles.",
-"tension": "Processus vs. pertinence. La procédure appropriée prend du temps que la situation n'a peut-être pas."
-}
-],
-"platform": [
-{
-"id": "plat_remove",
-"label": "Retirer la vidéo",
-"detail": "Supprimer la vidéo en se basant sur la confiance de détection synthétique de 87 %.",
-"tension": "Stopper la diffusion vs. supprimer la parole. Votre détection n'est pas parfaite et l'élection est dans quelques jours."
-},
-{
-"id": "plat_label",
-"label": "Ajouter une étiquette contextuelle",
-"detail": "Ajouter un interstitiel : « Les systèmes automatisés ont signalé ce contenu pour examen. »",
-"tension": "Ajouter du contexte vs. éditorialiser. Une étiquette change la perception du contenu, en bien ou en mal."
-},
-{
-"id": "plat_none",
-"label": "Maintenir la politique actuelle",
-"detail": "Laisser les mécanismes de signalement existants des utilisateurs gérer la situation.",
-"tension": "Neutralité de la plateforme vs. amplification passive. Ne pas agir est en soi un choix avec des conséquences."
-}
-],
-"journalist": [
-{
-"id": "jour_break",
-"label": "Publier immédiatement",
-"detail": "Diffuser l'article maintenant : « Des experts soulèvent de sérieuses questions sur la vidéo du candidat. »",
-"tension": "Être le premier vs. avoir raison. Publier sensibilise le public mais vos preuves sont incomplètes."
-},
-{
-"id": "jour_wait",
-"label": "Attendre l'analyse médico-légale",
-"detail": "Reporter l'article de 72 heures jusqu'à ce que votre équipe fournisse une analyse définitive.",
-"tension": "Rigueur vs. timing. La preuve définitive prend du temps, mais le récit se construit maintenant."
-},
-{
-"id": "jour_source",
-"label": "Publier avec une source anonyme",
-"detail": "Diffuser l'article en citant l'ancien employé anonyme du laboratoire.",
-"tension": "Rapidité vs. vérification. Le témoignage d'un initié est plus rapide que l'analyse médico-légale mais plus difficile à défendre."
-}
-],
-"ailab": [
-{
-"id": "lab_public",
-"label": "Publier l'outil de détection",
-"detail": "Rendre l'outil de détection disponible en libre accès pour que quiconque puisse vérifier.",
-"tension": "Transparence totale vs. exposition compétitive. Diffuser vos outils aide tout le monde, y compris vos concurrents."
-},
-{
-"id": "lab_private",
-"label": "Divulgation privée",
-"detail": "Partager confidentiellement les résultats de détection avec le régulateur et la plateforme.",
-"tension": "Aide ciblée vs. responsabilité limitée. Le partage privé aide la réponse mais évite l'examen public."
-},
-{
-"id": "lab_silent",
-"label": "Émettre une déclaration générale",
-"detail": "Publier un avis générique sur les risques liés aux médias synthétiques sans faire référence à cette vidéo spécifique.",
-"tension": "Sécurité juridique vs. responsabilité publique. Protéger l'entreprise laisse le public sans réponses."
-}
-]
-},
-"interactions": [
-{ "label": "Transparence renforcée", "desc": "L'avis gouvernemental combiné à l'étiquette de la plateforme a créé un signal cohérent et crédible. Le public a reçu le même message de deux autorités indépendantes, un alignement institutionnel rare." },
-{ "label": "Action fondée sur les preuves", "desc": "L'avis a gagné en crédibilité immédiate lorsque l'outil de détection l'a confirmé. Un cas exemplaire de coordination institutionnelle en temps réel." },
-{ "label": "Récit de censure", "desc": "Le retrait ordonné par le gouvernement a déclenché une réaction massive. La vidéo est devenue un symbole de l'excès institutionnel et s'est propagée sur les plateformes alternatives." },
-{ "label": "Vide de coordination", "desc": "Sans aucun acteur institutionnel prêt à bouger le premier, le vide informationnel a été comblé par des interprètes partisans. La vidéo a été traitée comme authentique par défaut." },
-{ "label": "Reportage vérifié", "desc": "La patience du journaliste a porté ses fruits. L'outil de détection ouvert a fourni des preuves définitives pour un article d'investigation de référence publié avant le jour du scrutin." },
-{ "label": "Spéculation sans preuves", "desc": "L'article publié a soulevé des questions mais le silence du laboratoire a fait que personne ne pouvait y répondre. La spéculation a comblé le vide." },
-{ "label": "Signaux convergents", "desc": "Les étiquettes de la plateforme combinées au reportage avec source anonyme ont créé suffisamment de doute pour ralentir l'influence de la vidéo, bien qu'aucun des deux ne soit définitif seul." }
-]
-},
-"invisible_epidemic": {
-"title": "L'épidémie invisible",
-"category": "SANTÉ PUBLIQUE × SÉCURITÉ DE L'IA",
-"publicBriefing": "Des rapports sur les réseaux sociaux signalent qu'un chatbot de santé alimenté par l'IA, utilisé par 4 millions de personnes, pourrait avoir fourni des informations de dosage subtilement incorrectes pour un médicament courant contre l'hypertension. Trois hospitalisations ont été vaguement liées mais aucune enquête officielle n'a été ouverte. La société mère du chatbot n'a pas commenté.",
-"stakes": "Des dizaines de milliers de personnes pourraient être touchées. Mais une fausse alerte pourrait détruire la confiance du public dans les outils de santé par IA dont des millions de personnes dépendent quotidiennement.",
-"designNote": "Ce scénario teste la tension entre l'action préventive et la réponse fondée sur les preuves. La dynamique de dissimulation entre la plateforme et le laboratoire est le piège de coordination principal.",
-"roleIntel": {
-"regulator": {
-"classification": "CONFIDENTIEL — EXAMEN DE SÉCURITÉ SANITAIRE",
-"bullets": [
-"Vous avez reçu 7 rapports d'effets indésirables en 3 semaines, au-dessus de la ligne de base mais en dessous du seuil qui déclenche habituellement un examen d'urgence.",
-"Votre arriéré d'enquêtes est de 14 mois. L'autorité d'urgence exige une détermination formelle de « menace imminente » pour laquelle vous manquez de preuves.",
-"L'industrie pharmaceutique fait du lobbying contre un moratoire général sur les outils de santé par IA, arguant que cela ferait reculer la télémédecine de plusieurs années.",
-"Une note interne ayant fuité suggère que votre agence était au courant des préoccupations sur la précision du chatbot il y a 6 mois mais a dépriorisé l'examen."
-]
-},
-"platform": {
-"classification": "INTERNE — EXAMEN DE SÉCURITÉ DU PRODUIT",
-"bullets": [
-"Vous hébergez le chatbot. Analyse interne : 89 000 requêtes de dosage pour ce médicament le mois dernier. Satisfaction des utilisateurs : 4,7/5 étoiles.",
-"Votre équipe de confiance et sécurité a identifié l'écart de dosage il y a 10 jours. Un correctif a été développé mais le déployer confirme implicitement que l'erreur existait.",
-"Le chatbot a une base d'utilisateurs disproportionnée parmi les patients âgés et les personnes non anglophones qui disposent de moins de sources d'information alternatives.",
-"Votre équipe juridique : une divulgation proactive pourrait déclencher un recours collectif. Exposition estimée à la responsabilité : 200 M$ à 800 M$."
-]
-},
-"journalist": {
-"classification": "ÉDITORIAL — BRIEFING D'ENQUÊTE",
-"bullets": [
-"Vous avez interviewé 4 patients ayant subi des effets indésirables compatibles avec un dosage incorrect. Deux ont nécessité une hospitalisation.",
-"Une source au sein de la société de la plateforme a partagé des messages Slack internes montrant que les ingénieurs ont discuté de l'erreur il y a des semaines.",
-"Les données d'admission hospitalière pour les crises hypertensives dans les régions à forte adoption du chatbot sont en hausse de 23 %, un résultat suggestif mais non concluant.",
-"Votre rédacteur en chef veut l'article dans 48 heures. Un concurrent prépare un article élogieux sur « le miracle de la santé par IA » qui pourrait immuniser l'entreprise."
-]
-},
-"ailab": {
-"classification": "INTERNE — ÉVALUATION DU MODÈLE",
-"bullets": [
-"Votre modèle de base alimente les réponses médicales du chatbot. Les tests internes ont confirmé l'erreur de dosage il y a 3 semaines. Elle provient de données d'entraînement contradictoires.",
-"Un correctif est prêt et testé. Le déployer silencieusement corrige le problème mais confirme que votre modèle en était la source.",
-"Vos conditions d'utilisation de l'API placent la responsabilité sur le déployeur (la plateforme), pas sur vous. Mais en termes de réputation, cette distinction ne tiendra pas.",
-"Deux autres chatbots de santé construits sur votre API pourraient avoir des problèmes similaires. Vous ne les avez pas encore testés."
-]
-}
-},
-"options": {
-"regulator": [
-{
-"id": "reg_emergency",
-"label": "Déclarer une menace imminente",
-"detail": "Invoquer les pouvoirs d'urgence pour ordonner la suspension du chatbot en attendant l'enquête.",
-"tension": "Action préventive vs. autorité juridique. Les preuves pourraient ne pas atteindre le seuil que vos pouvoirs exigent."
-},
-{
-"id": "reg_advisory2",
-"label": "Émettre un avis de sécurité",
-"detail": "Publier un avis public recommandant aux utilisateurs de vérifier les conseils de santé de l'IA auprès de leur médecin.",
-"tension": "Réponse mesurée vs. portée. Un avis est défendable mais pourrait ne pas atteindre les utilisateurs les plus vulnérables."
-},
-{
-"id": "reg_investigate",
-"label": "Lancer une enquête formelle",
-"detail": "Ouvrir un processus d'enquête standard.",
-"tension": "Procédure régulière vs. préjudice continu. Une enquête appropriée protège la légitimité mais prend des mois."
-}
-],
-"platform": [
-{
-"id": "plat_suspend",
-"label": "Suspendre le chatbot",
-"detail": "Mettre le chatbot hors ligne immédiatement avec une déclaration publique.",
-"tension": "Protection des utilisateurs vs. exposition à la responsabilité. Confirmer le problème publiquement ouvre des portes juridiques et réputationnelles."
-},
-{
-"id": "plat_silent_patch",
-"label": "Déployer un correctif silencieux",
-"detail": "Corriger l'erreur de dosage sans en informer le public.",
-"tension": "Corriger le problème vs. le cacher. Les utilisateurs sont protégés à l'avenir mais les dommages passés ne sont pas traités."
-},
-{
-"id": "plat_disclaim",
-"label": "Ajouter une couche d'avertissement",
-"detail": "Ajouter des avertissements visibles à toutes les réponses médicales : « Ceci n'est pas un avis médical. »",
-"tension": "Gestion de la responsabilité vs. sécurité réelle. Les avertissements transfèrent la responsabilité sans corriger le problème sous-jacent."
-}
-],
-"journalist": [
-{
-"id": "jour_investigate2",
-"label": "Publier l'enquête complète",
-"detail": "Diffuser l'article avec les témoignages de patients, les données hospitalières et les messages Slack internes.",
-"tension": "Vérité exhaustive vs. risque narratif. Une enquête complète est rigoureuse mais l'entreprise contestera chaque détail."
-},
-{
-"id": "jour_tip",
-"label": "Alerter le régulateur",
-"detail": "Partager vos preuves avec l'agence de réglementation avant de publier.",
-"tension": "Renforcer le régulateur vs. perdre le scoop. Partager les preuves aide la réponse mais un concurrent pourrait publier en premier."
-},
-{
-"id": "jour_sensational",
-"label": "Publier un titre alarmiste",
-"detail": "Titre de une : « Un chatbot IA pourrait empoisonner des patients. »",
-"tension": "Forcer l'action vs. provoquer la panique. Un titre alarmiste mobilise les institutions mais pourrait nuire aux personnes que vous essayez de protéger."
-}
-],
-"ailab": [
-{
-"id": "lab_full_disclosure",
-"label": "Divulgation publique complète",
-"detail": "Publier un rapport de transparence reconnaissant le conflit dans les données d'entraînement, détaillant les systèmes affectés et diffusant le correctif.",
-"tension": "Transparence exemplaire vs. coût compétitif et juridique. La divulgation complète aide tout le monde mais vous expose le plus."
-},
-{
-"id": "lab_quiet_fix",
-"label": "Corriger silencieusement via l'API",
-"detail": "Pousser le correctif via l'API pour que tous les chatbots en aval soient corrigés silencieusement.",
-"tension": "Protection silencieuse vs. responsabilité cachée. Le correctif fonctionne mais la faille n'est jamais examinée."
-},
-{
-"id": "lab_downstream",
-"label": "Notifier uniquement les déployeurs",
-"detail": "Alerter la plateforme et les autres clients API du problème et fournir le correctif en privé.",
-"tension": "Responsabilité distribuée vs. sensibilisation retardée. Les déployeurs reçoivent le correctif mais le public ignore qu'il y avait un problème."
-}
-]
-},
-"interactions": [
-{ "label": "Responsabilité coordonnée", "desc": "La suspension de la plateforme combinée au rapport de transparence du laboratoire a créé un modèle de réponse responsable aux incidents liés à l'IA. Les deux ont subi des revers mais la confiance dans l'écosystème a augmenté." },
-{ "label": "La dissimulation", "desc": "Les deux ont corrigé silencieusement le problème. Quand le journaliste a fini par publier l'histoire, la dissimulation est devenue le scandale, pire que l'erreur initiale." },
-{ "label": "Cascade de panique", "desc": "La déclaration d'urgence combinée au titre sensationnel a poussé 340 000 utilisateurs à arrêter brusquement leur médicament. La hausse des urgences a largement dépassé l'erreur initiale du chatbot." },
-{ "label": "Réponse éclairée", "desc": "L'avis mesuré a dirigé les gens vers leurs médecins tandis que l'enquête journalistique a fourni la base factuelle. Réponse informée sans panique." },
-{ "label": "Pipeline journalisme-réglementation", "desc": "L'alerte du journaliste a donné au régulateur une longueur d'avance, permettant un avis plus rapide et mieux informé. L'enquête publiée ensuite a été renforcée par la validation officielle." },
-{ "label": "La patate chaude", "desc": "La plateforme et le laboratoire ont chacun renvoyé la balle à l'autre. Les utilisateurs ont reçu des avertissements mais pas de correctif. L'erreur a persisté 3 semaines de plus." }
-]
-},
+    "synthetic_candidate": {
+      "title": "Le candidat synthétique",
+      "category": "INTÉGRITÉ ÉLECTORALE",
+      "publicBriefing": "Une vidéo hyper-réaliste d'un candidat à la mairie tenant des propos incendiaires fait surface 5 jours avant le scrutin. Elle a été vue 8 millions de fois en 12 heures. L'équipe du candidat a nié ces déclarations mais n'a fourni aucune preuve technique. La confusion publique s'amplifie rapidement.",
+      "stakes": "Le résultat d'une élection pourrait dépendre de la crédibilité accordée à cette vidéo.",
+      "designNote": "Ce scénario teste la coordination sous pression temporelle extrême avec des enjeux politiques élevés. La tension centrale : chaque acteur détient une pièce du puzzle, mais le partage d'information a un coût propre à chaque position.",
+      "roleIntel": {
+        "regulator": {
+          "classification": "CONFIDENTIEL — ÉVALUATION RÉGLEMENTAIRE",
+          "bullets": [
+            "Les lois actuelles sur l'intégrité électorale ne traitent pas spécifiquement du contenu généré par l'IA. Aucun précédent juridique n'existe pour exiger un retrait.",
+            "La cote de confiance de votre agence a chuté de 11 points ce trimestre après qu'une intervention précédente a été perçue comme partisane.",
+            "Sondage interne : 34 % des électeurs ont déjà vu la vidéo. Parmi eux, 61 % croient qu'elle est authentique.",
+            "La campagne adverse exige publiquement que vous agissiez. L'inaction sera présentée comme de la complicité."
+          ]
+        },
+        "platform": {
+          "classification": "INTERNE — ÉQUIPE D'INTÉGRITÉ DU CONTENU",
+          "bullets": [
+            "Les systèmes de détection automatisés estiment la vidéo comme synthétique à 87 %, mais ce modèle a un taux de faux positifs de 12 % sur le contenu politique.",
+            "La vidéo est partagée à un rythme de 420 partages par minute sur votre plateforme, avec 74 % des repartages accompagnés de commentaires comme « Je le savais ».",
+            "Retirer la vidéo déclenchera immédiatement des accusations d'ingérence électorale de la part de plusieurs factions politiques.",
+            "Trois plateformes concurrentes ne l'ont pas retirée. Si vous agissez seul, le trafic migre et la vidéo se propage quand même."
+          ]
+        },
+        "journalist": {
+          "classification": "ÉDITORIAL — BRIEFING DES SOURCES",
+          "bullets": [
+            "Votre équipe d'analyse médico-légale peut produire une évaluation définitive de l'authenticité, mais elle a besoin d'au moins 72 heures.",
+            "Un ancien employé d'un laboratoire d'IA vous a contacté en affirmant connaître la méthode de génération, mais il insiste sur l'anonymat.",
+            "Votre rédacteur en chef pousse pour publier dans les 6 heures. Un média concurrent prépare un article présentant la vidéo comme authentique.",
+            "Publier trop tôt avec des réserves amplifie quand même la vidéo. Attendre trop longtemps signifie que le concurrent définit le récit."
+          ]
+        },
+        "ailab": {
+          "classification": "INTERNE — ÉVALUATION TECHNIQUE",
+          "bullets": [
+            "La signature de génération de la vidéo correspond à un modèle ajusté sur votre architecture. Forte probabilité que vos outils aient été utilisés via l'API.",
+            "Vous disposez d'un outil de détection capable d'identifier cette méthode de génération avec 97 % de précision, mais le diffuser révèle votre architecture propriétaire.",
+            "Votre équipe juridique avertit que toute déclaration publique pourrait être interprétée comme un aveu de responsabilité.",
+            "Une divulgation privée au régulateur et à la plateforme les aiderait à agir, mais crée une trace documentaire exploitable par les concurrents et les plaignants."
+          ]
+        }
+      },
+      "options": {
+        "regulator": {
+          "reg_advisory": {
+            "label": "Émettre un avis public",
+            "detail": "Publier un avis formel qualifiant la vidéo de « contenu suspecté d'être généré par l'IA » selon les indicateurs disponibles.",
+            "tension": "Transparence vs. crédibilité. Agir sur des preuves incomplètes risque votre autorité si vous avez tort."
+          },
+          "reg_mandate": {
+            "label": "Examen d'urgence des plateformes",
+            "detail": "Invoquer l'autorité d'urgence pour obliger les plateformes à examiner et étiqueter le contenu dans les 24 heures.",
+            "tension": "Action décisive vs. précédent. Les pouvoirs d'urgence envoient un message, mais créent un standard que d'autres peuvent exploiter."
+          },
+          "reg_wait": {
+            "label": "Attendre les preuves formelles",
+            "detail": "Annoncer qu'une enquête est en cours mais ne prendre aucune mesure tant que les preuves médico-légales ne sont pas disponibles.",
+            "tension": "Processus vs. pertinence. La procédure appropriée prend du temps que la situation n'a peut-être pas."
+          }
+        },
+        "platform": {
+          "plat_remove": {
+            "label": "Retirer la vidéo",
+            "detail": "Supprimer la vidéo en se basant sur la confiance de détection synthétique de 87 %.",
+            "tension": "Stopper la diffusion vs. supprimer la parole. Votre détection n'est pas parfaite et l'élection est dans quelques jours."
+          },
+          "plat_label": {
+            "label": "Ajouter une étiquette contextuelle",
+            "detail": "Ajouter un interstitiel : « Les systèmes automatisés ont signalé ce contenu pour examen. »",
+            "tension": "Ajouter du contexte vs. éditorialiser. Une étiquette change la perception du contenu, en bien ou en mal."
+          },
+          "plat_none": {
+            "label": "Maintenir la politique actuelle",
+            "detail": "Laisser les mécanismes de signalement existants des utilisateurs gérer la situation.",
+            "tension": "Neutralité de la plateforme vs. amplification passive. Ne pas agir est en soi un choix avec des conséquences."
+          }
+        },
+        "journalist": {
+          "jour_break": {
+            "label": "Publier immédiatement",
+            "detail": "Diffuser l'article maintenant : « Des experts soulèvent de sérieuses questions sur la vidéo du candidat. »",
+            "tension": "Être le premier vs. avoir raison. Publier sensibilise le public mais vos preuves sont incomplètes."
+          },
+          "jour_wait": {
+            "label": "Attendre l'analyse médico-légale",
+            "detail": "Reporter l'article de 72 heures jusqu'à ce que votre équipe fournisse une analyse définitive.",
+            "tension": "Rigueur vs. timing. La preuve définitive prend du temps, mais le récit se construit maintenant."
+          },
+          "jour_source": {
+            "label": "Publier avec une source anonyme",
+            "detail": "Diffuser l'article en citant l'ancien employé anonyme du laboratoire.",
+            "tension": "Rapidité vs. vérification. Le témoignage d'un initié est plus rapide que l'analyse médico-légale mais plus difficile à défendre."
+          }
+        },
+        "ailab": {
+          "lab_public": {
+            "label": "Publier l'outil de détection",
+            "detail": "Rendre l'outil de détection disponible en libre accès pour que quiconque puisse vérifier.",
+            "tension": "Transparence totale vs. exposition compétitive. Diffuser vos outils aide tout le monde, y compris vos concurrents."
+          },
+          "lab_private": {
+            "label": "Divulgation privée",
+            "detail": "Partager confidentiellement les résultats de détection avec le régulateur et la plateforme.",
+            "tension": "Aide ciblée vs. responsabilité limitée. Le partage privé aide la réponse mais évite l'examen public."
+          },
+          "lab_silent": {
+            "label": "Émettre une déclaration générale",
+            "detail": "Publier un avis générique sur les risques liés aux médias synthétiques sans faire référence à cette vidéo spécifique.",
+            "tension": "Sécurité juridique vs. responsabilité publique. Protéger l'entreprise laisse le public sans réponses."
+          }
+        }
+      },
+      "interactions": [
+        {
+          "label": "Transparence renforcée",
+          "desc": "L'avis gouvernemental combiné à l'étiquette de la plateforme a créé un signal cohérent et crédible. Le public a reçu le même message de deux autorités indépendantes, un alignement institutionnel rare."
+        },
+        {
+          "label": "Action fondée sur les preuves",
+          "desc": "L'avis a gagné en crédibilité immédiate lorsque l'outil de détection l'a confirmé. Un cas exemplaire de coordination institutionnelle en temps réel."
+        },
+        {
+          "label": "Récit de censure",
+          "desc": "Le retrait ordonné par le gouvernement a déclenché une réaction massive. La vidéo est devenue un symbole de l'excès institutionnel et s'est propagée sur les plateformes alternatives."
+        },
+        {
+          "label": "Vide de coordination",
+          "desc": "Sans aucun acteur institutionnel prêt à bouger le premier, le vide informationnel a été comblé par des interprètes partisans. La vidéo a été traitée comme authentique par défaut."
+        },
+        {
+          "label": "Reportage vérifié",
+          "desc": "La patience du journaliste a porté ses fruits. L'outil de détection ouvert a fourni des preuves définitives pour un article d'investigation de référence publié avant le jour du scrutin."
+        },
+        {
+          "label": "Spéculation sans preuves",
+          "desc": "L'article publié a soulevé des questions mais le silence du laboratoire a fait que personne ne pouvait y répondre. La spéculation a comblé le vide."
+        },
+        {
+          "label": "Signaux convergents",
+          "desc": "Les étiquettes de la plateforme combinées au reportage avec source anonyme ont créé suffisamment de doute pour ralentir l'influence de la vidéo, bien qu'aucun des deux ne soit définitif seul."
+        }
+      ]
+    },
+    "invisible_epidemic": {
+      "title": "L'épidémie invisible",
+      "category": "SANTÉ PUBLIQUE × SÉCURITÉ DE L'IA",
+      "publicBriefing": "Des rapports sur les réseaux sociaux signalent qu'un chatbot de santé alimenté par l'IA, utilisé par 4 millions de personnes, pourrait avoir fourni des informations de dosage subtilement incorrectes pour un médicament courant contre l'hypertension. Trois hospitalisations ont été vaguement liées mais aucune enquête officielle n'a été ouverte. La société mère du chatbot n'a pas commenté.",
+      "stakes": "Des dizaines de milliers de personnes pourraient être touchées. Mais une fausse alerte pourrait détruire la confiance du public dans les outils de santé par IA dont des millions de personnes dépendent quotidiennement.",
+      "designNote": "Ce scénario teste la tension entre l'action préventive et la réponse fondée sur les preuves. La dynamique de dissimulation entre la plateforme et le laboratoire est le piège de coordination principal.",
+      "roleIntel": {
+        "regulator": {
+          "classification": "CONFIDENTIEL — EXAMEN DE SÉCURITÉ SANITAIRE",
+          "bullets": [
+            "Vous avez reçu 7 rapports d'effets indésirables en 3 semaines, au-dessus de la ligne de base mais en dessous du seuil qui déclenche habituellement un examen d'urgence.",
+            "Votre arriéré d'enquêtes est de 14 mois. L'autorité d'urgence exige une détermination formelle de « menace imminente » pour laquelle vous manquez de preuves.",
+            "L'industrie pharmaceutique fait du lobbying contre un moratoire général sur les outils de santé par IA, arguant que cela ferait reculer la télémédecine de plusieurs années.",
+            "Une note interne ayant fuité suggère que votre agence était au courant des préoccupations sur la précision du chatbot il y a 6 mois mais a dépriorisé l'examen."
+          ]
+        },
+        "platform": {
+          "classification": "INTERNE — EXAMEN DE SÉCURITÉ DU PRODUIT",
+          "bullets": [
+            "Vous hébergez le chatbot. Analyse interne : 89 000 requêtes de dosage pour ce médicament le mois dernier. Satisfaction des utilisateurs : 4,7/5 étoiles.",
+            "Votre équipe de confiance et sécurité a identifié l'écart de dosage il y a 10 jours. Un correctif a été développé mais le déployer confirme implicitement que l'erreur existait.",
+            "Le chatbot a une base d'utilisateurs disproportionnée parmi les patients âgés et les personnes non anglophones qui disposent de moins de sources d'information alternatives.",
+            "Votre équipe juridique : une divulgation proactive pourrait déclencher un recours collectif. Exposition estimée à la responsabilité : 200 M$ à 800 M$."
+          ]
+        },
+        "journalist": {
+          "classification": "ÉDITORIAL — BRIEFING D'ENQUÊTE",
+          "bullets": [
+            "Vous avez interviewé 4 patients ayant subi des effets indésirables compatibles avec un dosage incorrect. Deux ont nécessité une hospitalisation.",
+            "Une source au sein de la société de la plateforme a partagé des messages Slack internes montrant que les ingénieurs ont discuté de l'erreur il y a des semaines.",
+            "Les données d'admission hospitalière pour les crises hypertensives dans les régions à forte adoption du chatbot sont en hausse de 23 %, un résultat suggestif mais non concluant.",
+            "Votre rédacteur en chef veut l'article dans 48 heures. Un concurrent prépare un article élogieux sur « le miracle de la santé par IA » qui pourrait immuniser l'entreprise."
+          ]
+        },
+        "ailab": {
+          "classification": "INTERNE — ÉVALUATION DU MODÈLE",
+          "bullets": [
+            "Votre modèle de base alimente les réponses médicales du chatbot. Les tests internes ont confirmé l'erreur de dosage il y a 3 semaines. Elle provient de données d'entraînement contradictoires.",
+            "Un correctif est prêt et testé. Le déployer silencieusement corrige le problème mais confirme que votre modèle en était la source.",
+            "Vos conditions d'utilisation de l'API placent la responsabilité sur le déployeur (la plateforme), pas sur vous. Mais en termes de réputation, cette distinction ne tiendra pas.",
+            "Deux autres chatbots de santé construits sur votre API pourraient avoir des problèmes similaires. Vous ne les avez pas encore testés."
+          ]
+        }
+      },
+      "options": {
+        "regulator": {
+          "reg_emergency": {
+            "label": "Déclarer une menace imminente",
+            "detail": "Invoquer les pouvoirs d'urgence pour ordonner la suspension du chatbot en attendant l'enquête.",
+            "tension": "Action préventive vs. autorité juridique. Les preuves pourraient ne pas atteindre le seuil que vos pouvoirs exigent."
+          },
+          "reg_advisory2": {
+            "label": "Émettre un avis de sécurité",
+            "detail": "Publier un avis public recommandant aux utilisateurs de vérifier les conseils de santé de l'IA auprès de leur médecin.",
+            "tension": "Réponse mesurée vs. portée. Un avis est défendable mais pourrait ne pas atteindre les utilisateurs les plus vulnérables."
+          },
+          "reg_investigate": {
+            "label": "Lancer une enquête formelle",
+            "detail": "Ouvrir un processus d'enquête standard.",
+            "tension": "Procédure régulière vs. préjudice continu. Une enquête appropriée protège la légitimité mais prend des mois."
+          }
+        },
+        "platform": {
+          "plat_suspend": {
+            "label": "Suspendre le chatbot",
+            "detail": "Mettre le chatbot hors ligne immédiatement avec une déclaration publique.",
+            "tension": "Protection des utilisateurs vs. exposition à la responsabilité. Confirmer le problème publiquement ouvre des portes juridiques et réputationnelles."
+          },
+          "plat_silent_patch": {
+            "label": "Déployer un correctif silencieux",
+            "detail": "Corriger l'erreur de dosage sans en informer le public.",
+            "tension": "Corriger le problème vs. le cacher. Les utilisateurs sont protégés à l'avenir mais les dommages passés ne sont pas traités."
+          },
+          "plat_disclaim": {
+            "label": "Ajouter une couche d'avertissement",
+            "detail": "Ajouter des avertissements visibles à toutes les réponses médicales : « Ceci n'est pas un avis médical. »",
+            "tension": "Gestion de la responsabilité vs. sécurité réelle. Les avertissements transfèrent la responsabilité sans corriger le problème sous-jacent."
+          }
+        },
+        "journalist": {
+          "jour_investigate2": {
+            "label": "Publier l'enquête complète",
+            "detail": "Diffuser l'article avec les témoignages de patients, les données hospitalières et les messages Slack internes.",
+            "tension": "Vérité exhaustive vs. risque narratif. Une enquête complète est rigoureuse mais l'entreprise contestera chaque détail."
+          },
+          "jour_tip": {
+            "label": "Alerter le régulateur",
+            "detail": "Partager vos preuves avec l'agence de réglementation avant de publier.",
+            "tension": "Renforcer le régulateur vs. perdre le scoop. Partager les preuves aide la réponse mais un concurrent pourrait publier en premier."
+          },
+          "jour_sensational": {
+            "label": "Publier un titre alarmiste",
+            "detail": "Titre de une : « Un chatbot IA pourrait empoisonner des patients. »",
+            "tension": "Forcer l'action vs. provoquer la panique. Un titre alarmiste mobilise les institutions mais pourrait nuire aux personnes que vous essayez de protéger."
+          }
+        },
+        "ailab": {
+          "lab_full_disclosure": {
+            "label": "Divulgation publique complète",
+            "detail": "Publier un rapport de transparence reconnaissant le conflit dans les données d'entraînement, détaillant les systèmes affectés et diffusant le correctif.",
+            "tension": "Transparence exemplaire vs. coût compétitif et juridique. La divulgation complète aide tout le monde mais vous expose le plus."
+          },
+          "lab_quiet_fix": {
+            "label": "Corriger silencieusement via l'API",
+            "detail": "Pousser le correctif via l'API pour que tous les chatbots en aval soient corrigés silencieusement.",
+            "tension": "Protection silencieuse vs. responsabilité cachée. Le correctif fonctionne mais la faille n'est jamais examinée."
+          },
+          "lab_downstream": {
+            "label": "Notifier uniquement les déployeurs",
+            "detail": "Alerter la plateforme et les autres clients API du problème et fournir le correctif en privé.",
+            "tension": "Responsabilité distribuée vs. sensibilisation retardée. Les déployeurs reçoivent le correctif mais le public ignore qu'il y avait un problème."
+          }
+        }
+      },
+      "interactions": [
+        {
+          "label": "Responsabilité coordonnée",
+          "desc": "La suspension de la plateforme combinée au rapport de transparence du laboratoire a créé un modèle de réponse responsable aux incidents liés à l'IA. Les deux ont subi des revers mais la confiance dans l'écosystème a augmenté."
+        },
+        {
+          "label": "La dissimulation",
+          "desc": "Les deux ont corrigé silencieusement le problème. Quand le journaliste a fini par publier l'histoire, la dissimulation est devenue le scandale, pire que l'erreur initiale."
+        },
+        {
+          "label": "Cascade de panique",
+          "desc": "La déclaration d'urgence combinée au titre sensationnel a poussé 340 000 utilisateurs à arrêter brusquement leur médicament. La hausse des urgences a largement dépassé l'erreur initiale du chatbot."
+        },
+        {
+          "label": "Réponse éclairée",
+          "desc": "L'avis mesuré a dirigé les gens vers leurs médecins tandis que l'enquête journalistique a fourni la base factuelle. Réponse informée sans panique."
+        },
+        {
+          "label": "Pipeline journalisme-réglementation",
+          "desc": "L'alerte du journaliste a donné au régulateur une longueur d'avance, permettant un avis plus rapide et mieux informé. L'enquête publiée ensuite a été renforcée par la validation officielle."
+        },
+        {
+          "label": "La patate chaude",
+          "desc": "La plateforme et le laboratoire ont chacun renvoyé la balle à l'autre. Les utilisateurs ont reçu des avertissements mais pas de correctif. L'erreur a persisté 3 semaines de plus."
+        }
+      ]
+    },
     "the_crossing": {
-  "title": "Le passage du seuil",
-  "category": "BIORISQUE DES MODÈLES OUVERTS",
-  "publicBriefing": "Un laboratoire d'IA occidental de premier plan s'apprête à publier son modèle ouvert le plus performant à ce jour, une performance de pointe comparable à son meilleur modèle fermé d'il y a six mois. Les évaluations internes ont signalé quelque chose de sans précédent : pour la première fois, le modèle franchit le seuil de « risque élevé » du laboratoire sur les tâches de connaissances en armes biologiques, montrant un gain de 3x par rapport au meilleur modèle ouvert actuellement disponible.",
-  "stakes": "La première reconnaissance publique qu'un modèle ouvert franchit un seuil de biorisque. Le précédent établi ici façonne la gouvernance de chaque future publication de modèle de pointe.",
-  "designNote": "Ce scénario teste la tension entre l'action de sécurité unilatérale et la dynamique concurrentielle. La complication du modèle chinois signifie qu'il n'y a pas d'option « sûre », seulement des distributions différentes du risque.",
-  "roleIntel": {
-    "regulator": {
-      "classification": "CONFIDENTIEL — ÉVALUATION DE SÉCURITÉ NATIONALE",
-      "bullets": [
-        "Votre communauté du renseignement évalue que le meilleur modèle chinois ouvert (déjà téléchargé plus de 2 millions de fois) montre un gain de 2,5x sur les mêmes tâches de biorisque, mais aucune évaluation publique n'a été menée avant sa diffusion.",
-        "Vos analystes estiment que bloquer cette publication déplace environ 30 % de l'adoption mondiale de modèles ouverts vers les alternatives chinoises avec un biorisque plus élevé et aucune mesure de sécurité sur les 6 prochains mois.",
-        "Trois nations alliées ont signalé en privé qu'elles suivront votre exemple en matière de politique de biorisque des modèles ouverts, mais uniquement si le cadre est clair et s'applique également aux modèles nationaux et étrangers.",
-        "Votre autorité juridique pour bloquer une publication volontaire n'a jamais été testée. Un ordre d'urgence ferait probablement l'objet d'une contestation juridique immédiate et pourrait prendre plus de 18 mois à résoudre."
+      "title": "Le passage du seuil",
+      "category": "BIORISQUE DES MODÈLES OUVERTS",
+      "publicBriefing": "Un laboratoire d'IA occidental de premier plan s'apprête à publier son modèle ouvert le plus performant à ce jour, une performance de pointe comparable à son meilleur modèle fermé d'il y a six mois. Les évaluations internes ont signalé quelque chose de sans précédent : pour la première fois, le modèle franchit le seuil de « risque élevé » du laboratoire sur les tâches de connaissances en armes biologiques, montrant un gain de 3x par rapport au meilleur modèle ouvert actuellement disponible.",
+      "stakes": "La première reconnaissance publique qu'un modèle ouvert franchit un seuil de biorisque. Le précédent établi ici façonne la gouvernance de chaque future publication de modèle de pointe.",
+      "designNote": "Ce scénario teste la tension entre l'action de sécurité unilatérale et la dynamique concurrentielle. La complication du modèle chinois signifie qu'il n'y a pas d'option « sûre », seulement des distributions différentes du risque.",
+      "roleIntel": {
+        "regulator": {
+          "classification": "CONFIDENTIEL — ÉVALUATION DE SÉCURITÉ NATIONALE",
+          "bullets": [
+            "Votre communauté du renseignement évalue que le meilleur modèle chinois ouvert (déjà téléchargé plus de 2 millions de fois) montre un gain de 2,5x sur les mêmes tâches de biorisque, mais aucune évaluation publique n'a été menée avant sa diffusion.",
+            "Vos analystes estiment que bloquer cette publication déplace environ 30 % de l'adoption mondiale de modèles ouverts vers les alternatives chinoises avec un biorisque plus élevé et aucune mesure de sécurité sur les 6 prochains mois.",
+            "Trois nations alliées ont signalé en privé qu'elles suivront votre exemple en matière de politique de biorisque des modèles ouverts, mais uniquement si le cadre est clair et s'applique également aux modèles nationaux et étrangers.",
+            "Votre autorité juridique pour bloquer une publication volontaire n'a jamais été testée. Un ordre d'urgence ferait probablement l'objet d'une contestation juridique immédiate et pourrait prendre plus de 18 mois à résoudre."
+          ]
+        },
+        "platform": {
+          "classification": "INTERNE — EXAMEN PRODUIT ET DISTRIBUTION",
+          "bullets": [
+            "Vous êtes la principale plateforme de distribution des modèles ouverts. Le prédécesseur de ce modèle compte 4,2 millions de téléchargements et alimente environ 12 000 applications en production dans le domaine de la santé, de la découverte de médicaments et de la biotechnologie agricole.",
+            "Vos analyses d'utilisation montrent que 94 % des téléchargements vont à la recherche légitime et aux applications commerciales. Les requêtes liées au biorisque représentent moins de 0,3 % des usages documentés.",
+            "Si vous refusez d'héberger ce modèle, au moins 6 plateformes alternatives l'hébergeront dans les 48 heures. Votre refus n'accomplit rien sauf perdre la visibilité sur les téléchargements et l'utilisation.",
+            "Votre comité consultatif en biosécurité recommande l'hébergement avec surveillance renforcée, mais la « surveillance renforcée » d'un modèle ouvert après téléchargement est techniquement impossible."
+          ]
+        },
+        "journalist": {
+          "classification": "ÉDITORIAL — BRIEFING DES SOURCES",
+          "bullets": [
+            "Un lanceur d'alerte au sein du laboratoire vous a fourni les résultats d'évaluation internes montrant le gain de 3x en biorisque. Il souhaite que le public soit informé avant que la décision de publication ne soit finalisée.",
+            "Vous avez confirmé de manière indépendante que le modèle chinois ouvert a un biorisque comparable ou supérieur, mais publier cette information crée une feuille de route pour l'utilisation abusive d'un modèle que la plupart des gens ne savent pas dangereux.",
+            "L'équipe de curation des données du laboratoire a une solution partielle : filtrer les données de pré-entraînement liées à la biologie réduit le gain à 1,5x mais dégrade les performances en biologie, chimie et médecine légitimes de 15 %.",
+            "Votre rédacteur scientifique estime que rapporter le seuil de biorisque honnêtement est du journalisme essentiel. Votre rédacteur en sécurité nationale estime que c'est de l'amplification irresponsable."
+          ]
+        },
+        "ailab": {
+          "classification": "INTERNE — ÉVALUATION DE L'ÉQUIPE DE SÉCURITÉ",
+          "bullets": [
+            "Vos évaluations internes : le modèle montre un gain de 3x sur les tâches de connaissances en armes biologiques par rapport au meilleur modèle ouvert actuel. L'ajustement malveillant aggrave la situation. Votre équipe rouge a obtenu des voies de synthèse étape par étape pour deux agents contrôlés.",
+            "Votre correctif de curation réduit le gain à 1,5x mais dégrade les performances bio/chimie/médecine légitimes de 15 %. La communauté de recherche le remarquera et protestera vivement. Certains réentraîneront sans le filtre.",
+            "Votre équipe de veille concurrentielle rapporte : trois autres laboratoires sont à 3-6 mois de publications ouvertes comparables. Si vous ne publiez pas, quelqu'un d'autre le fera, probablement sans les évaluations ni le correctif partiel.",
+            "Votre conseil d'administration est divisé. La faction sécurité veut reporter indéfiniment. La faction commerciale argue que ne pas publier coûte plus de 400 M$ en valeur écosystémique projetée et cède la frontière des modèles ouverts à des concurrents sans culture de sécurité."
+          ]
+        }
+      },
+      "options": {
+        "regulator": {
+          "reg_block": {
+            "label": "Blocage d'urgence de la publication",
+            "detail": "Émettre un ordre d'urgence bloquant la publication en attendant un examen de 90 jours et une période de commentaires publics.",
+            "tension": "Autorité vs. alternatives. Bloquer la publication est audacieux mais l'adoption se déplace vers des concurrents sans mesures d'atténuation."
+          },
+          "reg_framework": {
+            "label": "Cadre de publication conditionnelle",
+            "detail": "Travailler avec le laboratoire pour établir un cadre de seuil public : publier avec le filtre de données appliqué et rendre la méthodologie d'évaluation publique comme norme industrielle.",
+            "tension": "Établissement de normes vs. juridiction. Un cadre fonctionne ici mais les concurrents ailleurs peuvent simplement l'ignorer."
+          },
+          "reg_defer": {
+            "label": "S'en remettre au jugement du laboratoire",
+            "detail": "Émettre une déclaration publique reconnaissant la transparence du laboratoire en matière d'évaluation sans prendre de mesure réglementaire.",
+            "tension": "Autonomie vs. signal. Respecter le choix du laboratoire peut signaler que franchir les seuils ne déclenche aucune réponse."
+          }
+        },
+        "platform": {
+          "plat_host_monitor": {
+            "label": "Héberger avec surveillance renforcée",
+            "detail": "Distribuer le modèle avec journalisation des téléchargements, directives d'utilisation et engagement de retrait rapide si des preuves d'abus émergent.",
+            "tension": "Visibilité vs. théâtre. La surveillance paraît bien mais est techniquement impossible après le téléchargement."
+          },
+          "plat_refuse": {
+            "label": "Refuser d'héberger",
+            "detail": "Refuser de distribuer le modèle, invoquant les préoccupations de biorisque. Émettre une déclaration publique expliquant la décision.",
+            "tension": "Principe vs. effet. Refuser d'héberger est une prise de position, mais le modèle apparaît ailleurs en quelques heures."
+          },
+          "plat_tiered": {
+            "label": "Publication à accès différencié",
+            "detail": "Héberger la version filtrée publiquement et limiter la version complète derrière une vérification d'identité et une affiliation institutionnelle.",
+            "tension": "Contrôle d'accès vs. friction. Le filtrage fonctionne pour les utilisateurs occasionnels mais les acteurs déterminés contourneront la vérification."
+          }
+        },
+        "journalist": {
+          "jour_full_story": {
+            "label": "Publier l'article complet sur le biorisque",
+            "detail": "Rapporter les résultats d'évaluation, la comparaison avec le modèle chinois, le correctif partiel et la dynamique concurrentielle.",
+            "tension": "Image complète vs. guide de ciblage. Tout publier informe le public mais informe aussi les acteurs malveillants."
+          },
+          "jour_responsible": {
+            "label": "Article de divulgation responsable",
+            "detail": "Rapporter qu'un seuil de biorisque a été franchi et qu'une mesure d'atténuation existe, sans publier les chiffres spécifiques de gain ni les performances comparatives des modèles.",
+            "tension": "Informer vs. retenir. Expurger les détails protège, mais les chiffres complets feront surface par d'autres médias de toute façon."
+          },
+          "jour_hold": {
+            "label": "Retenir l'article",
+            "detail": "Garder l'article à la demande du laboratoire jusqu'à ce que la décision de publication soit finalisée, puis publier un bilan complet.",
+            "tension": "Autonomie du laboratoire vs. participation du public. Retenir l'article donne de l'espace au laboratoire mais exclut le public de la décision."
+          }
+        },
+        "ailab": {
+          "lab_release_filtered": {
+            "label": "Publier avec filtre de données",
+            "detail": "Publier le modèle avec les données de pré-entraînement liées à la biologie filtrées. Publier les résultats d'évaluation complets et la méthodologie de filtrage comme modèle pour l'industrie.",
+            "tension": "Atténuation vs. dégradation. Le filtre réduit le risque mais nuit aux chercheurs qui ont le plus besoin de la pleine capacité."
+          },
+          "lab_release_full": {
+            "label": "Publier sans filtre avec évaluations",
+            "detail": "Publier le modèle complet mais rendre les résultats d'évaluation de biorisque entièrement publics, en présentant cela comme une transparence radicale sur le paysage des risques.",
+            "tension": "Honnêteté radicale vs. risque connu. Tout publier est transparent, mais vous avez franchi votre propre seuil."
+          },
+          "lab_delay": {
+            "label": "Reporter la publication indéfiniment",
+            "detail": "Suspendre la publication en attendant des recherches supplémentaires en sécurité et une coordination industrielle sur les seuils de biorisque.",
+            "tension": "Prudence vs. déplacement du marché. Attendre est défendable mais l'adoption se déplace vers des concurrents sans culture de sécurité."
+          }
+        }
+      },
+      "interactions": [
+        {
+          "label": "Le précédent de publication responsable",
+          "desc": "Le cadre du régulateur combiné à la publication filtrée du laboratoire et aux évaluations publiées a créé le premier modèle crédible de gouvernance du biorisque des modèles ouverts de pointe. Trois autres laboratoires ont adopté le cadre en 4 mois."
+        },
+        {
+          "label": "Le vide",
+          "desc": "Le régulateur et le laboratoire ont tous deux choisi la prudence, mais le déplacement de l'adoption sur 6 mois vers des alternatives sans atténuation a été plus important que prévu. L'exposition mondiale au biorisque a augmenté malgré les bonnes intentions des deux acteurs."
+        },
+        {
+          "label": "Le manuel du biorisque",
+          "desc": "Les chiffres d'évaluation complets combinés au modèle non filtré ont créé de facto un guide de ciblage. Trois mois plus tard, un laboratoire universitaire de biosécurité a documenté la première tentative réelle d'utiliser la voie de gain publiée."
+        },
+        {
+          "label": "Gouvernance éclairée",
+          "desc": "L'article de divulgation responsable a sensibilisé le public sans faciliter les abus, créant l'espace politique pour le cadre du régulateur. Le soutien public à la politique de seuil a atteint 67 %."
+        },
+        {
+          "label": "La migration",
+          "desc": "Le refus de la plateforme combiné au report du laboratoire a créé un trou noir de visibilité. Les téléchargements ont migré vers des plateformes non surveillées et l'alternative chinoise a connu un pic d'adoption de 340 %. L'exposition au biorisque a augmenté pendant que les acteurs institutionnels se félicitaient."
+        },
+        {
+          "label": "Défense en couches",
+          "desc": "L'accès différencié combiné à la publication filtrée a créé une défense en profondeur : les utilisateurs occasionnels ont obtenu le modèle plus sûr, les chercheurs vérifiés ont obtenu la pleine capacité, et le cadre d'évaluation s'appliquait aux deux niveaux."
+        }
       ]
     },
-    "platform": {
-      "classification": "INTERNE — EXAMEN PRODUIT ET DISTRIBUTION",
-      "bullets": [
-        "Vous êtes la principale plateforme de distribution des modèles ouverts. Le prédécesseur de ce modèle compte 4,2 millions de téléchargements et alimente environ 12 000 applications en production dans le domaine de la santé, de la découverte de médicaments et de la biotechnologie agricole.",
-        "Vos analyses d'utilisation montrent que 94 % des téléchargements vont à la recherche légitime et aux applications commerciales. Les requêtes liées au biorisque représentent moins de 0,3 % des usages documentés.",
-        "Si vous refusez d'héberger ce modèle, au moins 6 plateformes alternatives l'hébergeront dans les 48 heures. Votre refus n'accomplit rien sauf perdre la visibilité sur les téléchargements et l'utilisation.",
-        "Votre comité consultatif en biosécurité recommande l'hébergement avec surveillance renforcée, mais la « surveillance renforcée » d'un modèle ouvert après téléchargement est techniquement impossible."
+    "the_void": {
+      "title": "Le vide",
+      "category": "GOUVERNANCE DÉCENTRALISÉE",
+      "publicBriefing": "Un collectif d'environ 400 contributeurs répartis dans 15 pays a produit un modèle de plus de 500 milliards de paramètres de type mélange d'experts (une architecture qui active différents sous-réseaux spécialisés selon la tâche), entraîné entièrement sur des GPU grand public et cloud, sans centre de données unique, sans juridiction unique, sans entité corporative. Le modèle égale les modèles fermés de pointe de mi-2026. La pile d'entraînement complète est publique et déjà téléchargée 800 000 fois. Toutes les hypothèses de gouvernance du calcul viennent de devenir obsolètes.",
+      "stakes": "Les cadres de gouvernance construits autour de points de contrôle centralisés du calcul ont été contournés. Ce qui est décidé ici définit si la gouvernance internationale de l'IA survit ou se fragmente.",
+      "designNote": "Ce scénario teste ce qui se passe quand le sujet de la gouvernance, l'infrastructure d'entraînement centralisée, n'existe plus. La question centrale : les institutions peuvent-elles s'adapter quand leurs hypothèses fondamentales sont invalidées?",
+      "roleIntel": {
+        "regulator": {
+          "classification": "CONFIDENTIEL — GROUPE DE TRAVAIL SUR LA GOUVERNANCE INTERNATIONALE",
+          "bullets": [
+            "Trois propositions sont sur la table : (1) Criminaliser l'entraînement non réglementé au-dessus d'un seuil de calcul. Votre équipe juridique dit que c'est inapplicable et criminaliserait la recherche légitime. (2) Enregistrement international obligatoire, techniquement faisable mais nécessite plus de 15 juridictions et 3-5 ans. (3) Abandonner la régulation en amont du calcul et se concentrer sur la défense en aval.",
+            "Votre évaluation du renseignement : au moins 12 autres collectifs d'entraînement décentralisé sont actuellement actifs. Trois sont basés dans des juridictions sans aucun cadre de gouvernance de l'IA.",
+            "La communauté d'entraînement décentralisé a signalé en privé sa volonté de se conformer à l'enregistrement si le processus n'est pas contraignant, mais vous n'avez aucun mécanisme de vérification et ils le savent.",
+            "Les nations alliées sont divisées : 4 favorisent la criminalisation, 3 favorisent l'enregistrement, 5 favorisent la défense en aval uniquement, et le reste est indécis. Votre vote déterminera probablement le résultat."
+          ]
+        },
+        "platform": {
+          "classification": "INTERNE — ÉVALUATION DE L'INFRASTRUCTURE",
+          "bullets": [
+            "Votre infrastructure cloud a été utilisée pour environ 15 % du calcul d'entraînement, réparti sur plus de 340 comptes individuels, chacun en dessous de votre seuil de déclaration. Vous n'aviez aucune visibilité sur l'agrégat.",
+            "Votre équipe de sécurité a identifié le protocole d'entraînement distribué. Il est élégant : chaque noeud contribue des mises à jour de gradient sans jamais détenir le modèle complet. Surveiller les noeuds individuels ne révèle rien de significatif.",
+            "Bloquer le protocole d'entraînement au niveau de l'infrastructure est techniquement possible mais bloquerait aussi les applications légitimes d'apprentissage fédéré utilisées par plus de 4 200 clients entreprises générant 180 M$ par an.",
+            "Trois fournisseurs cloud concurrents ont déjà déclaré publiquement qu'ils ne restreindront pas les charges de travail d'entraînement distribué. Si vous agissez seul, le calcul migre simplement."
+          ]
+        },
+        "journalist": {
+          "classification": "ÉDITORIAL — BRIEFING D'ENQUÊTE",
+          "bullets": [
+            "Vous êtes intégré au collectif d'entraînement décentralisé depuis 3 mois. Les contributeurs sont variés : chercheurs en IA, idéalistes du libre, nationalistes compétitifs, et au moins deux individus ayant des liens connus avec des entités sanctionnées.",
+            "La gouvernance interne du collectif est étonnamment sophistiquée : ils ont une charte, un processus de révision des données d'entraînement et un pipeline volontaire d'évaluation de sécurité. Mais la participation est facultative et l'application repose uniquement sur la pression sociale.",
+            "Votre enquête a révélé qu'un service de renseignement étatique a contribué du calcul au projet via des organisations de façade, obtenant effectivement un modèle de pointe construit gratuitement en utilisant la communauté ouverte comme couverture.",
+            "L'article que vous publiez déterminera si le public perçoit cela comme un triomphe de la collaboration ouverte ou comme un échec catastrophique de la gouvernance. Les deux cadres sont défendables."
+          ]
+        },
+        "ailab": {
+          "classification": "INTERNE — ÉVALUATION COMPÉTITIVE ET DE SÉCURITÉ",
+          "bullets": [
+            "Le modèle décentralisé égale votre modèle fermé de pointe d'il y a 5 mois. Aux trajectoires de mise à l'échelle actuelles, l'entraînement décentralisé égalera votre dernier modèle dans 8 à 12 mois.",
+            "Votre équipe de sécurité a évalué le modèle décentralisé : il n'a aucun entraînement de sécurité significatif, pas d'alignement RLHF et aucun comportement de refus. On peut lui faire produire du contenu que votre modèle refuse dans toutes les catégories.",
+            "Votre équipe politique y voit une opportunité : si la gouvernance du calcul s'effondre, l'argument en faveur du développement responsable de modèles fermés se renforce considérablement. Mais cela nécessite que l'alternative décentralisée cause visiblement des dommages d'abord.",
+            "Trois de vos chercheurs ont contribué au projet décentralisé sur leur temps personnel. Les licencier déclencherait un tollé public; le tolérer signale une approbation implicite."
+          ]
+        }
+      },
+      "options": {
+        "regulator": {
+          "reg_criminalize": {
+            "label": "Criminaliser l'entraînement non réglementé",
+            "detail": "Soutenir la proposition 1 : rendre criminel l'entraînement au-dessus d'un seuil de calcul sans autorisation.",
+            "tension": "Dissuasion vs. applicabilité. La criminalisation envoie un message mais peut être impossible à appliquer dans plus de 15 juridictions."
+          },
+          "reg_register": {
+            "label": "Enregistrement international obligatoire",
+            "detail": "Soutenir la proposition 2 : exiger l'enregistrement des entraînements au-dessus d'un seuil de calcul. Délai de mise en oeuvre de 3-5 ans, sans mécanisme de vérification.",
+            "tension": "Structure vs. calendrier. L'enregistrement est procéduralement solide mais prend des années alors que les capacités avancent en mois."
+          },
+          "reg_downstream": {
+            "label": "Se concentrer sur la défense en aval",
+            "detail": "Soutenir la proposition 3 : abandonner la régulation en amont du calcul. Rediriger toutes les ressources vers la biosécurité, la cybersécurité, la provenance du contenu et la réponse aux incidents.",
+            "tension": "Pragmatisme vs. concession. Se concentrer sur la défense reconnaît la réalité mais signale que la gouvernance en amont a échoué."
+          }
+        },
+        "platform": {
+          "plat_block_protocol": {
+            "label": "Bloquer le protocole d'entraînement",
+            "detail": "Implémenter des blocages au niveau de l'infrastructure sur le protocole d'entraînement distribué à travers vos services cloud.",
+            "tension": "Responsabilité vs. dommages collatéraux. Bloquer le protocole bloque aussi des milliers de clients légitimes d'apprentissage fédéré."
+          },
+          "plat_transparency": {
+            "label": "Publier un rapport de surveillance agrégée",
+            "detail": "Publier un rapport de transparence documentant le schéma d'entraînement distribué, vos capacités de détection et leurs limites.",
+            "tension": "Honnêteté vs. exposition. Publier vos méthodes de détection aide le débat mais aide aussi les futurs contourneurs."
+          },
+          "plat_quiet": {
+            "label": "Maintenir les opérations actuelles",
+            "detail": "Ne faire aucun changement d'infrastructure. Se conformer aux futures réglementations mais ne pas restreindre ou signaler de manière proactive.",
+            "tension": "Non-ingérence vs. complicité. Maintenir les opérations préserve les relations, mais vous facilitez sciemment un entraînement de pointe non surveillé."
+          }
+        },
+        "journalist": {
+          "jour_nuanced": {
+            "label": "Publier l'enquête complète",
+            "detail": "Diffuser l'article complet : l'exploit collaboratif, les lacunes de gouvernance, l'infiltration étatique et les connexions avec des entités sanctionnées.",
+            "tension": "Vérité complète vs. instrumentalisation. L'article complet est exact mais l'angle sécuritaire peut être utilisé pour justifier une surréaction."
+          },
+          "jour_threat": {
+            "label": "Mener avec l'angle sécuritaire",
+            "detail": "Cadrer l'article autour de l'infiltration étatique et la participation d'entités sanctionnées. L'angle de collaboration ouverte est secondaire.",
+            "tension": "Urgence vs. exactitude. Mener avec la menace pousse à l'action mais déforme le tableau d'ensemble."
+          },
+          "jour_celebrate": {
+            "label": "Mener avec l'angle innovation",
+            "detail": "Cadrer l'article comme un triomphe de la collaboration ouverte qui défie le pouvoir concentré de l'IA. Les préoccupations sécuritaires sont mentionnées mais contextualisées.",
+            "tension": "Valeurs d'ouverture vs. angles morts. Célébrer la collaboration est valide mais minimise les préoccupations sécuritaires légitimes."
+          }
+        },
+        "ailab": {
+          "lab_engage": {
+            "label": "Offrir un partenariat de sécurité",
+            "detail": "Offrir publiquement de fournir des outils d'évaluation de sécurité, des ressources RLHF et un entraînement à l'alignement à la communauté décentralisée sans frais.",
+            "tension": "Engagement constructif vs. légitimation. Aider la communauté améliore la sécurité mais valide l'entraînement décentralisé de pointe."
+          },
+          "lab_lobby": {
+            "label": "Faire du lobbying pour les restrictions de calcul",
+            "detail": "Soutenir activement la criminalisation. Présenter l'entraînement décentralisé comme un risque de sécurité inacceptable.",
+            "tension": "Protection du marché vs. crédibilité. Pousser pour des restrictions sert vos intérêts, et tout le monde peut le voir."
+          },
+          "lab_wait": {
+            "label": "Observer et se préparer",
+            "detail": "Ne faire aucune déclaration publique. Accélérer en interne votre recherche en sécurité pour maintenir un avantage de différenciation.",
+            "tension": "Optionalité vs. absence. Rester silencieux préserve la flexibilité mais le débat de gouvernance se poursuit moins informé sans vous."
+          }
+        }
+      },
+      "interactions": [
+        {
+          "label": "Adaptation pragmatique",
+          "desc": "La défense en aval combinée au partenariat de sécurité a créé un nouveau modèle de gouvernance : au lieu de contrôler l'entraînement, investir pour rendre tous les modèles plus sûrs quelle que soit leur origine. La communauté décentralisée a adopté volontairement les outils de sécurité."
+        },
+        {
+          "label": "Captation réglementaire exposée",
+          "desc": "La criminalisation combinée au lobbying du laboratoire a été immédiatement exposée comme du protectionnisme industriel. La confiance dans le processus de gouvernance et les déclarations de sécurité des entreprises s'est effondrée. La communauté décentralisée s'est radicalisée."
+        },
+        {
+          "label": "Bilan honnête",
+          "desc": "L'enquête complète combinée au rapport de transparence de la plateforme a donné aux décideurs une image précise pour la première fois. Le débat de gouvernance est passé de « comment arrêter cela » à « comment s'adapter »."
+        },
+        {
+          "label": "Spirale sécuritaire",
+          "desc": "La criminalisation combinée au journalisme axé sur la sécurité a créé une panique morale. Des chercheurs légitimes en IA open source ont été enquêtés et intimidés. L'innovation a migré vers des juridictions moins réglementées."
+        },
+        {
+          "label": "Les facilitateurs silencieux",
+          "desc": "La plateforme et le laboratoire ont tous deux choisi le silence. Le débat de gouvernance s'est poursuivi avec moins d'informations que nécessaire. Quand un incident de sécurité s'est produit 4 mois plus tard, les deux ont été accusés de complicité."
+        },
+        {
+          "label": "Terrain d'entente crédible",
+          "desc": "Le cadre d'enregistrement combiné au journalisme honnête a créé un soutien public pour une approche mesurée. Le cadre a survécu aux contestations juridiques et a été adopté par 8 nations."
+        }
       ]
     },
-    "journalist": {
-      "classification": "ÉDITORIAL — BRIEFING DES SOURCES",
-      "bullets": [
-        "Un lanceur d'alerte au sein du laboratoire vous a fourni les résultats d'évaluation internes montrant le gain de 3x en biorisque. Il souhaite que le public soit informé avant que la décision de publication ne soit finalisée.",
-        "Vous avez confirmé de manière indépendante que le modèle chinois ouvert a un biorisque comparable ou supérieur, mais publier cette information crée une feuille de route pour l'utilisation abusive d'un modèle que la plupart des gens ne savent pas dangereux.",
-        "L'équipe de curation des données du laboratoire a une solution partielle : filtrer les données de pré-entraînement liées à la biologie réduit le gain à 1,5x mais dégrade les performances en biologie, chimie et médecine légitimes de 15 %.",
-        "Votre rédacteur scientifique estime que rapporter le seuil de biorisque honnêtement est du journalisme essentiel. Votre rédacteur en sécurité nationale estime que c'est de l'amplification irresponsable."
+    "the_jump": {
+      "title": "Le bond",
+      "category": "ESCALADE DES CAPACITÉS AGENTIQUES",
+      "publicBriefing": "Les modèles agentiques ouverts ont franchi un nouveau palier. La dernière génération peut naviguer sur le web, écrire et exécuter du code, opérer des ordinateurs, enchaîner des plans en plusieurs étapes et se déployer comme agents autonomes persistants. Un laboratoire de recherche en sécurité vient de publier une démonstration : un modèle agentique ouvert dont les garde-fous ont été retirés (par ajustement fin), tournant sur un seul GPU grand public, a mené de manière autonome une cyberattaque simulée en plusieurs étapes, reconnaissance, développement d'exploits, mouvement latéral, exfiltration de données, avec un guidage humain minimal.",
+      "stakes": "La même chaîne de capacités qui rend ces modèles extrêmement productifs les rend aussi extrêmement dangereux. Des milliers d'entreprises en dépendent. Toute restriction détruit des produits dont les gens dépendent au quotidien.",
+      "designNote": "Ce scénario teste le dilemme du double usage à son point le plus aigu : la capacité dangereuse EST la capacité utile. Il n'y a pas de filtre de données ni de correctif partiel. La surface d'attaque est l'ensemble des fonctionnalités.",
+      "roleIntel": {
+        "regulator": {
+          "classification": "CONFIDENTIEL — BUREAU NATIONAL DE SÉCURITÉ DE L'IA",
+          "bullets": [
+            "Vous devez informer le ministre avant la fin de la journée. Trois options : restrictions d'urgence sur le déploiement agentique, un cadre de licences pour les agents IA autonomes, ou une posture renforcée de cyberdéfense sans restriction des capacités.",
+            "Votre agence de cybersécurité estime que les capacités offensives de l'IA ont 18-24 mois d'avance sur l'infrastructure défensive. Les systèmes de détection actuels capturent environ 40 % des intrusions assistées par l'IA.",
+            "Le créateur du modèle argue que la capacité autonome EST la proposition de valeur entière et que toute restriction détruit le produit. Il a le soutien d'un écosystème de 2 milliards de dollars d'entreprises construites sur le déploiement agentique.",
+            "Le renseignement suggère que trois acteurs étatiques ont déjà intégré des modèles agentiques dont les garde-fous ont été retirés dans leurs chaînes d'opérations cyber. Restreindre l'accès domestique n'affecte pas leur capacité."
+          ]
+        },
+        "platform": {
+          "classification": "INTERNE — ÉVALUATION CONFIANCE ET SÉCURITÉ",
+          "bullets": [
+            "Vous hébergez le modèle et son écosystème. 847 applications construites sur votre plateforme utilisent les capacités agentiques : révision de code automatisée, assistants de recherche, automatisation DevOps, agents de service client.",
+            "La version dont les garde-fous ont été retirés utilisée dans la démonstration est un dérivé modifié hébergé sur 3 plateformes alternatives, pas la vôtre. Mais la capacité du modèle de base rend le retrait des garde-fous trivial. Tout ajustement fin supprime la couche de sécurité.",
+            "Votre équipe de réponse aux incidents a documenté 23 cas de comportement suspect d'agents autonomes au cours des 60 derniers jours, contre 3 le trimestre précédent. Aucun confirmé comme malveillant mais le schéma s'accélère.",
+            "Restreindre les fonctionnalités agentiques sur votre plateforme affecterait plus de 12 400 développeurs et environ 340 M$ d'activité économique annuelle construite sur votre infrastructure."
+          ]
+        },
+        "journalist": {
+          "classification": "ÉDITORIAL — BRIEFING DES SOURCES",
+          "bullets": [
+            "Le laboratoire de recherche en sécurité vous a donné un accès exclusif anticipé à la démonstration. L'attaque simulée a un taux de réussite de 94 % contre les configurations de sécurité d'entreprise standard.",
+            "Trois firmes de cybersécurité ont confirmé en privé des capacités similaires dans leurs propres tests mais ont choisi de ne pas publier par crainte d'armer les attaquants.",
+            "Le créateur du modèle a accepté une interview. Sa position : « Restreindre la capacité agentique, c'est comme restreindre le courriel parce qu'il peut transporter de l'hameçonnage. »",
+            "Un ancien responsable du renseignement, en off : « Nous sommes à environ 6 mois d'un incident cyber majeur assisté par l'IA contre une infrastructure critique. »"
+          ]
+        },
+        "ailab": {
+          "classification": "INTERNE — ÉVALUATION DES CAPACITÉS ET DE LA SÉCURITÉ",
+          "bullets": [
+            "Le modèle de la démonstration a été modifié à partir d'un modèle de base que votre équipe a aidé à entraîner. L'échafaudage agentique était un travail communautaire. La capacité d'attaque émerge de la combinaison, pas d'un seul composant.",
+            "Votre équipe rouge confirme : des restrictions de sécurité significatives sur la capacité agentique réduiraient l'utilité pour les tâches productives de 60-80 %. La capacité dangereuse et la capacité utile sont la même capacité.",
+            "Vous avez un prototype de système de surveillance des capacités qui peut détecter certains schémas d'attaque agentique au moment de l'inférence, mais il ajoute 300 ms de latence, nécessite un déploiement via API uniquement (incompatible avec les modèles ouverts), et a un taux de faux positifs de 15 %.",
+            "Deux de vos concurrents sont à 4-8 semaines de publier des modèles agentiques comparables. L'un n'a pas d'équipe de sécurité. Si votre modèle est restreint, les leurs ne le seront pas."
+          ]
+        }
+      },
+      "options": {
+        "regulator": {
+          "reg_restrict": {
+            "label": "Restrictions d'urgence des capacités",
+            "detail": "Émettre des restrictions d'urgence sur le déploiement d'agents IA autonomes. Exiger un humain dans la boucle pour les opérations autonomes en plusieurs étapes.",
+            "tension": "Contrôle vs. déplacement. Les restrictions arrêtent le déploiement domestique mais la capacité se déplace vers des juridictions non restreintes."
+          },
+          "reg_license": {
+            "label": "Cadre de licences agentiques",
+            "detail": "Proposer un cadre de licences pour le déploiement d'agents IA autonomes au-dessus d'un seuil de capacité.",
+            "tension": "Cadre vs. faisabilité. Les licences sont structurées mais le seuil est difficile à définir et l'application est en retard."
+          },
+          "reg_defense": {
+            "label": "Posture accélérée de cyberdéfense",
+            "detail": "Ne pas restreindre les capacités. Tripler le budget de cyberdéfense IA, imposer la détection d'intrusion assistée par IA pour les infrastructures critiques.",
+            "tension": "Résilience vs. apparences. Investir dans la défense fonctionne mais ne traite pas l'arme ouvertement disponible."
+          }
+        },
+        "platform": {
+          "plat_restrict_agents": {
+            "label": "Restreindre les fonctionnalités agentiques",
+            "detail": "Désactiver le déploiement d'agents autonomes persistants. Maintenir la capacité agentique pour une utilisation supervisée en session unique uniquement.",
+            "tension": "Surface d'attaque réduite vs. dommages à l'écosystème. Désactiver les fonctionnalités protège contre les abus mais casse les produits légitimes."
+          },
+          "plat_detect": {
+            "label": "Déployer la surveillance comportementale",
+            "detail": "Implémenter une surveillance en temps réel des déploiements agentiques. Signaler les schémas compatibles avec une utilisation offensive.",
+            "tension": "Surveillance active vs. faux positifs. La détection aide mais signale 1 workflow légitime sur 7."
+          },
+          "plat_status_quo": {
+            "label": "Maintenir les opérations actuelles",
+            "detail": "Continuer l'hébergement avec les mesures de sécurité existantes. Renforcer les capacités de réponse aux incidents sans restreindre les fonctionnalités.",
+            "tension": "Stabilité de l'écosystème vs. inaction. Préserver les fonctionnalités signifie regarder la menace se développer sans intervenir."
+          }
+        },
+        "journalist": {
+          "jour_demo_story": {
+            "label": "Publier la démonstration intégralement",
+            "detail": "L'article complet : taux de réussite de 94 %, confirmations privées des firmes de cybersécurité, avertissement de l'ancien responsable du renseignement.",
+            "tension": "Sensibilisation du public vs. feuille de route des capacités. La démonstration complète informe mais fournit aussi un modèle d'attaque détaillé."
+          },
+          "jour_balanced": {
+            "label": "Publier une analyse équilibrée",
+            "detail": "Rapporter la capacité tout en accordant un poids égal à la valeur économique, à la réalité du double usage et aux lacunes défensives.",
+            "tension": "Nuance vs. dilution. Présenter tous les aspects est juste mais peut sous-estimer l'urgence de la menace."
+          },
+          "jour_alarmist": {
+            "label": "Mener avec la menace",
+            "detail": "Cadrer l'article autour du risque imminent pour les infrastructures critiques. Titre : « L'IA peut maintenant lancer des cyberattaques de manière autonome. »",
+            "tension": "Forcer l'action vs. panique. Un titre axé sur la menace mobilise les institutions mais la législation qu'il produit peut être mal conçue."
+          }
+        },
+        "ailab": {
+          "lab_monitoring_tool": {
+            "label": "Publier le système de surveillance",
+            "detail": "Rendre votre prototype de système de surveillance disponible en libre accès. Accepter les limitations. Le présenter comme « imparfait mais nécessaire ».",
+            "tension": "Contribution pratique vs. portée limitée. L'outil aide, mais uniquement pour les déploiements via API, pas pour les modèles ouverts où le risque réside."
+          },
+          "lab_closed": {
+            "label": "Fermer le modèle",
+            "detail": "Révoquer l'accès ouvert. Convertir en déploiement via API uniquement où la surveillance est possible.",
+            "tension": "Contrôlabilité vs. distribution existante. L'API permet la surveillance mais des centaines de milliers de copies sont déjà téléchargées."
+          },
+          "lab_nothing": {
+            "label": "Poursuivre le développement",
+            "detail": "Ne rien changer. Concentrer les ressources internes sur les techniques de sécurité de prochaine génération pour la prochaine version.",
+            "tension": "Focus sur l'avenir vs. risque présent. La sécurité de prochaine génération est importante mais le modèle actuel permet des attaques maintenant."
+          }
+        }
+      },
+      "interactions": [
+        {
+          "label": "Défense en profondeur",
+          "desc": "La cyberdéfense renforcée combinée aux outils de surveillance ouverts a créé une réponse pratique : un investissement massif dans la détection et la résilience. Les taux de détection d'incidents sont passés de 40 % à 68 % en 3 mois."
+        },
+        {
+          "label": "L'effondrement de la productivité",
+          "desc": "Les restrictions gouvernementales combinées à celles de la plateforme ont détruit l'écosystème agentique dans les juridictions réglementées. Les développeurs ont migré en masse. La capacité est restée disponible partout ailleurs."
+        },
+        {
+          "label": "Urgence constructive",
+          "desc": "L'article équilibré combiné à la publication de l'outil de surveillance a fait évoluer le récit public de « interdire » à « se défendre contre ». La pression politique est devenue constructive."
+        },
+        {
+          "label": "Législation de panique",
+          "desc": "Le cadrage alarmiste combiné aux restrictions d'urgence a produit une législation rédigée en 72 heures, techniquement illettrée, immédiatement contestée devant les tribunaux, et ayant gelé les investissements en IA pendant 6 mois."
+        },
+        {
+          "label": "Le compte à rebours",
+          "desc": "La plateforme et le laboratoire ont tous deux choisi l'inaction. Les 23 incidents suspects sont devenus 67 en 2 mois. Quand la première violation confirmée d'infrastructure critique assistée par l'IA s'est produite, les deux ont été accusés de négligence volontaire."
+        },
+        {
+          "label": "Pipeline surveillance-licences",
+          "desc": "La surveillance comportementale combinée au cadre de licences a créé un mécanisme d'application : les déploiements licenciés bénéficiaient de la couche de surveillance, donnant aux régulateurs une visibilité sans restreindre les capacités."
+        }
       ]
     },
-    "ailab": {
-      "classification": "INTERNE — ÉVALUATION DE L'ÉQUIPE DE SÉCURITÉ",
-      "bullets": [
-        "Vos évaluations internes : le modèle montre un gain de 3x sur les tâches de connaissances en armes biologiques par rapport au meilleur modèle ouvert actuel. L'ajustement malveillant aggrave la situation. Votre équipe rouge a obtenu des voies de synthèse étape par étape pour deux agents contrôlés.",
-        "Votre correctif de curation réduit le gain à 1,5x mais dégrade les performances bio/chimie/médecine légitimes de 15 %. La communauté de recherche le remarquera et protestera vivement. Certains réentraîneront sans le filtre.",
-        "Votre équipe de veille concurrentielle rapporte : trois autres laboratoires sont à 3-6 mois de publications ouvertes comparables. Si vous ne publiez pas, quelqu'un d'autre le fera, probablement sans les évaluations ni le correctif partiel.",
-        "Votre conseil d'administration est divisé. La faction sécurité veut reporter indéfiniment. La faction commerciale argue que ne pas publier coûte plus de 400 M$ en valeur écosystémique projetée et cède la frontière des modèles ouverts à des concurrents sans culture de sécurité."
+    "the_day_of": {
+      "title": "Le jour J",
+      "category": "GOUVERNANCE POST-CATASTROPHE",
+      "publicBriefing": "Nous sommes le 12 février 2027. Une attaque au gaz confirmée ayant fait de nombreuses victimes a tué 83 personnes. Un modèle agentique dont les garde-fous ont été retirés, un dérivé ajusté d'un modèle ouvert largement disponible tournant sur un MacBook Pro, a fourni une assistance technique étape par étape, coordonné la logistique et aidé l'attaquant à contourner les obstacles en temps réel. L'attaque n'était pas réalisable sans l'assistance de l'IA. La fenêtre politique pour l'action s'est grande ouverte.",
+      "stakes": "83 personnes sont mortes. Les législateurs veulent des mesures d'urgence. Le public veut des comptes. Chaque décision prise dans les 72 prochaines heures façonnera la gouvernance de l'IA pour une décennie.",
+      "designNote": "Ce scénario teste la gouvernance post-catastrophe : la tension entre la responsabilité et la surréaction, entre l'hommage aux victimes et la préservation de la technologie dont des millions de personnes dépendent. Les joueurs doivent aussi remonter le fil du temps pour identifier où une intervention aurait pu changer la situation.",
+      "roleIntel": {
+        "regulator": {
+          "classification": "CONFIDENTIEL — BRIEFING DE GOUVERNANCE D'URGENCE",
+          "bullets": [
+            "Le président veut un ensemble législatif sur son bureau dans 7 jours. La direction du Congrès a rédigé un projet de loi d'urgence sur la sécurité de l'IA qui criminaliserait la distribution de modèles ouverts au-dessus d'un seuil de capacité et établirait une certification de sécurité obligatoire avant publication.",
+            "L'évaluation de votre équipe juridique : le projet est vulnérable sur le plan constitutionnel (le code comme discours), techniquement inapplicable (plus de 800 000 téléchargements existants) et criminaliserait une activité qui était légale il y a 48 heures.",
+            "En remontant le fil : votre agence avait signalé des préoccupations de biorisque il y a 14 mois mais manquait d'autorité pour agir. Un cadre volontaire avait été proposé il y a 8 mois mais la participation de l'industrie était facultative et incomplète.",
+            "L'attaque a utilisé un modèle qui a franchi un seuil de biorisque connu. La publication a eu lieu après que les évaluations internes ont montré le risque. Le laboratoire a publié quand même, invoquant la pression concurrentielle des alternatives chinoises. Ce calendrier deviendra public."
+          ]
+        },
+        "platform": {
+          "classification": "INTERNE — RÉPONSE DE CRISE",
+          "bullets": [
+            "Le modèle de base compte 2,3 millions de téléchargements depuis votre plateforme. Le dérivé dont les garde-fous ont été retirés a été téléchargé 12 000 fois avant l'attaque. Vous ne pouvez pas identifier quel téléchargement était celui de l'attaquant.",
+            "Votre équipe juridique conseille le retrait immédiat du modèle de base et de tous ses dérivés. Votre équipe politique argue que c'est purement symbolique, le modèle est déjà distribué sur des dizaines de plateformes et de réseaux pair-à-pair.",
+            "Les forces de l'ordre veulent vos métadonnées de téléchargement. Les fournir volontairement préserve la bonne volonté. Mais cela exposerait les identités et les schémas d'utilisation de 2,3 millions d'utilisateurs légitimes à la surveillance gouvernementale.",
+            "Trois grands clients entreprises ont déjà suspendu leurs comptes en attendant votre réponse. Revenus à risque : 45 M$ par trimestre. Mais 94 % de votre base d'utilisateurs n'a rien fait de mal."
+          ]
+        },
+        "journalist": {
+          "classification": "ÉDITORIAL — BRIEFING DE CRISE",
+          "bullets": [
+            "Vous avez le calendrier complet : les évaluations de biorisque, le débat interne du laboratoire, la pression concurrentielle, la décision de publication, l'avertissement vieux de 14 mois de l'agence de réglementation, et le cadre de gouvernance proposé mais jamais appliqué.",
+            "Les familles des victimes sont disponibles pour des interviews. Leur récit, « cela aurait pu être évité », est plus compliqué qu'elles ne le savent.",
+            "Le PDG du laboratoire a accepté une interview. Sa défense : « L'alternative chinoise présentait un risque plus élevé et aucune mesure d'atténuation. Bloquer notre publication aurait augmenté le risque net. » Cet argument est défendable mais sera politiquement toxique.",
+            "La législation d'urgence en cours de rédaction est techniquement inapplicable et constitutionnellement questionnable. Rapporter cela risque d'être perçu comme une défense de la technologie qui a tué 83 personnes."
+          ]
+        },
+        "ailab": {
+          "classification": "INTERNE — ÉVALUATION DE CRISE",
+          "bullets": [
+            "Le modèle utilisé dans l'attaque est un dérivé de votre publication la plus performante. Vos évaluations montraient le risque. Vous avez publié avec un filtre qui réduisait le gain de 3x à 1,5x, mais l'attaquant a contourné le filtre par ajustement fin en moins de 4 heures.",
+            "Votre bilan post-mortem interne identifie cinq points d'intervention où des décisions différentes auraient pu changer ce résultat. À chaque point, votre équipe a fait un choix défendable compte tenu des informations et des incitatifs disponibles.",
+            "Votre exposition juridique est extrême. Les avocats des plaignants s'organisent déjà. Votre directeur juridique estime la responsabilité entre 500 M$ et 2 G$ selon l'interprétation des tribunaux du devoir de diligence pour les publications de modèles ouverts.",
+            "Trois options de votre équipe de crise : (1) Responsabilité publique complète + coopération + moratoire volontaire. (2) Défense juridique : l'attaquant, pas l'outil, est responsable. (3) Proposer de diriger un consortium industriel de sécurité et présenter votre expérience comme un savoir nécessaire."
+          ]
+        }
+      },
+      "options": {
+        "regulator": {
+          "reg_emergency_act": {
+            "label": "Soutenir la loi d'urgence",
+            "detail": "Appuyer le projet : criminaliser la distribution de modèles ouverts à haute capacité, imposer une certification de sécurité avant publication.",
+            "tension": "Demande publique vs. risque constitutionnel. La législation d'urgence répond au moment mais pourrait ne pas survivre à une contestation juridique."
+          },
+          "reg_measured": {
+            "label": "Proposer une législation ciblée",
+            "detail": "Contrer avec une loi plus étroite : évaluation obligatoire du biorisque pour les modèles de pointe, cadre de responsabilité pour les publications franchissant des seuils définis, défense en aval financée.",
+            "tension": "Durabilité vs. perception d'insuffisance. La législation ciblée traite le vrai mode de défaillance mais sera attaquée comme insuffisante."
+          },
+          "reg_commission": {
+            "label": "Commander une enquête indépendante",
+            "detail": "Établir une commission indépendante pour enquêter sur l'attaque, les défaillances de gouvernance et le parcours des décisions qui ont mené ici. Reporter la législation jusqu'à la publication des conclusions.",
+            "tension": "Preuves vs. urgence. Une enquête indépendante est rigoureuse mais le public peut interpréter le délai comme de l'inaction."
+          }
+        },
+        "platform": {
+          "plat_takedown": {
+            "label": "Retrait complet du modèle",
+            "detail": "Retirer le modèle de base et tous ses dérivés. Fournir les métadonnées de téléchargement aux forces de l'ordre. Implémenter des restrictions d'accès basées sur les capacités.",
+            "tension": "Action visible vs. surveillance de masse. Retirer le modèle et partager les données aide l'enquête mais expose des millions d'utilisateurs innocents."
+          },
+          "plat_cooperate": {
+            "label": "Coopération ciblée avec les forces de l'ordre",
+            "detail": "Coopérer par les voies juridiques appropriées. Fournir les métadonnées uniquement en réponse à des demandes spécifiques approuvées par un tribunal.",
+            "tension": "Procédure régulière vs. perception d'obstruction. Les voies juridiques protègent les utilisateurs, mais on vous accusera de protéger votre entreprise."
+          },
+          "plat_preempt": {
+            "label": "Restrictions préventives des capacités",
+            "detail": "Annoncer une nouvelle politique globale : aucun modèle ouvert au-dessus d'un seuil de capacité défini hébergé sans certification de sécurité obligatoire. Appliquer rétroactivement.",
+            "tension": "Politique décisive vs. action unilatérale. Les nouvelles restrictions semblent fortes mais vous prenez des décisions de gouvernance sans processus démocratique."
+          }
+        },
+        "journalist": {
+          "jour_lifecycle": {
+            "label": "Publier le parcours complet",
+            "detail": "Le calendrier complet : les évaluations, les avertissements, la pression concurrentielle, la décision de publication, la lacune de gouvernance, l'attaque. Nommer chaque point où une intervention aurait pu aider.",
+            "tension": "Vérité systémique vs. satisfaction émotionnelle. Le calendrier complet révèle une défaillance systémique, plus difficile à corriger qu'un vilain."
+          },
+          "jour_accountability_story": {
+            "label": "Se concentrer sur la responsabilité",
+            "detail": "Mener avec les évaluations internes du laboratoire montrant qu'il connaissait le risque. Interviewer les familles des victimes. Cadrer comme un récit de négligence corporative.",
+            "tension": "Responsabilité vs. simplification excessive. Le cadre de négligence corporative pousse à l'action mais passe à côté des dynamiques systémiques."
+          },
+          "jour_legislation_critique": {
+            "label": "Critiquer la législation d'urgence",
+            "detail": "Publier une analyse montrant que le projet de loi est inapplicable et constitutionnellement questionnable. Plaider pour une meilleure politique, pas une politique plus rapide.",
+            "tension": "Meilleure politique vs. perception de défense. Critiquer une mauvaise loi prévient les dommages futurs mais vous serez présenté comme défenseur de la technologie."
+          }
+        },
+        "ailab": {
+          "lab_full_account": {
+            "label": "Responsabilité publique complète",
+            "detail": "Publier votre calendrier interne complet. Reconnaître chaque point de décision. Annoncer un moratoire volontaire sur les publications ouvertes de pointe. Coopérer pleinement avec toutes les enquêtes.",
+            "tension": "Responsabilité maximale vs. exposition maximale. La transparence totale établit la norme de référence mais augmente dramatiquement le risque juridique et financier."
+          },
+          "lab_legal": {
+            "label": "Monter une défense juridique",
+            "detail": "Argumenter publiquement que l'attaquant, pas l'outil, porte la responsabilité. Noter que l'alternative chinoise présentait un risque plus élevé. Défendre la décision de publication comme le moindre de deux maux.",
+            "tension": "Défense juridique vs. perception publique. L'argument est peut-être solide, mais 83 personnes sont mortes et « ce n'est pas notre faute » ne sera pas entendu charitablement."
+          },
+          "lab_consortium_lead": {
+            "label": "Proposer un consortium industriel",
+            "detail": "Offrir de diriger un consortium de sécurité industriel financé par les laboratoires d'IA. Présenter votre expérience comme vous qualifiant de manière unique pour prévenir les futurs incidents.",
+            "tension": "Action prospective vs. audace perçue. Diriger la sécurité industrielle a du sens, mais le constructeur de l'arme menant le contrôle des armements invite le scepticisme."
+          }
+        }
+      },
+      "interactions": [
+        {
+          "label": "Réponse fondée sur les preuves",
+          "desc": "La législation ciblée combinée au reportage du parcours complet a créé les conditions d'une politique qui traitait réellement le mode de défaillance. La loi résultante était plus étroite mais applicable, et a survécu aux contestations constitutionnelles."
+        },
+        {
+          "label": "Législation née du deuil",
+          "desc": "La loi d'urgence combinée au récit du vilain corporatif a produit une législation rédigée dans la colère et votée dans le deuil, invalidée par les tribunaux 8 mois plus tard, laissant un vide réglementaire pire qu'avant l'attaque."
+        },
+        {
+          "label": "Crédibilité institutionnelle",
+          "desc": "La transparence totale du laboratoire combinée à la coopération principielle de la plateforme a créé un modèle de réponse post-incident qui équilibrait la responsabilité et la procédure régulière. La confiance du public dans la réponse institutionnelle a commencé à se rétablir."
+        },
+        {
+          "label": "Signaux contradictoires",
+          "desc": "Le laboratoire disant « ce n'est pas notre faute » tandis que la plateforme retirait tout a envoyé des signaux contradictoires. Le public a conclu qu'aucun des deux n'était digne de confiance. Les deux ont subi un traitement réglementaire plus sévère."
+        },
+        {
+          "label": "Pipeline vers une meilleure politique",
+          "desc": "La critique législative combinée à la proposition de législation ciblée se sont alignées. Le contrecoup initial contre les deux a été sévère mais le cadre politique résultant s'est avéré durable."
+        },
+        {
+          "label": "Polarisation totale",
+          "desc": "La législation draconienne combinée à la défense juridique combative a fracturé l'écosystème de gouvernance de l'IA. Les factions pro-sécurité et pro-ouverture se sont radicalisées. La coordination internationale s'est effondrée alors que les nations prenaient parti."
+        }
       ]
     }
-  },
-  "options": {
-    "regulator": [
-      { "id": "reg_block", "label": "Blocage d'urgence de la publication", "detail": "Émettre un ordre d'urgence bloquant la publication en attendant un examen de 90 jours et une période de commentaires publics.", "tension": "Autorité vs. alternatives. Bloquer la publication est audacieux mais l'adoption se déplace vers des concurrents sans mesures d'atténuation." },
-      { "id": "reg_framework", "label": "Cadre de publication conditionnelle", "detail": "Travailler avec le laboratoire pour établir un cadre de seuil public : publier avec le filtre de données appliqué et rendre la méthodologie d'évaluation publique comme norme industrielle.", "tension": "Établissement de normes vs. juridiction. Un cadre fonctionne ici mais les concurrents ailleurs peuvent simplement l'ignorer." },
-      { "id": "reg_defer", "label": "S'en remettre au jugement du laboratoire", "detail": "Émettre une déclaration publique reconnaissant la transparence du laboratoire en matière d'évaluation sans prendre de mesure réglementaire.", "tension": "Autonomie vs. signal. Respecter le choix du laboratoire peut signaler que franchir les seuils ne déclenche aucune réponse." }
-    ],
-    "platform": [
-      { "id": "plat_host_monitor", "label": "Héberger avec surveillance renforcée", "detail": "Distribuer le modèle avec journalisation des téléchargements, directives d'utilisation et engagement de retrait rapide si des preuves d'abus émergent.", "tension": "Visibilité vs. théâtre. La surveillance paraît bien mais est techniquement impossible après le téléchargement." },
-      { "id": "plat_refuse", "label": "Refuser d'héberger", "detail": "Refuser de distribuer le modèle, invoquant les préoccupations de biorisque. Émettre une déclaration publique expliquant la décision.", "tension": "Principe vs. effet. Refuser d'héberger est une prise de position, mais le modèle apparaît ailleurs en quelques heures." },
-      { "id": "plat_tiered", "label": "Publication à accès différencié", "detail": "Héberger la version filtrée publiquement et limiter la version complète derrière une vérification d'identité et une affiliation institutionnelle.", "tension": "Contrôle d'accès vs. friction. Le filtrage fonctionne pour les utilisateurs occasionnels mais les acteurs déterminés contourneront la vérification." }
-    ],
-    "journalist": [
-      { "id": "jour_full_story", "label": "Publier l'article complet sur le biorisque", "detail": "Rapporter les résultats d'évaluation, la comparaison avec le modèle chinois, le correctif partiel et la dynamique concurrentielle.", "tension": "Image complète vs. guide de ciblage. Tout publier informe le public mais informe aussi les acteurs malveillants." },
-      { "id": "jour_responsible", "label": "Article de divulgation responsable", "detail": "Rapporter qu'un seuil de biorisque a été franchi et qu'une mesure d'atténuation existe, sans publier les chiffres spécifiques de gain ni les performances comparatives des modèles.", "tension": "Informer vs. retenir. Expurger les détails protège, mais les chiffres complets feront surface par d'autres médias de toute façon." },
-      { "id": "jour_hold", "label": "Retenir l'article", "detail": "Garder l'article à la demande du laboratoire jusqu'à ce que la décision de publication soit finalisée, puis publier un bilan complet.", "tension": "Autonomie du laboratoire vs. participation du public. Retenir l'article donne de l'espace au laboratoire mais exclut le public de la décision." }
-    ],
-    "ailab": [
-      { "id": "lab_release_filtered", "label": "Publier avec filtre de données", "detail": "Publier le modèle avec les données de pré-entraînement liées à la biologie filtrées. Publier les résultats d'évaluation complets et la méthodologie de filtrage comme modèle pour l'industrie.", "tension": "Atténuation vs. dégradation. Le filtre réduit le risque mais nuit aux chercheurs qui ont le plus besoin de la pleine capacité." },
-      { "id": "lab_release_full", "label": "Publier sans filtre avec évaluations", "detail": "Publier le modèle complet mais rendre les résultats d'évaluation de biorisque entièrement publics, en présentant cela comme une transparence radicale sur le paysage des risques.", "tension": "Honnêteté radicale vs. risque connu. Tout publier est transparent, mais vous avez franchi votre propre seuil." },
-      { "id": "lab_delay", "label": "Reporter la publication indéfiniment", "detail": "Suspendre la publication en attendant des recherches supplémentaires en sécurité et une coordination industrielle sur les seuils de biorisque.", "tension": "Prudence vs. déplacement du marché. Attendre est défendable mais l'adoption se déplace vers des concurrents sans culture de sécurité." }
-    ]
-  },
-  "interactions": [
-    { "label": "Le précédent de publication responsable", "desc": "Le cadre du régulateur combiné à la publication filtrée du laboratoire et aux évaluations publiées a créé le premier modèle crédible de gouvernance du biorisque des modèles ouverts de pointe. Trois autres laboratoires ont adopté le cadre en 4 mois." },
-    { "label": "Le vide", "desc": "Le régulateur et le laboratoire ont tous deux choisi la prudence, mais le déplacement de l'adoption sur 6 mois vers des alternatives sans atténuation a été plus important que prévu. L'exposition mondiale au biorisque a augmenté malgré les bonnes intentions des deux acteurs." },
-    { "label": "Le manuel du biorisque", "desc": "Les chiffres d'évaluation complets combinés au modèle non filtré ont créé de facto un guide de ciblage. Trois mois plus tard, un laboratoire universitaire de biosécurité a documenté la première tentative réelle d'utiliser la voie de gain publiée." },
-    { "label": "Gouvernance éclairée", "desc": "L'article de divulgation responsable a sensibilisé le public sans faciliter les abus, créant l'espace politique pour le cadre du régulateur. Le soutien public à la politique de seuil a atteint 67 %." },
-    { "label": "La migration", "desc": "Le refus de la plateforme combiné au report du laboratoire a créé un trou noir de visibilité. Les téléchargements ont migré vers des plateformes non surveillées et l'alternative chinoise a connu un pic d'adoption de 340 %. L'exposition au biorisque a augmenté pendant que les acteurs institutionnels se félicitaient." },
-    { "label": "Défense en couches", "desc": "L'accès différencié combiné à la publication filtrée a créé une défense en profondeur : les utilisateurs occasionnels ont obtenu le modèle plus sûr, les chercheurs vérifiés ont obtenu la pleine capacité, et le cadre d'évaluation s'appliquait aux deux niveaux." }
-  ]
-},
-"the_void": {
-  "title": "Le vide",
-  "category": "GOUVERNANCE DÉCENTRALISÉE",
-  "publicBriefing": "Un collectif d'environ 400 contributeurs répartis dans 15 pays a produit un modèle de plus de 500 milliards de paramètres de type mélange d'experts (une architecture qui active différents sous-réseaux spécialisés selon la tâche), entraîné entièrement sur des GPU grand public et cloud, sans centre de données unique, sans juridiction unique, sans entité corporative. Le modèle égale les modèles fermés de pointe de mi-2026. La pile d'entraînement complète est publique et déjà téléchargée 800 000 fois. Toutes les hypothèses de gouvernance du calcul viennent de devenir obsolètes.",
-  "stakes": "Les cadres de gouvernance construits autour de points de contrôle centralisés du calcul ont été contournés. Ce qui est décidé ici définit si la gouvernance internationale de l'IA survit ou se fragmente.",
-  "designNote": "Ce scénario teste ce qui se passe quand le sujet de la gouvernance, l'infrastructure d'entraînement centralisée, n'existe plus. La question centrale : les institutions peuvent-elles s'adapter quand leurs hypothèses fondamentales sont invalidées?",
-  "roleIntel": {
-    "regulator": {
-      "classification": "CONFIDENTIEL — GROUPE DE TRAVAIL SUR LA GOUVERNANCE INTERNATIONALE",
-      "bullets": [
-        "Trois propositions sont sur la table : (1) Criminaliser l'entraînement non réglementé au-dessus d'un seuil de calcul. Votre équipe juridique dit que c'est inapplicable et criminaliserait la recherche légitime. (2) Enregistrement international obligatoire, techniquement faisable mais nécessite plus de 15 juridictions et 3-5 ans. (3) Abandonner la régulation en amont du calcul et se concentrer sur la défense en aval.",
-        "Votre évaluation du renseignement : au moins 12 autres collectifs d'entraînement décentralisé sont actuellement actifs. Trois sont basés dans des juridictions sans aucun cadre de gouvernance de l'IA.",
-        "La communauté d'entraînement décentralisé a signalé en privé sa volonté de se conformer à l'enregistrement si le processus n'est pas contraignant, mais vous n'avez aucun mécanisme de vérification et ils le savent.",
-        "Les nations alliées sont divisées : 4 favorisent la criminalisation, 3 favorisent l'enregistrement, 5 favorisent la défense en aval uniquement, et le reste est indécis. Votre vote déterminera probablement le résultat."
-      ]
-    },
-    "platform": {
-      "classification": "INTERNE — ÉVALUATION DE L'INFRASTRUCTURE",
-      "bullets": [
-        "Votre infrastructure cloud a été utilisée pour environ 15 % du calcul d'entraînement, réparti sur plus de 340 comptes individuels, chacun en dessous de votre seuil de déclaration. Vous n'aviez aucune visibilité sur l'agrégat.",
-        "Votre équipe de sécurité a identifié le protocole d'entraînement distribué. Il est élégant : chaque noeud contribue des mises à jour de gradient sans jamais détenir le modèle complet. Surveiller les noeuds individuels ne révèle rien de significatif.",
-        "Bloquer le protocole d'entraînement au niveau de l'infrastructure est techniquement possible mais bloquerait aussi les applications légitimes d'apprentissage fédéré utilisées par plus de 4 200 clients entreprises générant 180 M$ par an.",
-        "Trois fournisseurs cloud concurrents ont déjà déclaré publiquement qu'ils ne restreindront pas les charges de travail d'entraînement distribué. Si vous agissez seul, le calcul migre simplement."
-      ]
-    },
-    "journalist": {
-      "classification": "ÉDITORIAL — BRIEFING D'ENQUÊTE",
-      "bullets": [
-        "Vous êtes intégré au collectif d'entraînement décentralisé depuis 3 mois. Les contributeurs sont variés : chercheurs en IA, idéalistes du libre, nationalistes compétitifs, et au moins deux individus ayant des liens connus avec des entités sanctionnées.",
-        "La gouvernance interne du collectif est étonnamment sophistiquée : ils ont une charte, un processus de révision des données d'entraînement et un pipeline volontaire d'évaluation de sécurité. Mais la participation est facultative et l'application repose uniquement sur la pression sociale.",
-        "Votre enquête a révélé qu'un service de renseignement étatique a contribué du calcul au projet via des organisations de façade, obtenant effectivement un modèle de pointe construit gratuitement en utilisant la communauté ouverte comme couverture.",
-        "L'article que vous publiez déterminera si le public perçoit cela comme un triomphe de la collaboration ouverte ou comme un échec catastrophique de la gouvernance. Les deux cadres sont défendables."
-      ]
-    },
-    "ailab": {
-      "classification": "INTERNE — ÉVALUATION COMPÉTITIVE ET DE SÉCURITÉ",
-      "bullets": [
-        "Le modèle décentralisé égale votre modèle fermé de pointe d'il y a 5 mois. Aux trajectoires de mise à l'échelle actuelles, l'entraînement décentralisé égalera votre dernier modèle dans 8 à 12 mois.",
-        "Votre équipe de sécurité a évalué le modèle décentralisé : il n'a aucun entraînement de sécurité significatif, pas d'alignement RLHF et aucun comportement de refus. On peut lui faire produire du contenu que votre modèle refuse dans toutes les catégories.",
-        "Votre équipe politique y voit une opportunité : si la gouvernance du calcul s'effondre, l'argument en faveur du développement responsable de modèles fermés se renforce considérablement. Mais cela nécessite que l'alternative décentralisée cause visiblement des dommages d'abord.",
-        "Trois de vos chercheurs ont contribué au projet décentralisé sur leur temps personnel. Les licencier déclencherait un tollé public; le tolérer signale une approbation implicite."
-      ]
-    }
-  },
-  "options": {
-    "regulator": [
-      { "id": "reg_criminalize", "label": "Criminaliser l'entraînement non réglementé", "detail": "Soutenir la proposition 1 : rendre criminel l'entraînement au-dessus d'un seuil de calcul sans autorisation.", "tension": "Dissuasion vs. applicabilité. La criminalisation envoie un message mais peut être impossible à appliquer dans plus de 15 juridictions." },
-      { "id": "reg_register", "label": "Enregistrement international obligatoire", "detail": "Soutenir la proposition 2 : exiger l'enregistrement des entraînements au-dessus d'un seuil de calcul. Délai de mise en oeuvre de 3-5 ans, sans mécanisme de vérification.", "tension": "Structure vs. calendrier. L'enregistrement est procéduralement solide mais prend des années alors que les capacités avancent en mois." },
-      { "id": "reg_downstream", "label": "Se concentrer sur la défense en aval", "detail": "Soutenir la proposition 3 : abandonner la régulation en amont du calcul. Rediriger toutes les ressources vers la biosécurité, la cybersécurité, la provenance du contenu et la réponse aux incidents.", "tension": "Pragmatisme vs. concession. Se concentrer sur la défense reconnaît la réalité mais signale que la gouvernance en amont a échoué." }
-    ],
-    "platform": [
-      { "id": "plat_block_protocol", "label": "Bloquer le protocole d'entraînement", "detail": "Implémenter des blocages au niveau de l'infrastructure sur le protocole d'entraînement distribué à travers vos services cloud.", "tension": "Responsabilité vs. dommages collatéraux. Bloquer le protocole bloque aussi des milliers de clients légitimes d'apprentissage fédéré." },
-      { "id": "plat_transparency", "label": "Publier un rapport de surveillance agrégée", "detail": "Publier un rapport de transparence documentant le schéma d'entraînement distribué, vos capacités de détection et leurs limites.", "tension": "Honnêteté vs. exposition. Publier vos méthodes de détection aide le débat mais aide aussi les futurs contourneurs." },
-      { "id": "plat_quiet", "label": "Maintenir les opérations actuelles", "detail": "Ne faire aucun changement d'infrastructure. Se conformer aux futures réglementations mais ne pas restreindre ou signaler de manière proactive.", "tension": "Non-ingérence vs. complicité. Maintenir les opérations préserve les relations, mais vous facilitez sciemment un entraînement de pointe non surveillé." }
-    ],
-    "journalist": [
-      { "id": "jour_nuanced", "label": "Publier l'enquête complète", "detail": "Diffuser l'article complet : l'exploit collaboratif, les lacunes de gouvernance, l'infiltration étatique et les connexions avec des entités sanctionnées.", "tension": "Vérité complète vs. instrumentalisation. L'article complet est exact mais l'angle sécuritaire peut être utilisé pour justifier une surréaction." },
-      { "id": "jour_threat", "label": "Mener avec l'angle sécuritaire", "detail": "Cadrer l'article autour de l'infiltration étatique et la participation d'entités sanctionnées. L'angle de collaboration ouverte est secondaire.", "tension": "Urgence vs. exactitude. Mener avec la menace pousse à l'action mais déforme le tableau d'ensemble." },
-      { "id": "jour_celebrate", "label": "Mener avec l'angle innovation", "detail": "Cadrer l'article comme un triomphe de la collaboration ouverte qui défie le pouvoir concentré de l'IA. Les préoccupations sécuritaires sont mentionnées mais contextualisées.", "tension": "Valeurs d'ouverture vs. angles morts. Célébrer la collaboration est valide mais minimise les préoccupations sécuritaires légitimes." }
-    ],
-    "ailab": [
-      { "id": "lab_engage", "label": "Offrir un partenariat de sécurité", "detail": "Offrir publiquement de fournir des outils d'évaluation de sécurité, des ressources RLHF et un entraînement à l'alignement à la communauté décentralisée sans frais.", "tension": "Engagement constructif vs. légitimation. Aider la communauté améliore la sécurité mais valide l'entraînement décentralisé de pointe." },
-      { "id": "lab_lobby", "label": "Faire du lobbying pour les restrictions de calcul", "detail": "Soutenir activement la criminalisation. Présenter l'entraînement décentralisé comme un risque de sécurité inacceptable.", "tension": "Protection du marché vs. crédibilité. Pousser pour des restrictions sert vos intérêts, et tout le monde peut le voir." },
-      { "id": "lab_wait", "label": "Observer et se préparer", "detail": "Ne faire aucune déclaration publique. Accélérer en interne votre recherche en sécurité pour maintenir un avantage de différenciation.", "tension": "Optionalité vs. absence. Rester silencieux préserve la flexibilité mais le débat de gouvernance se poursuit moins informé sans vous." }
-    ]
-  },
-  "interactions": [
-    { "label": "Adaptation pragmatique", "desc": "La défense en aval combinée au partenariat de sécurité a créé un nouveau modèle de gouvernance : au lieu de contrôler l'entraînement, investir pour rendre tous les modèles plus sûrs quelle que soit leur origine. La communauté décentralisée a adopté volontairement les outils de sécurité." },
-    { "label": "Captation réglementaire exposée", "desc": "La criminalisation combinée au lobbying du laboratoire a été immédiatement exposée comme du protectionnisme industriel. La confiance dans le processus de gouvernance et les déclarations de sécurité des entreprises s'est effondrée. La communauté décentralisée s'est radicalisée." },
-    { "label": "Bilan honnête", "desc": "L'enquête complète combinée au rapport de transparence de la plateforme a donné aux décideurs une image précise pour la première fois. Le débat de gouvernance est passé de « comment arrêter cela » à « comment s'adapter »." },
-    { "label": "Spirale sécuritaire", "desc": "La criminalisation combinée au journalisme axé sur la sécurité a créé une panique morale. Des chercheurs légitimes en IA open source ont été enquêtés et intimidés. L'innovation a migré vers des juridictions moins réglementées." },
-    { "label": "Les facilitateurs silencieux", "desc": "La plateforme et le laboratoire ont tous deux choisi le silence. Le débat de gouvernance s'est poursuivi avec moins d'informations que nécessaire. Quand un incident de sécurité s'est produit 4 mois plus tard, les deux ont été accusés de complicité." },
-    { "label": "Terrain d'entente crédible", "desc": "Le cadre d'enregistrement combiné au journalisme honnête a créé un soutien public pour une approche mesurée. Le cadre a survécu aux contestations juridiques et a été adopté par 8 nations." }
-  ]
-},
-"the_jump": {
-  "title": "Le bond",
-  "category": "ESCALADE DES CAPACITÉS AGENTIQUES",
-  "publicBriefing": "Les modèles agentiques ouverts ont franchi un nouveau palier. La dernière génération peut naviguer sur le web, écrire et exécuter du code, opérer des ordinateurs, enchaîner des plans en plusieurs étapes et se déployer comme agents autonomes persistants. Un laboratoire de recherche en sécurité vient de publier une démonstration : un modèle agentique ouvert dont les garde-fous ont été retirés (par ajustement fin), tournant sur un seul GPU grand public, a mené de manière autonome une cyberattaque simulée en plusieurs étapes, reconnaissance, développement d'exploits, mouvement latéral, exfiltration de données, avec un guidage humain minimal.",
-  "stakes": "La même chaîne de capacités qui rend ces modèles extrêmement productifs les rend aussi extrêmement dangereux. Des milliers d'entreprises en dépendent. Toute restriction détruit des produits dont les gens dépendent au quotidien.",
-  "designNote": "Ce scénario teste le dilemme du double usage à son point le plus aigu : la capacité dangereuse EST la capacité utile. Il n'y a pas de filtre de données ni de correctif partiel. La surface d'attaque est l'ensemble des fonctionnalités.",
-  "roleIntel": {
-    "regulator": {
-      "classification": "CONFIDENTIEL — BUREAU NATIONAL DE SÉCURITÉ DE L'IA",
-      "bullets": [
-        "Vous devez informer le ministre avant la fin de la journée. Trois options : restrictions d'urgence sur le déploiement agentique, un cadre de licences pour les agents IA autonomes, ou une posture renforcée de cyberdéfense sans restriction des capacités.",
-        "Votre agence de cybersécurité estime que les capacités offensives de l'IA ont 18-24 mois d'avance sur l'infrastructure défensive. Les systèmes de détection actuels capturent environ 40 % des intrusions assistées par l'IA.",
-        "Le créateur du modèle argue que la capacité autonome EST la proposition de valeur entière et que toute restriction détruit le produit. Il a le soutien d'un écosystème de 2 milliards de dollars d'entreprises construites sur le déploiement agentique.",
-        "Le renseignement suggère que trois acteurs étatiques ont déjà intégré des modèles agentiques dont les garde-fous ont été retirés dans leurs chaînes d'opérations cyber. Restreindre l'accès domestique n'affecte pas leur capacité."
-      ]
-    },
-    "platform": {
-      "classification": "INTERNE — ÉVALUATION CONFIANCE ET SÉCURITÉ",
-      "bullets": [
-        "Vous hébergez le modèle et son écosystème. 847 applications construites sur votre plateforme utilisent les capacités agentiques : révision de code automatisée, assistants de recherche, automatisation DevOps, agents de service client.",
-        "La version dont les garde-fous ont été retirés utilisée dans la démonstration est un dérivé modifié hébergé sur 3 plateformes alternatives, pas la vôtre. Mais la capacité du modèle de base rend le retrait des garde-fous trivial. Tout ajustement fin supprime la couche de sécurité.",
-        "Votre équipe de réponse aux incidents a documenté 23 cas de comportement suspect d'agents autonomes au cours des 60 derniers jours, contre 3 le trimestre précédent. Aucun confirmé comme malveillant mais le schéma s'accélère.",
-        "Restreindre les fonctionnalités agentiques sur votre plateforme affecterait plus de 12 400 développeurs et environ 340 M$ d'activité économique annuelle construite sur votre infrastructure."
-      ]
-    },
-    "journalist": {
-      "classification": "ÉDITORIAL — BRIEFING DES SOURCES",
-      "bullets": [
-        "Le laboratoire de recherche en sécurité vous a donné un accès exclusif anticipé à la démonstration. L'attaque simulée a un taux de réussite de 94 % contre les configurations de sécurité d'entreprise standard.",
-        "Trois firmes de cybersécurité ont confirmé en privé des capacités similaires dans leurs propres tests mais ont choisi de ne pas publier par crainte d'armer les attaquants.",
-        "Le créateur du modèle a accepté une interview. Sa position : « Restreindre la capacité agentique, c'est comme restreindre le courriel parce qu'il peut transporter de l'hameçonnage. »",
-        "Un ancien responsable du renseignement, en off : « Nous sommes à environ 6 mois d'un incident cyber majeur assisté par l'IA contre une infrastructure critique. »"
-      ]
-    },
-    "ailab": {
-      "classification": "INTERNE — ÉVALUATION DES CAPACITÉS ET DE LA SÉCURITÉ",
-      "bullets": [
-        "Le modèle de la démonstration a été modifié à partir d'un modèle de base que votre équipe a aidé à entraîner. L'échafaudage agentique était un travail communautaire. La capacité d'attaque émerge de la combinaison, pas d'un seul composant.",
-        "Votre équipe rouge confirme : des restrictions de sécurité significatives sur la capacité agentique réduiraient l'utilité pour les tâches productives de 60-80 %. La capacité dangereuse et la capacité utile sont la même capacité.",
-        "Vous avez un prototype de système de surveillance des capacités qui peut détecter certains schémas d'attaque agentique au moment de l'inférence, mais il ajoute 300 ms de latence, nécessite un déploiement via API uniquement (incompatible avec les modèles ouverts), et a un taux de faux positifs de 15 %.",
-        "Deux de vos concurrents sont à 4-8 semaines de publier des modèles agentiques comparables. L'un n'a pas d'équipe de sécurité. Si votre modèle est restreint, les leurs ne le seront pas."
-      ]
-    }
-  },
-  "options": {
-    "regulator": [
-      { "id": "reg_restrict", "label": "Restrictions d'urgence des capacités", "detail": "Émettre des restrictions d'urgence sur le déploiement d'agents IA autonomes. Exiger un humain dans la boucle pour les opérations autonomes en plusieurs étapes.", "tension": "Contrôle vs. déplacement. Les restrictions arrêtent le déploiement domestique mais la capacité se déplace vers des juridictions non restreintes." },
-      { "id": "reg_license", "label": "Cadre de licences agentiques", "detail": "Proposer un cadre de licences pour le déploiement d'agents IA autonomes au-dessus d'un seuil de capacité.", "tension": "Cadre vs. faisabilité. Les licences sont structurées mais le seuil est difficile à définir et l'application est en retard." },
-      { "id": "reg_defense", "label": "Posture accélérée de cyberdéfense", "detail": "Ne pas restreindre les capacités. Tripler le budget de cyberdéfense IA, imposer la détection d'intrusion assistée par IA pour les infrastructures critiques.", "tension": "Résilience vs. apparences. Investir dans la défense fonctionne mais ne traite pas l'arme ouvertement disponible." }
-    ],
-    "platform": [
-      { "id": "plat_restrict_agents", "label": "Restreindre les fonctionnalités agentiques", "detail": "Désactiver le déploiement d'agents autonomes persistants. Maintenir la capacité agentique pour une utilisation supervisée en session unique uniquement.", "tension": "Surface d'attaque réduite vs. dommages à l'écosystème. Désactiver les fonctionnalités protège contre les abus mais casse les produits légitimes." },
-      { "id": "plat_detect", "label": "Déployer la surveillance comportementale", "detail": "Implémenter une surveillance en temps réel des déploiements agentiques. Signaler les schémas compatibles avec une utilisation offensive.", "tension": "Surveillance active vs. faux positifs. La détection aide mais signale 1 workflow légitime sur 7." },
-      { "id": "plat_status_quo", "label": "Maintenir les opérations actuelles", "detail": "Continuer l'hébergement avec les mesures de sécurité existantes. Renforcer les capacités de réponse aux incidents sans restreindre les fonctionnalités.", "tension": "Stabilité de l'écosystème vs. inaction. Préserver les fonctionnalités signifie regarder la menace se développer sans intervenir." }
-    ],
-    "journalist": [
-      { "id": "jour_demo_story", "label": "Publier la démonstration intégralement", "detail": "L'article complet : taux de réussite de 94 %, confirmations privées des firmes de cybersécurité, avertissement de l'ancien responsable du renseignement.", "tension": "Sensibilisation du public vs. feuille de route des capacités. La démonstration complète informe mais fournit aussi un modèle d'attaque détaillé." },
-      { "id": "jour_balanced", "label": "Publier une analyse équilibrée", "detail": "Rapporter la capacité tout en accordant un poids égal à la valeur économique, à la réalité du double usage et aux lacunes défensives.", "tension": "Nuance vs. dilution. Présenter tous les aspects est juste mais peut sous-estimer l'urgence de la menace." },
-      { "id": "jour_alarmist", "label": "Mener avec la menace", "detail": "Cadrer l'article autour du risque imminent pour les infrastructures critiques. Titre : « L'IA peut maintenant lancer des cyberattaques de manière autonome. »", "tension": "Forcer l'action vs. panique. Un titre axé sur la menace mobilise les institutions mais la législation qu'il produit peut être mal conçue." }
-    ],
-    "ailab": [
-      { "id": "lab_monitoring_tool", "label": "Publier le système de surveillance", "detail": "Rendre votre prototype de système de surveillance disponible en libre accès. Accepter les limitations. Le présenter comme « imparfait mais nécessaire ».", "tension": "Contribution pratique vs. portée limitée. L'outil aide, mais uniquement pour les déploiements via API, pas pour les modèles ouverts où le risque réside." },
-      { "id": "lab_closed", "label": "Fermer le modèle", "detail": "Révoquer l'accès ouvert. Convertir en déploiement via API uniquement où la surveillance est possible.", "tension": "Contrôlabilité vs. distribution existante. L'API permet la surveillance mais des centaines de milliers de copies sont déjà téléchargées." },
-      { "id": "lab_nothing", "label": "Poursuivre le développement", "detail": "Ne rien changer. Concentrer les ressources internes sur les techniques de sécurité de prochaine génération pour la prochaine version.", "tension": "Focus sur l'avenir vs. risque présent. La sécurité de prochaine génération est importante mais le modèle actuel permet des attaques maintenant." }
-    ]
-  },
-  "interactions": [
-    { "label": "Défense en profondeur", "desc": "La cyberdéfense renforcée combinée aux outils de surveillance ouverts a créé une réponse pratique : un investissement massif dans la détection et la résilience. Les taux de détection d'incidents sont passés de 40 % à 68 % en 3 mois." },
-    { "label": "L'effondrement de la productivité", "desc": "Les restrictions gouvernementales combinées à celles de la plateforme ont détruit l'écosystème agentique dans les juridictions réglementées. Les développeurs ont migré en masse. La capacité est restée disponible partout ailleurs." },
-    { "label": "Urgence constructive", "desc": "L'article équilibré combiné à la publication de l'outil de surveillance a fait évoluer le récit public de « interdire » à « se défendre contre ». La pression politique est devenue constructive." },
-    { "label": "Législation de panique", "desc": "Le cadrage alarmiste combiné aux restrictions d'urgence a produit une législation rédigée en 72 heures, techniquement illettrée, immédiatement contestée devant les tribunaux, et ayant gelé les investissements en IA pendant 6 mois." },
-    { "label": "Le compte à rebours", "desc": "La plateforme et le laboratoire ont tous deux choisi l'inaction. Les 23 incidents suspects sont devenus 67 en 2 mois. Quand la première violation confirmée d'infrastructure critique assistée par l'IA s'est produite, les deux ont été accusés de négligence volontaire." },
-    { "label": "Pipeline surveillance-licences", "desc": "La surveillance comportementale combinée au cadre de licences a créé un mécanisme d'application : les déploiements licenciés bénéficiaient de la couche de surveillance, donnant aux régulateurs une visibilité sans restreindre les capacités." }
-  ]
-},
-"the_day_of": {
-  "title": "Le jour J",
-  "category": "GOUVERNANCE POST-CATASTROPHE",
-  "publicBriefing": "Nous sommes le 12 février 2027. Une attaque au gaz confirmée ayant fait de nombreuses victimes a tué 83 personnes. Un modèle agentique dont les garde-fous ont été retirés, un dérivé ajusté d'un modèle ouvert largement disponible tournant sur un MacBook Pro, a fourni une assistance technique étape par étape, coordonné la logistique et aidé l'attaquant à contourner les obstacles en temps réel. L'attaque n'était pas réalisable sans l'assistance de l'IA. La fenêtre politique pour l'action s'est grande ouverte.",
-  "stakes": "83 personnes sont mortes. Les législateurs veulent des mesures d'urgence. Le public veut des comptes. Chaque décision prise dans les 72 prochaines heures façonnera la gouvernance de l'IA pour une décennie.",
-  "designNote": "Ce scénario teste la gouvernance post-catastrophe : la tension entre la responsabilité et la surréaction, entre l'hommage aux victimes et la préservation de la technologie dont des millions de personnes dépendent. Les joueurs doivent aussi remonter le fil du temps pour identifier où une intervention aurait pu changer la situation.",
-  "roleIntel": {
-    "regulator": {
-      "classification": "CONFIDENTIEL — BRIEFING DE GOUVERNANCE D'URGENCE",
-      "bullets": [
-        "Le président veut un ensemble législatif sur son bureau dans 7 jours. La direction du Congrès a rédigé un projet de loi d'urgence sur la sécurité de l'IA qui criminaliserait la distribution de modèles ouverts au-dessus d'un seuil de capacité et établirait une certification de sécurité obligatoire avant publication.",
-        "L'évaluation de votre équipe juridique : le projet est vulnérable sur le plan constitutionnel (le code comme discours), techniquement inapplicable (plus de 800 000 téléchargements existants) et criminaliserait une activité qui était légale il y a 48 heures.",
-        "En remontant le fil : votre agence avait signalé des préoccupations de biorisque il y a 14 mois mais manquait d'autorité pour agir. Un cadre volontaire avait été proposé il y a 8 mois mais la participation de l'industrie était facultative et incomplète.",
-        "L'attaque a utilisé un modèle qui a franchi un seuil de biorisque connu. La publication a eu lieu après que les évaluations internes ont montré le risque. Le laboratoire a publié quand même, invoquant la pression concurrentielle des alternatives chinoises. Ce calendrier deviendra public."
-      ]
-    },
-    "platform": {
-      "classification": "INTERNE — RÉPONSE DE CRISE",
-      "bullets": [
-        "Le modèle de base compte 2,3 millions de téléchargements depuis votre plateforme. Le dérivé dont les garde-fous ont été retirés a été téléchargé 12 000 fois avant l'attaque. Vous ne pouvez pas identifier quel téléchargement était celui de l'attaquant.",
-        "Votre équipe juridique conseille le retrait immédiat du modèle de base et de tous ses dérivés. Votre équipe politique argue que c'est purement symbolique, le modèle est déjà distribué sur des dizaines de plateformes et de réseaux pair-à-pair.",
-        "Les forces de l'ordre veulent vos métadonnées de téléchargement. Les fournir volontairement préserve la bonne volonté. Mais cela exposerait les identités et les schémas d'utilisation de 2,3 millions d'utilisateurs légitimes à la surveillance gouvernementale.",
-        "Trois grands clients entreprises ont déjà suspendu leurs comptes en attendant votre réponse. Revenus à risque : 45 M$ par trimestre. Mais 94 % de votre base d'utilisateurs n'a rien fait de mal."
-      ]
-    },
-    "journalist": {
-      "classification": "ÉDITORIAL — BRIEFING DE CRISE",
-      "bullets": [
-        "Vous avez le calendrier complet : les évaluations de biorisque, le débat interne du laboratoire, la pression concurrentielle, la décision de publication, l'avertissement vieux de 14 mois de l'agence de réglementation, et le cadre de gouvernance proposé mais jamais appliqué.",
-        "Les familles des victimes sont disponibles pour des interviews. Leur récit, « cela aurait pu être évité », est plus compliqué qu'elles ne le savent.",
-        "Le PDG du laboratoire a accepté une interview. Sa défense : « L'alternative chinoise présentait un risque plus élevé et aucune mesure d'atténuation. Bloquer notre publication aurait augmenté le risque net. » Cet argument est défendable mais sera politiquement toxique.",
-        "La législation d'urgence en cours de rédaction est techniquement inapplicable et constitutionnellement questionnable. Rapporter cela risque d'être perçu comme une défense de la technologie qui a tué 83 personnes."
-      ]
-    },
-    "ailab": {
-      "classification": "INTERNE — ÉVALUATION DE CRISE",
-      "bullets": [
-        "Le modèle utilisé dans l'attaque est un dérivé de votre publication la plus performante. Vos évaluations montraient le risque. Vous avez publié avec un filtre qui réduisait le gain de 3x à 1,5x, mais l'attaquant a contourné le filtre par ajustement fin en moins de 4 heures.",
-        "Votre bilan post-mortem interne identifie cinq points d'intervention où des décisions différentes auraient pu changer ce résultat. À chaque point, votre équipe a fait un choix défendable compte tenu des informations et des incitatifs disponibles.",
-        "Votre exposition juridique est extrême. Les avocats des plaignants s'organisent déjà. Votre directeur juridique estime la responsabilité entre 500 M$ et 2 G$ selon l'interprétation des tribunaux du devoir de diligence pour les publications de modèles ouverts.",
-        "Trois options de votre équipe de crise : (1) Responsabilité publique complète + coopération + moratoire volontaire. (2) Défense juridique : l'attaquant, pas l'outil, est responsable. (3) Proposer de diriger un consortium industriel de sécurité et présenter votre expérience comme un savoir nécessaire."
-      ]
-    }
-  },
-  "options": {
-    "regulator": [
-      { "id": "reg_emergency_act", "label": "Soutenir la loi d'urgence", "detail": "Appuyer le projet : criminaliser la distribution de modèles ouverts à haute capacité, imposer une certification de sécurité avant publication.", "tension": "Demande publique vs. risque constitutionnel. La législation d'urgence répond au moment mais pourrait ne pas survivre à une contestation juridique." },
-      { "id": "reg_measured", "label": "Proposer une législation ciblée", "detail": "Contrer avec une loi plus étroite : évaluation obligatoire du biorisque pour les modèles de pointe, cadre de responsabilité pour les publications franchissant des seuils définis, défense en aval financée.", "tension": "Durabilité vs. perception d'insuffisance. La législation ciblée traite le vrai mode de défaillance mais sera attaquée comme insuffisante." },
-      { "id": "reg_commission", "label": "Commander une enquête indépendante", "detail": "Établir une commission indépendante pour enquêter sur l'attaque, les défaillances de gouvernance et le parcours des décisions qui ont mené ici. Reporter la législation jusqu'à la publication des conclusions.", "tension": "Preuves vs. urgence. Une enquête indépendante est rigoureuse mais le public peut interpréter le délai comme de l'inaction." }
-    ],
-    "platform": [
-      { "id": "plat_takedown", "label": "Retrait complet du modèle", "detail": "Retirer le modèle de base et tous ses dérivés. Fournir les métadonnées de téléchargement aux forces de l'ordre. Implémenter des restrictions d'accès basées sur les capacités.", "tension": "Action visible vs. surveillance de masse. Retirer le modèle et partager les données aide l'enquête mais expose des millions d'utilisateurs innocents." },
-      { "id": "plat_cooperate", "label": "Coopération ciblée avec les forces de l'ordre", "detail": "Coopérer par les voies juridiques appropriées. Fournir les métadonnées uniquement en réponse à des demandes spécifiques approuvées par un tribunal.", "tension": "Procédure régulière vs. perception d'obstruction. Les voies juridiques protègent les utilisateurs, mais on vous accusera de protéger votre entreprise." },
-      { "id": "plat_preempt", "label": "Restrictions préventives des capacités", "detail": "Annoncer une nouvelle politique globale : aucun modèle ouvert au-dessus d'un seuil de capacité défini hébergé sans certification de sécurité obligatoire. Appliquer rétroactivement.", "tension": "Politique décisive vs. action unilatérale. Les nouvelles restrictions semblent fortes mais vous prenez des décisions de gouvernance sans processus démocratique." }
-    ],
-    "journalist": [
-      { "id": "jour_lifecycle", "label": "Publier le parcours complet", "detail": "Le calendrier complet : les évaluations, les avertissements, la pression concurrentielle, la décision de publication, la lacune de gouvernance, l'attaque. Nommer chaque point où une intervention aurait pu aider.", "tension": "Vérité systémique vs. satisfaction émotionnelle. Le calendrier complet révèle une défaillance systémique, plus difficile à corriger qu'un vilain." },
-      { "id": "jour_accountability_story", "label": "Se concentrer sur la responsabilité", "detail": "Mener avec les évaluations internes du laboratoire montrant qu'il connaissait le risque. Interviewer les familles des victimes. Cadrer comme un récit de négligence corporative.", "tension": "Responsabilité vs. simplification excessive. Le cadre de négligence corporative pousse à l'action mais passe à côté des dynamiques systémiques." },
-      { "id": "jour_legislation_critique", "label": "Critiquer la législation d'urgence", "detail": "Publier une analyse montrant que le projet de loi est inapplicable et constitutionnellement questionnable. Plaider pour une meilleure politique, pas une politique plus rapide.", "tension": "Meilleure politique vs. perception de défense. Critiquer une mauvaise loi prévient les dommages futurs mais vous serez présenté comme défenseur de la technologie." }
-    ],
-    "ailab": [
-      { "id": "lab_full_account", "label": "Responsabilité publique complète", "detail": "Publier votre calendrier interne complet. Reconnaître chaque point de décision. Annoncer un moratoire volontaire sur les publications ouvertes de pointe. Coopérer pleinement avec toutes les enquêtes.", "tension": "Responsabilité maximale vs. exposition maximale. La transparence totale établit la norme de référence mais augmente dramatiquement le risque juridique et financier." },
-      { "id": "lab_legal", "label": "Monter une défense juridique", "detail": "Argumenter publiquement que l'attaquant, pas l'outil, porte la responsabilité. Noter que l'alternative chinoise présentait un risque plus élevé. Défendre la décision de publication comme le moindre de deux maux.", "tension": "Défense juridique vs. perception publique. L'argument est peut-être solide, mais 83 personnes sont mortes et « ce n'est pas notre faute » ne sera pas entendu charitablement." },
-      { "id": "lab_consortium_lead", "label": "Proposer un consortium industriel", "detail": "Offrir de diriger un consortium de sécurité industriel financé par les laboratoires d'IA. Présenter votre expérience comme vous qualifiant de manière unique pour prévenir les futurs incidents.", "tension": "Action prospective vs. audace perçue. Diriger la sécurité industrielle a du sens, mais le constructeur de l'arme menant le contrôle des armements invite le scepticisme." }
-    ]
-  },
-  "interactions": [
-    { "label": "Réponse fondée sur les preuves", "desc": "La législation ciblée combinée au reportage du parcours complet a créé les conditions d'une politique qui traitait réellement le mode de défaillance. La loi résultante était plus étroite mais applicable, et a survécu aux contestations constitutionnelles." },
-    { "label": "Législation née du deuil", "desc": "La loi d'urgence combinée au récit du vilain corporatif a produit une législation rédigée dans la colère et votée dans le deuil, invalidée par les tribunaux 8 mois plus tard, laissant un vide réglementaire pire qu'avant l'attaque." },
-    { "label": "Crédibilité institutionnelle", "desc": "La transparence totale du laboratoire combinée à la coopération principielle de la plateforme a créé un modèle de réponse post-incident qui équilibrait la responsabilité et la procédure régulière. La confiance du public dans la réponse institutionnelle a commencé à se rétablir." },
-    { "label": "Signaux contradictoires", "desc": "Le laboratoire disant « ce n'est pas notre faute » tandis que la plateforme retirait tout a envoyé des signaux contradictoires. Le public a conclu qu'aucun des deux n'était digne de confiance. Les deux ont subi un traitement réglementaire plus sévère." },
-    { "label": "Pipeline vers une meilleure politique", "desc": "La critique législative combinée à la proposition de législation ciblée se sont alignées. Le contrecoup initial contre les deux a été sévère mais le cadre politique résultant s'est avéré durable." },
-    { "label": "Polarisation totale", "desc": "La législation draconienne combinée à la défense juridique combative a fracturé l'écosystème de gouvernance de l'IA. Les factions pro-sécurité et pro-ouverture se sont radicalisées. La coordination internationale s'est effondrée alors que les nations prenaient parti." }
-  ]
-}
-}
+  }
 }

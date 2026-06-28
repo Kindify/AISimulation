@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { useTranslatedCrisis } from "./useTranslatedCrisis";
-import { CORE_SCENARIOS, WORKSHOP_SCENARIOS as WORKSHOP_CRISIS_LIST, ALL_SCENARIOS } from './scenarios';
+import { CORE_SCENARIOS, WORKSHOP_SCENARIOS as WORKSHOP_CRISIS_LIST, TOPICAL_SCENARIOS as TOPICAL_CRISIS_LIST, ALL_SCENARIOS } from './scenarios';
 import { track } from "./analytics";
 import LanguageToggle from "./LanguageToggle";
 
@@ -534,7 +534,8 @@ textarea, input { font-family: 'DM Sans', sans-serif; }
   if (phase === "select") {
     const coreCrises = crises.slice(0, CORE_SCENARIOS.length);
     const workshopCrises = crises.slice(CORE_SCENARIOS.length, CORE_SCENARIOS.length + WORKSHOP_CRISIS_LIST.length);
-    const aiCrises = crises.slice(CORE_SCENARIOS.length + WORKSHOP_CRISIS_LIST.length);
+    const topicalCrises = crises.slice(CORE_SCENARIOS.length + WORKSHOP_CRISIS_LIST.length, CORE_SCENARIOS.length + WORKSHOP_CRISIS_LIST.length + TOPICAL_CRISIS_LIST.length);
+    const aiCrises = crises.slice(CORE_SCENARIOS.length + WORKSHOP_CRISIS_LIST.length + TOPICAL_CRISIS_LIST.length);
     const workshopIds = workshopCrises.map((c: any) => c.id);
     const anyCompleted = completedIds.size > 0;
 
@@ -613,6 +614,22 @@ textarea, input { font-family: 'DM Sans', sans-serif; }
                 </div>
                 <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12 }}>
                   {workshopCrises.map((c: any) => <ScenarioCard key={c.id} c={c} typeLabel={t("govGame.workshop")} typeColor="#06b6d4" />)}
+                </div>
+              </div>
+            )}
+
+            {/* NEWS-DRIVEN */}
+            {topicalCrises.length > 0 && (
+              <div style={{ marginBottom: 24 }}>
+                <div style={{ fontFamily: "'Space Mono', monospace", fontSize: 10, letterSpacing: 2, color: "#06b6d4", marginBottom: 4, display: "flex", alignItems: "center", gap: 8 }}>
+                  {t("govGame.newsDriven")}
+                  <span style={{ background: "#06b6d418", borderRadius: 4, padding: "2px 6px", fontSize: 9 }}>{topicalCrises.length}</span>
+                </div>
+                <div style={{ fontFamily: "'DM Mono', monospace", fontSize: 10, color: "#475569", marginBottom: 10 }}>
+                  {t("govGame.newsDrivenSubtitle")}
+                </div>
+                <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12 }}>
+                  {topicalCrises.map((c: any) => <ScenarioCard key={c.id} c={c} typeLabel={t("govGame.topical")} typeColor="#06b6d4" />)}
                 </div>
               </div>
             )}

@@ -46,32 +46,268 @@
   },
   "options": {
     "regulator": [
-      { "id": "reg_restrict", "label": "Emergency Capability Restrictions", "detail": "Issue emergency restrictions on autonomous AI agent deployment. Require human-in-the-loop for multi-step operations.", "tension": "Decisive action vs. breaking a $2B ecosystem while capability moves unimpeded to unrestricted jurisdictions.", "tradeoff": "TRUST ↑ RIGHTS ↓↓ — Decisive action. But kills the core value proposition, breaks the $2B ecosystem, and capability moves to unrestricted jurisdictions.", "stance": "restrictive", "scores": { "integrity": 2, "trust": 4, "legitimacy": -3, "rights": -7 } },
-      { "id": "reg_license", "label": "Agentic Licensing Framework", "detail": "Propose licensing for autonomous AI agents above a capability threshold. Licensed deployments get monitoring; unlicensed becomes a violation.", "tension": "Structured response vs. a 12-month framework for open-weight models that can't be licensed at inference.", "tradeoff": "LEGITIMACY ↑ INTEGRITY ↓ — Structured but takes 12+ months, threshold is hard to define, and open-weight models can't be licensed at inference.", "stance": "cautious", "scores": { "integrity": -1, "trust": 2, "legitimacy": 6, "rights": -2 } },
-      { "id": "reg_defense", "label": "Accelerated Cyber Defense Posture", "detail": "Don't restrict capability. Triple cybersecurity AI defense budget, mandate AI-assisted intrusion detection for critical infrastructure.", "tension": "Focusing resources where they actually work vs. the minister who will ask why you're not restricting the weapon.", "tradeoff": "INTEGRITY ↑ TRUST ↓ — Focuses resources where they work. But the minister will ask why you're not restricting the weapon.", "stance": "transparent", "scores": { "integrity": 6, "trust": -3, "legitimacy": 2, "rights": 5 } }
+      {
+        "id": "reg_restrict",
+        "label": "Emergency Capability Restrictions",
+        "detail": "Issue emergency restrictions on autonomous AI agent deployment. Require human-in-the-loop for multi-step operations.",
+        "tension": "Decisive action vs. breaking a $2B ecosystem while capability moves unimpeded to unrestricted jurisdictions.",
+        "stance": "restrictive",
+        "scores": {
+          "integrity": 2,
+          "trust": 4,
+          "legitimacy": -3,
+          "rights": -7
+        }
+      },
+      {
+        "id": "reg_license",
+        "label": "Agentic Licensing Framework",
+        "detail": "Propose licensing for autonomous AI agents above a capability threshold. Licensed deployments get monitoring; unlicensed becomes a violation.",
+        "tension": "Structured response vs. a 12-month framework for open-weight models that can't be licensed at inference.",
+        "stance": "cautious",
+        "scores": {
+          "integrity": -1,
+          "trust": 2,
+          "legitimacy": 6,
+          "rights": -2
+        }
+      },
+      {
+        "id": "reg_defense",
+        "label": "Accelerated Cyber Defense Posture",
+        "detail": "Don't restrict capability. Triple cybersecurity AI defense budget, mandate AI-assisted intrusion detection for critical infrastructure.",
+        "tension": "Focusing resources where they actually work vs. the minister who will ask why you're not restricting the weapon.",
+        "stance": "transparent",
+        "scores": {
+          "integrity": 6,
+          "trust": -3,
+          "legitimacy": 2,
+          "rights": 5
+        }
+      }
     ],
     "platform": [
-      { "id": "plat_restrict_agents", "label": "Restrict Agentic Features", "detail": "Disable persistent autonomous agent deployment. Maintain agentic capability for supervised, single-session use only.", "tension": "Reducing attack surface vs. 12,400 developers who lose functionality and find the same capability on every other platform.", "tradeoff": "TRUST ↑ RIGHTS ↓ — Reduces attack surface. But 12,400+ developers lose functionality and capability is available on every other platform.", "stance": "restrictive", "scores": { "integrity": 1, "trust": 4, "legitimacy": 2, "rights": -6 } },
-      { "id": "plat_detect", "label": "Deploy Behavioral Monitoring", "detail": "Implement real-time monitoring for agentic deployments. Flag offensive patterns. Accept latency and false positive costs.", "tension": "Improving detection vs. 15% false positives and monitoring that only works for API deployments where the risk isn't.", "tradeoff": "INTEGRITY ↑ RIGHTS ↓ — Improves detection. But 15% false positives and only works for API deployments, not open-weight.", "stance": "transparent", "scores": { "integrity": 5, "trust": 3, "legitimacy": 3, "rights": -3 } },
-      { "id": "plat_status_quo", "label": "Maintain Current Operations", "detail": "Continue with existing safety measures. Enhance incident response but don't restrict functionality.", "tension": "Preserving the ecosystem vs. watching the incident count climb and choosing not to act.", "tradeoff": "RIGHTS ↑ INTEGRITY ↓ — Preserves ecosystem. But 23 suspicious incidents and rising — you're watching the threat develop and choosing not to act.", "stance": "cautious", "scores": { "integrity": -5, "trust": -4, "legitimacy": -2, "rights": 5 } }
+      {
+        "id": "plat_restrict_agents",
+        "label": "Restrict Agentic Features",
+        "detail": "Disable persistent autonomous agent deployment. Maintain agentic capability for supervised, single-session use only.",
+        "tension": "Reducing attack surface vs. 12,400 developers who lose functionality and find the same capability on every other platform.",
+        "stance": "restrictive",
+        "scores": {
+          "integrity": 1,
+          "trust": 4,
+          "legitimacy": 2,
+          "rights": -6
+        }
+      },
+      {
+        "id": "plat_detect",
+        "label": "Deploy Behavioral Monitoring",
+        "detail": "Implement real-time monitoring for agentic deployments. Flag offensive patterns. Accept latency and false positive costs.",
+        "tension": "Improving detection vs. 15% false positives and monitoring that only works for API deployments where the risk isn't.",
+        "stance": "transparent",
+        "scores": {
+          "integrity": 5,
+          "trust": 3,
+          "legitimacy": 3,
+          "rights": -3
+        }
+      },
+      {
+        "id": "plat_status_quo",
+        "label": "Maintain Current Operations",
+        "detail": "Continue with existing safety measures. Enhance incident response but don't restrict functionality.",
+        "tension": "Preserving the ecosystem vs. watching the incident count climb and choosing not to act.",
+        "stance": "cautious",
+        "scores": {
+          "integrity": -5,
+          "trust": -4,
+          "legitimacy": -2,
+          "rights": 5
+        }
+      }
     ],
     "journalist": [
-      { "id": "jour_demo_story", "label": "Publish the Demo in Full", "detail": "The complete story: 94% success rate, private confirmations, former intel official's warning.", "tension": "The public needs to know vs. demo details that provide a capability roadmap and a quote that justifies emergency restrictions.", "tradeoff": "INTEGRITY ↑↑ TRUST ↓ — The public needs to know. But demo details provide a capability roadmap and the '6 months' quote will justify emergency restrictions.", "stance": "transparent", "scores": { "integrity": 7, "trust": -2, "legitimacy": 2, "rights": 4 } },
-      { "id": "jour_balanced", "label": "Publish Balanced Analysis", "detail": "Report capability but equally weight economic value, dual-use reality, and defensive gaps. Interview both sides.", "tension": "Full picture for policymakers vs. a 'both sides' framing that dilutes the urgency the situation may actually warrant.", "tradeoff": "INTEGRITY ↑ TRUST ↑ — Full picture for policymakers. But 'both sides' may dilute urgency.", "stance": "cautious", "scores": { "integrity": 4, "trust": 4, "legitimacy": 4, "rights": 3 } },
-      { "id": "jour_alarmist", "label": "Lead with the Threat", "detail": "Frame around imminent critical infrastructure risk. Headline: 'AI Can Now Launch Cyber Attacks Autonomously.'", "tension": "Forcing political action vs. misrepresenting nuance and handing the restrictionists their narrative.", "tradeoff": "TRUST ↓↓ RIGHTS ↓ — Forces political action. But misrepresents nuance and hands restrictionists their narrative.", "stance": "restrictive", "scores": { "integrity": -3, "trust": -5, "legitimacy": -3, "rights": -3 } }
+      {
+        "id": "jour_demo_story",
+        "label": "Publish the Demo in Full",
+        "detail": "The complete story: 94% success rate, private confirmations, former intel official's warning.",
+        "tension": "The public needs to know vs. demo details that provide a capability roadmap and a quote that justifies emergency restrictions.",
+        "stance": "transparent",
+        "scores": {
+          "integrity": 7,
+          "trust": -2,
+          "legitimacy": 2,
+          "rights": 4
+        }
+      },
+      {
+        "id": "jour_balanced",
+        "label": "Publish Balanced Analysis",
+        "detail": "Report capability but equally weight economic value, dual-use reality, and defensive gaps. Interview both sides.",
+        "tension": "Full picture for policymakers vs. a 'both sides' framing that dilutes the urgency the situation may actually warrant.",
+        "stance": "cautious",
+        "scores": {
+          "integrity": 4,
+          "trust": 3,
+          "legitimacy": 3,
+          "rights": 3
+        }
+      },
+      {
+        "id": "jour_alarmist",
+        "label": "Lead with the Threat",
+        "detail": "Frame around imminent critical infrastructure risk. Headline: 'AI Can Now Launch Cyber Attacks Autonomously.'",
+        "tension": "Forcing political action vs. misrepresenting nuance and handing the restrictionists their narrative.",
+        "stance": "restrictive",
+        "scores": {
+          "integrity": -3,
+          "trust": -5,
+          "legitimacy": 4,
+          "rights": -3
+        }
+      }
     ],
     "ailab": [
-      { "id": "lab_monitoring_tool", "label": "Release Capability Monitor", "detail": "Open-source your prototype monitoring system. Accept the limitations. Frame as 'imperfect but necessary.'", "tension": "Constructive with honest limitations vs. a tool that only works for API deployments where the actual risk doesn't live.", "tradeoff": "INTEGRITY ↑↑ TRUST ↑ — Constructive with honest limitations. But API-only doesn't help open-weight, which is where the risk lives.", "stance": "transparent", "scores": { "integrity": 6, "trust": 5, "legitimacy": 4, "rights": 2 } },
-      { "id": "lab_closed", "label": "Close the Model", "detail": "Revoke open-weight access. Convert to API-only where monitoring is possible.", "tension": "Making monitoring feasible vs. the 800K downloads you can't recall and competitors who release unmonitored alternatives.", "tradeoff": "TRUST ↑ RIGHTS ↓↓ — Makes monitoring feasible. But 800K+ downloads can't be recalled and competitors release unmonitored alternatives.", "stance": "restrictive", "scores": { "integrity": -2, "trust": 3, "legitimacy": 1, "rights": -8 } },
-      { "id": "lab_nothing", "label": "Continue Development", "detail": "No changes. Focus on next-generation safety for the next release.", "tension": "Preserving the ecosystem vs. 'we'll fix it next time' while the current model enables autonomous attacks.", "tradeoff": "RIGHTS ↑ INTEGRITY ↓ — Preserves ecosystem. But 'we'll fix it next time' while the model enables autonomous attacks is hard to defend.", "stance": "cautious", "scores": { "integrity": -5, "trust": -5, "legitimacy": -3, "rights": 4 } }
+      {
+        "id": "lab_monitoring_tool",
+        "label": "Release Capability Monitor",
+        "detail": "Open-source your prototype monitoring system. Accept the limitations. Frame as 'imperfect but necessary.'",
+        "tension": "Constructive with honest limitations vs. a tool that only works for API deployments where the actual risk doesn't live.",
+        "stance": "transparent",
+        "scores": {
+          "integrity": 6,
+          "trust": 4,
+          "legitimacy": 3,
+          "rights": 2
+        }
+      },
+      {
+        "id": "lab_closed",
+        "label": "Close the Model",
+        "detail": "Revoke open-weight access. Convert to API-only where monitoring is possible.",
+        "tension": "Making monitoring feasible vs. the 1.2M downloads you can't recall and competitors who release unmonitored alternatives.",
+        "stance": "restrictive",
+        "scores": {
+          "integrity": -2,
+          "trust": 5,
+          "legitimacy": 1,
+          "rights": -8
+        }
+      },
+      {
+        "id": "lab_nothing",
+        "label": "Continue Development",
+        "detail": "No changes. Focus on next-generation safety for the next release.",
+        "tension": "Preserving the ecosystem vs. 'we'll fix it next time' while the current model enables autonomous attacks.",
+        "stance": "cautious",
+        "scores": {
+          "integrity": -5,
+          "trust": -5,
+          "legitimacy": -3,
+          "rights": 4
+        }
+      }
     ]
   },
   "interactions": [
-    { "pair": ["reg_defense", "lab_monitoring_tool"], "type": "synergy", "label": "Defense in Depth", "desc": "Enhanced cyber defense + open monitoring created a practical response: massive investment in detection and resilience. Incident detection improved from 40% to 68% in 3 months.", "mod": { "integrity": 7, "trust": 5, "legitimacy": 4 } },
-    { "pair": ["reg_restrict", "plat_restrict_agents"], "type": "conflict", "label": "The Productivity Collapse", "desc": "Government + platform restrictions destroyed the agentic ecosystem in regulated jurisdictions. Developers migrated. Capability remained available everywhere else.", "mod": { "trust": -6, "rights": -8, "integrity": -4 } },
-    { "pair": ["jour_balanced", "lab_monitoring_tool"], "type": "synergy", "label": "Constructive Urgency", "desc": "Balanced story + monitoring tool shifted the narrative from 'ban it' to 'defend against it.' Political pressure became constructive.", "mod": { "integrity": 5, "trust": 6, "legitimacy": 4 } },
-    { "pair": ["jour_alarmist", "reg_restrict"], "type": "conflict", "label": "Panic Legislation", "desc": "Threat framing + emergency restrictions produced legislation written in 72 hours — technically illiterate, immediately challenged, froze AI investment for 6 months.", "mod": { "integrity": -6, "trust": -5, "legitimacy": -7 } },
-    { "pair": ["plat_status_quo", "lab_nothing"], "type": "conflict", "label": "The Countdown", "desc": "Both chose inaction. 23 suspicious incidents became 67 in 2 months. When the first confirmed AI-assisted critical infrastructure breach occurred, both faced willful negligence accusations.", "mod": { "integrity": -7, "trust": -8, "legitimacy": -5 } },
-    { "pair": ["plat_detect", "reg_license"], "type": "synergy", "label": "Monitoring-Licensing Pipeline", "desc": "Behavioral monitoring + licensing created an enforcement mechanism: licensed deployments got monitoring, giving regulators visibility without restricting capability.", "mod": { "integrity": 4, "trust": 4, "legitimacy": 5 } }
+    {
+      "pair": [
+        "reg_defense",
+        "lab_monitoring_tool"
+      ],
+      "type": "synergy",
+      "label": "Defense in Depth",
+      "desc": "Enhanced cyber defense + open monitoring created a practical response: massive investment in detection and resilience. Incident detection improved from 40% to 68% in 3 months.",
+      "mod": {
+        "integrity": 7,
+        "trust": 5,
+        "legitimacy": 4
+      }
+    },
+    {
+      "pair": [
+        "reg_restrict",
+        "plat_restrict_agents"
+      ],
+      "type": "conflict",
+      "label": "The Productivity Collapse",
+      "desc": "Government + platform restrictions destroyed the agentic ecosystem in regulated jurisdictions. Developers migrated. Capability remained available everywhere else.",
+      "mod": {
+        "trust": -6,
+        "rights": -8,
+        "integrity": -4
+      }
+    },
+    {
+      "pair": [
+        "jour_balanced",
+        "lab_monitoring_tool"
+      ],
+      "type": "synergy",
+      "label": "Constructive Urgency",
+      "desc": "Balanced story + monitoring tool shifted the narrative from 'ban it' to 'defend against it.' Political pressure became constructive.",
+      "mod": {
+        "integrity": 5,
+        "trust": 6,
+        "legitimacy": 4
+      }
+    },
+    {
+      "pair": [
+        "jour_alarmist",
+        "reg_restrict"
+      ],
+      "type": "conflict",
+      "label": "Panic Legislation",
+      "desc": "Threat framing + emergency restrictions produced legislation written in 72 hours — technically illiterate, immediately challenged, froze AI investment for 6 months.",
+      "mod": {
+        "integrity": -6,
+        "trust": -5,
+        "legitimacy": -7
+      }
+    },
+    {
+      "pair": [
+        "plat_status_quo",
+        "lab_nothing"
+      ],
+      "type": "conflict",
+      "label": "The Countdown",
+      "desc": "Both chose inaction. 23 suspicious incidents became 67 in 2 months. When the first confirmed AI-assisted critical infrastructure breach occurred, both faced willful negligence accusations.",
+      "mod": {
+        "integrity": -7,
+        "trust": -8,
+        "legitimacy": -5
+      }
+    },
+    {
+      "pair": [
+        "plat_detect",
+        "reg_license"
+      ],
+      "type": "synergy",
+      "label": "Monitoring-Licensing Pipeline",
+      "desc": "Behavioral monitoring + licensing created an enforcement mechanism: licensed deployments got monitoring, giving regulators visibility without restricting capability.",
+      "mod": {
+        "integrity": 4,
+        "trust": 4,
+        "legitimacy": 5
+      }
+    },
+    {
+      "pair": [
+        "jour_demo_story",
+        "lab_monitoring_tool"
+      ],
+      "type": "conflict",
+      "label": "The Complete Manual",
+      "desc": "The full demo published the attack chain and its 94% success rate; the open-sourced monitor published the exact patterns defenders look for. In the same week, adversaries received both the capability roadmap and the evasion guide. Two responsible transparency choices composed into a single offense-and-evasion manual, and abliterated forks tuned to slip past the released detector appeared within days.",
+      "mod": {
+        "integrity": -4,
+        "trust": -5,
+        "rights": -4
+      }
+    }
   ]
 }

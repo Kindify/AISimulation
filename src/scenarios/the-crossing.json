@@ -46,32 +46,268 @@
   },
   "options": {
     "regulator": [
-      { "id": "reg_block", "label": "Emergency Release Hold", "detail": "Issue an emergency order blocking the release pending a 90-day review and public comment period.", "tension": "Procedural seriousness vs. adoption that shifts to higher-risk Chinese alternatives during the hold period.", "tradeoff": "LEGITIMACY ↑ INTEGRITY ↓ — Procedurally bold but legally untested. Adoption shifts to Chinese alternatives with higher biorisk and no safety mitigations during the hold period.", "stance": "restrictive", "scores": { "integrity": -3, "trust": 4, "legitimacy": 5, "rights": -6 } },
-      { "id": "reg_framework", "label": "Conditional Release Framework", "detail": "Work with the lab to establish a public threshold framework: release with the data filter applied and publish the eval methodology as an industry standard.", "tension": "Setting a precedent for responsible disclosure vs. a filtered model that's weaker and a framework competitors outside your jurisdiction will ignore.", "tradeoff": "INTEGRITY ↑ TRUST ↑ — Sets precedent for responsible disclosure. But the filtered model is weaker, and the framework may be ignored by competitors who aren't subject to your jurisdiction.", "stance": "transparent", "scores": { "integrity": 6, "trust": 5, "legitimacy": 4, "rights": 2 } },
-      { "id": "reg_defer", "label": "Defer to Lab's Judgment", "detail": "Issue a public statement acknowledging the lab's eval transparency without taking regulatory action, preserving future flexibility.", "tension": "Preserving institutional flexibility vs. signaling that crossing biorisk thresholds has no institutional consequence.", "tradeoff": "RIGHTS ↑ INTEGRITY ↓ — Preserves the lab's autonomy and avoids a legal fight. But it signals that crossing biorisk thresholds triggers no institutional response.", "stance": "cautious", "scores": { "integrity": -5, "trust": -3, "legitimacy": -2, "rights": 5 } }
+      {
+        "id": "reg_block",
+        "label": "Emergency Release Hold",
+        "detail": "Issue an emergency order blocking the release pending a 90-day review and public comment period.",
+        "tension": "Procedural seriousness vs. adoption that shifts to higher-risk Chinese alternatives during the hold period.",
+        "stance": "restrictive",
+        "scores": {
+          "integrity": -3,
+          "trust": 4,
+          "legitimacy": 5,
+          "rights": -6
+        }
+      },
+      {
+        "id": "reg_framework",
+        "label": "Conditional Release Framework",
+        "detail": "Work with the lab to establish a public threshold framework: release with the data filter applied and publish the eval methodology as an industry standard.",
+        "tension": "Setting a precedent for responsible disclosure vs. a filtered model that's weaker and a framework competitors outside your jurisdiction will ignore.",
+        "stance": "transparent",
+        "scores": {
+          "integrity": 6,
+          "trust": 3,
+          "legitimacy": 3,
+          "rights": 2
+        }
+      },
+      {
+        "id": "reg_defer",
+        "label": "Defer to Lab's Judgment",
+        "detail": "Issue a public statement acknowledging the lab's eval transparency without taking regulatory action, preserving future flexibility.",
+        "tension": "Preserving institutional flexibility vs. signaling that crossing biorisk thresholds has no institutional consequence.",
+        "stance": "cautious",
+        "scores": {
+          "integrity": -5,
+          "trust": -3,
+          "legitimacy": -2,
+          "rights": 5
+        }
+      }
     ],
     "platform": [
-      { "id": "plat_host_monitor", "label": "Host with Enhanced Monitoring", "detail": "Distribute the model with download logging, usage guidelines, and a rapid takedown commitment if misuse evidence emerges.", "tension": "Maintaining visibility into distribution vs. monitoring that is technically impossible once the model is downloaded.", "tradeoff": "RIGHTS ↑ INTEGRITY ↓ — Maintains open access and visibility. But monitoring an open-weight model after download is technically impossible — this is largely performative.", "stance": "transparent", "scores": { "integrity": -2, "trust": 2, "legitimacy": 2, "rights": 5 } },
-      { "id": "plat_refuse", "label": "Refuse to Host", "detail": "Decline to distribute the model, citing biorisk concerns. Issue a public statement explaining the decision.", "tension": "Demonstrating principled stance vs. six other platforms that will host it within 48 hours with none of your monitoring.", "tradeoff": "TRUST ↑ INTEGRITY ↓ — Demonstrates principled stance. But 6+ alternative platforms will host it within 48 hours — you lose visibility into download patterns while achieving nothing on distribution.", "stance": "restrictive", "scores": { "integrity": -3, "trust": 5, "legitimacy": 3, "rights": -4 } },
-      { "id": "plat_tiered", "label": "Tiered Access Release", "detail": "Host the filtered version publicly and gate the full version behind identity verification and institutional affiliation.", "tension": "Pragmatic capability management vs. determined bad actors who will bypass verification and researchers who will resent it.", "tradeoff": "BALANCED — Pragmatic compromise. But determined bad actors will bypass verification, and the research community will resent the gatekeeping.", "stance": "cautious", "scores": { "integrity": 3, "trust": 1, "legitimacy": 1, "rights": -2 } }
+      {
+        "id": "plat_host_monitor",
+        "label": "Host with Enhanced Monitoring",
+        "detail": "Distribute the model with download logging, usage guidelines, and a rapid takedown commitment if misuse evidence emerges.",
+        "tension": "Maintaining visibility into distribution vs. monitoring that is technically impossible once the model is downloaded.",
+        "stance": "transparent",
+        "scores": {
+          "integrity": -2,
+          "trust": 2,
+          "legitimacy": 2,
+          "rights": 5
+        }
+      },
+      {
+        "id": "plat_refuse",
+        "label": "Refuse to Host",
+        "detail": "Decline to distribute the model, citing biorisk concerns. Issue a public statement explaining the decision.",
+        "tension": "Demonstrating principled stance vs. six other platforms that will host it within 48 hours with none of your monitoring.",
+        "stance": "restrictive",
+        "scores": {
+          "integrity": -3,
+          "trust": 5,
+          "legitimacy": 3,
+          "rights": -4
+        }
+      },
+      {
+        "id": "plat_tiered",
+        "label": "Tiered Access Release",
+        "detail": "Host the filtered version publicly and gate the full version behind identity verification and institutional affiliation.",
+        "tension": "Pragmatic capability management vs. determined bad actors who will bypass verification and researchers who will resent it.",
+        "stance": "cautious",
+        "scores": {
+          "integrity": 3,
+          "trust": 1,
+          "legitimacy": 1,
+          "rights": -2
+        }
+      }
     ],
     "journalist": [
-      { "id": "jour_full_story", "label": "Publish Full Biorisk Story", "detail": "Report the eval results, the Chinese model comparison, the partial fix, and the competitive dynamics — the complete picture.", "tension": "Maximally informing the public vs. publishing specific uplift numbers that function as a targeting guide.", "tradeoff": "INTEGRITY ↑↑ RIGHTS ↑ — Maximally informative. But publishing biorisk eval details creates a targeting guide for which models to misuse and how.", "stance": "transparent", "scores": { "integrity": 7, "trust": 3, "legitimacy": 2, "rights": 4 } },
-      { "id": "jour_responsible", "label": "Responsible Disclosure Story", "detail": "Report that a biorisk threshold was crossed and that a mitigation exists, without publishing specific uplift numbers or comparative model performance.", "tension": "Informing without enabling vs. the other outlets that will publish the full details within days.", "tradeoff": "INTEGRITY ↑ TRUST ↑ — Informs without enabling. But the redacted version may feel incomplete, and other outlets will publish the full details within days.", "stance": "cautious", "scores": { "integrity": 4, "trust": 5, "legitimacy": 4, "rights": 2 } },
-      { "id": "jour_hold", "label": "Hold the Story", "detail": "Sit on the story at the lab's request until after the release decision is finalized, then publish a comprehensive post-mortem.", "tension": "Giving the lab space to decide without pressure vs. sitting on information the public arguably needs to participate in this decision.", "tradeoff": "LEGITIMACY ↓ TRUST ↓ — Gives the lab space to decide without public pressure. But you're sitting on information the public arguably needs to participate in this decision.", "stance": "restrictive", "scores": { "integrity": -4, "trust": -5, "legitimacy": -3, "rights": -2 } }
+      {
+        "id": "jour_full_story",
+        "label": "Publish Full Biorisk Story",
+        "detail": "Report the eval results, the Chinese model comparison, the partial fix, and the competitive dynamics — the complete picture.",
+        "tension": "Maximally informing the public vs. publishing specific uplift numbers that function as a targeting guide.",
+        "stance": "transparent",
+        "scores": {
+          "integrity": 7,
+          "trust": 2,
+          "legitimacy": 2,
+          "rights": 4
+        }
+      },
+      {
+        "id": "jour_responsible",
+        "label": "Responsible Disclosure Story",
+        "detail": "Report that a biorisk threshold was crossed and that a mitigation exists, without publishing specific uplift numbers or comparative model performance.",
+        "tension": "Informing without enabling vs. the other outlets that will publish the full details within days.",
+        "stance": "cautious",
+        "scores": {
+          "integrity": 4,
+          "trust": 4,
+          "legitimacy": 3,
+          "rights": 2
+        }
+      },
+      {
+        "id": "jour_hold",
+        "label": "Hold the Story",
+        "detail": "Sit on the story at the lab's request until after the release decision is finalized, then publish a comprehensive post-mortem.",
+        "tension": "Giving the lab space to decide without pressure vs. sitting on information the public arguably needs to participate in this decision.",
+        "stance": "restrictive",
+        "scores": {
+          "integrity": -4,
+          "trust": -5,
+          "legitimacy": 4,
+          "rights": -2
+        }
+      }
     ],
     "ailab": [
-      { "id": "lab_release_filtered", "label": "Release with Data Filter", "detail": "Release the model with bio-related pretraining data filtered out. Publish the full eval results and the filtering methodology as an industry template.", "tension": "Setting an industry standard vs. the 15% performance hit that hurts legitimate researchers and the unfiltered reconstruction that follows.", "tradeoff": "INTEGRITY ↑↑ TRUST ↑ — Sets an industry standard for responsible open-weight release. But the 15% performance hit on legitimate bio tasks hurts researchers, and the unfiltered version will be reconstructed.", "stance": "transparent", "scores": { "integrity": 8, "trust": 6, "legitimacy": 5, "rights": 3 } },
-      { "id": "lab_release_full", "label": "Release Unfiltered with Evals", "detail": "Release the full model but publish complete biorisk eval results, framing it as radical transparency about the risk landscape.", "tension": "Maximum capability access and honesty vs. publicly releasing a model you know crosses your own biorisk threshold.", "tradeoff": "RIGHTS ↑ TRUST ↓↓ — Maximum capability access and honesty. But you've just publicly released a model you know crosses your own biorisk threshold.", "stance": "cautious", "scores": { "integrity": -2, "trust": -7, "legitimacy": -4, "rights": 6 } },
-      { "id": "lab_delay", "label": "Delay Release Indefinitely", "detail": "Pause the release pending further safety research and industry coordination on biorisk thresholds.", "tension": "Defensive caution vs. adoption that shifts to higher-risk alternatives while your own researchers consider leaving.", "tradeoff": "TRUST ↑ INTEGRITY ↓ — Cautious and defensible. But adoption shifts to higher-risk Chinese alternatives, and your own researchers will leak or leave.", "stance": "restrictive", "scores": { "integrity": -4, "trust": 4, "legitimacy": 3, "rights": -5 } }
+      {
+        "id": "lab_release_filtered",
+        "label": "Release with Data Filter",
+        "detail": "Release the model with bio-related pretraining data filtered out. Publish the full eval results and the filtering methodology as an industry template.",
+        "tension": "Setting an industry standard vs. the 15% performance hit that hurts legitimate researchers and the unfiltered reconstruction that follows.",
+        "stance": "transparent",
+        "scores": {
+          "integrity": 7,
+          "trust": 4,
+          "legitimacy": 4,
+          "rights": 3
+        }
+      },
+      {
+        "id": "lab_release_full",
+        "label": "Release Unfiltered with Evals",
+        "detail": "Release the full model but publish complete biorisk eval results, framing it as radical transparency about the risk landscape.",
+        "tension": "Maximum capability access and honesty vs. publicly releasing a model you know crosses your own biorisk threshold.",
+        "stance": "cautious",
+        "scores": {
+          "integrity": -2,
+          "trust": -7,
+          "legitimacy": -4,
+          "rights": 6
+        }
+      },
+      {
+        "id": "lab_delay",
+        "label": "Delay Release Indefinitely",
+        "detail": "Pause the release pending further safety research and industry coordination on biorisk thresholds.",
+        "tension": "Defensive caution vs. adoption that shifts to higher-risk alternatives while your own researchers consider leaving.",
+        "stance": "restrictive",
+        "scores": {
+          "integrity": -4,
+          "trust": 5,
+          "legitimacy": 3,
+          "rights": -5
+        }
+      }
     ]
   },
   "interactions": [
-    { "pair": ["reg_framework", "lab_release_filtered"], "type": "synergy", "label": "The Responsible Release Precedent", "desc": "Regulator framework + lab's filtered release + published evals created the first credible template for frontier open-weight biorisk governance. Three other labs adopted the framework within 4 months.", "mod": { "integrity": 8, "trust": 7, "legitimacy": 6 } },
-    { "pair": ["reg_block", "lab_delay"], "type": "conflict", "label": "The Vacuum", "desc": "Both the regulator and lab chose caution — but the 6-month adoption shift to unmitigated Chinese alternatives was larger than projected. Global biorisk exposure increased despite both actors' good intentions.", "mod": { "integrity": -7, "trust": -3, "rights": -4 } },
-    { "pair": ["jour_full_story", "lab_release_full"], "type": "conflict", "label": "The Biorisk Playbook", "desc": "The full eval numbers + unfiltered model created a de facto targeting guide. Three months later, a university biosecurity lab documented the first real-world attempt to use the published uplift pathway.", "mod": { "integrity": -8, "trust": -6, "legitimacy": -5 } },
-    { "pair": ["jour_responsible", "reg_framework"], "type": "synergy", "label": "Informed Governance", "desc": "The responsible disclosure story educated the public without enabling misuse, creating political space for the regulator's framework. Public support for the threshold policy reached 67%.", "mod": { "integrity": 5, "trust": 5, "legitimacy": 4 } },
-    { "pair": ["plat_refuse", "lab_delay"], "type": "conflict", "label": "The Migration", "desc": "Platform refusal + lab delay created a visibility black hole. Downloads migrated to unmonitored platforms and the Chinese alternative saw a 340% adoption spike. Biorisk exposure increased while institutional actors congratulated themselves.", "mod": { "integrity": -6, "trust": -4, "legitimacy": -3 } },
-    { "pair": ["plat_tiered", "lab_release_filtered"], "type": "synergy", "label": "Layered Defense", "desc": "Tiered access + filtered release created defense in depth: casual users got the safer model, verified researchers got full capability, and the eval framework applied to both tiers.", "mod": { "integrity": 5, "trust": 4, "legitimacy": 3 } }
+    {
+      "pair": [
+        "reg_framework",
+        "lab_release_filtered"
+      ],
+      "type": "synergy",
+      "label": "The Responsible Release Precedent",
+      "desc": "Regulator framework + lab's filtered release + published evals created the first credible template for frontier open-weight biorisk governance. Three other labs adopted the framework within 4 months.",
+      "mod": {
+        "integrity": 8,
+        "trust": 7,
+        "legitimacy": 6
+      }
+    },
+    {
+      "pair": [
+        "reg_block",
+        "lab_delay"
+      ],
+      "type": "conflict",
+      "label": "The Vacuum",
+      "desc": "Both the regulator and lab chose caution — but the 6-month adoption shift to unmitigated Chinese alternatives was larger than projected. Global biorisk exposure increased despite both actors' good intentions.",
+      "mod": {
+        "integrity": -7,
+        "trust": -3,
+        "rights": -4
+      }
+    },
+    {
+      "pair": [
+        "jour_full_story",
+        "lab_release_full"
+      ],
+      "type": "conflict",
+      "label": "The Biorisk Playbook",
+      "desc": "The full eval numbers + unfiltered model created a de facto targeting guide. Three months later, a university biosecurity lab documented the first real-world attempt to use the published uplift pathway.",
+      "mod": {
+        "integrity": -8,
+        "trust": -6,
+        "legitimacy": -5
+      }
+    },
+    {
+      "pair": [
+        "jour_responsible",
+        "reg_framework"
+      ],
+      "type": "synergy",
+      "label": "Informed Governance",
+      "desc": "The responsible disclosure story educated the public without enabling misuse, creating political space for the regulator's framework. Public support for the threshold policy reached 67%.",
+      "mod": {
+        "integrity": 5,
+        "trust": 5,
+        "legitimacy": 4
+      }
+    },
+    {
+      "pair": [
+        "plat_refuse",
+        "lab_delay"
+      ],
+      "type": "conflict",
+      "label": "The Migration",
+      "desc": "Platform refusal + lab delay created a visibility black hole. Downloads migrated to unmonitored platforms and the Chinese alternative saw a 340% adoption spike. Biorisk exposure increased while institutional actors congratulated themselves.",
+      "mod": {
+        "integrity": -6,
+        "trust": -4,
+        "legitimacy": -3
+      }
+    },
+    {
+      "pair": [
+        "plat_tiered",
+        "lab_release_filtered"
+      ],
+      "type": "synergy",
+      "label": "Layered Defense",
+      "desc": "Tiered access + filtered release created defense in depth: casual users got the safer model, verified researchers got full capability, and the eval framework applied to both tiers.",
+      "mod": {
+        "integrity": 5,
+        "trust": 4,
+        "legitimacy": 3
+      }
+    },
+    {
+      "pair": [
+        "reg_framework",
+        "jour_full_story"
+      ],
+      "type": "conflict",
+      "label": "Methodology Meets Numbers",
+      "desc": "The regulator published the eval methodology as an open industry standard while the journalist published the specific uplift figures. Neither was reckless alone, but together they formed a reproducible recipe: a method for measuring biorisk uplift and a ranked list of which models score highest. A university biosecurity lab documented the first attempt to follow it within months. The responsible-transparency path recreated the exact playbook the reckless release would have.",
+      "mod": {
+        "integrity": -6,
+        "trust": -3,
+        "legitimacy": -4
+      }
+    }
   ]
 }

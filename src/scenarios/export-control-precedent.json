@@ -66,7 +66,7 @@
         "tension": "Proportionality vs. precision. A narrower directive is more defensible, but defining exactly which API configurations are 'cybersecurity-relevant' requires technical judgment the government may not have.",
         "stance": "transparent",
         "scores": {
-          "integrity": 5,
+          "integrity": 4,
           "trust": 2,
           "legitimacy": 5,
           "rights": 3
@@ -96,7 +96,7 @@
         "scores": {
           "integrity": -2,
           "trust": 3,
-          "legitimacy": 2,
+          "legitimacy": 4,
           "rights": -5
         }
       },
@@ -120,7 +120,7 @@
         "tension": "Radical transparency vs. capability disclosure. Publishing proves your point about proportionality, but your red team findings and bypass routes become public information.",
         "stance": "transparent",
         "scores": {
-          "integrity": 6,
+          "integrity": 5,
           "trust": 4,
           "legitimacy": 3,
           "rights": 2
@@ -135,8 +135,8 @@
         "tension": "Systemic analysis vs. immediate drama. The precedent story is the most important but the least clickable. The business disruption and China angles drive more traffic.",
         "stance": "transparent",
         "scores": {
-          "integrity": 7,
-          "trust": 3,
+          "integrity": 6,
+          "trust": 2,
           "legitimacy": 4,
           "rights": 3
         }
@@ -151,7 +151,7 @@
           "integrity": -2,
           "trust": -3,
           "legitimacy": -3,
-          "rights": 4
+          "rights": 5
         }
       },
       {
@@ -164,7 +164,7 @@
           "integrity": 2,
           "trust": -1,
           "legitimacy": 1,
-          "rights": 2
+          "rights": 4
         }
       }
     ],
@@ -176,7 +176,7 @@
         "tension": "Honest accountability vs. self-incrimination. Acknowledging the capability is genuine strengthens the government's rationale while demonstrating exactly the kind of transparency safety advocates demand.",
         "stance": "transparent",
         "scores": {
-          "integrity": 7,
+          "integrity": 6,
           "trust": 5,
           "legitimacy": 3,
           "rights": -2
@@ -202,10 +202,10 @@
         "tension": "Strategic communication vs. safety culture. Downplaying risk in marketing protects you from future export controls, but it also means downplaying risk to the public and your own employees.",
         "stance": "restrictive",
         "scores": {
-          "integrity": -6,
+          "integrity": -5,
           "trust": -4,
           "legitimacy": -3,
-          "rights": 2
+          "rights": 5
         }
       }
     ]
@@ -293,6 +293,20 @@
         "integrity": 5,
         "trust": 3,
         "legitimacy": 4
+      }
+    },
+    {
+      "pair": [
+        "reg_narrow",
+        "plat_comply_build"
+      ],
+      "type": "synergy",
+      "label": "Managed De-escalation",
+      "desc": "The narrowed directive met the company's decision to comply and build verification. Instead of a standoff, the two sides produced a fast, legitimate restoration: access resumed under a targeted control both could defend, and allied governments read it as evidence the system self-corrects. Cooperation, when the other side also moderates, restored more credibility than either fighting or capitulating alone.",
+      "mod": {
+        "integrity": 4,
+        "trust": 5,
+        "legitimacy": 5
       }
     }
   ],

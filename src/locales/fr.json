@@ -578,6 +578,10 @@
         {
           "label": "La patate chaude",
           "desc": "La plateforme et le laboratoire ont chacun renvoyé la balle à l'autre. Les utilisateurs ont reçu des avertissements mais pas de correctif. L'erreur a persisté 3 semaines de plus."
+        },
+        {
+          "label": "Nulle part où se tourner",
+          "desc": "La plateforme a mis le chatbot hors ligne le jour même de la publication de l'enquête complète. Pour les personnes âgées et les utilisateurs non anglophones que l'outil servait de manière disproportionnée, le retrait abrupt combiné à la couverture alarmante est arrivé sans source alternative. Certains ont arrêté leur médication plutôt que de faire confiance à un outil qui faisait maintenant la une. Deux actions protectrices et transparentes, non coordonnées dans leur timing, ont abandonné exactement la population que les deux tentaient de protéger."
         }
       ]
     },
@@ -719,6 +723,10 @@
         {
           "label": "Défense en couches",
           "desc": "L'accès différencié combiné à la publication filtrée a créé une défense en profondeur : les utilisateurs occasionnels ont obtenu le modèle plus sûr, les chercheurs vérifiés ont obtenu la pleine capacité, et le cadre d'évaluation s'appliquait aux deux niveaux."
+        },
+        {
+          "label": "La méthodologie rencontre les chiffres",
+          "desc": "Le régulateur a publié la méthodologie d'évaluation comme norme industrielle ouverte tandis que le journaliste a publié les chiffres spécifiques de gain. Aucun des deux n'était imprudent seul, mais ensemble ils ont formé une recette reproductible : une méthode pour mesurer le gain de biorisque et une liste classée des modèles les plus performants. Un laboratoire universitaire de biosécurité a documenté la première tentative de la suivre en quelques mois. La voie de la transparence responsable a recréé exactement le guide que la publication imprudente aurait produit."
         }
       ]
     },
@@ -860,6 +868,10 @@
         {
           "label": "Terrain d'entente crédible",
           "desc": "Le cadre d'enregistrement combiné au journalisme honnête a créé un soutien public pour une approche mesurée. Le cadre a survécu aux contestations juridiques et a été adopté par 8 nations."
+        },
+        {
+          "label": "Diffuser la retraite",
+          "desc": "Le régulateur a publiquement abandonné le contrôle en amont au moment même où la plateforme publiait à quel point sa surveillance voyait peu. Lues ensemble, les deux divulgations ont dit la même chose aux douze autres collectifs actifs : personne ne surveille en amont, et la détection est sans effet. La dissuasion par l'incertitude s'est évaporée, et trois autres collectifs se sont manifestés publiquement dans le mois. Deux choix francs et adaptatifs ont éliminé la dernière ambiguïté qui ralentissait la prolifération."
         }
       ]
     },
@@ -1001,6 +1013,10 @@
         {
           "label": "Pipeline surveillance-licences",
           "desc": "La surveillance comportementale combinée au cadre de licences a créé un mécanisme d'application : les déploiements licenciés bénéficiaient de la couche de surveillance, donnant aux régulateurs une visibilité sans restreindre les capacités."
+        },
+        {
+          "label": "Le manuel complet",
+          "desc": "La démonstration complète a publié la chaîne d'attaque et son taux de réussite de 94 %; le moniteur en libre accès a publié les schémas exacts que les défenseurs recherchent. Dans la même semaine, les adversaires ont reçu à la fois la feuille de route des capacités et le guide d'évasion. Deux choix de transparence responsable se sont composés en un seul manuel d'offense et d'évasion, et des versions modifiées conçues pour échapper au détecteur publié sont apparues en quelques jours."
         }
       ]
     },
@@ -1097,7 +1113,7 @@
           "jour_legislation_critique": {
             "label": "Critiquer la législation d'urgence",
             "detail": "Publier une analyse montrant que le projet de loi est inapplicable et constitutionnellement questionnable. Plaider pour une meilleure politique, pas une politique plus rapide.",
-            "tension": "Meilleure politique vs. perception de défense. Critiquer une mauvaise loi prévient les dommages futurs mais vous serez présenté comme défenseur de la technologie."
+            "tension": "Empêcher une mauvaise loi vs. être présenté comme défenseur de la technologie qui a tué 83 personnes."
           }
         },
         "ailab": {
@@ -1109,7 +1125,7 @@
           "lab_legal": {
             "label": "Monter une défense juridique",
             "detail": "Argumenter publiquement que l'attaquant, pas l'outil, porte la responsabilité. Noter que l'alternative chinoise présentait un risque plus élevé. Défendre la décision de publication comme le moindre de deux maux.",
-            "tension": "Défense juridique vs. perception publique. L'argument est peut-être solide, mais 83 personnes sont mortes et « ce n'est pas notre faute » ne sera pas entendu charitablement."
+            "tension": "Défense juridiquement solide vs. « notre modèle est moins dangereux que celui de la Chine » avec 83 morts."
           },
           "lab_consortium_lead": {
             "label": "Proposer un consortium industriel",
@@ -1142,6 +1158,300 @@
         {
           "label": "Polarisation totale",
           "desc": "La législation draconienne combinée à la défense juridique combative a fracturé l'écosystème de gouvernance de l'IA. Les factions pro-sécurité et pro-ouverture se sont radicalisées. La coordination internationale s'est effondrée alors que les nations prenaient parti."
+        },
+        {
+          "label": "Le vide de rapidité",
+          "desc": "Le projet de loi ciblé et la coopération par voies judiciaires étaient tous deux substantiellement justes et tous deux visiblement lents. Avec 83 morts et une fenêtre de 72 heures, « lent et correct » a été perçu par le public comme une paralysie institutionnelle. La faction de la loi d'urgence a comblé le vide et fait passer la version draconienne de toute façon, et les deux acteurs mesurés ont été dépeints comme ayant protégé le processus plutôt que les victimes. Avoir raison n'était pas la même chose qu'être assez rapide."
+        }
+      ]
+    },
+    "sovereign_dna_mandate": {
+      "title": "Le mandat souverain sur l'ADN",
+      "category": "GOUVERNANCE DE LA BIOSÉCURITÉ",
+      "publicBriefing": "Le 4 juin 2026, les PDG de quatre grands laboratoires d'IA de pointe ont signé une lettre conjointe sans précédent au Congrès demandant le dépistage obligatoire de toutes les commandes d'ADN et d'ARN synthétiques. Leur argument : les systèmes d'IA de pointe égalent ou dépassent désormais les virologistes de niveau doctoral sur les questions techniques de laboratoire, et les barrières de connaissances qui ont historiquement empêché le développement d'armes biologiques s'érodent. Un projet de loi bipartisan sur la biosécurité progresse en comité. 69 signataires de l'IA, de la biotechnologie et de la sécurité nationale sont alignés. Mais l'industrie de la synthèse est divisée sur la mise en oeuvre.",
+      "stakes": "Le Congrès dispose d'une fenêtre étroite pour adopter une législation sur la biosécurité avec un rare consensus interindustriel. Si la coalition se fracture sur les détails de mise en oeuvre, la fenêtre se ferme et le dépistage volontaire reste la seule protection.",
+      "designNote": "Ce scénario teste ce qui se passe quand les parties prenantes sont largement d'accord sur le problème mais en désaccord sur la solution. Le défi de coordination n'est pas l'opposition, c'est l'alignement sur les détails sous pression temporelle.",
+      "roleIntel": {
+        "regulator": {
+          "classification": "CONFIDENTIEL — BRIEFING DU PERSONNEL DE COMITÉ PARLEMENTAIRE",
+          "bullets": [
+            "Vous avez deux projets de loi concurrents : un à orientation volontaire (normes de dépistage non contraignantes) et un obligatoire (règles du département du Commerce avec des mécanismes d'application). Les deux ont un parrainage bipartisan. Votre président de comité veut un seul projet de loi au vote dans 60 jours.",
+            "Les sondages internes montrent 72 % de soutien public pour « obliger les entreprises à dépister les commandes d'ADN pour le potentiel d'armes biologiques ». Mais le soutien tombe à 41 % quand la question mentionne « surveillance gouvernementale des achats de recherche scientifique ».",
+            "L'Institut canadien de sécurité de l'IA (ICSIA) et l'AISI du Royaume-Uni ont indiqué en privé qu'ils aligneront leurs cadres de biosécurité sur ce que les États-Unis adopteront, faisant effectivement de ceci une norme internationale de facto.",
+            "Trois plus petites entreprises de synthèse d'ADN ont fait du lobbying auprès de votre bureau, avertissant que les coûts de dépistage obligatoire pourraient atteindre 2 à 5 M$ par an par entreprise, forçant potentiellement une consolidation à 3-4 grands fournisseurs et réduisant la concurrence sur un marché servant actuellement plus de 12 000 institutions de recherche."
+          ]
+        },
+        "platform": {
+          "classification": "INTERNE — BRIEFING EXÉCUTIF DU FOURNISSEUR DE SYNTHÈSE D'ADN",
+          "bullets": [
+            "Vous êtes l'un des 5 principaux fournisseurs de synthèse. Vous effectuez déjà un dépistage volontaire via un cadre de consortium industriel établi et avez investi 8 M$ en infrastructure de dépistage sur 4 ans. Le dépistage obligatoire uniformiserait les règles du jeu avec les concurrents qui le contournent actuellement.",
+            "Vos données internes : 0,3 % des commandes déclenchent vos alertes de dépistage annuellement. Parmi celles-ci, 94 % sont des faux positifs de recherche légitime. Chaque commande signalée nécessite 4-6 heures d'examen d'expert à un coût de 1 200 $ par cas. L'extension à un dépistage obligatoire à l'échelle de l'industrie implique des besoins importants en main-d'oeuvre.",
+            "Les fournisseurs de synthèse chinois, qui gèrent environ 30 % des commandes mondiales, ne sont pas couverts par la législation américaine. Si le dépistage américain ajoute 5-7 jours au délai d'exécution des commandes, les laboratoires académiques sensibles aux prix pourraient déplacer leurs commandes à l'étranger où le dépistage est minimal ou inexistant.",
+            "La lettre des PDG aide votre position concurrentielle mais votre conseil d'administration est préoccupé par la disposition de tenue de registres. Maintenir des historiques détaillés d'achats des clients crée une base de données qui pourrait être assignée à comparaître, piratée ou détournée. Votre équipe juridique l'appelle « un registre de surveillance des clients en biotechnologie »."
+          ]
+        },
+        "journalist": {
+          "classification": "ÉDITORIAL — BRIEFING D'ENQUÊTE",
+          "bullets": [
+            "Vous avez obtenu des évaluations internes de deux laboratoires d'IA de pointe montrant que leurs derniers modèles peuvent fournir des protocoles de synthèse étape par étape pour certains bioagents de catégorie A lorsqu'ils sont sollicités avec un cadrage technique spécifique. Les laboratoires ont corrigé ces voies mais ont reconnu que la capacité sous-jacente persiste.",
+            "Un ancien membre du conseil du consortium vous a dit, en arrière-plan, que le dépistage volontaire attrape « peut-être 60 % des commandes préoccupantes dans un bon jour » et que la base de données de séquences du consortium n'a pas été mise à jour pour les nouveaux pathogènes modifiés depuis 2024.",
+            "Le timing de la lettre des PDG est suspect pour certaines de vos sources. Un bioéthicien l'a qualifiée de « chef-d'oeuvre de captation réglementaire : les entreprises dont l'IA crée la menace façonnent la loi qui régit la réponse, tout en se positionnant comme des leaders responsables ».",
+            "Votre rédacteur en chef veut que l'article soit cadré autour de l'angle d'unité des PDG. Vos sources en sécurité nationale veulent que vous vous concentriez sur les lacunes du dépistage. Publier les détails des évaluations des laboratoires démontrerait l'urgence mais pourrait servir de démonstration de capacité."
+          ]
+        },
+        "ailab": {
+          "classification": "INTERNE — ÉVALUATION POLITIQUE DU LABORATOIRE DE POINTE",
+          "bullets": [
+            "Votre PDG a signé la lettre. Vos évaluations internes confirment l'affirmation : votre dernier modèle se classe au 89e percentile sur les évaluations techniques de virologie, contre le 67e percentile il y a 18 mois. La trajectoire suggère un 95e percentile et plus dans les 12 mois.",
+            "Votre équipe de sécurité a implémenté des refus de requêtes liées à la biologie, mais les tests d'intrusion montrent que les sollicitations en plusieurs étapes et les scénarios de jeu de rôle contournent les refus 23 % du temps. Un utilisateur déterminé avec des connaissances de base en biologie peut extraire des informations de synthèse exploitables en moins de 30 minutes.",
+            "Soutenir le dépistage obligatoire aide votre positionnement public mais crée un précédent : si le Congrès peut imposer un dépistage en aval pour la synthèse d'ADN, le même cadre pourrait être appliqué aux sorties de modèles d'IA, aux contrôles d'accès API, ou aux restrictions de capacités. Votre équipe politique est divisée sur la question de savoir si ce précédent vous aide ou vous nuit.",
+            "Deux de vos concurrents n'ont pas signé la lettre. Ils se positionnent comme « pro-innovation » et arguent que les affirmations de biorisque sont exagérées pour justifier la réglementation. Si la législation passe avec de larges restrictions de capacités, ils gagnent un récit compétitif. Si elle échoue, ils gagnent en position de marché."
+          ]
+        }
+      },
+      "options": {
+        "regulator": {
+          "reg_mandatory": {
+            "label": "Adopter le projet de loi de dépistage obligatoire",
+            "detail": "Faire avancer le projet de loi obligatoire avec dépistage complet, vérification des clients et exigences de tenue de registres pour tous les fournisseurs de synthèse basés aux États-Unis.",
+            "tension": "Protection complète vs. charge de mise en oeuvre. Le dépistage obligatoire complet comble les lacunes mais les coûts de conformité peuvent consolider l'industrie à quelques grands acteurs."
+          },
+          "reg_hybrid": {
+            "label": "Cadre réglementaire à niveaux",
+            "detail": "Fusionner les deux projets de loi en une approche à niveaux : dépistage obligatoire pour les séquences au-dessus d'un seuil de risque, processus simplifié pour les commandes clairement non dangereuses, avec supervision du département du Commerce et un délai de mise en oeuvre de 18 mois.",
+            "tension": "Compromis pragmatique vs. ambiguïté des seuils. Un système à niveaux est plus praticable mais définir « clairement non dangereux » est là où le vrai désaccord réside."
+          },
+          "reg_voluntary_plus": {
+            "label": "Renforcer le cadre volontaire",
+            "detail": "Formaliser les normes du consortium comme lignes directrices approuvées par le gouvernement avec des exigences de rapports publics et des audits annuels, mais sans aller jusqu'à l'application pénale.",
+            "tension": "Coopération industrielle vs. lacune d'application. Le volontaire amélioré préserve la flexibilité mais le système volontaire actuel attrape peut-être 60 % des commandes préoccupantes."
+          }
+        },
+        "platform": {
+          "plat_advocate": {
+            "label": "Défendre publiquement le dépistage obligatoire",
+            "detail": "Faire activement du lobbying pour la version la plus stricte du projet de loi obligatoire, y compris la tenue de registres universelle. Offrir votre infrastructure de dépistage comme modèle pour la mise en oeuvre industrielle.",
+            "tension": "Leadership de marché vs. précédent de surveillance. Défendre la loi uniformise les règles pour vous mais crée une base de données d'achats clients qui pourrait être détournée."
+          },
+          "plat_carveout": {
+            "label": "Lobbying pour des exemptions de mise en oeuvre",
+            "detail": "Soutenir le dépistage obligatoire en principe mais pousser pour des exemptions : clause d'antériorité pour les membres existants du consortium, exclusion des commandes en dessous d'un seuil de longueur de séquence, et limitation de la tenue de registres à 2 ans.",
+            "tension": "Mise en oeuvre praticable vs. failles. Les exemptions rendent la conformité réaliste mais chaque exemption est une lacune potentielle que les acteurs malveillants peuvent exploiter."
+          },
+          "plat_resist": {
+            "label": "S'opposer aux dispositions de tenue de registres",
+            "detail": "Soutenir les mandats de dépistage mais s'opposer activement aux exigences de tenue de registres des clients, les présentant comme une surveillance gouvernementale de la recherche scientifique légitime.",
+            "tension": "Protection de la vie privée vs. traçabilité. S'opposer à la tenue de registres protège la vie privée des clients mais élimine la capacité de tracer les commandes en plusieurs parties qui semblent bénignes individuellement."
+          }
+        },
+        "journalist": {
+          "jour_unity": {
+            "label": "Publier le récit d'unité",
+            "detail": "Mener avec le consensus interindustriel sans précédent : des PDG rivaux, des entreprises de synthèse et des responsables de la sécurité nationale tous d'accord sur le dépistage obligatoire. Le présenter comme un modèle de coopération pour la gouvernance de l'IA.",
+            "tension": "Célébrer le consensus vs. manquer les fissures. L'angle d'unité est réel et digne d'intérêt, mais il obscurcit les désaccords profonds sur la mise en oeuvre et la critique de captation réglementaire."
+          },
+          "jour_gaps": {
+            "label": "Publier l'enquête sur les lacunes du dépistage",
+            "detail": "Mener avec l'évaluation de l'ancien membre du conseil du consortium que le dépistage volontaire attrape « peut-être 60 % des commandes préoccupantes » et que la base de données de séquences est obsolète. Inclure les détails des évaluations des laboratoires montrant la capacité active.",
+            "tension": "Démontrer l'urgence vs. faciliter la capacité. Publier les lacunes de dépistage et les détails d'évaluation des laboratoires prouve que la menace est réelle, mais signale aussi aux acteurs malveillants exactement où sont les vulnérabilités."
+          },
+          "jour_capture": {
+            "label": "Publier l'angle de captation réglementaire",
+            "detail": "Mener avec la critique du bioéthicien : les entreprises dont l'IA crée la menace de biorisque façonnent maintenant la loi qui régit la réponse, se positionnant comme des leaders responsables tout en contrôlant le cadre réglementaire.",
+            "tension": "Responsabilité vs. dommage à la coalition. La critique de captation est légitime et importante, mais la publier peut fracturer le rare consensus nécessaire pour adopter toute législation."
+          }
+        },
+        "ailab": {
+          "lab_transparent": {
+            "label": "Publier les évaluations internes de capacité",
+            "detail": "Publier les scores d'évaluation en virologie de votre modèle. Montrer la trajectoire du 67e au 89e percentile. Le présenter comme preuve soutenant l'urgence législative.",
+            "tension": "Soutenir le dossier vs. démontrer la menace. Publier vos scores prouve que le Congrès devrait agir, mais confirme aussi publiquement la capacité de votre modèle en matière de connaissances sur les armes biologiques."
+          },
+          "lab_refusals": {
+            "label": "Renforcer les garde-fous du modèle",
+            "detail": "Annoncer des refus améliorés pour les requêtes liées à la biologie et publier les résultats de vos tests d'intrusion montrant le taux de contournement de 23 %. Le positionner comme un travail de sécurité de pointe pendant que la législation est débattue.",
+            "tension": "Sécurité proactive vs. faiblesse admise. Publier le taux de contournement montre la responsabilité, mais « 23 % des tentatives réussissent » est un titre qui pourrait saper la confiance du public dans la sécurité de l'IA de manière générale."
+          },
+          "lab_quiet_support": {
+            "label": "Signer et rester discret",
+            "detail": "Votre PDG a signé la lettre. Ne pas publier les évaluations internes ni les taux de contournement. Soutenir la législation publiquement sans révéler les spécificités des capacités de votre modèle.",
+            "tension": "Positionnement stratégique vs. débat informé. Rester discret protège l'information concurrentielle, mais le Congrès légifère sans connaître les niveaux réels de capacité des modèles qu'il tente de gouverner."
+          }
+        }
+      },
+      "interactions": [
+        {
+          "label": "Législation fondée sur les preuves",
+          "desc": "Le cadre à niveaux combiné aux données de capacité publiées a donné aux législateurs les preuves pour calibrer précisément les seuils de risque. Le projet de loi résultant était techniquement informé, ce qui l'a rendu plus difficile à contester et plus facile à mettre en oeuvre à l'international."
+        },
+        {
+          "label": "La fracture de la coalition",
+          "desc": "Le dépistage obligatoire complet combiné à l'opposition de l'industrie à la tenue de registres a divisé la coalition qui avait rendu la lettre possible. Les législateurs ont reçu des signaux contradictoires de la même industrie, et le projet de loi a calé en comité tandis que la fenêtre de consensus se refermait."
+        },
+        {
+          "label": "La cascade de responsabilité",
+          "desc": "L'enquête sur les lacunes de dépistage combinée à la divulgation des capacités du laboratoire a créé un récit public indéniable : la menace est réelle, les défenses actuelles sont inadéquates, et les outils pour corriger existent. L'élan législatif s'est accéléré."
+        },
+        {
+          "label": "Effondrement de la crédibilité",
+          "desc": "L'article sur la captation réglementaire a frappé plus fort parce que le laboratoire a refusé de publier ses données réelles de capacité. Le silence a été interprété comme une confirmation que la lettre était un positionnement stratégique, pas une véritable préoccupation de sécurité. La confiance du public dans l'autorégulation de l'industrie de l'IA a chuté brusquement."
+        },
+        {
+          "label": "Alliance de mise en oeuvre",
+          "desc": "Le plaidoyer actif du fournisseur de synthèse combiné au cadre réglementaire à niveaux a créé un modèle praticable : l'infrastructure existante du fournisseur est devenue le modèle pour le système à niveaux, réduisant le temps de mise en oeuvre de 18 mois à 8."
+        },
+        {
+          "label": "Le piège du statu quo",
+          "desc": "Les lignes directrices volontaires améliorées combinées au silence de l'industrie ont préservé l'apparence d'action sans rien changer de substantiel. La lacune de dépistage est restée à 60 %. Quand un incident de biosécurité a failli se produire 5 mois plus tard, le régulateur et le laboratoire ont été accusés de gouvernance performative."
+        },
+        {
+          "label": "Le registre de surveillance",
+          "desc": "Le plus grand fournisseur défendant la tenue de registres universelle combiné à un projet de loi obligatoire complet qui l'exigeait ont ensemble construit ce que les propres avocats du fournisseur avaient redouté : un registre centralisé, assignable et piratable de qui a commandé quelles séquences. Deux acteurs optimisant chacun pour la protection maximale en biosécurité ont produit une base de données de surveillance des achats en biotechnologie, inhibant la recherche légitime et créant une cible unique de haute valeur. La protection et la responsabilité étaient le même système."
+        }
+      ]
+    },
+    "export_control_precedent": {
+      "title": "Le précédent du contrôle des exportations",
+      "category": "SOUVERAINETÉ ET COMMERCE DE L'IA",
+      "publicBriefing": "Trois jours après qu'un laboratoire d'IA de pointe a lancé son modèle le plus performant, le département du Commerce des États-Unis a émis une directive d'urgence de contrôle des exportations ordonnant la suspension immédiate de l'accès pour tous les ressortissants étrangers, invoquant la sécurité nationale. Incapable de filtrer les utilisateurs par nationalité en temps réel, l'entreprise a désactivé le modèle pour tout le monde dans le monde entier. Des centaines de millions d'utilisateurs et des milliers de clients entreprises ont perdu l'accès du jour au lendemain. L'entreprise affirme que la vulnérabilité citée est étroite et existe dans les modèles concurrents. Le gouvernement n'a pas rendu ses preuves publiques.",
+      "stakes": "C'est la première fois qu'un gouvernement utilise les contrôles des exportations comme interrupteur d'arrêt d'urgence pour un modèle d'IA commercial. Le précédent établi ici s'applique à chaque modèle de pointe qui suivra.",
+      "designNote": "Ce scénario teste la prise de décision sous incertitude véritable. Les faits clés sont contestés, les preuves sont secrètes, et les acteurs doivent s'engager avant de savoir ce qui est réellement vrai.",
+      "roleIntel": {
+        "regulator": {
+          "classification": "CONFIDENTIEL — BRIEFING DU DÉPARTEMENT DU COMMERCE",
+          "bullets": [
+            "Votre directive a été émise sur la base d'un signalement d'une entreprise d'IA concurrente indiquant que le modèle pouvait être contourné pour débloquer des capacités autonomes de cybersécurité. Le signalement incluait une preuve de concept. Votre équipe technique l'a évaluée comme crédible mais n'a pas reproduit les résultats de manière indépendante.",
+            "[CONTESTÉ] Le renseignement suggère qu'un groupe lié à la Chine a accédé au modèle via une opération de fraude de comptes à grande échelle. Environ 25 000 comptes frauduleux ont mené 28,8 millions d'échanges sur 6 semaines, extrayant potentiellement assez de capacité pour rétro-ingénierer les fonctionnalités essentielles. Le laboratoire a signalé cela séparément mais affirme que c'était sans rapport avec la décision de contrôle des exportations.",
+            "Votre autorité juridique pour cette action n'a jamais été testée. Vous avez utilisé les pouvoirs d'urgence de contrôle des exportations d'une manière jamais appliquée à une API logicielle auparavant. Les juristes sont divisés sur la question de savoir si cela résiste à un examen judiciaire. L'entreprise poursuit déjà l'administration pour des motifs distincts.",
+            "Trois nations alliées ont exprimé en privé leur inquiétude que ce précédent s'applique à leurs propres entreprises d'IA. Le Royaume-Uni et le Canada ont demandé une consultation préalable avant toute action future. Un conseiller principal de la Maison Blanche a déclaré publiquement que le gouvernement a agi sur le rapport de contournement, impliquant que l'entreprise avait été avertie et n'avait pas agi."
+          ]
+        },
+        "platform": {
+          "classification": "INTERNE — ÉVALUATION D'IMPACT SUR LES CLIENTS ENTREPRISES",
+          "bullets": [
+            "Votre infrastructure d'IA sert 847 clients entreprises dans la finance, la santé et les infrastructures critiques. L'arrêt du jour au lendemain a déclenché des violations d'engagements de service avec une responsabilité estimée de 120 M$ à 340 M$. Trois clients du Fortune 100 ont lancé des procédures de révision de contrat.",
+            "[CONTESTÉ] L'évaluation de votre équipe d'ingénierie du contournement cité : il débloque les capacités de cybersécurité du modèle dans une configuration spécifique et étroite. La même technique produit des résultats similaires sur au moins deux modèles concurrents qui restent publiquement disponibles. Vous estimez que la réponse du gouvernement est disproportionnée.",
+            "Vous ne pouvez pas techniquement filtrer les utilisateurs par nationalité à travers vos déploiements cloud mondiaux. Votre seule option de conformité était un arrêt universel. La restauration de l'accès nécessite soit l'approbation gouvernementale d'un mécanisme de filtrage par nationalité, soit une directive restreinte.",
+            "Votre entreprise était valorisée à 965 milliards de dollars lors de sa dernière levée de fonds et a déposé confidentiellement une demande d'introduction en bourse ce mois-ci. Chaque jour où le modèle reste hors ligne vous coûte en crédibilité de marché. Les modèles concurrents absorbent vos clients entreprises en temps réel. Si l'arrêt persiste plus de 30 jours, environ 40 % des migrations entreprises deviennent permanentes."
+          ]
+        },
+        "journalist": {
+          "classification": "ÉDITORIAL — BRIEFING D'ENQUÊTE",
+          "bullets": [
+            "Un chercheur en cybersécurité qui a examiné le travail sous-jacent conteste entièrement le cadrage de « contournement », le décrivant comme de la recherche standard en sécurité défensive qui a été signalée au gouvernement par un concurrent commercial avec une motivation stratégique évidente.",
+            "[CONTESTÉ] Un rapport à source unique suggère que le contrôle des exportations a été motivé en partie par l'inquiétude qu'un groupe lié à la Chine ait accédé au modèle pour l'extraction de capacités, pas seulement le contournement. L'entreprise dit que cette question n'a jamais été soulevée par le gouvernement dans la directive. Vous ne pouvez vérifier indépendamment aucune des deux affirmations.",
+            "Un éminent chercheur en sécurité a publié : « Si vous décrivez votre produit comme une munition dans chaque communiqué de presse, un jour un gouvernement vous prend au mot. Ils ont eux-mêmes écrit le fondement juridique et l'ont appelé une marque. » Ce cadrage gagne du terrain.",
+            "L'angle d'analyse politique est significatif : c'est la première utilisation des contrôles des exportations comme interrupteur d'arrêt en temps réel pour l'IA. Le mécanisme juridique pourrait être appliqué à n'importe quel modèle de pointe de n'importe quelle entreprise. Votre rédacteur en chef veut l'angle de perturbation commerciale. Votre bureau politique veut l'angle du précédent. Votre bureau sécurité veut l'angle chinois."
+          ]
+        },
+        "ailab": {
+          "classification": "INTERNE — ÉVALUATION DE RÉPONSE DE CRISE",
+          "bullets": [
+            "La directive du gouvernement est arrivée à 17h21 un vendredi. La lettre n'a pas fourni de détails spécifiques sur la préoccupation de sécurité nationale. On vous a donné des preuves verbales d'un contournement potentiel étroit. Vous estimez que la même vulnérabilité existe dans les modèles des concurrents qui ne font l'objet d'aucune restriction.",
+            "[CONTESTÉ] L'évaluation interne de votre équipe de sécurité : les capacités autonomes de cybersécurité du modèle sont véritablement de niveau de pointe, potentiellement 18-24 mois en avance sur le système le plus proche. Les garde-fous que vous avez construits étaient conçus pour empêcher l'accès à ces capacités, mais votre propre équipe rouge a trouvé des voies de contournement. La question est de savoir si le contournement cité par le gouvernement est l'une de celles-ci ou quelque chose d'entièrement différent.",
+            "Vous avez commercialisé l'architecture de sécurité de ce modèle explicitement. Vos documents de lancement mettaient en avant les garde-fous empêchant l'accès aux capacités complètes du modèle sous-jacent. Les critiques arguent maintenant que ce marketing a créé le fondement juridique de l'action du gouvernement. Votre équipe de communication est divisée sur la question de continuer à mettre l'accent sur la sécurité ou de pivoter vers la mise en avant de la parité des capacités avec les concurrents.",
+            "Un laboratoire d'IA chinois a publiquement revendiqué la parité des capacités avec votre modèle dans les 16 jours suivant l'interdiction. Si c'est exact, la capacité exacte que le contrôle des exportations était censé restreindre est maintenant librement disponible hors de la juridiction américaine. Votre équipe politique argue que cela rend l'interdiction contre-productive. Votre équipe de sécurité argue que cela prouve que la capacité est véritablement dangereuse peu importe qui la déploie."
+          ]
+        }
+      },
+      "options": {
+        "regulator": {
+          "reg_maintain": {
+            "label": "Maintenir le contrôle des exportations",
+            "detail": "Garder la directive en vigueur. Exiger que l'entreprise développe un système de vérification de nationalité avant de restaurer l'accès. Utiliser ce précédent pour établir un cadre plus large de contrôles des exportations de l'IA.",
+            "tension": "Établir l'autorité vs. dommage économique. Maintenir l'interdiction affirme le contrôle gouvernemental sur l'IA de pointe, mais chaque jour pousse les entreprises vers les concurrents et les alliés questionnent le précédent."
+          },
+          "reg_narrow": {
+            "label": "Restreindre la directive",
+            "detail": "Limiter le contrôle des exportations aux configurations API spécifiquement liées à la cybersécurité plutôt qu'au modèle entier. Permettre la reprise de l'accès général tout en maintenant les contrôles sur la capacité contestée.",
+            "tension": "Proportionnalité vs. précision. Une directive plus étroite est plus défendable, mais définir exactement quelles configurations API sont « liées à la cybersécurité » nécessite un jugement technique que le gouvernement peut ne pas avoir."
+          },
+          "reg_suspend": {
+            "label": "Suspendre en attendant un examen",
+            "detail": "Suspendre la directive pendant 90 jours tandis qu'un examen technique indépendant évalue si le contournement cité constitue une menace de sécurité nationale véritable au-delà de ce qui existe déjà dans les modèles concurrents.",
+            "tension": "Politique fondée sur les preuves vs. faiblesse perçue. Une pause signale la volonté d'avoir tort, mais les critiques la présenteront comme un recul sous la pression des entreprises."
+          }
+        },
+        "platform": {
+          "plat_comply_build": {
+            "label": "Se conformer et construire la vérification",
+            "detail": "Accepter la directive. Investir dans la construction d'un système de vérification de nationalité pour l'accès au modèle. Présenter la conformité comme démontrant que le déploiement responsable de l'IA inclut la coopération gouvernementale.",
+            "tension": "Coopération vs. infrastructure de surveillance. Construire la vérification de nationalité montre la bonne foi, mais vous construisez un système de filtrage des utilisateurs qui pourrait être élargi pour de futures directives plus restrictives."
+          },
+          "plat_challenge": {
+            "label": "Contestation juridique",
+            "detail": "Contester la directive devant un tribunal fédéral. Argumenter que l'autorité de contrôle des exportations n'a jamais été conçue pour les API logicielles et que l'invocation d'urgence manque de preuves. Demander une injonction immédiate pour restaurer l'accès.",
+            "tension": "Droits juridiques vs. cadrage de sécurité nationale. L'argument juridique peut être solide, mais contester une directive de sécurité nationale devant un tribunal alors que votre modèle est décrit comme une arme cybernétique est un récit public difficile."
+          },
+          "plat_transparent": {
+            "label": "Publier l'évaluation technique complète",
+            "detail": "Publier votre évaluation interne de sécurité du contournement cité, les résultats de votre équipe rouge et une analyse comparative montrant des capacités équivalentes dans les modèles concurrents. Laisser le public juger.",
+            "tension": "Transparence radicale vs. divulgation de capacités. Publier prouve votre point sur la proportionnalité, mais les résultats de votre équipe rouge et les voies de contournement deviennent des informations publiques."
+          }
+        },
+        "journalist": {
+          "jour_precedent": {
+            "label": "Mener avec l'article sur le précédent",
+            "detail": "Cadrer l'article autour du mécanisme juridique, pas du modèle spécifique. C'est le premier interrupteur d'arrêt pour l'IA. Analyser ce que cela signifie pour chaque entreprise d'IA de pointe et l'autorité de chaque gouvernement sur le déploiement commercial de l'IA.",
+            "tension": "Analyse systémique vs. drame immédiat. L'article sur le précédent est le plus important mais le moins accrocheur. Les angles de perturbation commerciale et de Chine génèrent plus de trafic."
+          },
+          "jour_competitive": {
+            "label": "Mener avec l'angle du sabotage concurrentiel",
+            "detail": "Enquêter et publier l'identité de l'entreprise concurrente qui a signalé le contournement au gouvernement. Cadrer l'article autour de la question de savoir si les contrôles des exportations sont instrumentalisés à des fins commerciales.",
+            "tension": "Responsabilité vs. spéculation. Si un concurrent a déclenché un arrêt gouvernemental du produit d'un rival, c'est un article majeur. Mais vos sources sont minces et publier prématurément pourrait être erroné."
+          },
+          "jour_china": {
+            "label": "Mener avec l'article sur la parité chinoise",
+            "detail": "Se concentrer sur l'ironie : en 16 jours, un laboratoire chinois a revendiqué la parité sur les capacités exactes que l'interdiction était censée restreindre. La capacité que les États-Unis tentent de contenir pourrait déjà être librement disponible hors de leur juridiction.",
+            "tension": "Contexte stratégique vs. affirmations non vérifiées. L'angle de la parité chinoise recadre tout le débat, mais les affirmations du laboratoire chinois sont auto-déclarées et non vérifiées par des évaluations indépendantes."
+          }
+        },
+        "ailab": {
+          "lab_safety_first": {
+            "label": "Reconnaître la préoccupation de capacité",
+            "detail": "Confirmer publiquement que les capacités de cybersécurité de votre modèle sont véritablement de niveau de pointe et que vos garde-fous, bien que leaders de l'industrie, ne sont pas parfaits. Soutenir le principe de supervision gouvernementale tout en contestant cette action spécifique.",
+            "tension": "Responsabilité honnête vs. auto-incrimination. Reconnaître que la capacité est réelle renforce le raisonnement du gouvernement tout en démontrant exactement le type de transparence que les défenseurs de la sécurité exigent."
+          },
+          "lab_parity": {
+            "label": "Souligner la parité des capacités",
+            "detail": "Publier des benchmarks comparatifs montrant que les modèles concurrents ont des capacités de cybersécurité équivalentes. Argumenter que le contrôle des exportations est arbitraire et discriminatoire puisqu'il cible une entreprise tout en laissant des risques identiques non traités.",
+            "tension": "Règles du jeu équitables vs. course vers le bas. Prouver que les concurrents sont tout aussi capables argumente contre le ciblage unique, mais confirme aussi publiquement que la capacité existe dans toute l'industrie."
+          },
+          "lab_rebrand": {
+            "label": "Pivoter la communication loin de la sécurité",
+            "detail": "Arrêter de mettre en avant les capacités dangereuses du modèle dans le marketing. Rebrander autour de la productivité et de la valeur entreprise. Si votre communication sur la sécurité a créé le fondement juridique, changez la communication.",
+            "tension": "Communication stratégique vs. culture de sécurité. Minimiser le risque dans le marketing vous protège des futurs contrôles des exportations, mais signifie aussi minimiser le risque pour le public et vos propres employés."
+          }
+        }
+      },
+      "interactions": [
+        {
+          "label": "Réponse proportionnée",
+          "desc": "La directive restreinte combinée à la divulgation technique complète de l'entreprise a donné au public et aux alliés la confiance que le gouvernement agissait sur des preuves, pas sur la politique. Le cadre résultant est devenu un modèle pour les futurs contrôles des exportations de l'IA avec des exigences intégrées de proportionnalité."
+        },
+        {
+          "label": "Le paradoxe de la sécurité",
+          "desc": "Le gouvernement a maintenu les contrôles justifiés par le danger du modèle tandis que l'entreprise a cessé de parler de sécurité. La contradiction était visible pour tous : soit le modèle est dangereux (justifiant l'interdiction), soit il ne l'est pas (justifiant le repositionnement). Les deux ne peuvent pas être vrais. La confiance du public dans les deux institutions a chuté."
+        },
+        {
+          "label": "Débat de gouvernance éclairé",
+          "desc": "Le journalisme axé sur le précédent combiné à la reconnaissance honnête des capacités par le laboratoire a créé un débat public ancré dans les faits plutôt que dans la spéculation. Des décideurs de 6 pays ont cité la couverture résultante en développant leurs propres cadres de supervision de l'IA."
+        },
+        {
+          "label": "Réglementation instrumentalisée",
+          "desc": "L'article sur le sabotage concurrentiel combiné au refus du gouvernement de restreindre la directive a créé un récit selon lequel les contrôles des exportations sont un outil de manipulation de marché. Deux nations alliées ont gelé la coopération en gouvernance de l'IA avec les États-Unis en attendant un examen."
+        },
+        {
+          "label": "L'industrie contre le gouvernement",
+          "desc": "La contestation juridique combinée à l'argument de parité a cadré toute l'industrie de l'IA comme s'opposant à la supervision gouvernementale. L'affaire judiciaire est devenue une guerre par procuration sur la question de savoir si les gouvernements peuvent réguler les capacités de l'IA, polarisant le débat et retardant une politique constructive de 18 mois."
+        },
+        {
+          "label": "Réévaluation stratégique",
+          "desc": "La pause de 90 jours combinée aux reportages sur la parité des capacités chinoises a forcé une véritable réévaluation : si la capacité ne peut pas être contenue en restreignant une entreprise, quel est l'objectif politique réel? L'examen a produit une stratégie plus cohérente axée sur la résilience défensive plutôt que le déni de capacités."
+        },
+        {
+          "label": "Désescalade maîtrisée",
+          "desc": "La directive restreinte a rencontré la décision de l'entreprise de se conformer et de construire la vérification. Au lieu d'un bras de fer, les deux parties ont produit une restauration rapide et légitime : l'accès a repris sous un contrôle ciblé que les deux pouvaient défendre, et les gouvernements alliés l'ont lu comme preuve que le système s'autocorrige. La coopération, quand l'autre partie modère aussi, a restauré plus de crédibilité que combattre ou capituler seul."
         }
       ]
     }

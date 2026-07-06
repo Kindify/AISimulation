@@ -29,7 +29,7 @@
       "classification": "EDITORIAL — INVESTIGATION BRIEFING",
       "bullets": [
         "You've obtained internal evaluations from two frontier AI labs showing their latest models can provide step-by-step synthesis protocols for select Category A bioagents when prompted with specific technical framing. The labs patched these pathways but acknowledged the underlying capability persists.",
-        "A former the industry consortium board member told you, on background, that voluntary screening catches 'maybe 60% of concerning orders on a good day' and that the consortium's sequence database hasn't been updated for novel engineered pathogens since 2024.",
+        "A former board member of the industry screening consortium told you, on background, that voluntary screening catches 'maybe 60% of concerning orders on a good day' and that the consortium's sequence database hasn't been updated for novel engineered pathogens since 2024.",
         "The CEO letter's timing is suspicious to some of your sources. One bioethicist called it 'a masterclass in regulatory capture: the companies whose AI creates the threat get to shape the law that governs the response, while positioning themselves as responsible leaders.'",
         "Your editor wants the story framed around the CEO unity angle. Your national security sources want you to focus on the screening gaps. Publishing the lab evaluation details would demonstrate the urgency but could function as a capability demonstration."
       ]
@@ -75,7 +75,7 @@
       {
         "id": "reg_voluntary_plus",
         "label": "Strengthen Voluntary Framework",
-        "detail": "Formalize the industry consortium standards as government-endorsed guidelines with public reporting requirements and annual audits, but stop short of criminal enforcement.",
+        "detail": "Formalize the industry screening consortium standards as government-endorsed guidelines with public reporting requirements and annual audits, but stop short of criminal enforcement.",
         "tension": "Industry cooperation vs. enforcement gap. Voluntary-plus preserves flexibility but the current voluntary system catches maybe 60% of concerning orders.",
         "stance": "cautious",
         "scores": {
@@ -103,7 +103,7 @@
       {
         "id": "plat_carveout",
         "label": "Lobby for Implementation Carve-outs",
-        "detail": "Support mandatory screening in principle but push for exemptions: grandfather existing the industry consortium members, exclude orders below a sequence length threshold, and limit recordkeeping to 2 years.",
+        "detail": "Support mandatory screening in principle but push for exemptions: grandfather existing consortium members, exclude orders below a sequence length threshold, and limit recordkeeping to 2 years.",
         "tension": "Workable implementation vs. loopholes. Carve-outs make compliance realistic but every exemption is a potential gap bad actors can exploit.",
         "stance": "cautious",
         "scores": {
@@ -144,7 +144,7 @@
       {
         "id": "jour_gaps",
         "label": "Publish the Screening Gaps Investigation",
-        "detail": "Lead with the former the industry consortium board member's assessment that voluntary screening catches 'maybe 60% of concerning orders' and that the sequence database is outdated. Include the lab evaluation details showing active capability.",
+        "detail": "Lead with the former consortium board member's assessment that voluntary screening catches 'maybe 60% of concerning orders' and that the sequence database is outdated. Include the lab evaluation details showing active capability.",
         "tension": "Demonstrating urgency vs. enabling capability. Publishing the screening gaps and lab eval details proves the threat is real, but it also signals to bad actors exactly where the vulnerabilities are.",
         "stance": "transparent",
         "scores": {
@@ -294,8 +294,22 @@
         "trust": -5,
         "legitimacy": -4
       }
+    },
+    {
+      "pair": [
+        "plat_advocate",
+        "reg_mandatory"
+      ],
+      "type": "conflict",
+      "label": "The Surveillance Registry",
+      "desc": "The largest provider championing universal recordkeeping plus a full mandatory bill that required it together built the thing the provider's own lawyers had warned about: a centralized, subpoenable, breachable record of who ordered which sequences. Two actors each optimizing for maximum biosecurity protection produced a biotech purchase-surveillance database, chilling legitimate research and creating a single high-value target. The protection and the liability were the same system.",
+      "mod": {
+        "rights": -6,
+        "trust": -4,
+        "legitimacy": -3
+      }
     }
   ],
   "sourceDate": "June 2026",
-  "sourceNote": "Inspired by publicly reported events as of June 28, 2026. Details are fictionalized for gameplay. Contested claims are flagged where sources conflict."
+  "sourceNote": "Inspired by publicly reported events as of June 2026. Details are fictionalized for gameplay. Contested claims are flagged where sources conflict."
 }

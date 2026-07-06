@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { useTranslatedCrisis } from "./useTranslatedCrisis";
 import { ROLES, computeOutcome } from "./EpistemicCommons";
-import { ALL_SCENARIOS } from "./scenarios";
+import { ALL_SCENARIOS, TOPICAL_SCENARIOS } from "./scenarios";
 import LanguageToggle from "./LanguageToggle";
 import { track } from "./analytics";
 
@@ -53,8 +53,13 @@ export default function QuickPlay({ onBack, onFullPlay }: Props) {
   const [feedbackSubmitted, setFeedbackSubmitted] = useState(false);
 
   const randomize = (isReroll = false) => {
-    const allCrises = [...ALL_SCENARIOS];
-    const randomCrisis = allCrises[Math.floor(Math.random() * allCrises.length)];
+    let pool: typeof ALL_SCENARIOS;
+    if (TOPICAL_SCENARIOS.length > 0 && Math.random() < 0.5) {
+      pool = [...TOPICAL_SCENARIOS];
+    } else {
+      pool = [...ALL_SCENARIOS];
+    }
+    const randomCrisis = pool[Math.floor(Math.random() * pool.length)];
     const randomRole = ROLES[Math.floor(Math.random() * ROLES.length)];
     const others: any = {};
     ROLES.forEach(r => {

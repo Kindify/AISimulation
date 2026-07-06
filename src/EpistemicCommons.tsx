@@ -602,22 +602,6 @@ textarea, input { font-family: 'DM Sans', sans-serif; }
               </div>
             </div>
 
-            {/* WORKSHOP LIFECYCLE */}
-            {workshopCrises.length > 0 && (
-              <div style={{ marginBottom: 24 }}>
-                <div style={{ fontFamily: "'Space Mono', monospace", fontSize: 10, letterSpacing: 2, color: "#06b6d4", marginBottom: 10, display: "flex", alignItems: "center", gap: 8 }}>
-                  {t("govGame.workshopLifecycle")}
-                  <span style={{ background: "#06b6d418", borderRadius: 4, padding: "2px 6px", fontSize: 9 }}>{workshopCrises.length}</span>
-                  <button onClick={() => startQueue(workshopIds)} style={{ marginLeft: "auto", padding: "4px 12px", background: "#06b6d418", color: "#06b6d4", border: "1px solid #06b6d433", borderRadius: 6, cursor: "pointer", fontFamily: "'Space Mono', monospace", fontSize: 9, fontWeight: 700, letterSpacing: 1 }}>
-                    {t("govGame.playLifecycleArc")} →
-                  </button>
-                </div>
-                <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12 }}>
-                  {workshopCrises.map((c: any) => <ScenarioCard key={c.id} c={c} typeLabel={t("govGame.workshop")} typeColor="#06b6d4" />)}
-                </div>
-              </div>
-            )}
-
             {/* NEWS-DRIVEN */}
             {topicalCrises.length > 0 && (
               <div style={{ marginBottom: 24 }}>
@@ -630,6 +614,22 @@ textarea, input { font-family: 'DM Sans', sans-serif; }
                 </div>
                 <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12 }}>
                   {topicalCrises.map((c: any) => <ScenarioCard key={c.id} c={c} typeLabel={t("govGame.topical")} typeColor="#06b6d4" />)}
+                </div>
+              </div>
+            )}
+
+            {/* WORKSHOP LIFECYCLE */}
+            {workshopCrises.length > 0 && (
+              <div style={{ marginBottom: 24 }}>
+                <div style={{ fontFamily: "'Space Mono', monospace", fontSize: 10, letterSpacing: 2, color: "#06b6d4", marginBottom: 10, display: "flex", alignItems: "center", gap: 8 }}>
+                  {t("govGame.workshopLifecycle")}
+                  <span style={{ background: "#06b6d418", borderRadius: 4, padding: "2px 6px", fontSize: 9 }}>{workshopCrises.length}</span>
+                  <button onClick={() => startQueue(workshopIds)} style={{ marginLeft: "auto", padding: "4px 12px", background: "#06b6d418", color: "#06b6d4", border: "1px solid #06b6d433", borderRadius: 6, cursor: "pointer", fontFamily: "'Space Mono', monospace", fontSize: 9, fontWeight: 700, letterSpacing: 1 }}>
+                    {t("govGame.playLifecycleArc")} →
+                  </button>
+                </div>
+                <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12 }}>
+                  {workshopCrises.map((c: any) => <ScenarioCard key={c.id} c={c} typeLabel={t("govGame.workshop")} typeColor="#06b6d4" />)}
                 </div>
               </div>
             )}

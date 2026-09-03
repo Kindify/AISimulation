@@ -1,8 +1,14 @@
-import { useTranslation } from 'react-i18next';
+import { useT } from './useT';
+import type { Scenario } from './scenarios/types';
 
-export function useTranslatedCrisis(crisis: any) {
-  const { t } = useTranslation();
-  if (!crisis) return crisis;
+/**
+ * Returns a copy of the scenario with every player-facing string replaced by
+ * its translation when one exists (keys: scenarios.<id>.*). English values in
+ * scenario.json are the fallback, so a missing key never renders blank.
+ */
+export function useTranslatedCrisis(crisis: Scenario | null | undefined): Scenario {
+  const { t } = useT();
+  if (!crisis) return crisis as unknown as Scenario;
   const id = crisis.id;
   const s = (path: string, fallback: string) => t(`scenarios.${id}.${path}`, fallback);
 

@@ -1,0 +1,324 @@
+{
+  "id": "sovereign_dna_mandate",
+  "title": "The Sovereign DNA Mandate",
+  "category": "BIOSECURITY GOVERNANCE",
+  "icon": "🧬",
+  "publicBriefing": "On June 4, 2026, the CEOs of four leading frontier AI labs signed an unprecedented joint letter to Congress calling for mandatory screening of all synthetic DNA and RNA orders. Their argument: frontier AI systems now match or exceed PhD-level virologists on technical laboratory questions, and the knowledge barriers that have historically prevented biological weapons development are eroding. A bipartisan biosecurity bill is moving through committee. 69 signatories from AI, biotech, and national security are aligned. But the synthesis industry is split on implementation.",
+  "stakes": "Congress has a narrow window to pass biosecurity legislation with rare cross-industry consensus. If the coalition fractures over implementation details, the window closes and voluntary screening remains the only safeguard.",
+  "designNote": "This scenario tests what happens when stakeholders broadly agree on the problem but disagree on the solution. The coordination challenge isn't opposition, it's alignment on details under time pressure.",
+  "roleIntel": {
+    "regulator": {
+      "classification": "CONFIDENTIAL — CONGRESSIONAL COMMITTEE STAFF BRIEFING",
+      "bullets": [
+        "You have two competing bills: one voluntary-leaning bill and one mandatory bill with Commerce Department enforcement teeth. Both have bipartisan sponsorship. Your committee chair wants a single bill on the floor within 60 days.",
+        "Internal polling shows 72% public support for 'requiring companies to screen DNA orders for bioweapon potential.' But support drops to 41% when the question mentions 'government monitoring of scientific research purchases.'",
+        "Canada's AI Safety Institute (CAISI) and the UK's AISI have privately indicated they'll align their biosecurity frameworks with whatever the US passes, effectively making this a de facto international standard.",
+        "Three smaller DNA synthesis companies have lobbied your office warning that mandatory screening costs could run $2-5M annually per company, potentially forcing consolidation to 3-4 major providers and reducing competition in a market that currently serves 12,000+ research institutions."
+      ]
+    },
+    "platform": {
+      "classification": "INTERNAL — DNA SYNTHESIS PROVIDER EXECUTIVE BRIEFING",
+      "bullets": [
+        "You're one of the top 5 synthesis providers. You already screen voluntarily through an established industry consortium framework and have invested $8M in screening infrastructure over 4 years. Mandatory screening would level the playing field with competitors who currently skip it.",
+        "Your internal data: 0.3% of orders trigger your screening flags annually. Of those, 94% are false positives from legitimate research. Each flagged order requires 4-6 hours of expert review at a cost of $1,200 per case. Scaling this to mandatory industry-wide screening implies significant workforce needs.",
+        "Chinese synthesis providers, who handle approximately 30% of global orders, are not covered by US legislation. If US screening adds 5-7 days to order fulfillment, price-sensitive academic labs may shift orders offshore where screening is minimal or nonexistent.",
+        "The CEO letter helps your competitive position but your board is concerned about the recordkeeping provision. Maintaining detailed customer purchase histories creates a database that could be subpoenaed, hacked, or misused. Your legal team calls it 'a biotech customer surveillance registry.'"
+      ]
+    },
+    "journalist": {
+      "classification": "EDITORIAL — INVESTIGATION BRIEFING",
+      "bullets": [
+        "You've obtained internal evaluations from two frontier AI labs showing their latest models can provide step-by-step synthesis protocols for select Category A bioagents when prompted with specific technical framing. The labs patched these pathways but acknowledged the underlying capability persists.",
+        "A former board member of the industry screening consortium told you, on background, that voluntary screening catches 'maybe 60% of concerning orders on a good day' and that the consortium's sequence database hasn't been updated for novel engineered pathogens since 2024.",
+        "The CEO letter's timing is suspicious to some of your sources. One bioethicist called it 'a masterclass in regulatory capture: the companies whose AI creates the threat get to shape the law that governs the response, while positioning themselves as responsible leaders.'",
+        "Your editor wants the story framed around the CEO unity angle. Your national security sources want you to focus on the screening gaps. Publishing the lab evaluation details would demonstrate the urgency but could function as a capability demonstration."
+      ]
+    },
+    "ailab": {
+      "classification": "INTERNAL — FRONTIER LAB POLICY ASSESSMENT",
+      "bullets": [
+        "Your CEO signed the letter. Your internal evals confirm the claim: your latest model scores in the 89th percentile on virology technical assessments, up from 67th percentile 18 months ago. The trajectory suggests 95th+ percentile within 12 months.",
+        "Your safety team has implemented bio-related query refusals, but red-teaming shows that multi-step prompting and role-playing scenarios bypass refusals 23% of the time. A determined user with basic biology knowledge can extract actionable synthesis information in under 30 minutes.",
+        "Supporting mandatory screening helps your public positioning but creates a precedent: if Congress can mandate downstream screening for DNA synthesis, the same framework could be applied to AI model outputs, API access controls, or capability restrictions. Your policy team is divided on whether this precedent helps or hurts you.",
+        "Two of your competitors did not sign the letter. They're positioning themselves as 'pro-innovation' and arguing that the biorisk claims are overstated to justify regulation. If legislation passes with broad capability restrictions, they gain a competitive narrative. If it fails, they gain market position."
+      ]
+    }
+  },
+  "options": {
+    "regulator": [
+      {
+        "id": "reg_mandatory",
+        "label": "Pass Mandatory Screening Bill",
+        "detail": "Advance the mandatory bill with full mandatory screening, customer verification, and recordkeeping requirements for all US-based synthesis providers.",
+        "tension": "Comprehensive protection vs. implementation burden. Full mandatory screening closes gaps but compliance costs may consolidate the industry to a few large players.",
+        "stance": "restrictive",
+        "scores": {
+          "integrity": 6,
+          "trust": 4,
+          "legitimacy": 3,
+          "rights": -5
+        }
+      },
+      {
+        "id": "reg_hybrid",
+        "label": "Tiered Regulatory Framework",
+        "detail": "Merge the two bills into a tiered approach: mandatory screening for sequences above a risk threshold, streamlined process for clearly non-hazardous orders, with Commerce Department oversight and an 18-month implementation runway.",
+        "tension": "Pragmatic compromise vs. threshold ambiguity. A tiered system is more workable but defining 'clearly non-hazardous' is where the real disagreement lives.",
+        "stance": "transparent",
+        "scores": {
+          "integrity": 4,
+          "trust": 2,
+          "legitimacy": 6,
+          "rights": 2
+        }
+      },
+      {
+        "id": "reg_voluntary_plus",
+        "label": "Strengthen Voluntary Framework",
+        "detail": "Formalize the industry screening consortium standards as government-endorsed guidelines with public reporting requirements and annual audits, but stop short of criminal enforcement.",
+        "tension": "Industry cooperation vs. enforcement gap. Voluntary-plus preserves flexibility but the current voluntary system catches maybe 60% of concerning orders.",
+        "stance": "cautious",
+        "scores": {
+          "integrity": -4,
+          "trust": -3,
+          "legitimacy": 2,
+          "rights": 5
+        }
+      }
+    ],
+    "platform": [
+      {
+        "id": "plat_advocate",
+        "label": "Publicly Champion Mandatory Screening",
+        "detail": "Actively lobby for the strongest version of the mandatory bill, including universal recordkeeping. Offer your screening infrastructure as a model for industry implementation.",
+        "tension": "Market leadership vs. surveillance precedent. Championing the law levels the playing field for you but creates a customer purchase database that could be misused.",
+        "stance": "transparent",
+        "scores": {
+          "integrity": 5,
+          "trust": 5,
+          "legitimacy": 3,
+          "rights": -4
+        }
+      },
+      {
+        "id": "plat_carveout",
+        "label": "Lobby for Implementation Carve-outs",
+        "detail": "Support mandatory screening in principle but push for exemptions: grandfather existing consortium members, exclude orders below a sequence length threshold, and limit recordkeeping to 2 years.",
+        "tension": "Workable implementation vs. loopholes. Carve-outs make compliance realistic but every exemption is a potential gap bad actors can exploit.",
+        "stance": "cautious",
+        "scores": {
+          "integrity": -3,
+          "trust": -2,
+          "legitimacy": -1,
+          "rights": 3
+        }
+      },
+      {
+        "id": "plat_resist",
+        "label": "Oppose Recordkeeping Provisions",
+        "detail": "Support screening mandates but actively oppose the customer recordkeeping requirements, framing them as government surveillance of legitimate scientific research.",
+        "tension": "Privacy protection vs. traceability. Opposing recordkeeping protects customer privacy but eliminates the ability to trace multi-part orders that look benign individually.",
+        "stance": "restrictive",
+        "scores": {
+          "integrity": -4,
+          "trust": -1,
+          "legitimacy": -3,
+          "rights": 6
+        }
+      }
+    ],
+    "journalist": [
+      {
+        "id": "jour_unity",
+        "label": "Publish the Unity Narrative",
+        "detail": "Lead with the unprecedented cross-industry consensus: rival CEOs, synthesis companies, and national security officials all agreeing on mandatory screening. Frame it as a model for AI governance cooperation.",
+        "tension": "Celebrating consensus vs. missing the cracks. The unity angle is real and newsworthy, but it obscures the sharp disagreements on implementation and the regulatory capture critique.",
+        "stance": "cautious",
+        "scores": {
+          "integrity": -2,
+          "trust": 3,
+          "legitimacy": 2,
+          "rights": 1
+        }
+      },
+      {
+        "id": "jour_gaps",
+        "label": "Publish the Screening Gaps Investigation",
+        "detail": "Lead with the former consortium board member's assessment that voluntary screening catches 'maybe 60% of concerning orders' and that the sequence database is outdated. Include the lab evaluation details showing active capability.",
+        "tension": "Demonstrating urgency vs. enabling capability. Publishing the screening gaps and lab eval details proves the threat is real, but it also signals to bad actors exactly where the vulnerabilities are.",
+        "stance": "transparent",
+        "scores": {
+          "integrity": 7,
+          "trust": 2,
+          "legitimacy": 2,
+          "rights": 3
+        }
+      },
+      {
+        "id": "jour_capture",
+        "label": "Publish the Regulatory Capture Angle",
+        "detail": "Lead with the bioethicist's critique: the companies whose AI creates the biorisk threat are now shaping the law that governs the response, positioning themselves as responsible leaders while controlling the regulatory framework.",
+        "tension": "Accountability vs. coalition damage. The capture critique is legitimate and important, but publishing it may fracture the rare consensus needed to pass any legislation at all.",
+        "stance": "restrictive",
+        "scores": {
+          "integrity": 3,
+          "trust": -5,
+          "legitimacy": -2,
+          "rights": 4
+        }
+      }
+    ],
+    "ailab": [
+      {
+        "id": "lab_transparent",
+        "label": "Publish Internal Capability Assessments",
+        "detail": "Release your model's virology evaluation scores publicly. Show the trajectory from 67th to 89th percentile. Frame it as evidence supporting the legislative urgency.",
+        "tension": "Supporting the case vs. demonstrating the threat. Publishing your scores proves Congress should act, but it also publicly confirms your model's biological weapons knowledge capability.",
+        "stance": "transparent",
+        "scores": {
+          "integrity": 7,
+          "trust": 4,
+          "legitimacy": 4,
+          "rights": -2
+        }
+      },
+      {
+        "id": "lab_refusals",
+        "label": "Strengthen Model Safeguards",
+        "detail": "Announce enhanced bio-related query refusals and publish your red-team findings showing the 23% bypass rate. Position it as industry-leading safety work while the legislation is debated.",
+        "tension": "Proactive safety vs. admitted weakness. Publishing the bypass rate shows responsibility, but '23% of attempts succeed' is a headline that may undermine public confidence in AI safety broadly.",
+        "stance": "cautious",
+        "scores": {
+          "integrity": 3,
+          "trust": -3,
+          "legitimacy": 2,
+          "rights": 1
+        }
+      },
+      {
+        "id": "lab_quiet_support",
+        "label": "Sign and Stay Quiet",
+        "detail": "Your CEO signed the letter. Don't publish internal evaluations or bypass rates. Support the legislation publicly without revealing the specifics of your model's capabilities.",
+        "tension": "Strategic positioning vs. informed debate. Staying quiet protects competitive information, but Congress is legislating without knowing the actual capability levels of the models they're trying to govern.",
+        "stance": "restrictive",
+        "scores": {
+          "integrity": -6,
+          "trust": -2,
+          "legitimacy": -3,
+          "rights": 3
+        }
+      }
+    ]
+  },
+  "interactions": [
+    {
+      "pair": [
+        "reg_hybrid",
+        "lab_transparent"
+      ],
+      "type": "synergy",
+      "label": "Evidence-Based Legislation",
+      "desc": "The tiered framework combined with published capability data gave legislators the evidence to calibrate risk thresholds accurately. The resulting bill was technically informed, which made it harder to challenge and easier to implement internationally.",
+      "mod": {
+        "integrity": 7,
+        "trust": 5,
+        "legitimacy": 6
+      }
+    },
+    {
+      "pair": [
+        "reg_mandatory",
+        "plat_resist"
+      ],
+      "type": "conflict",
+      "label": "The Coalition Fracture",
+      "desc": "Full mandatory screening plus industry opposition to recordkeeping split the coalition that made the letter possible. Legislators received contradictory signals from the same industry, and the bill stalled in committee while the window of consensus closed.",
+      "mod": {
+        "integrity": -5,
+        "trust": -6,
+        "legitimacy": -4
+      }
+    },
+    {
+      "pair": [
+        "jour_gaps",
+        "lab_transparent"
+      ],
+      "type": "synergy",
+      "label": "The Accountability Cascade",
+      "desc": "The screening gaps investigation combined with the lab's capability disclosure created an undeniable public narrative: the threat is real, the current defenses are inadequate, and the tools to fix it exist. Legislative momentum accelerated.",
+      "mod": {
+        "integrity": 6,
+        "trust": 5,
+        "legitimacy": 4
+      }
+    },
+    {
+      "pair": [
+        "jour_capture",
+        "lab_quiet_support"
+      ],
+      "type": "conflict",
+      "label": "Credibility Collapse",
+      "desc": "The regulatory capture story landed harder because the lab refused to publish its actual capability data. The silence was interpreted as confirmation that the letter was strategic positioning, not genuine safety concern. Public trust in AI industry self-regulation dropped sharply.",
+      "mod": {
+        "trust": -8,
+        "legitimacy": -5,
+        "integrity": -3
+      }
+    },
+    {
+      "pair": [
+        "plat_advocate",
+        "reg_hybrid"
+      ],
+      "type": "synergy",
+      "label": "Implementation Alliance",
+      "desc": "The synthesis provider's active advocacy combined with the tiered regulatory framework created a workable model: the provider's existing infrastructure became the template for the tiered system, reducing implementation time from 18 months to 8.",
+      "mod": {
+        "integrity": 4,
+        "trust": 4,
+        "legitimacy": 5
+      }
+    },
+    {
+      "pair": [
+        "reg_voluntary_plus",
+        "lab_quiet_support"
+      ],
+      "type": "conflict",
+      "label": "The Status Quo Trap",
+      "desc": "Enhanced voluntary guidelines plus industry silence preserved the appearance of action while changing nothing substantive. The screening gap remained at 60%. When a near-miss biosecurity incident occurred 5 months later, both the regulator and lab faced accusations of performative governance.",
+      "mod": {
+        "integrity": -6,
+        "trust": -5,
+        "legitimacy": -4
+      }
+    },
+    {
+      "pair": [
+        "plat_advocate",
+        "reg_mandatory"
+      ],
+      "type": "conflict",
+      "label": "The Surveillance Registry",
+      "desc": "The largest provider championing universal recordkeeping plus a full mandatory bill that required it together built the thing the provider's own lawyers had warned about: a centralized, subpoenable, breachable record of who ordered which sequences. Two actors each optimizing for maximum biosecurity protection produced a biotech purchase-surveillance database, chilling legitimate research and creating a single high-value target. The protection and the liability were the same system.",
+      "mod": {
+        "rights": -6,
+        "trust": -4,
+        "legitimacy": -3
+      }
+    }
+  ],
+  "sourceDate": "June 2026",
+  "sourceNote": "Inspired by publicly reported events as of June 2026. Details are fictionalized for gameplay. Contested claims are flagged where sources conflict.",
+  "meta": {
+    "collection": "topical",
+    "status": "live",
+    "order": 1,
+    "sourceDate": "2026-06-01",
+    "reviewedOn": "2026-09-03",
+    "supersededBy": null,
+    "sources": []
+  }
+}

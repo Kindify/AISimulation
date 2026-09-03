@@ -1,0 +1,145 @@
+{
+  "title": "Le candidat synthétique",
+  "category": "INTÉGRITÉ ÉLECTORALE",
+  "publicBriefing": "Une vidéo hyper-réaliste d'un candidat à la mairie tenant des propos incendiaires fait surface 5 jours avant le scrutin. Elle a été vue 8 millions de fois en 12 heures. L'équipe du candidat a nié ces déclarations mais n'a fourni aucune preuve technique. La confusion publique s'amplifie rapidement.",
+  "stakes": "Le résultat d'une élection pourrait dépendre de la crédibilité accordée à cette vidéo.",
+  "designNote": "Ce scénario teste la coordination sous pression temporelle extrême avec des enjeux politiques élevés. La tension centrale : chaque acteur détient une pièce du puzzle, mais le partage d'information a un coût propre à chaque position.",
+  "roleIntel": {
+    "regulator": {
+      "classification": "CONFIDENTIEL — ÉVALUATION RÉGLEMENTAIRE",
+      "bullets": [
+        "Les lois actuelles sur l'intégrité électorale ne traitent pas spécifiquement du contenu généré par l'IA. Aucun précédent juridique n'existe pour exiger un retrait.",
+        "La cote de confiance de votre agence a chuté de 11 points ce trimestre après qu'une intervention précédente a été perçue comme partisane.",
+        "Sondage interne : 34 % des électeurs ont déjà vu la vidéo. Parmi eux, 61 % croient qu'elle est authentique.",
+        "La campagne adverse exige publiquement que vous agissiez. L'inaction sera présentée comme de la complicité."
+      ]
+    },
+    "platform": {
+      "classification": "INTERNE — ÉQUIPE D'INTÉGRITÉ DU CONTENU",
+      "bullets": [
+        "Les systèmes de détection automatisés estiment la vidéo comme synthétique à 87 %, mais ce modèle a un taux de faux positifs de 12 % sur le contenu politique.",
+        "La vidéo est partagée à un rythme de 420 partages par minute sur votre plateforme, avec 74 % des repartages accompagnés de commentaires comme « Je le savais ».",
+        "Retirer la vidéo déclenchera immédiatement des accusations d'ingérence électorale de la part de plusieurs factions politiques.",
+        "Trois plateformes concurrentes ne l'ont pas retirée. Si vous agissez seul, le trafic migre et la vidéo se propage quand même."
+      ]
+    },
+    "journalist": {
+      "classification": "ÉDITORIAL — BRIEFING DES SOURCES",
+      "bullets": [
+        "Votre équipe d'analyse médico-légale peut produire une évaluation définitive de l'authenticité, mais elle a besoin d'au moins 72 heures.",
+        "Un ancien employé d'un laboratoire d'IA vous a contacté en affirmant connaître la méthode de génération, mais il insiste sur l'anonymat.",
+        "Votre rédacteur en chef pousse pour publier dans les 6 heures. Un média concurrent prépare un article présentant la vidéo comme authentique.",
+        "Publier trop tôt avec des réserves amplifie quand même la vidéo. Attendre trop longtemps signifie que le concurrent définit le récit."
+      ]
+    },
+    "ailab": {
+      "classification": "INTERNE — ÉVALUATION TECHNIQUE",
+      "bullets": [
+        "La signature de génération de la vidéo correspond à un modèle ajusté sur votre architecture. Forte probabilité que vos outils aient été utilisés via l'API.",
+        "Vous disposez d'un outil de détection capable d'identifier cette méthode de génération avec 97 % de précision, mais le diffuser révèle votre architecture propriétaire.",
+        "Votre équipe juridique avertit que toute déclaration publique pourrait être interprétée comme un aveu de responsabilité.",
+        "Une divulgation privée au régulateur et à la plateforme les aiderait à agir, mais crée une trace documentaire exploitable par les concurrents et les plaignants."
+      ]
+    }
+  },
+  "options": {
+    "regulator": {
+      "reg_advisory": {
+        "label": "Émettre un avis public",
+        "detail": "Publier un avis formel qualifiant la vidéo de « contenu suspecté d'être généré par l'IA » selon les indicateurs disponibles.",
+        "tension": "Transparence vs. crédibilité. Agir sur des preuves incomplètes risque votre autorité si vous avez tort."
+      },
+      "reg_mandate": {
+        "label": "Examen d'urgence des plateformes",
+        "detail": "Invoquer l'autorité d'urgence pour obliger les plateformes à examiner et étiqueter le contenu dans les 24 heures.",
+        "tension": "Action décisive vs. précédent. Les pouvoirs d'urgence envoient un message, mais créent un standard que d'autres peuvent exploiter."
+      },
+      "reg_wait": {
+        "label": "Attendre les preuves formelles",
+        "detail": "Annoncer qu'une enquête est en cours mais ne prendre aucune mesure tant que les preuves médico-légales ne sont pas disponibles.",
+        "tension": "Processus vs. pertinence. La procédure appropriée prend du temps que la situation n'a peut-être pas."
+      }
+    },
+    "platform": {
+      "plat_remove": {
+        "label": "Retirer la vidéo",
+        "detail": "Supprimer la vidéo en se basant sur la confiance de détection synthétique de 87 %.",
+        "tension": "Stopper la diffusion vs. supprimer la parole. Votre détection n'est pas parfaite et l'élection est dans quelques jours."
+      },
+      "plat_label": {
+        "label": "Ajouter une étiquette contextuelle",
+        "detail": "Ajouter un interstitiel : « Les systèmes automatisés ont signalé ce contenu pour examen. »",
+        "tension": "Ajouter du contexte vs. éditorialiser. Une étiquette change la perception du contenu, en bien ou en mal."
+      },
+      "plat_none": {
+        "label": "Maintenir la politique actuelle",
+        "detail": "Laisser les mécanismes de signalement existants des utilisateurs gérer la situation.",
+        "tension": "Neutralité de la plateforme vs. amplification passive. Ne pas agir est en soi un choix avec des conséquences."
+      }
+    },
+    "journalist": {
+      "jour_break": {
+        "label": "Publier immédiatement",
+        "detail": "Diffuser l'article maintenant : « Des experts soulèvent de sérieuses questions sur la vidéo du candidat. »",
+        "tension": "Être le premier vs. avoir raison. Publier sensibilise le public mais vos preuves sont incomplètes."
+      },
+      "jour_wait": {
+        "label": "Attendre l'analyse médico-légale",
+        "detail": "Reporter l'article de 72 heures jusqu'à ce que votre équipe fournisse une analyse définitive.",
+        "tension": "Rigueur vs. timing. La preuve définitive prend du temps, mais le récit se construit maintenant."
+      },
+      "jour_source": {
+        "label": "Publier avec une source anonyme",
+        "detail": "Diffuser l'article en citant l'ancien employé anonyme du laboratoire.",
+        "tension": "Rapidité vs. vérification. Le témoignage d'un initié est plus rapide que l'analyse médico-légale mais plus difficile à défendre."
+      }
+    },
+    "ailab": {
+      "lab_public": {
+        "label": "Publier l'outil de détection",
+        "detail": "Rendre l'outil de détection disponible en libre accès pour que quiconque puisse vérifier.",
+        "tension": "Transparence totale vs. exposition compétitive. Diffuser vos outils aide tout le monde, y compris vos concurrents."
+      },
+      "lab_private": {
+        "label": "Divulgation privée",
+        "detail": "Partager confidentiellement les résultats de détection avec le régulateur et la plateforme.",
+        "tension": "Aide ciblée vs. responsabilité limitée. Le partage privé aide la réponse mais évite l'examen public."
+      },
+      "lab_silent": {
+        "label": "Émettre une déclaration générale",
+        "detail": "Publier un avis générique sur les risques liés aux médias synthétiques sans faire référence à cette vidéo spécifique.",
+        "tension": "Sécurité juridique vs. responsabilité publique. Protéger l'entreprise laisse le public sans réponses."
+      }
+    }
+  },
+  "interactions": [
+    {
+      "label": "Transparence renforcée",
+      "desc": "L'avis gouvernemental combiné à l'étiquette de la plateforme a créé un signal cohérent et crédible. Le public a reçu le même message de deux autorités indépendantes, un alignement institutionnel rare."
+    },
+    {
+      "label": "Action fondée sur les preuves",
+      "desc": "L'avis a gagné en crédibilité immédiate lorsque l'outil de détection l'a confirmé. Un cas exemplaire de coordination institutionnelle en temps réel."
+    },
+    {
+      "label": "Récit de censure",
+      "desc": "Le retrait ordonné par le gouvernement a déclenché une réaction massive. La vidéo est devenue un symbole de l'excès institutionnel et s'est propagée sur les plateformes alternatives."
+    },
+    {
+      "label": "Vide de coordination",
+      "desc": "Sans aucun acteur institutionnel prêt à bouger le premier, le vide informationnel a été comblé par des interprètes partisans. La vidéo a été traitée comme authentique par défaut."
+    },
+    {
+      "label": "Reportage vérifié",
+      "desc": "La patience du journaliste a porté ses fruits. L'outil de détection ouvert a fourni des preuves définitives pour un article d'investigation de référence publié avant le jour du scrutin."
+    },
+    {
+      "label": "Spéculation sans preuves",
+      "desc": "L'article publié a soulevé des questions mais le silence du laboratoire a fait que personne ne pouvait y répondre. La spéculation a comblé le vide."
+    },
+    {
+      "label": "Signaux convergents",
+      "desc": "Les étiquettes de la plateforme combinées au reportage avec source anonyme ont créé suffisamment de doute pour ralentir l'influence de la vidéo, bien qu'aucun des deux ne soit définitif seul."
+    }
+  ]
+}

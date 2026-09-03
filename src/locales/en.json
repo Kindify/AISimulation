@@ -199,7 +199,20 @@
     "asymmetricInfo": "multiple actors with asymmetric information (each actor knows things the others don't)",
     "scoringNote_synergy": "synergy",
     "scoringNote_conflict": "conflict",
-    "scoringNote_grade": "coordination grade"
+    "scoringNote_grade": "coordination grade",
+    "featured": "THIS WEEK",
+    "played": "PLAYED",
+    "chooseScenarios": "Choose your scenarios",
+    "viewDebrief": "View debrief",
+    "nextInQueue": "Next in queue",
+    "basedOnReporting": "Based on public reporting as of",
+    "lastReviewed": "Content last reviewed",
+    "sources": "Sources",
+    "scoringNote": "SCORING: Each option describes the tension it carries. Your individual choices matter, but interactions between roles generate the biggest swings, for better or worse.",
+    "roadmapTitle": "MULTIPLAYER ROADMAP",
+    "roadmapDesc": "Coming next: play a scenario with your team from separate devices at your own pace, with a short public statement from each role before anyone commits, and a shared reveal page you can return to for the debrief.",
+    "forFacilitatorsTitle": "FOR FACILITATORS",
+    "forFacilitatorsDesc": "Assign each participant a role and physically separate them. Give 3 minutes to read intel and decide. Bring everyone together for the reveal. The \"what if\" analysis makes the debrief conversation concrete."
   },
   "metrics": {
     "integrity": "Information Integrity",

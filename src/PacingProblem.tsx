@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback } from "react";
-import { useTranslation } from "react-i18next";
+import { useT } from "./useT";
 import { track } from "./analytics";
 import LanguageToggle from "./LanguageToggle";
 
@@ -156,7 +156,7 @@ function SpectrumSlider({ value, onChange, disabled }: any) {
 }
 
 export default function PacingProblem({ onBack }: { onBack: () => void }) {
-  const { t } = useTranslation();
+  const { t } = useT();
   const [phase, setPhase] = useState("intro");
   const [currentEvent, setCurrentEvent] = useState(0);
   const [sliderValue, setSliderValue] = useState(50);

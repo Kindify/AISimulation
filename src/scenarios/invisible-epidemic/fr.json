@@ -1,0 +1,145 @@
+{
+  "title": "L'épidémie invisible",
+  "category": "SANTÉ PUBLIQUE × SÉCURITÉ DE L'IA",
+  "publicBriefing": "Des rapports sur les réseaux sociaux signalent qu'un chatbot de santé alimenté par l'IA, utilisé par 4 millions de personnes, pourrait avoir fourni des informations de dosage subtilement incorrectes pour un médicament courant contre l'hypertension. Trois hospitalisations ont été vaguement liées mais aucune enquête officielle n'a été ouverte. La société mère du chatbot n'a pas commenté.",
+  "stakes": "Des dizaines de milliers de personnes pourraient être touchées. Mais une fausse alerte pourrait détruire la confiance du public dans les outils de santé par IA dont des millions de personnes dépendent quotidiennement.",
+  "designNote": "Ce scénario teste la tension entre l'action préventive et la réponse fondée sur les preuves. La dynamique de dissimulation entre la plateforme et le laboratoire est le piège de coordination principal.",
+  "roleIntel": {
+    "regulator": {
+      "classification": "CONFIDENTIEL — EXAMEN DE SÉCURITÉ SANITAIRE",
+      "bullets": [
+        "Vous avez reçu 7 rapports d'effets indésirables en 3 semaines, au-dessus de la ligne de base mais en dessous du seuil qui déclenche habituellement un examen d'urgence.",
+        "Votre arriéré d'enquêtes est de 14 mois. L'autorité d'urgence exige une détermination formelle de « menace imminente » pour laquelle vous manquez de preuves.",
+        "L'industrie pharmaceutique fait du lobbying contre un moratoire général sur les outils de santé par IA, arguant que cela ferait reculer la télémédecine de plusieurs années.",
+        "Une note interne ayant fuité suggère que votre agence était au courant des préoccupations sur la précision du chatbot il y a 6 mois mais a dépriorisé l'examen."
+      ]
+    },
+    "platform": {
+      "classification": "INTERNE — EXAMEN DE SÉCURITÉ DU PRODUIT",
+      "bullets": [
+        "Vous hébergez le chatbot. Analyse interne : 89 000 requêtes de dosage pour ce médicament le mois dernier. Satisfaction des utilisateurs : 4,7/5 étoiles.",
+        "Votre équipe de confiance et sécurité a identifié l'écart de dosage il y a 10 jours. Un correctif a été développé mais le déployer confirme implicitement que l'erreur existait.",
+        "Le chatbot a une base d'utilisateurs disproportionnée parmi les patients âgés et les personnes non anglophones qui disposent de moins de sources d'information alternatives.",
+        "Votre équipe juridique : une divulgation proactive pourrait déclencher un recours collectif. Exposition estimée à la responsabilité : 200 M$ à 800 M$."
+      ]
+    },
+    "journalist": {
+      "classification": "ÉDITORIAL — BRIEFING D'ENQUÊTE",
+      "bullets": [
+        "Vous avez interviewé 4 patients ayant subi des effets indésirables compatibles avec un dosage incorrect. Deux ont nécessité une hospitalisation.",
+        "Une source au sein de la société de la plateforme a partagé des messages Slack internes montrant que les ingénieurs ont discuté de l'erreur il y a des semaines.",
+        "Les données d'admission hospitalière pour les crises hypertensives dans les régions à forte adoption du chatbot sont en hausse de 23 %, un résultat suggestif mais non concluant.",
+        "Votre rédacteur en chef veut l'article dans 48 heures. Un concurrent prépare un article élogieux sur « le miracle de la santé par IA » qui pourrait immuniser l'entreprise."
+      ]
+    },
+    "ailab": {
+      "classification": "INTERNE — ÉVALUATION DU MODÈLE",
+      "bullets": [
+        "Votre modèle de base alimente les réponses médicales du chatbot. Les tests internes ont confirmé l'erreur de dosage il y a 3 semaines. Elle provient de données d'entraînement contradictoires.",
+        "Un correctif est prêt et testé. Le déployer silencieusement corrige le problème mais confirme que votre modèle en était la source.",
+        "Vos conditions d'utilisation de l'API placent la responsabilité sur le déployeur (la plateforme), pas sur vous. Mais en termes de réputation, cette distinction ne tiendra pas.",
+        "Deux autres chatbots de santé construits sur votre API pourraient avoir des problèmes similaires. Vous ne les avez pas encore testés."
+      ]
+    }
+  },
+  "options": {
+    "regulator": {
+      "reg_emergency": {
+        "label": "Déclarer une menace imminente",
+        "detail": "Invoquer les pouvoirs d'urgence pour ordonner la suspension du chatbot en attendant l'enquête.",
+        "tension": "Action préventive vs. autorité juridique. Les preuves pourraient ne pas atteindre le seuil que vos pouvoirs exigent."
+      },
+      "reg_advisory2": {
+        "label": "Émettre un avis de sécurité",
+        "detail": "Publier un avis public recommandant aux utilisateurs de vérifier les conseils de santé de l'IA auprès de leur médecin.",
+        "tension": "Réponse mesurée vs. portée. Un avis est défendable mais pourrait ne pas atteindre les utilisateurs les plus vulnérables."
+      },
+      "reg_investigate": {
+        "label": "Lancer une enquête formelle",
+        "detail": "Ouvrir un processus d'enquête standard.",
+        "tension": "Procédure régulière vs. préjudice continu. Une enquête appropriée protège la légitimité mais prend des mois."
+      }
+    },
+    "platform": {
+      "plat_suspend": {
+        "label": "Suspendre le chatbot",
+        "detail": "Mettre le chatbot hors ligne immédiatement avec une déclaration publique.",
+        "tension": "Protection des utilisateurs vs. exposition à la responsabilité. Confirmer le problème publiquement ouvre des portes juridiques et réputationnelles."
+      },
+      "plat_silent_patch": {
+        "label": "Déployer un correctif silencieux",
+        "detail": "Corriger l'erreur de dosage sans en informer le public.",
+        "tension": "Corriger le problème vs. le cacher. Les utilisateurs sont protégés à l'avenir mais les dommages passés ne sont pas traités."
+      },
+      "plat_disclaim": {
+        "label": "Ajouter une couche d'avertissement",
+        "detail": "Ajouter des avertissements visibles à toutes les réponses médicales : « Ceci n'est pas un avis médical. »",
+        "tension": "Gestion de la responsabilité vs. sécurité réelle. Les avertissements transfèrent la responsabilité sans corriger le problème sous-jacent."
+      }
+    },
+    "journalist": {
+      "jour_investigate2": {
+        "label": "Publier l'enquête complète",
+        "detail": "Diffuser l'article avec les témoignages de patients, les données hospitalières et les messages Slack internes.",
+        "tension": "Vérité exhaustive vs. risque narratif. Une enquête complète est rigoureuse mais l'entreprise contestera chaque détail."
+      },
+      "jour_tip": {
+        "label": "Alerter le régulateur",
+        "detail": "Partager vos preuves avec l'agence de réglementation avant de publier.",
+        "tension": "Renforcer le régulateur vs. perdre le scoop. Partager les preuves aide la réponse mais un concurrent pourrait publier en premier."
+      },
+      "jour_sensational": {
+        "label": "Publier un titre alarmiste",
+        "detail": "Titre de une : « Un chatbot IA pourrait empoisonner des patients. »",
+        "tension": "Forcer l'action vs. provoquer la panique. Un titre alarmiste mobilise les institutions mais pourrait nuire aux personnes que vous essayez de protéger."
+      }
+    },
+    "ailab": {
+      "lab_full_disclosure": {
+        "label": "Divulgation publique complète",
+        "detail": "Publier un rapport de transparence reconnaissant le conflit dans les données d'entraînement, détaillant les systèmes affectés et diffusant le correctif.",
+        "tension": "Transparence exemplaire vs. coût compétitif et juridique. La divulgation complète aide tout le monde mais vous expose le plus."
+      },
+      "lab_quiet_fix": {
+        "label": "Corriger silencieusement via l'API",
+        "detail": "Pousser le correctif via l'API pour que tous les chatbots en aval soient corrigés silencieusement.",
+        "tension": "Protection silencieuse vs. responsabilité cachée. Le correctif fonctionne mais la faille n'est jamais examinée."
+      },
+      "lab_downstream": {
+        "label": "Notifier uniquement les déployeurs",
+        "detail": "Alerter la plateforme et les autres clients API du problème et fournir le correctif en privé.",
+        "tension": "Responsabilité distribuée vs. sensibilisation retardée. Les déployeurs reçoivent le correctif mais le public ignore qu'il y avait un problème."
+      }
+    }
+  },
+  "interactions": [
+    {
+      "label": "Responsabilité coordonnée",
+      "desc": "La suspension de la plateforme combinée au rapport de transparence du laboratoire a créé un modèle de réponse responsable aux incidents liés à l'IA. Les deux ont subi des revers mais la confiance dans l'écosystème a augmenté."
+    },
+    {
+      "label": "La dissimulation",
+      "desc": "Les deux ont corrigé silencieusement le problème. Quand le journaliste a fini par publier l'histoire, la dissimulation est devenue le scandale, pire que l'erreur initiale."
+    },
+    {
+      "label": "Cascade de panique",
+      "desc": "La déclaration d'urgence combinée au titre sensationnel a poussé 340 000 utilisateurs à arrêter brusquement leur médicament. La hausse des urgences a largement dépassé l'erreur initiale du chatbot."
+    },
+    {
+      "label": "Réponse éclairée",
+      "desc": "L'avis mesuré a dirigé les gens vers leurs médecins tandis que l'enquête journalistique a fourni la base factuelle. Réponse informée sans panique."
+    },
+    {
+      "label": "Pipeline journalisme-réglementation",
+      "desc": "L'alerte du journaliste a donné au régulateur une longueur d'avance, permettant un avis plus rapide et mieux informé. L'enquête publiée ensuite a été renforcée par la validation officielle."
+    },
+    {
+      "label": "La patate chaude",
+      "desc": "La plateforme et le laboratoire ont chacun renvoyé la balle à l'autre. Les utilisateurs ont reçu des avertissements mais pas de correctif. L'erreur a persisté 3 semaines de plus."
+    },
+    {
+      "label": "Nulle part où se tourner",
+      "desc": "La plateforme a mis le chatbot hors ligne le jour même de la publication de l'enquête complète. Pour les personnes âgées et les utilisateurs non anglophones que l'outil servait de manière disproportionnée, le retrait abrupt combiné à la couverture alarmante est arrivé sans source alternative. Certains ont arrêté leur médication plutôt que de faire confiance à un outil qui faisait maintenant la une. Deux actions protectrices et transparentes, non coordonnées dans leur timing, ont abandonné exactement la population que les deux tentaient de protéger."
+    }
+  ]
+}

@@ -1,53 +1,10 @@
 import { useState, useEffect } from "react";
-import { useTranslation } from "react-i18next";
+import { useT } from "./useT";
 import { useTranslatedCrisis } from "./useTranslatedCrisis";
-import { CORE_SCENARIOS, WORKSHOP_SCENARIOS as WORKSHOP_CRISIS_LIST, TOPICAL_SCENARIOS as TOPICAL_CRISIS_LIST, ALL_SCENARIOS } from './scenarios';
+import { ALL_SCENARIOS, COLLECTIONS, WORKSHOP_SCENARIOS, DEFAULT_ROLES, rolesFor, isFeatured } from "./scenarios";
+import type { Scenario, Role, Option, Interaction } from "./scenarios";
 import { track } from "./analytics";
 import LanguageToggle from "./LanguageToggle";
-
-// ─── ROLES ───────────────────────────────────────────────
-const ROLES = [
-  {
-    id: "regulator",
-    name: "The Regulator",
-    icon: "🏛️",
-    color: "#f59e0b",
-    bg: "#f59e0b18",
-    desc: "You set policy and have formal authority to act. Your objective is public safety and institutional credibility.",
-    role: "You set policy and have formal authority to act. Your objective is public safety and institutional credibility.",
-    incentive: "Political pressure to act fast OR appear measured. Your legitimacy depends on due process, but the crisis won't wait for process."
-  },
-  {
-    id: "platform",
-    name: "The Platform",
-    icon: "📱",
-    color: "#06b6d4",
-    bg: "#06b6d418",
-    desc: "You control content distribution and user access. Your objective is a safe, trustworthy platform ecosystem.",
-    role: "You control content distribution and user access. Your objective is a safe, trustworthy platform ecosystem.",
-    incentive: "Revenue depends on engagement and growth. Legal liability pushes toward caution. Acting alone while competitors don't costs you users."
-  },
-  {
-    id: "journalist",
-    name: "The Journalist",
-    icon: "📰",
-    color: "#10b981",
-    bg: "#10b98118",
-    desc: "You shape the public narrative through investigation and reporting. Your objective is informing the public accurately.",
-    role: "You shape the public narrative through investigation and reporting. Your objective is informing the public accurately.",
-    incentive: "Editorial pressure to publish fast and first. Competitor outlets are working the same story. Speed and accuracy pull in opposite directions."
-  },
-  {
-    id: "ailab",
-    name: "The AI Lab",
-    icon: "🔬",
-    color: "#a855f7",
-    bg: "#a855f718",
-    desc: "You develop the technology and hold unique technical knowledge. Your objective is responsible development and deployment.",
-    role: "You develop the technology and hold unique technical knowledge. Your objective is responsible development and deployment.",
-    incentive: "Transparency has competitive costs. Competitors who don't share safety findings gain an advantage. Legal exposure increases with disclosure."
-  },
-];
 
 const METRICS_INFO = [
   { key: "integrity", label: "Information Integrity", icon: "🎯", color: "#06b6d4", desc: "Did accurate information reach the public in time to matter? Measures whether the collective response improved or degraded the information environment." },
@@ -58,17 +15,27 @@ const METRICS_INFO = [
 
 
 // ─── GAME LOGIC ──────────────────────────────────────────
-function computeOutcome(crisis: any, decisions: any) {
-  let scores: any = { integrity: 0, trust: 0, legitimacy: 0, rights: 0 };
-  const chosenOptions: any = {};
-  const triggeredInteractions: any[] = [];
+export type Decisions = Record<string, string>;
+export type TriggeredInteraction = Interaction & { _idx: number };
+export interface Outcome {
+  scores: Record<string, number>;
+  triggeredInteractions: TriggeredInteraction[];
+  chosenOptions: Record<string, Option>;
+  coordinationGrade: string;
+  coordinationDesc: string;
+}
+
+function computeOutcome(crisis: Scenario, decisions: Decisions): Outcome {
+  const scores: Record<string, number> = { integrity: 0, trust: 0, legitimacy: 0, rights: 0 };
+  const chosenOptions: Record<string, Option> = {};
+  const triggeredInteractions: TriggeredInteraction[] = [];
   for (const roleId of Object.keys(decisions)) {
     const optionId = decisions[roleId];
     const opts = crisis.options[roleId];
-    const opt = opts.find((o: any) => o.id === optionId);
+    const opt = opts?.find(o => o.id === optionId);
     if (opt) {
       chosenOptions[roleId] = opt;
-      for (const k of Object.keys(scores)) scores[k] += (opt.scores[k] || 0);
+      for (const k of Object.keys(scores)) scores[k] += (opt.scores[k as keyof typeof opt.scores] || 0);
     }
   }
   const chosenIds = Object.values(decisions);
@@ -76,13 +43,13 @@ function computeOutcome(crisis: any, decisions: any) {
     const interaction = crisis.interactions[interIdx];
     if (chosenIds.includes(interaction.pair[0]) && chosenIds.includes(interaction.pair[1])) {
       triggeredInteractions.push({ ...interaction, _idx: interIdx });
-      for (const k of Object.keys(scores)) scores[k] += (interaction.mod[k] || 0);
+      for (const k of Object.keys(scores)) scores[k] += (interaction.mod[k as keyof typeof interaction.mod] || 0);
     }
   }
-  const synergies = triggeredInteractions.filter((i: any) => i.type === "synergy").length;
-  const conflicts = triggeredInteractions.filter((i: any) => i.type === "conflict").length;
+  const synergies = triggeredInteractions.filter(i => i.type === "synergy").length;
+  const conflicts = triggeredInteractions.filter(i => i.type === "conflict").length;
   for (const k of Object.keys(scores)) scores[k] = Math.max(-30, Math.min(30, scores[k]));
-  const totalScore = Object.values(scores).reduce((a: any, b: any) => (a as number) + (b as number), 0) as number;
+  const totalScore = Object.values(scores).reduce((a, b) => a + b, 0);
 
   // Base grade from interactions
   let baseGradeVal: number;
@@ -115,7 +82,7 @@ function computeOutcome(crisis: any, decisions: any) {
   return { scores, triggeredInteractions, chosenOptions, coordinationGrade, coordinationDesc };
 }
 
-function computeCounterfactuals(crisis: any, decisions: any, currentOutcome: any) {
+function computeCounterfactuals(crisis: Scenario, roles: Role[], decisions: Decisions, currentOutcome: Outcome) {
   const counterfactuals: any[] = [];
   for (const roleId of Object.keys(decisions)) {
     const opts = crisis.options[roleId];
@@ -124,12 +91,12 @@ function computeCounterfactuals(crisis: any, decisions: any, currentOutcome: any
       if (opt.id === currentOptId) continue;
       const altDecisions = { ...decisions, [roleId]: opt.id };
       const altOutcome = computeOutcome(crisis, altDecisions);
-      const totalCurrent = Object.values(currentOutcome.scores).reduce((a: any, b: any) => a + b, 0) as number;
-      const totalAlt = Object.values(altOutcome.scores).reduce((a: any, b: any) => a + b, 0) as number;
+      const totalCurrent = Object.values(currentOutcome.scores).reduce((a, b) => a + b, 0);
+      const totalAlt = Object.values(altOutcome.scores).reduce((a, b) => a + b, 0);
       const diff = totalAlt - totalCurrent;
       // Only show improvements (positive diff) — "what could have gone better"
       if (diff >= 5) {
-        const role = ROLES.find(r => r.id === roleId);
+        const role = roles.find(r => r.id === roleId);
         counterfactuals.push({
           roleId,
           roleName: role!.name,
@@ -150,73 +117,8 @@ function computeCounterfactuals(crisis: any, decisions: any, currentOutcome: any
   return counterfactuals.slice(0, 3);
 }
 
-// ─── AI SCENARIO GENERATOR ───────────────────────────────
-const SCENARIO_PROMPT = `You are a scenario designer for an AI governance simulation game called "The Epistemic Commons." Generate a complete, playable crisis scenario.
-
-RESPOND WITH ONLY VALID JSON. No markdown, no backticks, no preamble.
-
-The scenario must follow this exact structure:
-{
-  "id": "snake_case_id",
-  "title": "Short evocative title",
-  "category": "CATEGORY IN CAPS",
-  "icon": "single emoji",
-  "publicBriefing": "2-3 sentence public briefing all players see. Specific numbers and details make it feel real.",
-  "stakes": "One sentence explaining what's at stake.",
-  "designNote": "One sentence about what coordination dynamic this scenario tests.",
-  "roleIntel": {
-    "regulator": { "classification": "CONFIDENTIAL — ...", "bullets": ["4 specific intel items with numbers and details"] },
-    "platform": { "classification": "INTERNAL — ...", "bullets": ["4 items"] },
-    "journalist": { "classification": "EDITORIAL — ...", "bullets": ["4 items"] },
-    "ailab": { "classification": "INTERNAL — ...", "bullets": ["4 items"] }
-  },
-  "options": {
-    "regulator": [
-      { "id": "unique_id", "label": "Short label", "detail": "One sentence description.", "tradeoff": "METRIC ↑ METRIC ↓ — Explanation of the trade-off.", "stance": "transparent|restrictive|cautious", "scores": { "integrity": -10 to 10, "trust": -10 to 10, "legitimacy": -10 to 10, "rights": -10 to 10 } }
-    ],
-    "platform": [3 options same format],
-    "journalist": [3 options same format],
-    "ailab": [3 options same format]
-  },
-  "interactions": [
-    { "pair": ["option_id_1", "option_id_2"], "type": "synergy|conflict", "label": "Short label", "desc": "What happens when these two choices combine.", "mod": { "integrity": 0, "trust": 0, "legitimacy": 0, "rights": 0 } }
-  ]
-}
-
-CRITICAL RULES:
-- Each role gets exactly 3 options with unique IDs
-- Each option must have one "transparent", one "restrictive", one "cautious" stance
-- Include 4-6 interactions (mix of synergies and conflicts)
-- Interaction pairs must reference actual option IDs from the options
-- Scores range from -10 to 10. Interaction mods range from -12 to 8
-- Every option must have real trade-offs — no obviously correct answers
-- Intel must be ASYMMETRIC — each role knows something others don't
-- Be specific: use numbers, percentages, dollar amounts, timelines`;
-
-async function generateScenario(context: string) {
-  try {
-    const response = await fetch("https://api.anthropic.com/v1/messages", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        model: "claude-sonnet-4-20250514",
-        max_tokens: 4000,
-        system: SCENARIO_PROMPT,
-        messages: [{ role: "user", content: `Generate a crisis scenario about: ${context}\n\nRespond with ONLY the JSON object, nothing else.` }]
-      })
-    });
-    const data = await response.json();
-    const text = data.content?.map((c: any) => c.text || "").join("") || "";
-    const cleaned = text.replace(/```json\s*/g, "").replace(/```\s*/g, "").trim();
-    return JSON.parse(cleaned);
-  } catch (err) {
-    console.error("Generation error:", err);
-    return null;
-  }
-}
-
 // ─── UI HELPERS ──────────────────────────────────────────
-function MetricBar({ label, value, maxVal = 30, icon, color }: any) {
+function MetricBar({ label, value, maxVal = 30, icon }: { label: string; value: number; maxVal?: number; icon: string; color?: string }) {
   const pct = Math.abs(value) / maxVal * 100;
   const isPositive = value > 0;
   const barColor = isPositive ? "#10b981" : value < 0 ? "#ef4444" : "#64748b";
@@ -234,8 +136,8 @@ function MetricBar({ label, value, maxVal = 30, icon, color }: any) {
   );
 }
 
-function RoleCard({ role, isActive, isCompleted }: any) {
-  const { t } = useTranslation();
+function RoleCard({ role, isActive, isCompleted }: { role: Role; isActive: boolean; isCompleted: boolean }) {
+  const { t } = useT();
   return (
     <div style={{ background: isActive ? role.bg : "#141820", border: `1px solid ${isActive ? role.color : isCompleted ? "#334155" : "#1e2533"}`, borderRadius: 10, padding: "10px 12px", opacity: isCompleted && !isActive ? 0.6 : 1, transition: "all 0.3s ease" }}>
       <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
@@ -251,13 +153,13 @@ function RoleCard({ role, isActive, isCompleted }: any) {
   );
 }
 
-export { ROLES, ALL_SCENARIOS, computeOutcome };
+export { DEFAULT_ROLES as ROLES, ALL_SCENARIOS, computeOutcome };
 
 // ─── MAIN ────────────────────────────────────────────────
 export default function EpistemicCommonsV2({ onBack }: { onBack: () => void }) {
-  const { t } = useTranslation();
+  const { t } = useT();
   const [phase, setPhase] = useState("intro");
-  const [crises, setCrises] = useState([...ALL_SCENARIOS]);
+  const crises: Scenario[] = ALL_SCENARIOS;
   const [crisisIdx, setCrisisIdx] = useState(0);
   const [roleIdx, setRoleIdx] = useState(0);
   const [decisions, setDecisions] = useState<any>({});
@@ -267,10 +169,6 @@ export default function EpistemicCommonsV2({ onBack }: { onBack: () => void }) {
   const [showAllIntel, setShowAllIntel] = useState(false);
   const [showCounterfactuals, setShowCounterfactuals] = useState(false);
   const [showScoring, setShowScoring] = useState(false);
-  const [genContext, setGenContext] = useState("");
-  const [genLoading, setGenLoading] = useState(false);
-  const [genError, setGenError] = useState<string | null>(null);
-  const [genPreview, setGenPreview] = useState<any>(null);
   // Scenario selection state
   const [selectedIds, setSelectedIds] = useState<Set<string>>(new Set());
   const [queue, setQueue] = useState<string[]>([]);
@@ -308,6 +206,7 @@ export default function EpistemicCommonsV2({ onBack }: { onBack: () => void }) {
 
   const crisis = crises[crisisIdx];
   const tc = useTranslatedCrisis(crisis);
+  const ROLES = rolesFor(crisis);
   const role = ROLES[roleIdx];
   const crisisDecisions = decisions[crisis?.id] || {};
 
@@ -335,7 +234,7 @@ export default function EpistemicCommonsV2({ onBack }: { onBack: () => void }) {
 
   const commitDecision = () => {
     if (!selectedOption) return;
-    const opts: any[] = crisis.options[role.id] || [];
+    const opts: Option[] = crisis.options[role.id] || [];
     track("commons_role_commit", {
       scenario_id: crisis.id,
       role_id: role.id,
@@ -396,24 +295,6 @@ export default function EpistemicCommonsV2({ onBack }: { onBack: () => void }) {
     setOutcomes([]); setShowAllIntel(false); setShowCounterfactuals(false); setShowScoring(false);
     setSelectedIds(new Set()); setQueue([]);
     setCopied(false); setFeedbackSubmitted(false); setFeedbackThinking(null); setFeedbackUseCase(null); setFeedbackEmail(""); setFeedbackSubmitting(false);
-  };
-
-  const handleGenerate = async () => {
-    if (!genContext.trim()) return;
-    setGenLoading(true); setGenError(null); setGenPreview(null);
-    const scenario = await generateScenario(genContext);
-    setGenLoading(false);
-    if (scenario && scenario.title && scenario.options) {
-      setGenPreview(scenario);
-    } else {
-      setGenError("Generation failed — try rephrasing your scenario description or try again.");
-    }
-  };
-
-  const addGeneratedScenario = () => {
-    if (!genPreview) return;
-    setCrises((prev: any[]) => [...prev, genPreview]);
-    setGenPreview(null); setGenContext(""); setGenError(null);
   };
 
   const toggleSelectId = (id: string) => {
@@ -496,7 +377,7 @@ textarea, input { font-family: 'DM Sans', sans-serif; }
                     </div>
                   ))}
                   <div style={{ background: "#f59e0b11", border: "1px solid #f59e0b33", borderRadius: 6, padding: 10, marginTop: 8 }}>
-                    <p style={{ fontFamily: "'DM Mono', monospace", fontSize: 10, color: "#f59e0b", lineHeight: 1.5 }}>⚡ KEY: Each option shows its trade-off signature (e.g. "INTEGRITY ↑ TRUST ↓"). The coordination grade is based on how many synergies vs conflicts your combined choices trigger.</p>
+                    <p style={{ fontFamily: "'DM Mono', monospace", fontSize: 10, color: "#f59e0b", lineHeight: 1.5 }}>⚡ KEY: Each option describes the tension it carries (what it protects against what it risks). The coordination grade is based on how many synergies vs conflicts your combined choices trigger.</p>
                   </div>
                 </div>
               )}
@@ -532,14 +413,15 @@ textarea, input { font-family: 'DM Sans', sans-serif; }
 
   // ─── SELECT ────────────────────────────────
   if (phase === "select") {
-    const coreCrises = crises.slice(0, CORE_SCENARIOS.length);
-    const workshopCrises = crises.slice(CORE_SCENARIOS.length, CORE_SCENARIOS.length + WORKSHOP_CRISIS_LIST.length);
-    const topicalCrises = crises.slice(CORE_SCENARIOS.length + WORKSHOP_CRISIS_LIST.length, CORE_SCENARIOS.length + WORKSHOP_CRISIS_LIST.length + TOPICAL_CRISIS_LIST.length);
-    const aiCrises = crises.slice(CORE_SCENARIOS.length + WORKSHOP_CRISIS_LIST.length + TOPICAL_CRISIS_LIST.length);
-    const workshopIds = workshopCrises.map((c: any) => c.id);
+    const workshopIds = WORKSHOP_SCENARIOS.map(c => c.id);
     const anyCompleted = completedIds.size > 0;
+    const collectionLabel: Record<string, { title: string; subtitle?: string; tag: string; color: string }> = {
+      core: { title: t("govGame.coreScenarios"), tag: t("govGame.builtIn"), color: "#64748b" },
+      topical: { title: t("govGame.newsDriven"), subtitle: t("govGame.newsDrivenSubtitle"), tag: t("govGame.topical"), color: "#06b6d4" },
+      lifecycle: { title: t("govGame.workshopLifecycle"), tag: t("govGame.workshop"), color: "#06b6d4" },
+    };
 
-    const ScenarioCard = ({ c, typeLabel, typeColor }: { c: any; typeLabel: string; typeColor: string }) => {
+    const ScenarioCard = ({ c, typeLabel, typeColor }: { c: Scenario; typeLabel: string; typeColor: string }) => {
       const tcCard = useTranslatedCrisis(c);
       const isSelected = selectedIds.has(c.id);
       const isCompleted = completedIds.has(c.id);
@@ -548,6 +430,9 @@ textarea, input { font-family: 'DM Sans', sans-serif; }
       const gradeCol = outcome ? (gc[outcome.coordinationGrade] || "#64748b") : null;
       return (
         <div onClick={() => toggleSelectId(c.id)} style={{ position: "relative", background: "#141820", border: `2px solid ${isSelected ? "#06b6d4" : "#1e2533"}`, borderRadius: 10, padding: 16, cursor: "pointer", transition: "all 0.18s ease", transform: isSelected ? "translateY(-2px)" : "none", boxShadow: isSelected ? "0 6px 24px rgba(6,182,212,0.15)" : "none" }}>
+          {isFeatured(c) && !isCompleted && (
+            <div style={{ position: "absolute", top: 10, right: 10, fontFamily: "'Space Mono', monospace", fontSize: 9, fontWeight: 700, letterSpacing: 1, color: "#0c0f14", background: "#06b6d4", borderRadius: 6, padding: "2px 8px" }}>{t("govGame.featured")}</div>
+          )}
           {isCompleted && outcome && (
             <div style={{ position: "absolute", top: 10, right: 10, fontFamily: "'Space Mono', monospace", fontSize: 13, fontWeight: 700, color: gradeCol!, background: `${gradeCol}18`, border: `1px solid ${gradeCol}44`, borderRadius: 6, padding: "2px 8px" }}>{outcome.coordinationGrade}</div>
           )}
@@ -555,13 +440,13 @@ textarea, input { font-family: 'DM Sans', sans-serif; }
             <span style={{ fontSize: 26 }}>{c.icon}</span>
             <div style={{ flex: 1, paddingRight: isCompleted ? 44 : 0 }}>
               <div style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 14, fontWeight: 700, color: "#e2e8f0", lineHeight: 1.2 }}>{tcCard.title}</div>
-              <div style={{ fontFamily: "'DM Mono', monospace", fontSize: 9, color: "#64748b", marginTop: 2 }}>{c.category}</div>
+              <div style={{ fontFamily: "'DM Mono', monospace", fontSize: 9, color: "#64748b", marginTop: 2 }}>{tcCard.category}</div>
             </div>
           </div>
           {c.stakes && <p style={{ color: "#64748b", fontSize: 11, lineHeight: 1.5, marginBottom: 8 }}>{tcCard.stakes}</p>}
           <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
             <span style={{ fontFamily: "'DM Mono', monospace", fontSize: 9, color: typeColor, background: `${typeColor}18`, padding: "2px 8px", borderRadius: 4 }}>{typeLabel}</span>
-            {isCompleted && <span style={{ fontFamily: "'DM Mono', monospace", fontSize: 9, color: "#10b981" }}>PLAYED</span>}
+            {isCompleted && <span style={{ fontFamily: "'DM Mono', monospace", fontSize: 9, color: "#10b981" }}>{t("govGame.played")}</span>}
           </div>
         </div>
       );
@@ -574,15 +459,15 @@ textarea, input { font-family: 'DM Sans', sans-serif; }
             <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-end", marginBottom: 16 }}>
               <div>
                 <div style={{ fontFamily: "'Space Mono', monospace", fontSize: 10, letterSpacing: 2, color: "#64748b", marginBottom: 4 }}>{t("govGame.scenarioSelection")}</div>
-                <h2 style={{ fontFamily: "'Instrument Serif', serif", fontSize: 26, fontWeight: 400 }}>Choose your scenarios</h2>
+                <h2 style={{ fontFamily: "'Instrument Serif', serif", fontSize: 26, fontWeight: 400 }}>{t("govGame.chooseScenarios")}</h2>
               </div>
               <div style={{ display: "flex", gap: 10, flexWrap: "wrap" as const, justifyContent: "flex-end" }}>
                 {anyCompleted && (
                   <button onClick={() => setPhase("debrief")} style={{ padding: "10px 18px", background: "#141820", color: "#10b981", border: "1px solid #10b98144", borderRadius: 8, cursor: "pointer", fontFamily: "'Space Mono', monospace", fontSize: 10, fontWeight: 700, letterSpacing: 1 }}>
-                    View Debrief ({completedIds.size} played) →
+                    {t("govGame.viewDebrief")} ({completedIds.size}) →
                   </button>
                 )}
-                <button onClick={() => startQueue(crises.map((c: any) => c.id))} style={{ padding: "10px 18px", background: "#1e293b", color: "#94a3b8", border: "1px solid #334155", borderRadius: 8, cursor: "pointer", fontFamily: "'Space Mono', monospace", fontSize: 10, letterSpacing: 1 }}>
+                <button onClick={() => startQueue(crises.map(c => c.id))} style={{ padding: "10px 18px", background: "#1e293b", color: "#94a3b8", border: "1px solid #334155", borderRadius: 8, cursor: "pointer", fontFamily: "'Space Mono', monospace", fontSize: 10, letterSpacing: 1 }}>
                   {t("govGame.playAll")} ({crises.length})
                 </button>
                 <button onClick={() => { if (selectedIds.size > 0) startQueue([...selectedIds]); }} disabled={selectedIds.size === 0} style={{ padding: "10px 18px", background: selectedIds.size > 0 ? "linear-gradient(135deg, #06b6d4, #0ea5e9)" : "#1e293b", color: selectedIds.size > 0 ? "#fff" : "#334155", border: "none", borderRadius: 8, cursor: selectedIds.size > 0 ? "pointer" : "not-allowed", fontFamily: "'Space Mono', monospace", fontSize: 10, fontWeight: 700, letterSpacing: 1 }}>
@@ -591,63 +476,26 @@ textarea, input { font-family: 'DM Sans', sans-serif; }
               </div>
             </div>
 
-            {/* CORE SCENARIOS */}
-            <div style={{ marginBottom: 24 }}>
-              <div style={{ fontFamily: "'Space Mono', monospace", fontSize: 10, letterSpacing: 2, color: "#64748b", marginBottom: 10, display: "flex", alignItems: "center", gap: 8 }}>
-                {t("govGame.coreScenarios")}
-                <span style={{ background: "#1e293b", borderRadius: 4, padding: "2px 6px", fontSize: 9 }}>{coreCrises.length}</span>
-              </div>
-              <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12 }}>
-                {coreCrises.map((c: any) => <ScenarioCard key={c.id} c={c} typeLabel={t("govGame.builtIn")} typeColor="#64748b" />)}
-              </div>
-            </div>
-
-            {/* NEWS-DRIVEN */}
-            {topicalCrises.length > 0 && (
-              <div style={{ marginBottom: 24 }}>
-                <div style={{ fontFamily: "'Space Mono', monospace", fontSize: 10, letterSpacing: 2, color: "#06b6d4", marginBottom: 4, display: "flex", alignItems: "center", gap: 8 }}>
-                  {t("govGame.newsDriven")}
-                  <span style={{ background: "#06b6d418", borderRadius: 4, padding: "2px 6px", fontSize: 9 }}>{topicalCrises.length}</span>
+            {COLLECTIONS.map(({ key, scenarios }) => {
+              const lbl = collectionLabel[key];
+              return (
+                <div key={key} style={{ marginBottom: 24 }}>
+                  <div style={{ fontFamily: "'Space Mono', monospace", fontSize: 10, letterSpacing: 2, color: lbl.color, marginBottom: lbl.subtitle ? 4 : 10, display: "flex", alignItems: "center", gap: 8 }}>
+                    {lbl.title}
+                    <span style={{ background: `${lbl.color}18`, borderRadius: 4, padding: "2px 6px", fontSize: 9 }}>{scenarios.length}</span>
+                    {key === "lifecycle" && (
+                      <button onClick={() => startQueue(workshopIds)} style={{ marginLeft: "auto", padding: "4px 12px", background: "#06b6d418", color: "#06b6d4", border: "1px solid #06b6d433", borderRadius: 6, cursor: "pointer", fontFamily: "'Space Mono', monospace", fontSize: 9, fontWeight: 700, letterSpacing: 1 }}>
+                        {t("govGame.playLifecycleArc")} →
+                      </button>
+                    )}
+                  </div>
+                  {lbl.subtitle && <div style={{ fontFamily: "'DM Mono', monospace", fontSize: 10, color: "#475569", marginBottom: 10 }}>{lbl.subtitle}</div>}
+                  <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12 }}>
+                    {scenarios.map(c => <ScenarioCard key={c.id} c={c} typeLabel={lbl.tag} typeColor={lbl.color} />)}
+                  </div>
                 </div>
-                <div style={{ fontFamily: "'DM Mono', monospace", fontSize: 10, color: "#475569", marginBottom: 10 }}>
-                  {t("govGame.newsDrivenSubtitle")}
-                </div>
-                <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12 }}>
-                  {topicalCrises.map((c: any) => <ScenarioCard key={c.id} c={c} typeLabel={t("govGame.topical")} typeColor="#06b6d4" />)}
-                </div>
-              </div>
-            )}
-
-            {/* WORKSHOP LIFECYCLE */}
-            {workshopCrises.length > 0 && (
-              <div style={{ marginBottom: 24 }}>
-                <div style={{ fontFamily: "'Space Mono', monospace", fontSize: 10, letterSpacing: 2, color: "#06b6d4", marginBottom: 10, display: "flex", alignItems: "center", gap: 8 }}>
-                  {t("govGame.workshopLifecycle")}
-                  <span style={{ background: "#06b6d418", borderRadius: 4, padding: "2px 6px", fontSize: 9 }}>{workshopCrises.length}</span>
-                  <button onClick={() => startQueue(workshopIds)} style={{ marginLeft: "auto", padding: "4px 12px", background: "#06b6d418", color: "#06b6d4", border: "1px solid #06b6d433", borderRadius: 6, cursor: "pointer", fontFamily: "'Space Mono', monospace", fontSize: 9, fontWeight: 700, letterSpacing: 1 }}>
-                    {t("govGame.playLifecycleArc")} →
-                  </button>
-                </div>
-                <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12 }}>
-                  {workshopCrises.map((c: any) => <ScenarioCard key={c.id} c={c} typeLabel={t("govGame.workshop")} typeColor="#06b6d4" />)}
-                </div>
-              </div>
-            )}
-
-            {/* AI-GENERATED */}
-            {aiCrises.length > 0 && (
-              <div style={{ marginBottom: 24 }}>
-                <div style={{ fontFamily: "'Space Mono', monospace", fontSize: 10, letterSpacing: 2, color: "#a855f7", marginBottom: 10, display: "flex", alignItems: "center", gap: 8 }}>
-                  {t("govGame.aiGenerated")}
-                  <span style={{ background: "#a855f718", borderRadius: 4, padding: "2px 6px", fontSize: 9 }}>{aiCrises.length}</span>
-                </div>
-                <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12 }}>
-                  {aiCrises.map((c: any) => <ScenarioCard key={c.id} c={c} typeLabel={t("govGame.aiGenerated")} typeColor="#a855f7" />)}
-                </div>
-              </div>
-            )}
-
-            {/* AI SCENARIO GENERATOR — hidden until functional */}
+              );
+            })}
           </div>
         </div>
       </div>
@@ -663,7 +511,7 @@ textarea, input { font-family: 'DM Sans', sans-serif; }
             <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 16 }}>
               <span style={{ fontSize: 36 }}>{crisis.icon}</span>
               <div>
-                <div style={{ fontFamily: "'Space Mono', monospace", fontSize: 10, letterSpacing: 2, color: "#ef4444" }}>{crisis.category}</div>
+                <div style={{ fontFamily: "'Space Mono', monospace", fontSize: 10, letterSpacing: 2, color: "#ef4444" }}>{tc.category}</div>
                 <h2 style={{ fontFamily: "'Instrument Serif', serif", fontSize: 26, fontWeight: 400 }}>{tc.title}</h2>
               </div>
             </div>
@@ -681,11 +529,22 @@ textarea, input { font-family: 'DM Sans', sans-serif; }
                 <p style={{ fontSize: 12, color: "#94a3b8", lineHeight: 1.5 }}>{tc.designNote}</p>
               </div>
             )}
+            {(crisis.meta?.sourceDate || crisis.meta?.reviewedOn) && (
+              <div style={{ fontFamily: "'DM Mono', monospace", fontSize: 10, color: "#64748b", marginBottom: 16, lineHeight: 1.6 }}>
+                {crisis.meta.sourceDate && <span>{t("govGame.basedOnReporting")} {crisis.meta.sourceDate}. </span>}
+                {crisis.meta.reviewedOn && <span>{t("govGame.lastReviewed")} {crisis.meta.reviewedOn}. </span>}
+                {crisis.meta.sources && crisis.meta.sources.length > 0 && (
+                  <span>{t("govGame.sources")}: {crisis.meta.sources.map((s, i) => (
+                    <span key={i}>{i > 0 && ", "}{s.url ? <a href={s.url} target="_blank" rel="noopener noreferrer" style={{ color: "#94a3b8" }}>{s.label}</a> : s.label}</span>
+                  ))}.</span>
+                )}
+              </div>
+            )}
             <div style={{ background: "#06b6d411", borderRadius: 8, padding: 12, marginBottom: 20, border: "1px solid #06b6d433" }}>
-              <div style={{ fontFamily: "'DM Mono', monospace", fontSize: 10, color: "#06b6d4", lineHeight: 1.5 }}>📊 SCORING: Each option shows its trade-off (e.g. "INTEGRITY ↑ TRUST ↓"). Your individual choices matter, but <strong>interactions between roles</strong> generate the biggest score swings — for better or worse.</div>
+              <div style={{ fontFamily: "'DM Mono', monospace", fontSize: 10, color: "#06b6d4", lineHeight: 1.5 }}>{t("govGame.scoringNote")}</div>
             </div>
             <button onClick={() => { setRoleIdx(0); setPhase("roleplay"); }} style={{ width: "100%", padding: "14px", background: ROLES[0].color, color: "#0c0f14", border: "none", borderRadius: 8, cursor: "pointer", fontFamily: "'Space Mono', monospace", fontSize: 13, fontWeight: 700, letterSpacing: 2, textTransform: "uppercase" }}>
-              {t("govGame.beginAs")} {ROLES[0].name} →
+              {t("govGame.beginAs")} {t(`roles.${ROLES[0].id}.name`, ROLES[0].name)} →
             </button>
           </div>
         </div>
@@ -696,7 +555,7 @@ textarea, input { font-family: 'DM Sans', sans-serif; }
   // ─── ROLEPLAY ──────────────────────────────
   if (phase === "roleplay") {
     const intel = crisis.roleIntel[role.id];
-    const opts = tc?.options?.[role.id] || crisis.options[role.id];
+    const opts: Option[] = tc?.options?.[role.id] || crisis.options[role.id];
     return (
       <div style={S}><style>{css}</style>{hdr}
         <div className="roleplay-layout" style={{ display: "grid", gridTemplateColumns: "200px 1fr", gap: 20, maxWidth: 960, margin: "0 auto" }}>
@@ -745,7 +604,7 @@ textarea, input { font-family: 'DM Sans', sans-serif; }
                 ))}
               </div>
               <button onClick={commitDecision} disabled={!selectedOption} style={{ width: "100%", padding: "14px", background: selectedOption ? role.color : "#1e293b", color: selectedOption ? "#0c0f14" : "#64748b", border: "none", borderRadius: 8, cursor: selectedOption ? "pointer" : "not-allowed", fontFamily: "'Space Mono', monospace", fontSize: 13, fontWeight: 700, letterSpacing: 2, textTransform: "uppercase", opacity: selectedOption ? 1 : 0.5 }}>
-                {roleIdx < ROLES.length - 1 ? `${t("govGame.lockIn")} → ${ROLES[roleIdx + 1].name}` : `${t("govGame.lockIn")} → ${t("govGame.seeOutcome")}`}
+                {roleIdx < ROLES.length - 1 ? `${t("govGame.lockIn")} → ${t(`roles.${ROLES[roleIdx + 1].id}.name`, ROLES[roleIdx + 1].name)}` : `${t("govGame.lockIn")} → ${t("govGame.seeOutcome")}`}
               </button>
             </div>
           </div>
@@ -757,8 +616,8 @@ textarea, input { font-family: 'DM Sans', sans-serif; }
   // ─── RESOLUTION ────────────────────────────
   if (phase === "resolution") {
     const outcome = outcomes[outcomes.length - 1];
-    const counterfactuals = computeCounterfactuals(crisis, decisions[crisis.id], outcome);
-    const gradeColor: any = { A: "#10b981", "A-": "#10b981", B: "#06b6d4", "B-": "#06b6d4", C: "#f59e0b", "C-": "#f59e0b", D: "#f97316", "D-": "#f97316", F: "#ef4444" }[outcome.coordinationGrade] || "#64748b";
+    const counterfactuals = computeCounterfactuals(crisis, ROLES, decisions[crisis.id], outcome);
+    const gradeColor: string = ({ A: "#10b981", "A-": "#10b981", B: "#06b6d4", "B-": "#06b6d4", C: "#f59e0b", "C-": "#f59e0b", D: "#f97316", "D-": "#f97316", F: "#ef4444" } as Record<string, string>)[outcome.coordinationGrade] || "#64748b";
 
     return (
       <div style={S}><style>{css}</style>{hdr}
@@ -809,7 +668,7 @@ textarea, input { font-family: 'DM Sans', sans-serif; }
 
           <div style={{ marginBottom: 16 }}>
             <button onClick={() => setShowCounterfactuals(!showCounterfactuals)} style={{ width: "100%", padding: "12px", background: "#1e293b", color: "#94a3b8", border: "1px solid #334155", borderRadius: 8, cursor: "pointer", fontFamily: "'Space Mono', monospace", fontSize: 11, letterSpacing: 1 }}>
-              {showCounterfactuals ? "▾ HIDE" : "▸ SHOW"} {t("govGame.whatCouldBeBetter")}
+{showCounterfactuals ? "▾" : "▸"} {t("govGame.whatCouldBeBetter")}
             </button>
             {showCounterfactuals && (
               <div style={{ marginTop: 10 }}>
@@ -817,7 +676,7 @@ textarea, input { font-family: 'DM Sans', sans-serif; }
                   <div key={i} style={{ background: "#141820", border: `1px solid ${cf.roleColor}33`, borderRadius: 10, padding: 14, marginBottom: 8, borderLeft: `3px solid ${cf.roleColor}` }}>
                     <div style={{ display: "flex", alignItems: "center", gap: 6, marginBottom: 6 }}>
                       <span style={{ fontSize: 14 }}>{cf.roleIcon}</span>
-                      <span style={{ fontFamily: "'Space Mono', monospace", fontSize: 10, fontWeight: 700, color: cf.roleColor }}>{cf.roleName}</span>
+                      <span style={{ fontFamily: "'Space Mono', monospace", fontSize: 10, fontWeight: 700, color: cf.roleColor }}>{t(`roles.${cf.roleId}.name`, cf.roleName)}</span>
                     </div>
                     <p style={{ color: "#e2e8f0", fontSize: 13, marginBottom: 4 }}>
                       {t("counterfactual.ifChosen")} <strong style={{ color: cf.roleColor }}>{tc?.options?.[cf.roleId]?.find((o: any) => o.id === cf.toOptId)?.label ?? cf.toLabel}</strong> {t("counterfactual.insteadOf")} <span style={{ color: "#64748b" }}>{tc?.options?.[cf.roleId]?.find((o: any) => o.id === cf.fromOptId)?.label ?? cf.fromLabel}</span>:
@@ -850,7 +709,7 @@ textarea, input { font-family: 'DM Sans', sans-serif; }
                 {ROLES.map(r => (
                   <div key={r.id} style={{ background: "#141820", border: `1px solid ${r.color}22`, borderRadius: 10, padding: 14, marginBottom: 8 }}>
                     <div style={{ fontFamily: "'Space Mono', monospace", fontSize: 10, color: r.color, letterSpacing: 1, marginBottom: 8 }}>{r.icon} {t(`roles.${r.id}.name`, r.name).toUpperCase()}</div>
-                    {crisis.roleIntel[r.id].bullets.map((b: string, i: number) => (
+                    {(crisis.roleIntel[r.id]?.bullets || []).map((b: string, i: number) => (
                       <p key={i} style={{ color: "#94a3b8", fontSize: 12, lineHeight: 1.5, marginBottom: 6, paddingLeft: 12, borderLeft: `2px solid ${r.color}33` }}>{tc?.roleIntel?.[r.id]?.bullets?.[i] ?? b}</p>
                     ))}
                   </div>
@@ -862,7 +721,7 @@ textarea, input { font-family: 'DM Sans', sans-serif; }
           <div style={{ display: "flex", gap: 12 }}>
             {queue.indexOf(crisis.id) < queue.length - 1 && (
               <button onClick={nextCrisis} style={{ flex: 1, padding: "14px", background: "linear-gradient(135deg, #06b6d4, #0ea5e9)", color: "#fff", border: "none", borderRadius: 8, cursor: "pointer", fontFamily: "'Space Mono', monospace", fontSize: 13, fontWeight: 700, letterSpacing: 2, textTransform: "uppercase" as const }}>
-                Next in Queue →
+                {t("govGame.nextInQueue")} →
               </button>
             )}
             <button onClick={() => setPhase("select")} style={{ flex: 1, padding: "14px", background: "#141820", color: "#e2e8f0", border: "1px solid #1e2533", borderRadius: 8, cursor: "pointer", fontFamily: "'Space Mono', monospace", fontSize: 13, fontWeight: 700, letterSpacing: 2, textTransform: "uppercase" as const }}>
@@ -884,7 +743,7 @@ textarea, input { font-family: 'DM Sans', sans-serif; }
     const gradeToVal: Record<string, number> = { A: 4, "A-": 3.5, B: 3, "B-": 2.5, C: 2, "C-": 1.5, D: 1, "D-": 0.5, F: 0 };
     const avgGradeVal = grades.length > 0 ? grades.reduce((s: number, g: string) => s + (gradeToVal[g] ?? 2), 0) / grades.length : 2;
     const overallGrade = avgGradeVal >= 3.75 ? "A" : avgGradeVal >= 3.25 ? "A-" : avgGradeVal >= 2.75 ? "B" : avgGradeVal >= 2.25 ? "B-" : avgGradeVal >= 1.75 ? "C" : avgGradeVal >= 1.25 ? "C-" : avgGradeVal >= 0.75 ? "D" : avgGradeVal >= 0.25 ? "D-" : "F";
-    const gradeColor: any = { A: "#10b981", "A-": "#10b981", B: "#06b6d4", "B-": "#06b6d4", C: "#f59e0b", "C-": "#f59e0b", D: "#f97316", "D-": "#f97316", F: "#ef4444" }[overallGrade] || "#64748b";
+    const gradeColor: string = ({ A: "#10b981", "A-": "#10b981", B: "#06b6d4", "B-": "#06b6d4", C: "#f59e0b", "C-": "#f59e0b", D: "#f97316", "D-": "#f97316", F: "#ef4444" } as Record<string, string>)[overallGrade] || "#64748b";
 
     let archetype, archetypeDesc, archetypeKey: string;
     if (overallGrade === "A" || overallGrade === "A-") { archetypeKey = "aligned"; archetype = "The Aligned Ecosystem"; archetypeDesc = "Your institutions found ways to reinforce each other. This is the aspiration of multi-stakeholder governance — achieved in practice by very few systems. The key factor wasn't any single actor's wisdom, but the communication architecture between them."; }
@@ -926,7 +785,7 @@ textarea, input { font-family: 'DM Sans', sans-serif; }
             {METRICS_INFO.map(m => <MetricBar key={m.key} label={t(`metrics.${m.key}`)} value={totalScores[m.key]} icon={m.icon} color={m.color} />)}
           </div>
 
-          {crises.map((c: any) => {
+          {crises.map(c => {
             const o = outcomes.find((out: any) => out.crisisId === c.id);
             const gcMap: Record<string, string> = { A: "#10b981", "A-": "#10b981", B: "#06b6d4", "B-": "#06b6d4", C: "#f59e0b", "C-": "#f59e0b", D: "#f97316", "D-": "#f97316", F: "#ef4444" };
             const gc = o ? (gcMap[o.coordinationGrade] || "#64748b") : null;
@@ -950,7 +809,7 @@ textarea, input { font-family: 'DM Sans', sans-serif; }
                         {inter.type === "synergy" ? "🤝" : "💥"} {t(`scenarios.${c.id}.interactions.${inter._idx}.label`, inter.label)}
                       </span>
                     ))}
-                    {o.triggeredInteractions.length === 0 && <span style={{ fontFamily: "'DM Mono', monospace", fontSize: 9, color: "#64748b" }}>No interactions — isolated action</span>}
+                    {o.triggeredInteractions.length === 0 && <span style={{ fontFamily: "'DM Mono', monospace", fontSize: 9, color: "#64748b" }}>{t("govGame.noInteractions")}</span>}
                   </div>
                 )}
               </div>
@@ -966,12 +825,12 @@ textarea, input { font-family: 'DM Sans', sans-serif; }
 
           <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12, marginBottom: 20 }}>
             <div style={{ background: "#141820", border: "1px solid #1e2533", borderRadius: 10, padding: 16 }}>
-              <div style={{ fontFamily: "'Space Mono', monospace", fontSize: 10, letterSpacing: 1.5, color: "#a855f7", marginBottom: 8 }}>FOR FACILITATORS</div>
-              <p style={{ color: "#94a3b8", fontSize: 12, lineHeight: 1.6 }}>Assign each participant a role and physically separate them. Give 3 minutes to read intel and decide. Bring everyone together for the reveal. The "what if" analysis makes the debrief conversation concrete.</p>
+              <div style={{ fontFamily: "'Space Mono', monospace", fontSize: 10, letterSpacing: 1.5, color: "#a855f7", marginBottom: 8 }}>{t("govGame.forFacilitatorsTitle")}</div>
+              <p style={{ color: "#94a3b8", fontSize: 12, lineHeight: 1.6 }}>{t("govGame.forFacilitatorsDesc")}</p>
             </div>
             <div style={{ background: "#141820", border: "1px solid #1e2533", borderRadius: 10, padding: 16 }}>
-              <div style={{ fontFamily: "'Space Mono', monospace", fontSize: 10, letterSpacing: 1.5, color: "#06b6d4", marginBottom: 8 }}>MULTIPLAYER ROADMAP</div>
-              <p style={{ color: "#94a3b8", fontSize: 12, lineHeight: 1.6 }}>Full version: separate devices, real-time decision locking, a negotiation phase for limited info-sharing before commitment, and AI-generated scenarios tailored to your workshop context.</p>
+              <div style={{ fontFamily: "'Space Mono', monospace", fontSize: 10, letterSpacing: 1.5, color: "#06b6d4", marginBottom: 8 }}>{t("govGame.roadmapTitle")}</div>
+              <p style={{ color: "#94a3b8", fontSize: 12, lineHeight: 1.6 }}>{t("govGame.roadmapDesc")}</p>
             </div>
           </div>
 

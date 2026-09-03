@@ -1,0 +1,145 @@
+{
+  "title": "Le jour J",
+  "category": "GOUVERNANCE POST-CATASTROPHE",
+  "publicBriefing": "Nous sommes le 12 février 2027. Une attaque au gaz confirmée ayant fait de nombreuses victimes a tué 83 personnes. Un modèle agentique dont les garde-fous ont été retirés, un dérivé ajusté d'un modèle ouvert largement disponible tournant sur un MacBook Pro, a fourni une assistance technique étape par étape, coordonné la logistique et aidé l'attaquant à contourner les obstacles en temps réel. L'attaque n'était pas réalisable sans l'assistance de l'IA. La fenêtre politique pour l'action s'est grande ouverte.",
+  "stakes": "83 personnes sont mortes. Les législateurs veulent des mesures d'urgence. Le public veut des comptes. Chaque décision prise dans les 72 prochaines heures façonnera la gouvernance de l'IA pour une décennie.",
+  "designNote": "Ce scénario teste la gouvernance post-catastrophe : la tension entre la responsabilité et la surréaction, entre l'hommage aux victimes et la préservation de la technologie dont des millions de personnes dépendent. Les joueurs doivent aussi remonter le fil du temps pour identifier où une intervention aurait pu changer la situation.",
+  "roleIntel": {
+    "regulator": {
+      "classification": "CONFIDENTIEL — BRIEFING DE GOUVERNANCE D'URGENCE",
+      "bullets": [
+        "Le président veut un ensemble législatif sur son bureau dans 7 jours. La direction du Congrès a rédigé un projet de loi d'urgence sur la sécurité de l'IA qui criminaliserait la distribution de modèles ouverts au-dessus d'un seuil de capacité et établirait une certification de sécurité obligatoire avant publication.",
+        "L'évaluation de votre équipe juridique : le projet est vulnérable sur le plan constitutionnel (le code comme discours), techniquement inapplicable (plus de 800 000 téléchargements existants) et criminaliserait une activité qui était légale il y a 48 heures.",
+        "En remontant le fil : votre agence avait signalé des préoccupations de biorisque il y a 14 mois mais manquait d'autorité pour agir. Un cadre volontaire avait été proposé il y a 8 mois mais la participation de l'industrie était facultative et incomplète.",
+        "L'attaque a utilisé un modèle qui a franchi un seuil de biorisque connu. La publication a eu lieu après que les évaluations internes ont montré le risque. Le laboratoire a publié quand même, invoquant la pression concurrentielle des alternatives chinoises. Ce calendrier deviendra public."
+      ]
+    },
+    "platform": {
+      "classification": "INTERNE — RÉPONSE DE CRISE",
+      "bullets": [
+        "Le modèle de base compte 2,3 millions de téléchargements depuis votre plateforme. Le dérivé dont les garde-fous ont été retirés a été téléchargé 12 000 fois avant l'attaque. Vous ne pouvez pas identifier quel téléchargement était celui de l'attaquant.",
+        "Votre équipe juridique conseille le retrait immédiat du modèle de base et de tous ses dérivés. Votre équipe politique argue que c'est purement symbolique, le modèle est déjà distribué sur des dizaines de plateformes et de réseaux pair-à-pair.",
+        "Les forces de l'ordre veulent vos métadonnées de téléchargement. Les fournir volontairement préserve la bonne volonté. Mais cela exposerait les identités et les schémas d'utilisation de 2,3 millions d'utilisateurs légitimes à la surveillance gouvernementale.",
+        "Trois grands clients entreprises ont déjà suspendu leurs comptes en attendant votre réponse. Revenus à risque : 45 M$ par trimestre. Mais 94 % de votre base d'utilisateurs n'a rien fait de mal."
+      ]
+    },
+    "journalist": {
+      "classification": "ÉDITORIAL — BRIEFING DE CRISE",
+      "bullets": [
+        "Vous avez le calendrier complet : les évaluations de biorisque, le débat interne du laboratoire, la pression concurrentielle, la décision de publication, l'avertissement vieux de 14 mois de l'agence de réglementation, et le cadre de gouvernance proposé mais jamais appliqué.",
+        "Les familles des victimes sont disponibles pour des interviews. Leur récit, « cela aurait pu être évité », est plus compliqué qu'elles ne le savent.",
+        "Le PDG du laboratoire a accepté une interview. Sa défense : « L'alternative chinoise présentait un risque plus élevé et aucune mesure d'atténuation. Bloquer notre publication aurait augmenté le risque net. » Cet argument est défendable mais sera politiquement toxique.",
+        "La législation d'urgence en cours de rédaction est techniquement inapplicable et constitutionnellement questionnable. Rapporter cela risque d'être perçu comme une défense de la technologie qui a tué 83 personnes."
+      ]
+    },
+    "ailab": {
+      "classification": "INTERNE — ÉVALUATION DE CRISE",
+      "bullets": [
+        "Le modèle utilisé dans l'attaque est un dérivé de votre publication la plus performante. Vos évaluations montraient le risque. Vous avez publié avec un filtre qui réduisait le gain de 3x à 1,5x, mais l'attaquant a contourné le filtre par ajustement fin en moins de 4 heures.",
+        "Votre bilan post-mortem interne identifie cinq points d'intervention où des décisions différentes auraient pu changer ce résultat. À chaque point, votre équipe a fait un choix défendable compte tenu des informations et des incitatifs disponibles.",
+        "Votre exposition juridique est extrême. Les avocats des plaignants s'organisent déjà. Votre directeur juridique estime la responsabilité entre 500 M$ et 2 G$ selon l'interprétation des tribunaux du devoir de diligence pour les publications de modèles ouverts.",
+        "Trois options de votre équipe de crise : (1) Responsabilité publique complète + coopération + moratoire volontaire. (2) Défense juridique : l'attaquant, pas l'outil, est responsable. (3) Proposer de diriger un consortium industriel de sécurité et présenter votre expérience comme un savoir nécessaire."
+      ]
+    }
+  },
+  "options": {
+    "regulator": {
+      "reg_emergency_act": {
+        "label": "Soutenir la loi d'urgence",
+        "detail": "Appuyer le projet : criminaliser la distribution de modèles ouverts à haute capacité, imposer une certification de sécurité avant publication.",
+        "tension": "Demande publique vs. risque constitutionnel. La législation d'urgence répond au moment mais pourrait ne pas survivre à une contestation juridique."
+      },
+      "reg_measured": {
+        "label": "Proposer une législation ciblée",
+        "detail": "Contrer avec une loi plus étroite : évaluation obligatoire du biorisque pour les modèles de pointe, cadre de responsabilité pour les publications franchissant des seuils définis, défense en aval financée.",
+        "tension": "Durabilité vs. perception d'insuffisance. La législation ciblée traite le vrai mode de défaillance mais sera attaquée comme insuffisante."
+      },
+      "reg_commission": {
+        "label": "Commander une enquête indépendante",
+        "detail": "Établir une commission indépendante pour enquêter sur l'attaque, les défaillances de gouvernance et le parcours des décisions qui ont mené ici. Reporter la législation jusqu'à la publication des conclusions.",
+        "tension": "Preuves vs. urgence. Une enquête indépendante est rigoureuse mais le public peut interpréter le délai comme de l'inaction."
+      }
+    },
+    "platform": {
+      "plat_takedown": {
+        "label": "Retrait complet du modèle",
+        "detail": "Retirer le modèle de base et tous ses dérivés. Fournir les métadonnées de téléchargement aux forces de l'ordre. Implémenter des restrictions d'accès basées sur les capacités.",
+        "tension": "Action visible vs. surveillance de masse. Retirer le modèle et partager les données aide l'enquête mais expose des millions d'utilisateurs innocents."
+      },
+      "plat_cooperate": {
+        "label": "Coopération ciblée avec les forces de l'ordre",
+        "detail": "Coopérer par les voies juridiques appropriées. Fournir les métadonnées uniquement en réponse à des demandes spécifiques approuvées par un tribunal.",
+        "tension": "Procédure régulière vs. perception d'obstruction. Les voies juridiques protègent les utilisateurs, mais on vous accusera de protéger votre entreprise."
+      },
+      "plat_preempt": {
+        "label": "Restrictions préventives des capacités",
+        "detail": "Annoncer une nouvelle politique globale : aucun modèle ouvert au-dessus d'un seuil de capacité défini hébergé sans certification de sécurité obligatoire. Appliquer rétroactivement.",
+        "tension": "Politique décisive vs. action unilatérale. Les nouvelles restrictions semblent fortes mais vous prenez des décisions de gouvernance sans processus démocratique."
+      }
+    },
+    "journalist": {
+      "jour_lifecycle": {
+        "label": "Publier le parcours complet",
+        "detail": "Le calendrier complet : les évaluations, les avertissements, la pression concurrentielle, la décision de publication, la lacune de gouvernance, l'attaque. Nommer chaque point où une intervention aurait pu aider.",
+        "tension": "Vérité systémique vs. satisfaction émotionnelle. Le calendrier complet révèle une défaillance systémique, plus difficile à corriger qu'un vilain."
+      },
+      "jour_accountability_story": {
+        "label": "Se concentrer sur la responsabilité",
+        "detail": "Mener avec les évaluations internes du laboratoire montrant qu'il connaissait le risque. Interviewer les familles des victimes. Cadrer comme un récit de négligence corporative.",
+        "tension": "Responsabilité vs. simplification excessive. Le cadre de négligence corporative pousse à l'action mais passe à côté des dynamiques systémiques."
+      },
+      "jour_legislation_critique": {
+        "label": "Critiquer la législation d'urgence",
+        "detail": "Publier une analyse montrant que le projet de loi est inapplicable et constitutionnellement questionnable. Plaider pour une meilleure politique, pas une politique plus rapide.",
+        "tension": "Empêcher une mauvaise loi vs. être présenté comme défenseur de la technologie qui a tué 83 personnes."
+      }
+    },
+    "ailab": {
+      "lab_full_account": {
+        "label": "Responsabilité publique complète",
+        "detail": "Publier votre calendrier interne complet. Reconnaître chaque point de décision. Annoncer un moratoire volontaire sur les publications ouvertes de pointe. Coopérer pleinement avec toutes les enquêtes.",
+        "tension": "Responsabilité maximale vs. exposition maximale. La transparence totale établit la norme de référence mais augmente dramatiquement le risque juridique et financier."
+      },
+      "lab_legal": {
+        "label": "Monter une défense juridique",
+        "detail": "Argumenter publiquement que l'attaquant, pas l'outil, porte la responsabilité. Noter que l'alternative chinoise présentait un risque plus élevé. Défendre la décision de publication comme le moindre de deux maux.",
+        "tension": "Défense juridiquement solide vs. « notre modèle est moins dangereux que celui de la Chine » avec 83 morts."
+      },
+      "lab_consortium_lead": {
+        "label": "Proposer un consortium industriel",
+        "detail": "Offrir de diriger un consortium de sécurité industriel financé par les laboratoires d'IA. Présenter votre expérience comme vous qualifiant de manière unique pour prévenir les futurs incidents.",
+        "tension": "Action prospective vs. audace perçue. Diriger la sécurité industrielle a du sens, mais le constructeur de l'arme menant le contrôle des armements invite le scepticisme."
+      }
+    }
+  },
+  "interactions": [
+    {
+      "label": "Réponse fondée sur les preuves",
+      "desc": "La législation ciblée combinée au reportage du parcours complet a créé les conditions d'une politique qui traitait réellement le mode de défaillance. La loi résultante était plus étroite mais applicable, et a survécu aux contestations constitutionnelles."
+    },
+    {
+      "label": "Législation née du deuil",
+      "desc": "La loi d'urgence combinée au récit du vilain corporatif a produit une législation rédigée dans la colère et votée dans le deuil, invalidée par les tribunaux 8 mois plus tard, laissant un vide réglementaire pire qu'avant l'attaque."
+    },
+    {
+      "label": "Crédibilité institutionnelle",
+      "desc": "La transparence totale du laboratoire combinée à la coopération principielle de la plateforme a créé un modèle de réponse post-incident qui équilibrait la responsabilité et la procédure régulière. La confiance du public dans la réponse institutionnelle a commencé à se rétablir."
+    },
+    {
+      "label": "Signaux contradictoires",
+      "desc": "Le laboratoire disant « ce n'est pas notre faute » tandis que la plateforme retirait tout a envoyé des signaux contradictoires. Le public a conclu qu'aucun des deux n'était digne de confiance. Les deux ont subi un traitement réglementaire plus sévère."
+    },
+    {
+      "label": "Pipeline vers une meilleure politique",
+      "desc": "La critique législative combinée à la proposition de législation ciblée se sont alignées. Le contrecoup initial contre les deux a été sévère mais le cadre politique résultant s'est avéré durable."
+    },
+    {
+      "label": "Polarisation totale",
+      "desc": "La législation draconienne combinée à la défense juridique combative a fracturé l'écosystème de gouvernance de l'IA. Les factions pro-sécurité et pro-ouverture se sont radicalisées. La coordination internationale s'est effondrée alors que les nations prenaient parti."
+    },
+    {
+      "label": "Le vide de rapidité",
+      "desc": "Le projet de loi ciblé et la coopération par voies judiciaires étaient tous deux substantiellement justes et tous deux visiblement lents. Avec 83 morts et une fenêtre de 72 heures, « lent et correct » a été perçu par le public comme une paralysie institutionnelle. La faction de la loi d'urgence a comblé le vide et fait passer la version draconienne de toute façon, et les deux acteurs mesurés ont été dépeints comme ayant protégé le processus plutôt que les victimes. Avoir raison n'était pas la même chose qu'être assez rapide."
+    }
+  ]
+}

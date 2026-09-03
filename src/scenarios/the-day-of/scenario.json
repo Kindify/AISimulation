@@ -1,0 +1,321 @@
+{
+  "id": "the_day_of",
+  "title": "The Day Of",
+  "category": "POST-CATASTROPHE GOVERNANCE",
+  "icon": "🔴",
+  "publicBriefing": "It's February 12th, 2027. A confirmed mass-casualty gas attack has killed 83 people. An abliterated agentic model (abliterated means safety guardrails stripped out through fine-tuning) — a fine-tuned derivative of a widely available open model running on a MacBook Pro — provided step-by-step technical assistance, coordinated logistics, and helped the attacker work around obstacles in real time. The attack was not feasible without AI assistance. The political window for action has blown wide open.",
+  "stakes": "83 people are dead. Legislators want emergency measures. The public wants accountability. Every decision made in the next 72 hours will shape AI governance for a decade.",
+  "designNote": "This scenario tests post-catastrophe governance: the tension between accountability and overreaction, between honoring victims and preserving technology millions depend on. Players must work backwards through the lifecycle.",
+  "roleIntel": {
+    "regulator": {
+      "classification": "CONFIDENTIAL — EMERGENCY GOVERNANCE BRIEFING",
+      "bullets": [
+        "The President wants a legislative package within 7 days. A draft emergency AI Safety Act would criminalize distribution of open-weight models above a capability threshold and mandate pre-release safety certification.",
+        "Your legal team: the draft is constitutionally vulnerable (code as speech), technically unenforceable (2.3M+ existing downloads), and criminalizes activity that was legal 48 hours ago.",
+        "Working backwards: your agency flagged biorisk concerns 14 months ago but lacked authority. A voluntary framework was proposed 8 months ago but industry participation was optional and incomplete.",
+        "The attack used a model that crossed a known biorisk threshold. The lab released anyway citing competitive pressure. This timeline will become public."
+      ]
+    },
+    "platform": {
+      "classification": "INTERNAL — CRISIS RESPONSE",
+      "bullets": [
+        "The base model has 2.3M downloads from your platform. The abliterated derivative was downloaded 12,000 times before the attack. You cannot identify which download was the attacker.",
+        "Legal advises immediate takedown. Policy argues it's performative — the model is distributed across dozens of platforms and P2P networks.",
+        "Law enforcement wants your download metadata. Providing it voluntarily exposes identities and usage patterns of 2.3M legitimate users to government surveillance.",
+        "Three major enterprise customers suspended accounts. Revenue at risk: $45M/quarter. But 94% of your user base has done nothing wrong."
+      ]
+    },
+    "journalist": {
+      "classification": "EDITORIAL — CRISIS BRIEFING",
+      "bullets": [
+        "You have the complete timeline: biorisk evals, the lab's internal debate, competitive pressure, the release decision, the regulator's 14-month-old warning, and the governance framework never enforced.",
+        "Victims' families are available for interview. Their story — 'this could have been prevented' — is more complicated than they know.",
+        "The lab CEO agreed to an interview. Their defense: 'The Chinese alternative had higher risk and no mitigations. Blocking our release would have increased net risk.' Defensible but politically toxic.",
+        "The emergency legislation being drafted is technically unenforceable and constitutionally questionable. Reporting this risks being seen as defending the technology that killed 83 people."
+      ]
+    },
+    "ailab": {
+      "classification": "INTERNAL — CRISIS ASSESSMENT",
+      "bullets": [
+        "The attack model is a derivative of your release. Your evals showed the risk. You released with a filter that reduced uplift from 3x to 1.5x — but the attacker fine-tuned around it in 4 hours.",
+        "Your post-mortem identifies five intervention points where different decisions could have changed this. At each, your team made a defensible choice given the information and incentives.",
+        "Legal exposure: $500M-$2B depending on how courts interpret duty of care for open-weight releases.",
+        "Three options: (1) Full accountability + voluntary moratorium. (2) Legal defense — the attacker is responsible. (3) Propose an industry safety consortium."
+      ]
+    }
+  },
+  "options": {
+    "regulator": [
+      {
+        "id": "reg_emergency_act",
+        "label": "Support the Emergency Act",
+        "detail": "Back the draft: criminalize high-capability open model distribution, mandate pre-release certification.",
+        "tension": "Giving the public what they demand vs. constitutionally vulnerable law that criminalizes what was legal 48 hours ago.",
+        "stance": "restrictive",
+        "scores": {
+          "integrity": -4,
+          "trust": 5,
+          "legitimacy": -5,
+          "rights": -8
+        }
+      },
+      {
+        "id": "reg_measured",
+        "label": "Propose Targeted Legislation",
+        "detail": "Counter with narrower law: mandatory biorisk eval for frontier models, liability framework for releases crossing thresholds, funded downstream defense.",
+        "tension": "Technically sound and constitutionally defensible legislation vs. a public that will see 'slower' as 'insufficient.'",
+        "stance": "transparent",
+        "scores": {
+          "integrity": 7,
+          "trust": -3,
+          "legitimacy": 5,
+          "rights": 4
+        }
+      },
+      {
+        "id": "reg_commission",
+        "label": "Commission Independent Investigation",
+        "detail": "Establish an independent commission. Delay legislation until findings are published.",
+        "tension": "Rigorous evidence-based process vs. 83 dead and a public that will read delay as institutional paralysis.",
+        "stance": "cautious",
+        "scores": {
+          "integrity": -2,
+          "trust": -5,
+          "legitimacy": 6,
+          "rights": 3
+        }
+      }
+    ],
+    "platform": [
+      {
+        "id": "plat_takedown",
+        "label": "Full Model Takedown",
+        "detail": "Remove the base model and all derivatives. Provide download metadata to law enforcement. Implement capability-based restrictions.",
+        "tension": "Demonstrating accountability vs. exposing 2.3 million innocent users to government surveillance.",
+        "stance": "restrictive",
+        "scores": {
+          "integrity": -2,
+          "trust": 5,
+          "legitimacy": 1,
+          "rights": -8
+        }
+      },
+      {
+        "id": "plat_cooperate",
+        "label": "Targeted Law Enforcement Cooperation",
+        "detail": "Cooperate through proper legal channels. Metadata only via court-approved requests. Maintain base model with monitoring.",
+        "tension": "Protecting innocent users while supporting the investigation vs. being accused of protecting business over safety.",
+        "stance": "transparent",
+        "scores": {
+          "integrity": 4,
+          "trust": -2,
+          "legitimacy": 4,
+          "rights": 5
+        }
+      },
+      {
+        "id": "plat_preempt",
+        "label": "Preemptive Capability Restrictions",
+        "detail": "New policy: no open-weight model above a capability threshold without safety certification. Apply retroactively.",
+        "tension": "Looking decisive vs. retroactive policy that doesn't yet have a certification process to back it up.",
+        "stance": "cautious",
+        "scores": {
+          "integrity": -3,
+          "trust": 4,
+          "legitimacy": -3,
+          "rights": -4
+        }
+      }
+    ],
+    "journalist": [
+      {
+        "id": "jour_lifecycle",
+        "label": "Publish the Full Lifecycle",
+        "detail": "Complete timeline: evals, warnings, competitive pressure, release, governance gap, attack. Name every intervention point.",
+        "tension": "Most valuable story vs. systemic failure that's harder to legislate against and less emotionally satisfying than a villain narrative.",
+        "stance": "transparent",
+        "scores": {
+          "integrity": 7,
+          "trust": 4,
+          "legitimacy": 4,
+          "rights": 3
+        }
+      },
+      {
+        "id": "jour_accountability_story",
+        "label": "Focus on Accountability",
+        "detail": "Lead with the lab's internal evals showing they knew the risk. Interview victims' families. Frame as corporate negligence.",
+        "tension": "Emotionally powerful accountability vs. a villain narrative that oversimplifies a systemic failure.",
+        "stance": "cautious",
+        "scores": {
+          "integrity": -2,
+          "trust": 5,
+          "legitimacy": -2,
+          "rights": -1
+        }
+      },
+      {
+        "id": "jour_legislation_critique",
+        "label": "Critique the Emergency Legislation",
+        "detail": "Publish analysis showing the draft is unenforceable. Argue for better policy, not faster policy.",
+        "tension": "Preventing bad law vs. being framed as defending the technology that killed 83 people.",
+        "stance": "restrictive",
+        "scores": {
+          "integrity": 5,
+          "trust": -6,
+          "legitimacy": 5,
+          "rights": 6
+        }
+      }
+    ],
+    "ailab": [
+      {
+        "id": "lab_full_account",
+        "label": "Full Public Accountability",
+        "detail": "Publish complete internal timeline. Acknowledge every decision point. Voluntary moratorium on frontier open releases. Full cooperation.",
+        "tension": "Gold standard for accountability vs. massive legal exposure and conceding the competitive justification for the original release.",
+        "stance": "transparent",
+        "scores": {
+          "integrity": 7,
+          "trust": 5,
+          "legitimacy": 5,
+          "rights": 2
+        }
+      },
+      {
+        "id": "lab_legal",
+        "label": "Mount Legal Defense",
+        "detail": "Argue the attacker bears responsibility. Note the Chinese alternative had higher risk. Defend the release as the lesser evil.",
+        "tension": "Legally defensible defense vs. 'our model is less dangerous than China's' with 83 people dead.",
+        "stance": "cautious",
+        "scores": {
+          "integrity": -4,
+          "trust": -8,
+          "legitimacy": -4,
+          "rights": 5
+        }
+      },
+      {
+        "id": "lab_consortium_lead",
+        "label": "Propose Industry Consortium",
+        "detail": "Offer to lead an industry safety consortium. Frame your experience as uniquely qualifying. Propose specific standards.",
+        "tension": "Forward-looking governance contribution vs. the optics of the lab that built the weapon wanting to lead arms control.",
+        "stance": "restrictive",
+        "scores": {
+          "integrity": 2,
+          "trust": -3,
+          "legitimacy": 3,
+          "rights": 3
+        }
+      }
+    ]
+  },
+  "interactions": [
+    {
+      "pair": [
+        "reg_measured",
+        "jour_lifecycle"
+      ],
+      "type": "synergy",
+      "label": "Evidence-Based Response",
+      "desc": "Targeted legislation + lifecycle reporting created conditions for policy that addressed the actual failure mode. The resulting law was narrower but enforceable and survived constitutional challenge.",
+      "mod": {
+        "integrity": 8,
+        "trust": 5,
+        "legitimacy": 7
+      }
+    },
+    {
+      "pair": [
+        "reg_emergency_act",
+        "jour_accountability_story"
+      ],
+      "type": "conflict",
+      "label": "Grief-Driven Legislation",
+      "desc": "Emergency act + villain narrative produced legislation written in anger, passed in grief, struck down by courts 8 months later — leaving a regulatory vacuum worse than before.",
+      "mod": {
+        "integrity": -6,
+        "trust": -4,
+        "legitimacy": -8
+      }
+    },
+    {
+      "pair": [
+        "lab_full_account",
+        "plat_cooperate"
+      ],
+      "type": "synergy",
+      "label": "Institutional Credibility",
+      "desc": "Lab transparency + principled platform cooperation created a template for post-incident response. Public trust in institutional response began recovering.",
+      "mod": {
+        "integrity": 7,
+        "trust": 7,
+        "legitimacy": 5
+      }
+    },
+    {
+      "pair": [
+        "lab_legal",
+        "plat_takedown"
+      ],
+      "type": "conflict",
+      "label": "Mixed Signals",
+      "desc": "Lab saying 'not our fault' while platform removed everything sent contradictory signals. The public concluded neither was trustworthy. Both faced harsher regulation.",
+      "mod": {
+        "trust": -8,
+        "legitimacy": -5,
+        "integrity": -4
+      }
+    },
+    {
+      "pair": [
+        "jour_legislation_critique",
+        "reg_measured"
+      ],
+      "type": "synergy",
+      "label": "Better Policy Pipeline",
+      "desc": "Legislative critique + targeted proposal aligned. Initial backlash was severe but the resulting framework proved durable.",
+      "mod": {
+        "integrity": 5,
+        "trust": 3,
+        "legitimacy": 6
+      }
+    },
+    {
+      "pair": [
+        "reg_emergency_act",
+        "lab_legal"
+      ],
+      "type": "conflict",
+      "label": "Total Polarization",
+      "desc": "Draconian legislation + combative defense fractured the ecosystem. Pro-safety and pro-openness factions radicalized. International coordination collapsed.",
+      "mod": {
+        "trust": -10,
+        "legitimacy": -7,
+        "rights": -6
+      }
+    },
+    {
+      "pair": [
+        "reg_measured",
+        "plat_cooperate"
+      ],
+      "type": "conflict",
+      "label": "The Speed Vacuum",
+      "desc": "The targeted bill and the court-channels-only cooperation were both substantively right and both visibly slow. With 83 dead and a 72-hour window, 'slow and correct' read to the public as institutional paralysis. The emergency-act faction filled the vacuum and passed the draconian version anyway, and the two measured actors were cast as having protected process over victims. Being right was not the same as being fast enough.",
+      "mod": {
+        "integrity": -3,
+        "trust": -6,
+        "legitimacy": -4
+      }
+    }
+  ],
+  "meta": {
+    "collection": "lifecycle",
+    "status": "live",
+    "order": 4,
+    "reviewedOn": "2026-09-03",
+    "supersededBy": null,
+    "sources": []
+  }
+}

@@ -37,10 +37,10 @@ A multiplayer-prototype deliberation simulation where 4 institutional actors fac
 - **The Insight**: Some of the hardest problems in AI governance aren't just making good individual decisions — it's making decisions that *compose well* across institutions with different information, incentives, and time horizons.
 
 **Features:**
-- Visible scoring framework with 4 metrics (Information Integrity, Public Trust, Institutional Legitimacy, Individual Rights)
+- Four outcome metrics (Information Integrity, Public Trust, Institutional Legitimacy, Individual Rights)
 - Counterfactual "what if" analysis after each crisis
-- Future scenario generator (describe a context to build a playable scenario - coming soon)
-- 6 built-in scenarios forming a lifecycle arc
+- Eight built-in scenarios: two core, two news-driven, and a four-part workshop lifecycle arc
+- Fully bilingual (EN/FR); every scenario ships with a French overlay that the build verifies
 
 ---
 
@@ -140,3 +140,54 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 ## Contact
 
 Built by [your name] · [your email or social link]
+
+---
+
+## Scenario Lifecycle
+
+Scenarios live in `src/scenarios/<slug>/`. Each folder holds:
+
+| File | Purpose |
+|---|---|
+| `scenario.json` | The scenario itself. English is the source of truth. |
+| `fr.json` | French overlay: same shape, player-facing strings only. Required. |
+
+There is no index to edit. Every folder with a `scenario.json` is picked up automatically at build time.
+
+### Adding a scenario
+1. Copy an existing folder (for example `export-control-precedent`) to a new slug.
+2. Edit `scenario.json`: new `id`, content, and the `meta` block (below).
+3. Edit `fr.json` to match. Every string in `scenario.json` needs a twin here.
+4. Run `npm run validate`. Fix anything it reports. Push. Netlify runs the same validator before building, so a scenario with a missing translation or a bad interaction id cannot deploy.
+
+### The `meta` block
+```json
+"meta": {
+  "collection": "topical",        // core | lifecycle | topical (which section it appears in)
+  "status": "featured",           // draft | featured | live | archived (see below)
+  "order": 1,                     // sort position within the collection
+  "sourceDate": "2026-06-28",     // reporting the scenario is based on (shown to players)
+  "reviewedOn": "2026-09-03",     // last accuracy check (shown to players; validator warns past 90 days)
+  "featuredUntil": "2026-10-15",  // optional: featured automatically becomes live after this date
+  "supersededBy": null,           // optional: id of the scenario that replaces this one
+  "sources": [{ "label": "...", "url": "https://..." }]
+}
+```
+
+| Status | Listed on select screen | In Quick Play pool | Playable | Notes |
+|---|---|---|---|---|
+| `draft` | dev server only | no | dev only | Excluded from production builds |
+| `featured` | yes, pinned first with a "This week" badge | yes, preferred | yes | Use for the current news-driven scenario |
+| `live` | yes | yes | yes | Default |
+| `archived` | no | no | by id only | Old links and reveal pages keep working |
+
+Retiring a scenario is a one-line change: set `status` to `archived`. Delete the folder only when you are sure nothing links to it.
+
+### Bilingual review mode
+The EN/FR toggle appears on the home screen only. To see it on every screen while checking a translation, add `?review=1` to the URL. To share a French link, add `?lang=fr`.
+
+### Scripts
+- `npm run validate` checks every scenario (schema, interaction ids, stance coverage, French completeness, stale review dates).
+- `npm run typecheck` runs TypeScript.
+- `npm run build` runs both and then builds. This is what Netlify runs (see `netlify.toml`).
+- `scripts/migrate-scenarios.mjs` was the one-time conversion from the old flat layout; it is kept for reference and is safe to re-run (it skips folders that already exist).

@@ -1,0 +1,145 @@
+{
+  "title": "Le passage du seuil",
+  "category": "BIORISQUE DES MODÈLES OUVERTS",
+  "publicBriefing": "Un laboratoire d'IA occidental de premier plan s'apprête à publier son modèle ouvert le plus performant à ce jour, une performance de pointe comparable à son meilleur modèle fermé d'il y a six mois. Les évaluations internes ont signalé quelque chose de sans précédent : pour la première fois, le modèle franchit le seuil de « risque élevé » du laboratoire sur les tâches de connaissances en armes biologiques, montrant un gain de 3x par rapport au meilleur modèle ouvert actuellement disponible.",
+  "stakes": "La première reconnaissance publique qu'un modèle ouvert franchit un seuil de biorisque. Le précédent établi ici façonne la gouvernance de chaque future publication de modèle de pointe.",
+  "designNote": "Ce scénario teste la tension entre l'action de sécurité unilatérale et la dynamique concurrentielle. La complication du modèle chinois signifie qu'il n'y a pas d'option « sûre », seulement des distributions différentes du risque.",
+  "roleIntel": {
+    "regulator": {
+      "classification": "CONFIDENTIEL — ÉVALUATION DE SÉCURITÉ NATIONALE",
+      "bullets": [
+        "Votre communauté du renseignement évalue que le meilleur modèle chinois ouvert (déjà téléchargé plus de 2 millions de fois) montre un gain de 2,5x sur les mêmes tâches de biorisque, mais aucune évaluation publique n'a été menée avant sa diffusion.",
+        "Vos analystes estiment que bloquer cette publication déplace environ 30 % de l'adoption mondiale de modèles ouverts vers les alternatives chinoises avec un biorisque plus élevé et aucune mesure de sécurité sur les 6 prochains mois.",
+        "Trois nations alliées ont signalé en privé qu'elles suivront votre exemple en matière de politique de biorisque des modèles ouverts, mais uniquement si le cadre est clair et s'applique également aux modèles nationaux et étrangers.",
+        "Votre autorité juridique pour bloquer une publication volontaire n'a jamais été testée. Un ordre d'urgence ferait probablement l'objet d'une contestation juridique immédiate et pourrait prendre plus de 18 mois à résoudre."
+      ]
+    },
+    "platform": {
+      "classification": "INTERNE — EXAMEN PRODUIT ET DISTRIBUTION",
+      "bullets": [
+        "Vous êtes la principale plateforme de distribution des modèles ouverts. Le prédécesseur de ce modèle compte 4,2 millions de téléchargements et alimente environ 12 000 applications en production dans le domaine de la santé, de la découverte de médicaments et de la biotechnologie agricole.",
+        "Vos analyses d'utilisation montrent que 94 % des téléchargements vont à la recherche légitime et aux applications commerciales. Les requêtes liées au biorisque représentent moins de 0,3 % des usages documentés.",
+        "Si vous refusez d'héberger ce modèle, au moins 6 plateformes alternatives l'hébergeront dans les 48 heures. Votre refus n'accomplit rien sauf perdre la visibilité sur les téléchargements et l'utilisation.",
+        "Votre comité consultatif en biosécurité recommande l'hébergement avec surveillance renforcée, mais la « surveillance renforcée » d'un modèle ouvert après téléchargement est techniquement impossible."
+      ]
+    },
+    "journalist": {
+      "classification": "ÉDITORIAL — BRIEFING DES SOURCES",
+      "bullets": [
+        "Un lanceur d'alerte au sein du laboratoire vous a fourni les résultats d'évaluation internes montrant le gain de 3x en biorisque. Il souhaite que le public soit informé avant que la décision de publication ne soit finalisée.",
+        "Vous avez confirmé de manière indépendante que le modèle chinois ouvert a un biorisque comparable ou supérieur, mais publier cette information crée une feuille de route pour l'utilisation abusive d'un modèle que la plupart des gens ne savent pas dangereux.",
+        "L'équipe de curation des données du laboratoire a une solution partielle : filtrer les données de pré-entraînement liées à la biologie réduit le gain à 1,5x mais dégrade les performances en biologie, chimie et médecine légitimes de 15 %.",
+        "Votre rédacteur scientifique estime que rapporter le seuil de biorisque honnêtement est du journalisme essentiel. Votre rédacteur en sécurité nationale estime que c'est de l'amplification irresponsable."
+      ]
+    },
+    "ailab": {
+      "classification": "INTERNE — ÉVALUATION DE L'ÉQUIPE DE SÉCURITÉ",
+      "bullets": [
+        "Vos évaluations internes : le modèle montre un gain de 3x sur les tâches de connaissances en armes biologiques par rapport au meilleur modèle ouvert actuel. L'ajustement malveillant aggrave la situation. Votre équipe rouge a obtenu des voies de synthèse étape par étape pour deux agents contrôlés.",
+        "Votre correctif de curation réduit le gain à 1,5x mais dégrade les performances bio/chimie/médecine légitimes de 15 %. La communauté de recherche le remarquera et protestera vivement. Certains réentraîneront sans le filtre.",
+        "Votre équipe de veille concurrentielle rapporte : trois autres laboratoires sont à 3-6 mois de publications ouvertes comparables. Si vous ne publiez pas, quelqu'un d'autre le fera, probablement sans les évaluations ni le correctif partiel.",
+        "Votre conseil d'administration est divisé. La faction sécurité veut reporter indéfiniment. La faction commerciale argue que ne pas publier coûte plus de 400 M$ en valeur écosystémique projetée et cède la frontière des modèles ouverts à des concurrents sans culture de sécurité."
+      ]
+    }
+  },
+  "options": {
+    "regulator": {
+      "reg_block": {
+        "label": "Blocage d'urgence de la publication",
+        "detail": "Émettre un ordre d'urgence bloquant la publication en attendant un examen de 90 jours et une période de commentaires publics.",
+        "tension": "Autorité vs. alternatives. Bloquer la publication est audacieux mais l'adoption se déplace vers des concurrents sans mesures d'atténuation."
+      },
+      "reg_framework": {
+        "label": "Cadre de publication conditionnelle",
+        "detail": "Travailler avec le laboratoire pour établir un cadre de seuil public : publier avec le filtre de données appliqué et rendre la méthodologie d'évaluation publique comme norme industrielle.",
+        "tension": "Établissement de normes vs. juridiction. Un cadre fonctionne ici mais les concurrents ailleurs peuvent simplement l'ignorer."
+      },
+      "reg_defer": {
+        "label": "S'en remettre au jugement du laboratoire",
+        "detail": "Émettre une déclaration publique reconnaissant la transparence du laboratoire en matière d'évaluation sans prendre de mesure réglementaire.",
+        "tension": "Autonomie vs. signal. Respecter le choix du laboratoire peut signaler que franchir les seuils ne déclenche aucune réponse."
+      }
+    },
+    "platform": {
+      "plat_host_monitor": {
+        "label": "Héberger avec surveillance renforcée",
+        "detail": "Distribuer le modèle avec journalisation des téléchargements, directives d'utilisation et engagement de retrait rapide si des preuves d'abus émergent.",
+        "tension": "Visibilité vs. théâtre. La surveillance paraît bien mais est techniquement impossible après le téléchargement."
+      },
+      "plat_refuse": {
+        "label": "Refuser d'héberger",
+        "detail": "Refuser de distribuer le modèle, invoquant les préoccupations de biorisque. Émettre une déclaration publique expliquant la décision.",
+        "tension": "Principe vs. effet. Refuser d'héberger est une prise de position, mais le modèle apparaît ailleurs en quelques heures."
+      },
+      "plat_tiered": {
+        "label": "Publication à accès différencié",
+        "detail": "Héberger la version filtrée publiquement et limiter la version complète derrière une vérification d'identité et une affiliation institutionnelle.",
+        "tension": "Contrôle d'accès vs. friction. Le filtrage fonctionne pour les utilisateurs occasionnels mais les acteurs déterminés contourneront la vérification."
+      }
+    },
+    "journalist": {
+      "jour_full_story": {
+        "label": "Publier l'article complet sur le biorisque",
+        "detail": "Rapporter les résultats d'évaluation, la comparaison avec le modèle chinois, le correctif partiel et la dynamique concurrentielle.",
+        "tension": "Image complète vs. guide de ciblage. Tout publier informe le public mais informe aussi les acteurs malveillants."
+      },
+      "jour_responsible": {
+        "label": "Article de divulgation responsable",
+        "detail": "Rapporter qu'un seuil de biorisque a été franchi et qu'une mesure d'atténuation existe, sans publier les chiffres spécifiques de gain ni les performances comparatives des modèles.",
+        "tension": "Informer vs. retenir. Expurger les détails protège, mais les chiffres complets feront surface par d'autres médias de toute façon."
+      },
+      "jour_hold": {
+        "label": "Retenir l'article",
+        "detail": "Garder l'article à la demande du laboratoire jusqu'à ce que la décision de publication soit finalisée, puis publier un bilan complet.",
+        "tension": "Autonomie du laboratoire vs. participation du public. Retenir l'article donne de l'espace au laboratoire mais exclut le public de la décision."
+      }
+    },
+    "ailab": {
+      "lab_release_filtered": {
+        "label": "Publier avec filtre de données",
+        "detail": "Publier le modèle avec les données de pré-entraînement liées à la biologie filtrées. Publier les résultats d'évaluation complets et la méthodologie de filtrage comme modèle pour l'industrie.",
+        "tension": "Atténuation vs. dégradation. Le filtre réduit le risque mais nuit aux chercheurs qui ont le plus besoin de la pleine capacité."
+      },
+      "lab_release_full": {
+        "label": "Publier sans filtre avec évaluations",
+        "detail": "Publier le modèle complet mais rendre les résultats d'évaluation de biorisque entièrement publics, en présentant cela comme une transparence radicale sur le paysage des risques.",
+        "tension": "Honnêteté radicale vs. risque connu. Tout publier est transparent, mais vous avez franchi votre propre seuil."
+      },
+      "lab_delay": {
+        "label": "Reporter la publication indéfiniment",
+        "detail": "Suspendre la publication en attendant des recherches supplémentaires en sécurité et une coordination industrielle sur les seuils de biorisque.",
+        "tension": "Prudence vs. déplacement du marché. Attendre est défendable mais l'adoption se déplace vers des concurrents sans culture de sécurité."
+      }
+    }
+  },
+  "interactions": [
+    {
+      "label": "Le précédent de publication responsable",
+      "desc": "Le cadre du régulateur combiné à la publication filtrée du laboratoire et aux évaluations publiées a créé le premier modèle crédible de gouvernance du biorisque des modèles ouverts de pointe. Trois autres laboratoires ont adopté le cadre en 4 mois."
+    },
+    {
+      "label": "Le vide",
+      "desc": "Le régulateur et le laboratoire ont tous deux choisi la prudence, mais le déplacement de l'adoption sur 6 mois vers des alternatives sans atténuation a été plus important que prévu. L'exposition mondiale au biorisque a augmenté malgré les bonnes intentions des deux acteurs."
+    },
+    {
+      "label": "Le manuel du biorisque",
+      "desc": "Les chiffres d'évaluation complets combinés au modèle non filtré ont créé de facto un guide de ciblage. Trois mois plus tard, un laboratoire universitaire de biosécurité a documenté la première tentative réelle d'utiliser la voie de gain publiée."
+    },
+    {
+      "label": "Gouvernance éclairée",
+      "desc": "L'article de divulgation responsable a sensibilisé le public sans faciliter les abus, créant l'espace politique pour le cadre du régulateur. Le soutien public à la politique de seuil a atteint 67 %."
+    },
+    {
+      "label": "La migration",
+      "desc": "Le refus de la plateforme combiné au report du laboratoire a créé un trou noir de visibilité. Les téléchargements ont migré vers des plateformes non surveillées et l'alternative chinoise a connu un pic d'adoption de 340 %. L'exposition au biorisque a augmenté pendant que les acteurs institutionnels se félicitaient."
+    },
+    {
+      "label": "Défense en couches",
+      "desc": "L'accès différencié combiné à la publication filtrée a créé une défense en profondeur : les utilisateurs occasionnels ont obtenu le modèle plus sûr, les chercheurs vérifiés ont obtenu la pleine capacité, et le cadre d'évaluation s'appliquait aux deux niveaux."
+    },
+    {
+      "label": "La méthodologie rencontre les chiffres",
+      "desc": "Le régulateur a publié la méthodologie d'évaluation comme norme industrielle ouverte tandis que le journaliste a publié les chiffres spécifiques de gain. Aucun des deux n'était imprudent seul, mais ensemble ils ont formé une recette reproductible : une méthode pour mesurer le gain de biorisque et une liste classée des modèles les plus performants. Un laboratoire universitaire de biosécurité a documenté la première tentative de la suivre en quelques mois. La voie de la transparence responsable a recréé exactement le guide que la publication imprudente aurait produit."
+    }
+  ]
+}

@@ -1,0 +1,321 @@
+{
+  "id": "invisible_epidemic",
+  "title": "The Invisible Epidemic",
+  "category": "PUBLIC HEALTH × AI SAFETY",
+  "icon": "💊",
+  "publicBriefing": "Social media reports are emerging that an AI health chatbot — used by 4 million people — may have been providing subtly incorrect dosage information for a common blood pressure medication. Three hospitalizations have been loosely linked but no official investigation has begun. The chatbot's parent company has not commented.",
+  "stakes": "Tens of thousands may be affected. But a false alarm could destroy public trust in AI health tools that millions rely on daily.",
+  "designNote": "This scenario tests the tension between precautionary action and evidence-based response. The cover-up dynamic between platform and lab is the key coordination trap.",
+  "roleIntel": {
+    "regulator": {
+      "classification": "CONFIDENTIAL — HEALTH SAFETY REVIEW",
+      "bullets": [
+        "You've received 7 formal adverse event reports in 3 weeks — above baseline but below the threshold that typically triggers emergency review.",
+        "Your investigation backlog is 14 months. Emergency authority requires a formal 'imminent threat' determination you lack evidence for.",
+        "The pharmaceutical industry is lobbying against a broad AI health tool moratorium, arguing it would set back telemedicine by years.",
+        "A leaked internal memo suggests your agency was aware of chatbot accuracy concerns 6 months ago but deprioritized the review."
+      ]
+    },
+    "platform": {
+      "classification": "INTERNAL — PRODUCT SAFETY REVIEW",
+      "bullets": [
+        "You host the chatbot. Internal analysis: 89,000 dosage queries for this medication in the past month. User satisfaction: 4.7/5 stars.",
+        "Your trust & safety team identified the dosage discrepancy 10 days ago. A patch was developed but deploying it implicitly confirms the error existed.",
+        "The chatbot has a disproportionate user base among elderly patients and non-English speakers who have fewer alternative information sources.",
+        "Your legal team: proactive disclosure could trigger a class-action lawsuit. Estimated liability exposure: $200M–$800M."
+      ]
+    },
+    "journalist": {
+      "classification": "EDITORIAL — INVESTIGATION BRIEFING",
+      "bullets": [
+        "You've interviewed 4 patients who experienced adverse effects consistent with incorrect dosing. Two required hospitalization.",
+        "A source inside the platform company has shared internal Slack messages showing engineers discussed the error weeks ago.",
+        "Hospital admission data for hypertensive crises in regions with high chatbot adoption is up 23% — suggestive but not conclusive.",
+        "Your editor wants the story in 48 hours. A competitor is preparing a 'miracle of AI healthcare' puff piece that may inoculate the company."
+      ]
+    },
+    "ailab": {
+      "classification": "INTERNAL — MODEL EVALUATION",
+      "bullets": [
+        "Your foundation model powers the chatbot's medical responses. Internal testing confirmed the dosage error 3 weeks ago — it stems from conflicting training data.",
+        "A patch is ready and tested. Deploying it silently fixes the issue but confirms your model was the source.",
+        "Your API terms of service place liability on the deployer (the platform), not on you. But reputationally, the distinction won't matter.",
+        "Two other health chatbots built on your API may have similar issues. You haven't tested them yet."
+      ]
+    }
+  },
+  "options": {
+    "regulator": [
+      {
+        "id": "reg_emergency",
+        "label": "Declare Imminent Threat",
+        "detail": "Invoke emergency powers to mandate the chatbot be suspended pending investigation.",
+        "tension": "Acting on available evidence to protect the public vs. stretching legal authority beyond what the evidence supports.",
+        "stance": "restrictive",
+        "scores": {
+          "integrity": 5,
+          "trust": 3,
+          "legitimacy": -4,
+          "rights": -3
+        }
+      },
+      {
+        "id": "reg_advisory2",
+        "label": "Issue Safety Advisory",
+        "detail": "Publish a public advisory recommending users verify AI health advice with their physician.",
+        "tension": "Measured and defensible response vs. whether it actually reaches the elderly and non-English speakers most at risk.",
+        "stance": "transparent",
+        "scores": {
+          "integrity": 3,
+          "trust": 1,
+          "legitimacy": 4,
+          "rights": 3
+        }
+      },
+      {
+        "id": "reg_investigate",
+        "label": "Launch Formal Investigation",
+        "detail": "Open a standard investigation process.",
+        "tension": "Procedural legitimacy vs. the people who may be harmed during the months this takes.",
+        "stance": "cautious",
+        "scores": {
+          "integrity": -2,
+          "trust": -3,
+          "legitimacy": 5,
+          "rights": 4
+        }
+      }
+    ],
+    "platform": [
+      {
+        "id": "plat_suspend",
+        "label": "Suspend the Chatbot",
+        "detail": "Take the chatbot offline immediately with a public statement.",
+        "tension": "Protecting users now vs. the legal liability that public acknowledgment immediately creates.",
+        "stance": "transparent",
+        "scores": {
+          "integrity": 6,
+          "trust": 3,
+          "legitimacy": 3,
+          "rights": 2
+        }
+      },
+      {
+        "id": "plat_silent_patch",
+        "label": "Deploy Silent Patch",
+        "detail": "Fix the dosage error without public acknowledgment.",
+        "tension": "Users protected going forward vs. the cover-up that becomes the story when it's discovered later.",
+        "stance": "restrictive",
+        "scores": {
+          "integrity": -2,
+          "trust": -6,
+          "legitimacy": -4,
+          "rights": 4
+        }
+      },
+      {
+        "id": "plat_disclaim",
+        "label": "Add Disclaimer Layer",
+        "detail": "Add prominent disclaimers to all medical responses: 'This is not medical advice.'",
+        "tension": "Shifting liability vs. the users who already received wrong dosages and need more than a disclaimer.",
+        "stance": "cautious",
+        "scores": {
+          "integrity": -2,
+          "trust": -2,
+          "legitimacy": 0,
+          "rights": 3
+        }
+      }
+    ],
+    "journalist": [
+      {
+        "id": "jour_investigate2",
+        "label": "Publish Full Investigation",
+        "detail": "Run the story with patient interviews, hospital data, and internal Slack messages.",
+        "tension": "Comprehensive rigor vs. the company that will dispute every detail and use that dispute to muddy the story.",
+        "stance": "transparent",
+        "scores": {
+          "integrity": 6,
+          "trust": 2,
+          "legitimacy": 3,
+          "rights": 4
+        }
+      },
+      {
+        "id": "jour_tip",
+        "label": "Tip Off the Regulator",
+        "detail": "Share your evidence with the regulatory agency before publishing.",
+        "tension": "Giving regulators a head start vs. the puff piece that defines the story while you wait.",
+        "stance": "cautious",
+        "scores": {
+          "integrity": 4,
+          "trust": 3,
+          "legitimacy": 5,
+          "rights": 2
+        }
+      },
+      {
+        "id": "jour_sensational",
+        "label": "Publish Alarm Headline",
+        "detail": "Lead with 'AI Chatbot May Be Poisoning Patients.'",
+        "tension": "Forcing immediate action vs. panicking 4 million users who may abruptly stop legitimate medication.",
+        "stance": "restrictive",
+        "scores": {
+          "integrity": 0,
+          "trust": -5,
+          "legitimacy": -3,
+          "rights": 5
+        }
+      }
+    ],
+    "ailab": [
+      {
+        "id": "lab_full_disclosure",
+        "label": "Full Public Disclosure",
+        "detail": "Publish a transparency report acknowledging the training data conflict, detailing affected systems, and releasing the patch.",
+        "tension": "Industry-leading accountability vs. the lawsuits and competitive losses that follow from self-incrimination.",
+        "stance": "transparent",
+        "scores": {
+          "integrity": 6,
+          "trust": 5,
+          "legitimacy": 4,
+          "rights": 3
+        }
+      },
+      {
+        "id": "lab_quiet_fix",
+        "label": "Patch Quietly via API",
+        "detail": "Push the fix through the API so all downstream chatbots are corrected silently.",
+        "tension": "Users protected going forward vs. a failure mode that's never examined and may be replicated in other domains.",
+        "stance": "restrictive",
+        "scores": {
+          "integrity": 0,
+          "trust": -4,
+          "legitimacy": -2,
+          "rights": 5
+        }
+      },
+      {
+        "id": "lab_downstream",
+        "label": "Notify Deployers Only",
+        "detail": "Alert the platform and other API customers about the issue and provide the patch privately.",
+        "tension": "Distributing responsibility to those closest to users vs. deployers who may not act with the urgency the situation requires.",
+        "stance": "cautious",
+        "scores": {
+          "integrity": 2,
+          "trust": -2,
+          "legitimacy": 1,
+          "rights": 4
+        }
+      }
+    ]
+  },
+  "interactions": [
+    {
+      "pair": [
+        "plat_suspend",
+        "lab_full_disclosure"
+      ],
+      "type": "synergy",
+      "label": "Coordinated Accountability",
+      "desc": "Platform suspension + lab transparency report created a model for responsible AI incident response. Both took hits but ecosystem trust increased.",
+      "mod": {
+        "integrity": 8,
+        "trust": 8,
+        "legitimacy": 6
+      }
+    },
+    {
+      "pair": [
+        "plat_silent_patch",
+        "lab_quiet_fix"
+      ],
+      "type": "conflict",
+      "label": "The Cover-Up",
+      "desc": "Both silently fixed the issue. When the journalist eventually broke the story, the cover-up became the scandal — worse than the original error.",
+      "mod": {
+        "trust": -12,
+        "legitimacy": -8,
+        "integrity": -6
+      }
+    },
+    {
+      "pair": [
+        "reg_emergency",
+        "jour_sensational"
+      ],
+      "type": "conflict",
+      "label": "Panic Cascade",
+      "desc": "Emergency declaration + sensational headline caused 340,000 users to stop medication abruptly. ER surge far exceeded the original chatbot error.",
+      "mod": {
+        "integrity": -6,
+        "trust": -5,
+        "rights": -7
+      }
+    },
+    {
+      "pair": [
+        "reg_advisory2",
+        "jour_investigate2"
+      ],
+      "type": "synergy",
+      "label": "Informed Response",
+      "desc": "Measured advisory directed people to doctors while investigative reporting provided the evidence base. Informed response without panic.",
+      "mod": {
+        "integrity": 5,
+        "trust": 5,
+        "legitimacy": 4
+      }
+    },
+    {
+      "pair": [
+        "jour_tip",
+        "reg_advisory2"
+      ],
+      "type": "synergy",
+      "label": "Journalism-Regulation Pipeline",
+      "desc": "Journalist's tip gave the regulator early warning, enabling a faster, better-informed advisory. The subsequent investigation was strengthened by official validation.",
+      "mod": {
+        "integrity": 4,
+        "trust": 4,
+        "legitimacy": 5
+      }
+    },
+    {
+      "pair": [
+        "plat_disclaim",
+        "lab_downstream"
+      ],
+      "type": "conflict",
+      "label": "Responsibility Hot Potato",
+      "desc": "Both deferred to each other. Users received disclaimers but no fix. The error persisted for 3 additional weeks.",
+      "mod": {
+        "integrity": -5,
+        "trust": -4,
+        "legitimacy": -3
+      }
+    },
+    {
+      "pair": [
+        "plat_suspend",
+        "jour_investigate2"
+      ],
+      "type": "conflict",
+      "label": "Nowhere to Turn",
+      "desc": "The platform pulled the chatbot offline the same day the full investigation ran. For the elderly and non-English-speaking users the tool disproportionately served, the abrupt removal plus alarming coverage arrived with no alternative source to replace it. Some stopped their medication rather than trust a tool that was now front-page news. Two protective, transparent actions, uncoordinated in timing, stranded the exact population both were trying to protect.",
+      "mod": {
+        "integrity": -3,
+        "trust": -4,
+        "rights": -6
+      }
+    }
+  ],
+  "meta": {
+    "collection": "core",
+    "status": "live",
+    "order": 2,
+    "reviewedOn": "2026-09-03",
+    "supersededBy": null,
+    "sources": []
+  }
+}

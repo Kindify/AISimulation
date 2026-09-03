@@ -353,31 +353,31 @@ textarea, input { font-family: 'DM Sans', sans-serif; }
           <div className="fade-up" style={{ background: "#141820", border: "1px solid #1e2533", borderRadius: 12, padding: 32 }}>
             <div style={{ fontSize: 48, marginBottom: 16 }}>🌐</div>
             <h2 style={{ fontFamily: "'Instrument Serif', serif", fontSize: 28, fontWeight: 400, marginBottom: 16 }}>{t("govGame.coordinationProblem")}</h2>
-            <p style={{ color: "#94a3b8", lineHeight: 1.7, fontSize: 15, marginBottom: 20 }}>AI governance isn't about any single institution — it's about whether multiple actors with asymmetric information (each actor knows things the others don't), different incentives, and different time horizons can act coherently under pressure.</p>
+            <p style={{ color: "#94a3b8", lineHeight: 1.7, fontSize: 15, marginBottom: 20 }}>{t("govGame.introP1")}</p>
             <div style={{ background: "#1e293b", borderRadius: 8, padding: 16, marginBottom: 20 }}>
               <div style={{ fontFamily: "'Space Mono', monospace", fontSize: 11, letterSpacing: 1.5, color: "#06b6d4", marginBottom: 10 }}>{t("govGame.howItWorks")}</div>
-              <p style={{ color: "#94a3b8", lineHeight: 1.7, fontSize: 14 }}>A crisis unfolds. You step into four institutional roles — each with <strong style={{ color: "#e2e8f0" }}>private intelligence</strong> the others can't see. Commit each role's decision blind, then discover how your choices <strong style={{ color: "#e2e8f0" }}>interact</strong>.</p>
+              <p style={{ color: "#94a3b8", lineHeight: 1.7, fontSize: 14 }}>{t("govGame.howItWorksP1a")}<strong style={{ color: "#e2e8f0" }}>{t("govGame.howItWorksP1b")}</strong>{t("govGame.howItWorksP1c")}<strong style={{ color: "#e2e8f0" }}>{t("govGame.howItWorksP1d")}</strong>.</p>
             </div>
 
             <div style={{ marginBottom: 20 }}>
               <button onClick={() => setShowScoring(!showScoring)} style={{ width: "100%", padding: "10px 14px", background: "#0c0f14", border: "1px solid #1e2533", borderRadius: 8, cursor: "pointer", display: "flex", justifyContent: "space-between", alignItems: "center" }}>
-                <span style={{ fontFamily: "'Space Mono', monospace", fontSize: 11, letterSpacing: 1.5, color: "#f59e0b" }}>📊 HOW SCORING WORKS</span>
+                <span style={{ fontFamily: "'Space Mono', monospace", fontSize: 11, letterSpacing: 1.5, color: "#f59e0b" }}>📊 {t("govGame.howScoringWorks")}</span>
                 <span style={{ color: "#64748b", fontSize: 12 }}>{showScoring ? "▾" : "▸"}</span>
               </button>
               {showScoring && (
                 <div style={{ background: "#0c0f14", border: "1px solid #1e2533", borderTop: "none", borderRadius: "0 0 8px 8px", padding: 16 }}>
-                  <p style={{ color: "#94a3b8", fontSize: 12, lineHeight: 1.6, marginBottom: 12 }}>Your outcome is measured on four metrics. Each role's individual choice affects all four — but the <strong style={{ color: "#e2e8f0" }}>interactions between roles</strong> generate the largest swings. A single synergy (two actions that amplified each other's positive effects) or conflict (two actions that undermined each other, making things worse) can outweigh any individual decision. Your coordination grade (measures how well institutional actions reinforced or undermined each other) is determined by the balance of these interactions.</p>
+                  <p style={{ color: "#94a3b8", fontSize: 12, lineHeight: 1.6, marginBottom: 12 }}>{t("govGame.scoringP1a")}<strong style={{ color: "#e2e8f0" }}>{t("govGame.scoringP1b")}</strong>{t("govGame.scoringP1c")}</p>
                   {METRICS_INFO.map(m => (
                     <div key={m.key} style={{ display: "flex", gap: 10, marginBottom: 10, padding: 10, background: "#141820", borderRadius: 6, border: `1px solid ${m.color}22` }}>
                       <span style={{ fontSize: 18 }}>{m.icon}</span>
                       <div>
-                        <div style={{ fontFamily: "'Space Mono', monospace", fontSize: 10, fontWeight: 700, color: m.color, letterSpacing: 1 }}>{m.label.toUpperCase()}</div>
-                        <p style={{ color: "#94a3b8", fontSize: 11, lineHeight: 1.5, marginTop: 3 }}>{m.desc}</p>
+                        <div style={{ fontFamily: "'Space Mono', monospace", fontSize: 10, fontWeight: 700, color: m.color, letterSpacing: 1 }}>{t(`metrics.${m.key}`, m.label).toUpperCase()}</div>
+                        <p style={{ color: "#94a3b8", fontSize: 11, lineHeight: 1.5, marginTop: 3 }}>{t(`metricsDesc.${m.key}`, m.desc)}</p>
                       </div>
                     </div>
                   ))}
                   <div style={{ background: "#f59e0b11", border: "1px solid #f59e0b33", borderRadius: 6, padding: 10, marginTop: 8 }}>
-                    <p style={{ fontFamily: "'DM Mono', monospace", fontSize: 10, color: "#f59e0b", lineHeight: 1.5 }}>⚡ KEY: Each option describes the tension it carries (what it protects against what it risks). The coordination grade is based on how many synergies vs conflicts your combined choices trigger.</p>
+                    <p style={{ fontFamily: "'DM Mono', monospace", fontSize: 10, color: "#f59e0b", lineHeight: 1.5 }}>⚡ {t("govGame.scoringKey")}</p>
                   </div>
                 </div>
               )}
@@ -516,7 +516,7 @@ textarea, input { font-family: 'DM Sans', sans-serif; }
               </div>
             </div>
             <div style={{ background: "#1e293b", borderRadius: 8, padding: 16, marginBottom: 16, borderLeft: "3px solid #ef4444" }}>
-              <div style={{ fontFamily: "'DM Mono', monospace", fontSize: 10, color: "#ef4444", letterSpacing: 1, marginBottom: 8 }}>📡 PUBLIC BRIEFING — ALL ACTORS</div>
+              <div style={{ fontFamily: "'DM Mono', monospace", fontSize: 10, color: "#ef4444", letterSpacing: 1, marginBottom: 8 }}>📡 {t("govGame.publicBriefing")}</div>
               <p style={{ color: "#e2e8f0", lineHeight: 1.7, fontSize: 14 }}>{tc.publicBriefing}</p>
             </div>
             <div style={{ background: "#0c0f14", borderRadius: 8, padding: 14, marginBottom: 16, border: "1px solid #f59e0b33" }}>
@@ -817,9 +817,9 @@ textarea, input { font-family: 'DM Sans', sans-serif; }
           })}
 
           <div className="fade-up" style={{ background: "#141820", border: "1px solid #1e2533", borderRadius: 12, padding: 24, marginTop: 20, marginBottom: 20 }}>
-            <div style={{ fontFamily: "'Space Mono', monospace", fontSize: 10, letterSpacing: 2, color: "#06b6d4", marginBottom: 10 }}>THE CORE INSIGHT</div>
+            <div style={{ fontFamily: "'Space Mono', monospace", fontSize: 10, letterSpacing: 2, color: "#06b6d4", marginBottom: 10 }}>{t("govGame.coreInsightTitle")}</div>
             <p style={{ color: "#94a3b8", lineHeight: 1.8, fontSize: 14 }}>
-              The hardest problem in AI governance isn't making good individual decisions — it's making decisions that <em style={{ color: "#e2e8f0" }}>compose well</em> across institutions with asymmetric information and conflicting incentives. Coordination architecture — the channels through which institutions share information and align action — determines whether individual good decisions produce collective good outcomes.
+              {t("govGame.coreInsightP1a")}<em style={{ color: "#e2e8f0" }}>{t("govGame.coreInsightP1b")}</em>{t("govGame.coreInsightP1c")}
             </p>
           </div>
 
@@ -897,24 +897,24 @@ textarea, input { font-family: 'DM Sans', sans-serif; }
                   <div style={{ background: "#0c0f14", border: `1px solid ${gradeColor}33`, borderRadius: 10, padding: 20, marginBottom: 16 }}>
                     <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: 12 }}>
                       <div>
-                        <div style={{ fontFamily: "'DM Mono', monospace", fontSize: 9, color: "#64748b", letterSpacing: 1 }}>MY INSTITUTIONAL ARCHETYPE</div>
+                        <div style={{ fontFamily: "'DM Mono', monospace", fontSize: 9, color: "#64748b", letterSpacing: 1 }}>{t("share.myArchetype")}</div>
                         <div style={{ fontFamily: "'Instrument Serif', serif", fontSize: 20, color: gradeColor, marginTop: 4 }}>{archetype}</div>
                       </div>
                       <div style={{ textAlign: "right" as const }}>
                         <div style={{ fontFamily: "'Instrument Serif', serif", fontSize: 36, color: gradeColor, lineHeight: 1 }}>{overallGrade}</div>
-                        <div style={{ fontFamily: "'DM Mono', monospace", fontSize: 9, color: "#64748b" }}>GRADE</div>
+                        <div style={{ fontFamily: "'DM Mono', monospace", fontSize: 9, color: "#64748b" }}>{t("share.grade")}</div>
                       </div>
                     </div>
                     <div style={{ display: "flex", gap: 16, marginBottom: 12 }}>
-                      <div><span style={{ fontFamily: "'Space Mono', monospace", fontSize: 14, color: "#10b981", fontWeight: 700 }}>{totalSynergies}</span><span style={{ fontFamily: "'DM Mono', monospace", fontSize: 9, color: "#64748b", marginLeft: 4 }}>synergies</span></div>
-                      <div><span style={{ fontFamily: "'Space Mono', monospace", fontSize: 14, color: "#ef4444", fontWeight: 700 }}>{totalConflicts}</span><span style={{ fontFamily: "'DM Mono', monospace", fontSize: 9, color: "#64748b", marginLeft: 4 }}>conflicts</span></div>
+                      <div><span style={{ fontFamily: "'Space Mono', monospace", fontSize: 14, color: "#10b981", fontWeight: 700 }}>{totalSynergies}</span><span style={{ fontFamily: "'DM Mono', monospace", fontSize: 9, color: "#64748b", marginLeft: 4 }}>{t("govGame.synergies").toLowerCase()}</span></div>
+                      <div><span style={{ fontFamily: "'Space Mono', monospace", fontSize: 14, color: "#ef4444", fontWeight: 700 }}>{totalConflicts}</span><span style={{ fontFamily: "'DM Mono', monospace", fontSize: 9, color: "#64748b", marginLeft: 4 }}>{t("govGame.conflicts").toLowerCase()}</span></div>
                     </div>
                     <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 8 }}>
                       {[
-                        { label: "Integrity", val: totalScores.integrity, icon: "🎯" },
-                        { label: "Trust", val: totalScores.trust, icon: "👥" },
-                        { label: "Legitimacy", val: totalScores.legitimacy, icon: "⚖️" },
-                        { label: "Rights", val: totalScores.rights, icon: "🛡️" }
+                        { label: t("metricsShort.integrity"), val: totalScores.integrity, icon: "🎯" },
+                        { label: t("metricsShort.trust"), val: totalScores.trust, icon: "👥" },
+                        { label: t("metricsShort.legitimacy"), val: totalScores.legitimacy, icon: "⚖️" },
+                        { label: t("metricsShort.rights"), val: totalScores.rights, icon: "🛡️" }
                       ].map((m, i) => (
                         <div key={i} style={{ fontFamily: "'DM Mono', monospace", fontSize: 11, color: m.val > 0 ? "#10b981" : m.val < 0 ? "#ef4444" : "#64748b" }}>
                           {m.icon} {m.label}: {m.val > 0 ? "+" : ""}{m.val}
@@ -922,7 +922,7 @@ textarea, input { font-family: 'DM Sans', sans-serif; }
                       ))}
                     </div>
                     <div style={{ marginTop: 12, paddingTop: 12, borderTop: "1px solid #1e2533", fontFamily: "'DM Mono', monospace", fontSize: 9, color: "#64748b" }}>
-                      strategy.mobilis.studio — AI Governance Simulation
+                      strategy.mobilis.studio · {t("home.suiteTitle")}
                     </div>
                   </div>
                   <button onClick={copyResult} style={{ width: "100%", padding: "12px", background: copied ? "#10b981" : "#1e293b", color: copied ? "#0c0f14" : "#94a3b8", border: "1px solid #334155", borderRadius: 8, cursor: "pointer", fontFamily: "'Space Mono', monospace", fontSize: 11, fontWeight: 700, letterSpacing: 1, transition: "all 0.3s ease" }}>
@@ -979,12 +979,12 @@ textarea, input { font-family: 'DM Sans', sans-serif; }
                 {/* ─── FACILITATOR CTA ─── */}
                 <div style={{ background: "linear-gradient(135deg, #06b6d411, #a855f711)", border: "1px solid #06b6d433", borderRadius: 12, padding: 20, marginBottom: 20, textAlign: "center" as const }}>
                   <div style={{ fontSize: 28, marginBottom: 8 }}>🎓</div>
-                  <div style={{ fontFamily: "'Instrument Serif', serif", fontSize: 20, color: "#e2e8f0", marginBottom: 8 }}>Run this with your team</div>
+                  <div style={{ fontFamily: "'Instrument Serif', serif", fontSize: 20, color: "#e2e8f0", marginBottom: 8 }}>{t("pacing.runTeam")}</div>
                   <p style={{ color: "#94a3b8", fontSize: 13, lineHeight: 1.6, marginBottom: 12, maxWidth: 480, margin: "0 auto 12px" }}>
-                    These simulations are designed for group workshops. Assign real roles, separate your participants, and discover how your organization thinks about AI governance trade-offs.
+                    {t("pacing.runTeamDesc")}
                   </p>
                   <p style={{ color: "#64748b", fontFamily: "'DM Mono', monospace", fontSize: 10 }}>
-                    Workshop formats available: 15-minute demo · 1-hour session · 2-hour lifecycle arc
+                    {t("pacing.workshopFormats")}
                   </p>
                 </div>
               </>

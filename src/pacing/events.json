@@ -1,0 +1,142 @@
+[
+  {
+    "id": 1,
+    "title": "Automated Lobbying Surge",
+    "description": "AI-generated policy briefs flood your agency. 14,000 unique submissions arrived overnight — each tailored to a different committee member. Your team can't distinguish synthetic from genuine constituent input.",
+    "icon": "📨",
+    "category": "INSTITUTIONAL INTEGRITY",
+    "bandwidthCost": 20,
+    "speedOutcome": {
+      "label": "Fast-Track Filter",
+      "detail": "Deploy AI detection tools immediately. Quick but imperfect — risks flagging legitimate grassroots input and creates an arms race with generators.",
+      "credibility": -8,
+      "capture": 15,
+      "obsolescence": -5,
+      "publicTrust": -5,
+      "headline": "Agency deploys AI filters — civil liberties groups cry foul over false positives blocking real constituent voices."
+    },
+    "rigourOutcome": {
+      "label": "Deliberative Review",
+      "detail": "Convene expert panel to develop comprehensive authentication framework. Thorough but slow — lobbying influence compounds while you deliberate.",
+      "credibility": 10,
+      "capture": -5,
+      "obsolescence": 12,
+      "publicTrust": 5,
+      "headline": "Agency announces 6-month review process. Meanwhile, three major AI bills pass committee shaped primarily by synthetic submissions."
+    },
+    "balancedOutcome": {
+      "label": "Tiered Triage",
+      "detail": "Immediate flagging of obvious synthetic content while launching parallel review. Pragmatic but resource-intensive.",
+      "credibility": 2,
+      "capture": 5,
+      "obsolescence": 3,
+      "publicTrust": 0,
+      "headline": "Agency implements interim measures — effective but straining already-limited staff capacity across other priorities."
+    }
+  },
+  {
+    "id": 2,
+    "title": "Deepfake Election Crisis",
+    "description": "A synthetic video of a presidential candidate endorsing an extremist position goes viral 72 hours before a major election. 40 million views and climbing. News networks are split on authenticity.",
+    "icon": "🎭",
+    "category": "EPISTEMIC SECURITY",
+    "bandwidthCost": 25,
+    "speedOutcome": {
+      "label": "Emergency Takedown Order",
+      "detail": "Issue immediate content removal directive to platforms. Decisive but sets precedent for government-ordered speech suppression — and the Streisand effect may amplify the video.",
+      "credibility": -12,
+      "capture": 10,
+      "obsolescence": -3,
+      "publicTrust": -15,
+      "headline": "Government orders video removal — opposition party alleges censorship. 'Banned' video now shared 3x more on alternative platforms."
+    },
+    "rigourOutcome": {
+      "label": "Forensic Verification Protocol",
+      "detail": "Commission independent forensic analysis and publish findings. Scientifically rigorous but the election may be over before the report drops.",
+      "credibility": 15,
+      "capture": -3,
+      "obsolescence": 15,
+      "publicTrust": 8,
+      "headline": "Forensic report confirms deepfake — published 4 days after election. 23% of voters say the video influenced their decision."
+    },
+    "balancedOutcome": {
+      "label": "Rapid Advisory + Investigation",
+      "detail": "Issue public advisory flagging suspected manipulation while launching fast-track investigation. Transparent but may be seen as prejudging the outcome.",
+      "credibility": 3,
+      "capture": 3,
+      "obsolescence": 5,
+      "publicTrust": -3,
+      "headline": "Agency advisory reaches 12M people but critics question whether flagging before confirmation is itself a form of influence."
+    }
+  },
+  {
+    "id": 3,
+    "title": "Autonomous Hiring Discrimination",
+    "description": "Investigative journalists reveal that an AI hiring system used by 200+ employers has been systematically filtering out candidates from certain demographics. 2.3 million job applications affected over 18 months.",
+    "icon": "⚖️",
+    "category": "CIVIL RIGHTS",
+    "bandwidthCost": 20,
+    "speedOutcome": {
+      "label": "Immediate Moratorium",
+      "detail": "Ban all AI hiring tools pending review. Protective but cripples companies' hiring pipelines and may push systems underground where oversight is impossible.",
+      "credibility": -5,
+      "capture": 5,
+      "obsolescence": -8,
+      "publicTrust": 5,
+      "headline": "AI hiring ban causes chaos — companies report 60% slowdown in recruitment. Some quietly switch to unregulated offshore AI screening tools."
+    },
+    "rigourOutcome": {
+      "label": "Comprehensive Audit Framework",
+      "detail": "Develop mandatory algorithmic impact assessment standards with industry consultation. Gold-standard policy but affected candidates continue to be filtered out during the 14-month process.",
+      "credibility": 12,
+      "capture": -8,
+      "obsolescence": 10,
+      "publicTrust": -5,
+      "headline": "Landmark audit framework published after 14 months. Estimated 800,000 additional applications were filtered during the review period."
+    },
+    "balancedOutcome": {
+      "label": "Targeted Suspension + Fast Audit",
+      "detail": "Suspend the specific system identified while accelerating audit standards. Focused but resource-intensive and other biased systems remain operational.",
+      "credibility": 5,
+      "capture": 0,
+      "obsolescence": 3,
+      "publicTrust": 2,
+      "headline": "One system suspended but investigation reveals 12 similar tools still in use — agency lacks bandwidth to address all simultaneously."
+    }
+  },
+  {
+    "id": 4,
+    "title": "Foundation Model Capability Jump",
+    "description": "A leading AI lab announces a model demonstrating unexpected autonomous planning capabilities. The system can decompose complex goals and execute multi-step strategies without human guidance. International competitors are 6 months behind.",
+    "icon": "🧠",
+    "category": "EXISTENTIAL RISK GOVERNANCE",
+    "bandwidthCost": 30,
+    "speedOutcome": {
+      "label": "Emergency Deployment Restrictions",
+      "detail": "Impose immediate capability restrictions on frontier models. Assertive but risks driving development to less-regulated jurisdictions and may be technically unenforceable.",
+      "credibility": -10,
+      "capture": 8,
+      "obsolescence": -10,
+      "publicTrust": -8,
+      "headline": "US restricts frontier AI — lab announces relocation of advanced research division to Singapore. Allied nations question unilateral action."
+    },
+    "rigourOutcome": {
+      "label": "International Standards Process",
+      "detail": "Initiate multilateral framework for autonomous capability governance through existing international bodies. Legitimate but geopolitical coordination takes years while capabilities advance in months.",
+      "credibility": 12,
+      "capture": -10,
+      "obsolescence": 20,
+      "publicTrust": 5,
+      "headline": "UN working group established with 18-month timeline. Three additional labs achieve autonomous planning capability during negotiations."
+    },
+    "balancedOutcome": {
+      "label": "Bilateral Agreements + Monitoring",
+      "detail": "Negotiate rapid bilateral agreements with key nations while establishing capability monitoring. Practical but incomplete coverage and monitoring tools lag behind capabilities.",
+      "credibility": 4,
+      "capture": 0,
+      "obsolescence": 8,
+      "publicTrust": 0,
+      "headline": "Agreements signed with 4 nations covering 60% of frontier labs. Monitoring regime reveals detection gaps for novel capability types."
+    }
+  }
+]

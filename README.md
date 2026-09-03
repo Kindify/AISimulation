@@ -183,6 +183,9 @@ There is no index to edit. Every folder with a `scenario.json` is picked up auto
 
 Retiring a scenario is a one-line change: set `status` to `archived`. Delete the folder only when you are sure nothing links to it.
 
+### Pacing Problem content
+The four Institutional Stress Test events follow the same pattern: `src/pacing/events.json` (English source) and `src/pacing/fr.json` (overlay, keyed `pacing_event_<id>`). The validator checks them the same way.
+
 ### Bilingual review mode
 The EN/FR toggle appears on the home screen only. To see it on every screen while checking a translation, add `?review=1` to the URL. To share a French link, add `?lang=fr`.
 

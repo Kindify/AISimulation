@@ -1,0 +1,82 @@
+{
+  "pacing_event_1": {
+    "title": "Déferlement de lobbying automatisé",
+    "category": "INTÉGRITÉ INSTITUTIONNELLE",
+    "description": "Des notes d'orientation générées par l'IA inondent votre organisme. 14 000 mémoires uniques sont arrivés pendant la nuit, chacun adapté à un membre de comité différent. Votre équipe n'arrive pas à distinguer les contributions synthétiques des véritables interventions citoyennes.",
+    "speedOutcome": {
+      "label": "Filtre accéléré",
+      "detail": "Déployer immédiatement des outils de détection par l'IA. Rapide mais imparfait : risque de signaler des contributions citoyennes légitimes et déclenche une course aux armements avec les générateurs.",
+      "headline": "L'organisme déploie des filtres d'IA; des groupes de défense des libertés civiles dénoncent les faux positifs qui bloquent de véritables voix citoyennes."
+    },
+    "rigourOutcome": {
+      "label": "Examen délibératif",
+      "detail": "Réunir un comité d'experts pour élaborer un cadre d'authentification complet. Rigoureux mais lent : l'influence du lobbying s'accumule pendant que vous délibérez.",
+      "headline": "L'organisme annonce un processus d'examen de six mois. Entre-temps, trois projets de loi majeurs sur l'IA franchissent l'étape du comité, façonnés surtout par des mémoires synthétiques."
+    },
+    "balancedOutcome": {
+      "label": "Triage par paliers",
+      "detail": "Signaler immédiatement le contenu synthétique évident tout en lançant un examen parallèle. Pragmatique mais exigeant en ressources.",
+      "headline": "L'organisme met en place des mesures provisoires, efficaces mais qui mettent à rude épreuve un personnel déjà limité sur les autres priorités."
+    }
+  },
+  "pacing_event_2": {
+    "title": "Crise électorale d'hypertrucage",
+    "category": "SÉCURITÉ ÉPISTÉMIQUE",
+    "description": "Une vidéo synthétique montrant un candidat à la présidence appuyant une position extrémiste devient virale 72 heures avant une élection majeure. 40 millions de visionnements, et le compteur grimpe. Les réseaux d'information sont divisés sur son authenticité.",
+    "speedOutcome": {
+      "label": "Ordonnance de retrait d'urgence",
+      "detail": "Émettre une directive immédiate de retrait de contenu aux plateformes. Décisif, mais crée un précédent de suppression de la parole ordonnée par l'État, et l'effet Streisand pourrait amplifier la vidéo.",
+      "headline": "Le gouvernement ordonne le retrait de la vidéo; l'opposition crie à la censure. La vidéo « interdite » est maintenant partagée trois fois plus sur les plateformes alternatives."
+    },
+    "rigourOutcome": {
+      "label": "Protocole d'expertise judiciaire",
+      "detail": "Commander une expertise judiciaire indépendante et publier les conclusions. Scientifiquement rigoureux, mais l'élection sera peut-être terminée avant la parution du rapport.",
+      "headline": "Le rapport d'expertise confirme l'hypertrucage, publié quatre jours après l'élection. 23 % des électeurs affirment que la vidéo a influencé leur décision."
+    },
+    "balancedOutcome": {
+      "label": "Avis rapide et enquête",
+      "detail": "Publier un avis public signalant une manipulation présumée tout en lançant une enquête accélérée. Transparent, mais pourrait être perçu comme un préjugement du résultat.",
+      "headline": "L'avis de l'organisme rejoint 12 millions de personnes, mais des critiques se demandent si signaler avant confirmation n'est pas en soi une forme d'influence."
+    }
+  },
+  "pacing_event_3": {
+    "title": "Discrimination à l'embauche automatisée",
+    "category": "DROITS CIVILS",
+    "description": "Des journalistes d'enquête révèlent qu'un système d'embauche par IA utilisé par plus de 200 employeurs a systématiquement écarté des candidats de certains groupes démographiques. 2,3 millions de candidatures touchées sur 18 mois.",
+    "speedOutcome": {
+      "label": "Moratoire immédiat",
+      "detail": "Interdire tous les outils d'embauche par IA en attendant un examen. Protecteur, mais paralyse les processus de recrutement des entreprises et pourrait pousser les systèmes dans la clandestinité, hors de toute surveillance.",
+      "headline": "L'interdiction des outils d'embauche par IA sème le chaos : les entreprises signalent un ralentissement de 60 % du recrutement. Certaines passent discrètement à des outils de présélection étrangers non réglementés."
+    },
+    "rigourOutcome": {
+      "label": "Cadre de vérification complet",
+      "detail": "Élaborer des normes obligatoires d'évaluation de l'incidence algorithmique en consultation avec l'industrie. Politique exemplaire, mais les candidats touchés continuent d'être écartés pendant les 14 mois du processus.",
+      "headline": "Un cadre de vérification historique est publié après 14 mois. On estime que 800 000 candidatures supplémentaires ont été écartées pendant la période d'examen."
+    },
+    "balancedOutcome": {
+      "label": "Suspension ciblée et vérification accélérée",
+      "detail": "Suspendre le système précis mis en cause tout en accélérant les normes de vérification. Ciblé, mais exigeant en ressources, et d'autres systèmes biaisés restent en service.",
+      "headline": "Un système est suspendu, mais l'enquête révèle que 12 outils semblables sont toujours utilisés; l'organisme n'a pas les ressources pour tous les traiter en même temps."
+    }
+  },
+  "pacing_event_4": {
+    "title": "Bond de capacité d'un modèle de fondation",
+    "category": "GOUVERNANCE DES RISQUES EXISTENTIELS",
+    "description": "Un grand laboratoire d'IA annonce un modèle doté de capacités inattendues de planification autonome. Le système peut décomposer des objectifs complexes et exécuter des stratégies en plusieurs étapes sans supervision humaine. Les concurrents internationaux ont six mois de retard.",
+    "speedOutcome": {
+      "label": "Restrictions de déploiement d'urgence",
+      "detail": "Imposer immédiatement des restrictions de capacité aux modèles de pointe. Ferme, mais risque de déplacer le développement vers des juridictions moins réglementées et pourrait être techniquement inapplicable.",
+      "headline": "Les États-Unis restreignent l'IA de pointe; le laboratoire annonce le déménagement de sa division de recherche avancée à Singapour. Les pays alliés remettent en question l'action unilatérale."
+    },
+    "rigourOutcome": {
+      "label": "Processus de normes internationales",
+      "detail": "Lancer un cadre multilatéral de gouvernance des capacités autonomes par l'entremise des organismes internationaux existants. Légitime, mais la coordination géopolitique prend des années alors que les capacités progressent en quelques mois.",
+      "headline": "Un groupe de travail de l'ONU est créé avec un échéancier de 18 mois. Trois autres laboratoires atteignent la capacité de planification autonome pendant les négociations."
+    },
+    "balancedOutcome": {
+      "label": "Ententes bilatérales et surveillance",
+      "detail": "Négocier rapidement des ententes bilatérales avec les pays clés tout en mettant en place une surveillance des capacités. Pratique, mais la couverture est incomplète et les outils de surveillance accusent du retard sur les capacités.",
+      "headline": "Ententes signées avec quatre pays couvrant 60 % des laboratoires de pointe. Le régime de surveillance révèle des lacunes de détection pour les nouveaux types de capacités."
+    }
+  }
+}

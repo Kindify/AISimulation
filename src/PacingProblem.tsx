@@ -2,113 +2,7 @@ import { useState, useEffect, useCallback } from "react";
 import { useT } from "./useT";
 import { track } from "./analytics";
 import LanguageToggle from "./LanguageToggle";
-
-const EVENTS = [
-  {
-    id: 1,
-    title: "Automated Lobbying Surge",
-    description: "AI-generated policy briefs flood your agency. 14,000 unique submissions arrived overnight — each tailored to a different committee member. Your team can't distinguish synthetic from genuine constituent input.",
-    icon: "📨",
-    category: "INSTITUTIONAL INTEGRITY",
-    bandwidthCost: 20,
-    speedOutcome: {
-      label: "Fast-Track Filter",
-      detail: "Deploy AI detection tools immediately. Quick but imperfect — risks flagging legitimate grassroots input and creates an arms race with generators.",
-      credibility: -8, capture: 15, obsolescence: -5, publicTrust: -5,
-      headline: "Agency deploys AI filters — civil liberties groups cry foul over false positives blocking real constituent voices."
-    },
-    rigourOutcome: {
-      label: "Deliberative Review",
-      detail: "Convene expert panel to develop comprehensive authentication framework. Thorough but slow — lobbying influence compounds while you deliberate.",
-      credibility: 10, capture: -5, obsolescence: 12, publicTrust: 5,
-      headline: "Agency announces 6-month review process. Meanwhile, three major AI bills pass committee shaped primarily by synthetic submissions."
-    },
-    balancedOutcome: {
-      label: "Tiered Triage",
-      detail: "Immediate flagging of obvious synthetic content while launching parallel review. Pragmatic but resource-intensive.",
-      credibility: 2, capture: 5, obsolescence: 3, publicTrust: 0,
-      headline: "Agency implements interim measures — effective but straining already-limited staff capacity across other priorities."
-    }
-  },
-  {
-    id: 2,
-    title: "Deepfake Election Crisis",
-    description: "A synthetic video of a presidential candidate endorsing an extremist position goes viral 72 hours before a major election. 40 million views and climbing. News networks are split on authenticity.",
-    icon: "🎭",
-    category: "EPISTEMIC SECURITY",
-    bandwidthCost: 25,
-    speedOutcome: {
-      label: "Emergency Takedown Order",
-      detail: "Issue immediate content removal directive to platforms. Decisive but sets precedent for government-ordered speech suppression — and the Streisand effect may amplify the video.",
-      credibility: -12, capture: 10, obsolescence: -3, publicTrust: -15,
-      headline: "Government orders video removal — opposition party alleges censorship. 'Banned' video now shared 3x more on alternative platforms."
-    },
-    rigourOutcome: {
-      label: "Forensic Verification Protocol",
-      detail: "Commission independent forensic analysis and publish findings. Scientifically rigorous but the election may be over before the report drops.",
-      credibility: 15, capture: -3, obsolescence: 15, publicTrust: 8,
-      headline: "Forensic report confirms deepfake — published 4 days after election. 23% of voters say the video influenced their decision."
-    },
-    balancedOutcome: {
-      label: "Rapid Advisory + Investigation",
-      detail: "Issue public advisory flagging suspected manipulation while launching fast-track investigation. Transparent but may be seen as prejudging the outcome.",
-      credibility: 3, capture: 3, obsolescence: 5, publicTrust: -3,
-      headline: "Agency advisory reaches 12M people but critics question whether flagging before confirmation is itself a form of influence."
-    }
-  },
-  {
-    id: 3,
-    title: "Autonomous Hiring Discrimination",
-    description: "Investigative journalists reveal that an AI hiring system used by 200+ employers has been systematically filtering out candidates from certain demographics. 2.3 million job applications affected over 18 months.",
-    icon: "⚖️",
-    category: "CIVIL RIGHTS",
-    bandwidthCost: 20,
-    speedOutcome: {
-      label: "Immediate Moratorium",
-      detail: "Ban all AI hiring tools pending review. Protective but cripples companies' hiring pipelines and may push systems underground where oversight is impossible.",
-      credibility: -5, capture: 5, obsolescence: -8, publicTrust: 5,
-      headline: "AI hiring ban causes chaos — companies report 60% slowdown in recruitment. Some quietly switch to unregulated offshore AI screening tools."
-    },
-    rigourOutcome: {
-      label: "Comprehensive Audit Framework",
-      detail: "Develop mandatory algorithmic impact assessment standards with industry consultation. Gold-standard policy but affected candidates continue to be filtered out during the 14-month process.",
-      credibility: 12, capture: -8, obsolescence: 10, publicTrust: -5,
-      headline: "Landmark audit framework published after 14 months. Estimated 800,000 additional applications were filtered during the review period."
-    },
-    balancedOutcome: {
-      label: "Targeted Suspension + Fast Audit",
-      detail: "Suspend the specific system identified while accelerating audit standards. Focused but resource-intensive and other biased systems remain operational.",
-      credibility: 5, capture: 0, obsolescence: 3, publicTrust: 2,
-      headline: "One system suspended but investigation reveals 12 similar tools still in use — agency lacks bandwidth to address all simultaneously."
-    }
-  },
-  {
-    id: 4,
-    title: "Foundation Model Capability Jump",
-    description: "A leading AI lab announces a model demonstrating unexpected autonomous planning capabilities. The system can decompose complex goals and execute multi-step strategies without human guidance. International competitors are 6 months behind.",
-    icon: "🧠",
-    category: "EXISTENTIAL RISK GOVERNANCE",
-    bandwidthCost: 30,
-    speedOutcome: {
-      label: "Emergency Deployment Restrictions",
-      detail: "Impose immediate capability restrictions on frontier models. Assertive but risks driving development to less-regulated jurisdictions and may be technically unenforceable.",
-      credibility: -10, capture: 8, obsolescence: -10, publicTrust: -8,
-      headline: "US restricts frontier AI — lab announces relocation of advanced research division to Singapore. Allied nations question unilateral action."
-    },
-    rigourOutcome: {
-      label: "International Standards Process",
-      detail: "Initiate multilateral framework for autonomous capability governance through existing international bodies. Legitimate but geopolitical coordination takes years while capabilities advance in months.",
-      credibility: 12, capture: -10, obsolescence: 20, publicTrust: 5,
-      headline: "UN working group established with 18-month timeline. Three additional labs achieve autonomous planning capability during negotiations."
-    },
-    balancedOutcome: {
-      label: "Bilateral Agreements + Monitoring",
-      detail: "Negotiate rapid bilateral agreements with key nations while establishing capability monitoring. Practical but incomplete coverage and monitoring tools lag behind capabilities.",
-      credibility: 4, capture: 0, obsolescence: 8, publicTrust: 0,
-      headline: "Agreements signed with 4 nations covering 60% of frontier labs. Monitoring regime reveals detection gaps for novel capability types."
-    }
-  }
-];
+import { EVENTS } from "./pacing";
 
 const clamp = (v: number, min: number, max: number) => Math.max(min, Math.min(max, v));
 
@@ -130,17 +24,18 @@ function GaugeBar({ label, value, color, icon, subtitle }: any) {
   );
 }
 
-function SpectrumSlider({ value, onChange, disabled }: any) {
+function SpectrumSlider({ value, onChange, disabled }: { value: number; onChange: (v: number) => void; disabled: boolean }) {
+  const { t } = useT();
   return (
     <div style={{ margin: "20px 0" }}>
       <div style={{ display: "flex", justifyContent: "space-between", marginBottom: 8 }}>
         <div style={{ textAlign: "left" as const }}>
-          <div style={{ fontFamily: "'Space Mono', monospace", fontSize: 12, fontWeight: 700, color: "#f97316", letterSpacing: 1 }}>⚡ SPEED</div>
-          <div style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 10, color: "#64748b", marginTop: 2 }}>Act fast, risk capture</div>
+          <div style={{ fontFamily: "'Space Mono', monospace", fontSize: 12, fontWeight: 700, color: "#f97316", letterSpacing: 1 }}>{t("pacing.speedLabel")}</div>
+          <div style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 10, color: "#64748b", marginTop: 2 }}>{t("pacing.actFast")}</div>
         </div>
         <div style={{ textAlign: "right" as const }}>
-          <div style={{ fontFamily: "'Space Mono', monospace", fontSize: 12, fontWeight: 700, color: "#3b82f6", letterSpacing: 1 }}>RIGOUR 🔬</div>
-          <div style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 10, color: "#64748b", marginTop: 2 }}>Be thorough, risk obsolescence</div>
+          <div style={{ fontFamily: "'Space Mono', monospace", fontSize: 12, fontWeight: 700, color: "#3b82f6", letterSpacing: 1 }}>{t("pacing.rigourLabel")}</div>
+          <div style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 10, color: "#64748b", marginTop: 2 }}>{t("pacing.beThorough")}</div>
         </div>
       </div>
       <div style={{ position: "relative" as const, padding: "8px 0" }}>
@@ -149,7 +44,7 @@ function SpectrumSlider({ value, onChange, disabled }: any) {
           style={{ width: "100%", position: "relative" as const, zIndex: 1, appearance: "none" as any, background: "transparent", cursor: disabled ? "not-allowed" : "pointer", height: 24 }} />
       </div>
       <div style={{ textAlign: "center" as const, fontFamily: "'Space Mono', monospace", fontSize: 13, fontWeight: 700, marginTop: 4, color: value < 35 ? "#f97316" : value > 65 ? "#3b82f6" : "#a855f7" }}>
-        {value < 35 ? "SPEED-BIASED" : value > 65 ? "RIGOUR-BIASED" : "BALANCED"} ({value})
+        {value < 35 ? t("pacing.speedBiased") : value > 65 ? t("pacing.rigourBiased") : t("pacing.balanced")} ({value})
       </div>
     </div>
   );
@@ -187,9 +82,9 @@ export default function PacingProblem({ onBack }: { onBack: () => void }) {
 
   const getStatusLabel = (v: number, metric: string) => {
     if (metric === "captureRisk" || metric === "obsolescenceRisk") {
-      if (v >= 70) return "CRITICAL"; if (v >= 45) return "ELEVATED"; if (v >= 25) return "MODERATE"; return "LOW";
+      if (v >= 70) return t("pacing.status.critical"); if (v >= 45) return t("pacing.status.elevated"); if (v >= 25) return t("pacing.status.moderate"); return t("pacing.status.low");
     }
-    if (v >= 70) return "STRONG"; if (v >= 45) return "STABLE"; if (v >= 25) return "STRAINED"; return "CRITICAL";
+    if (v >= 70) return t("pacing.status.strong"); if (v >= 45) return t("pacing.status.stable"); if (v >= 25) return t("pacing.status.strained"); return t("pacing.status.critical");
   };
 
   const submitChoice = useCallback(() => {
@@ -333,12 +228,12 @@ export default function PacingProblem({ onBack }: { onBack: () => void }) {
     const rigourChoices = state.history.filter(h => h.bias === "rigour").length;
     const balancedChoices = state.history.filter(h => h.bias === "balanced").length;
 
-    let archetype, archetypeDesc, archetypeColor;
-    if (state.captureRisk >= 60) { archetype = "The Captured Regulator"; archetypeDesc = "Your institution became an extension of the industries it was meant to oversee. Speed without sufficient safeguards eroded independence. This mirrors real patterns seen in financial regulation pre-2008 and telecom oversight in the 1990s."; archetypeColor = "#ef4444"; }
-    else if (state.obsolescenceRisk >= 60) { archetype = "The Museum Piece"; archetypeDesc = "Your institution produced excellent analysis that arrived too late to matter. By the time your frameworks were published, the technology had moved on. This is the trajectory of many international standards bodies confronting rapid technological change."; archetypeColor = "#3b82f6"; }
-    else if (state.publicTrust <= 25) { archetype = "The Discredited Authority"; archetypeDesc = "Your institution lost the public mandate needed to govern effectively. Without democratic legitimacy, even good policy can't be implemented. This reflects the challenge facing institutions like the WHO during contested crises."; archetypeColor = "#f59e0b"; }
-    else if (state.credibility >= 50 && state.captureRisk < 40 && state.obsolescenceRisk < 40) { archetype = "The Adaptive Institution"; archetypeDesc = "You managed the impossible balance — maintaining enough speed to stay relevant while preserving enough rigour to stay credible. This is rare in practice, but institutions like DARPA and certain central banks have achieved it in narrow domains."; archetypeColor = "#10b981"; }
-    else { archetype = "The Muddling Through"; archetypeDesc = "You avoided catastrophic failure but accumulated damage on all fronts. This is the most common real-world outcome — institutions that survive but gradually lose effectiveness. Reform becomes harder the longer this state persists."; archetypeColor = "#a855f7"; }
+    let archetype: string, archetypeDesc: string, archetypeColor: string, archetypeKey: string;
+    if (state.captureRisk >= 60) { archetypeKey = "captured"; archetype = "The Captured Regulator"; archetypeDesc = "Your institution became an extension of the industries it was meant to oversee. Speed without sufficient safeguards eroded independence. This mirrors real patterns seen in financial regulation pre-2008 and telecom oversight in the 1990s."; archetypeColor = "#ef4444"; }
+    else if (state.obsolescenceRisk >= 60) { archetypeKey = "museum"; archetype = "The Museum Piece"; archetypeDesc = "Your institution produced excellent analysis that arrived too late to matter. By the time your frameworks were published, the technology had moved on. This is the trajectory of many international standards bodies confronting rapid technological change."; archetypeColor = "#3b82f6"; }
+    else if (state.publicTrust <= 25) { archetypeKey = "discredited"; archetype = "The Discredited Authority"; archetypeDesc = "Your institution lost the public mandate needed to govern effectively. Without democratic legitimacy, even good policy can't be implemented. This reflects the challenge facing institutions like the WHO during contested crises."; archetypeColor = "#f59e0b"; }
+    else if (state.credibility >= 50 && state.captureRisk < 40 && state.obsolescenceRisk < 40) { archetypeKey = "adaptive"; archetype = "The Adaptive Institution"; archetypeDesc = "You managed the impossible balance — maintaining enough speed to stay relevant while preserving enough rigour to stay credible. This is rare in practice, but institutions like DARPA and certain central banks have achieved it in narrow domains."; archetypeColor = "#10b981"; }
+    else { archetypeKey = "muddling"; archetype = "The Muddling Through"; archetypeDesc = "You avoided catastrophic failure but accumulated damage on all fronts. This is the most common real-world outcome — institutions that survive but gradually lose effectiveness. Reform becomes harder the longer this state persists."; archetypeColor = "#a855f7"; }
 
     const resultText = [
       `🏛️ INSTITUTIONAL STRESS TEST — The Pacing Problem Simulator`,
@@ -404,17 +299,17 @@ export default function PacingProblem({ onBack }: { onBack: () => void }) {
         <div style={{ maxWidth: 680, margin: "0 auto" }}>
           <div style={{ background: "#141820", border: `1px solid ${archetypeColor}33`, borderRadius: 12, padding: 32, marginBottom: 20, animation: "fadeUp 0.5s ease forwards" }}>
             <div style={{ fontFamily: "'Space Mono', monospace", fontSize: 10, letterSpacing: 3, color: archetypeColor, marginBottom: 8 }}>{t("pacing.institutionalOutcome")}</div>
-            <h2 style={{ fontFamily: "'Instrument Serif', serif", fontSize: 32, fontWeight: 400, color: archetypeColor, marginBottom: 12 }}>{archetype}</h2>
-            <p style={{ color: "#94a3b8", lineHeight: 1.7, fontSize: 14 }}>{archetypeDesc}</p>
+            <h2 style={{ fontFamily: "'Instrument Serif', serif", fontSize: 32, fontWeight: 400, color: archetypeColor, marginBottom: 12 }}>{t(`pacing.archetypes.${archetypeKey}.name`, archetype)}</h2>
+            <p style={{ color: "#94a3b8", lineHeight: 1.7, fontSize: 14 }}>{t(`pacing.archetypes.${archetypeKey}.desc`, archetypeDesc)}</p>
           </div>
           <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12, marginBottom: 20 }}>
             <div style={{ background: "#141820", border: "1px solid #1e2533", borderRadius: 12, padding: 20 }}>
               <div style={{ fontFamily: "'Space Mono', monospace", fontSize: 10, letterSpacing: 2, color: "#64748b", marginBottom: 12 }}>{t("pacing.finalMetrics")}</div>
-              <GaugeBar label="Bandwidth" value={state.bandwidth} color="#10b981" icon="📊" />
-              <GaugeBar label="Credibility" value={state.credibility} color="#f59e0b" icon="🏛️" />
-              <GaugeBar label="Public Trust" value={state.publicTrust} color="#3b82f6" icon="👥" />
-              <GaugeBar label="Capture Risk" value={state.captureRisk} color="#ef4444" icon="🎯" />
-              <GaugeBar label="Obsolescence" value={state.obsolescenceRisk} color="#8b5cf6" icon="⏳" />
+              <GaugeBar label={t("pacing.bandwidth")} value={state.bandwidth} color="#10b981" icon="📊" />
+              <GaugeBar label={t("pacing.credibility")} value={state.credibility} color="#f59e0b" icon="🏛️" />
+              <GaugeBar label={t("pacing.publicTrust")} value={state.publicTrust} color="#3b82f6" icon="👥" />
+              <GaugeBar label={t("pacing.captureRisk")} value={state.captureRisk} color="#ef4444" icon="🎯" />
+              <GaugeBar label={t("pacing.obsolescence")} value={state.obsolescenceRisk} color="#8b5cf6" icon="⏳" />
             </div>
             <div style={{ background: "#141820", border: "1px solid #1e2533", borderRadius: 12, padding: 20 }}>
               <div style={{ fontFamily: "'Space Mono', monospace", fontSize: 10, letterSpacing: 2, color: "#64748b", marginBottom: 12 }}>{t("pacing.decisionPattern")}</div>
@@ -443,7 +338,7 @@ export default function PacingProblem({ onBack }: { onBack: () => void }) {
           <div style={{ background: "#141820", border: "1px solid #1e2533", borderRadius: 12, padding: 24, marginBottom: 20 }}>
             <div style={{ fontFamily: "'Space Mono', monospace", fontSize: 10, letterSpacing: 2, color: "#f97316", marginBottom: 10 }}>{t("pacing.coreInsight")}</div>
             <p style={{ color: "#94a3b8", lineHeight: 1.8, fontSize: 14 }}>
-              The pacing problem is not a puzzle to solve — it's a tension to manage. Every institution faces the same fundamental trade-off: act quickly enough to matter, or carefully enough to be right. The simulation demonstrates why "just regulate AI" is insufficient as a strategy. The <em style={{ color: "#e2e8f0" }}>how</em> of governance matters as much as the <em style={{ color: "#e2e8f0" }}>whether</em>, and the costs of both action and inaction are real and measurable.
+              {t("pacing.coreInsightP1")} <em style={{ color: "#e2e8f0" }}>{t("pacing.coreInsightHow")}</em> {t("pacing.coreInsightP2")} <em style={{ color: "#e2e8f0" }}>{t("pacing.coreInsightWhether")}</em>{t("pacing.coreInsightP3")}
             </p>
           </div>
 
@@ -529,12 +424,12 @@ export default function PacingProblem({ onBack }: { onBack: () => void }) {
           {/* ─── FACILITATOR CTA ─── */}
           <div style={{ background: "linear-gradient(135deg, #f9731611, #06b6d411)", border: "1px solid #f9731633", borderRadius: 12, padding: 20, marginBottom: 20, textAlign: "center" as const }}>
             <div style={{ fontSize: 28, marginBottom: 8 }}>🎓</div>
-            <div style={{ fontFamily: "'Instrument Serif', serif", fontSize: 20, color: "#e2e8f0", marginBottom: 8 }}>Run this with your team</div>
+            <div style={{ fontFamily: "'Instrument Serif', serif", fontSize: 20, color: "#e2e8f0", marginBottom: 8 }}>{t("pacing.runTeam")}</div>
             <p style={{ color: "#94a3b8", fontSize: 13, lineHeight: 1.6, marginBottom: 12, maxWidth: 480, margin: "0 auto 12px" }}>
-              These simulations are designed for group workshops. Assign real roles, separate your participants, and discover how your organization thinks about AI governance trade-offs.
+              {t("pacing.runTeamDesc")}
             </p>
             <p style={{ color: "#64748b", fontFamily: "'DM Mono', monospace", fontSize: 10 }}>
-              Workshop formats available: 15-minute demo · 1-hour session · 2-hour lifecycle arc
+              {t("pacing.workshopFormats")}
             </p>
           </div>
 
@@ -564,17 +459,17 @@ export default function PacingProblem({ onBack }: { onBack: () => void }) {
         <div>
           <div style={{ background: "#141820", border: "1px solid #1e2533", borderRadius: 12, padding: 20, position: "sticky" as const, top: 24 }}>
             <div style={{ fontFamily: "'Space Mono', monospace", fontSize: 10, letterSpacing: 2, color: "#64748b", marginBottom: 16 }}>{t("pacing.institutionalHealth")}</div>
-            <GaugeBar label="Bandwidth" value={state.bandwidth} color="#10b981" icon="📊" subtitle={getStatusLabel(state.bandwidth, "bandwidth")} />
-            <GaugeBar label="Credibility" value={state.credibility} color="#f59e0b" icon="🏛️" subtitle={getStatusLabel(state.credibility, "credibility")} />
-            <GaugeBar label="Public Trust" value={state.publicTrust} color="#3b82f6" icon="👥" subtitle={getStatusLabel(state.publicTrust, "publicTrust")} />
+            <GaugeBar label={t("pacing.bandwidth")} value={state.bandwidth} color="#10b981" icon="📊" subtitle={getStatusLabel(state.bandwidth, "bandwidth")} />
+            <GaugeBar label={t("pacing.credibility")} value={state.credibility} color="#f59e0b" icon="🏛️" subtitle={getStatusLabel(state.credibility, "credibility")} />
+            <GaugeBar label={t("pacing.publicTrust")} value={state.publicTrust} color="#3b82f6" icon="👥" subtitle={getStatusLabel(state.publicTrust, "publicTrust")} />
             <div style={{ borderTop: "1px solid #1e2533", marginTop: 12, paddingTop: 12 }}>
               <div style={{ fontFamily: "'Space Mono', monospace", fontSize: 10, letterSpacing: 2, color: "#ef4444", marginBottom: 12 }}>⚠ {t("pacing.threatLevels")}</div>
-              <GaugeBar label="Capture Risk" value={state.captureRisk} color="#ef4444" icon="🎯" subtitle={getStatusLabel(state.captureRisk, "captureRisk")} />
-              <GaugeBar label="Obsolescence" value={state.obsolescenceRisk} color="#8b5cf6" icon="⏳" subtitle={getStatusLabel(state.obsolescenceRisk, "obsolescenceRisk")} />
+              <GaugeBar label={t("pacing.captureRisk")} value={state.captureRisk} color="#ef4444" icon="🎯" subtitle={getStatusLabel(state.captureRisk, "captureRisk")} />
+              <GaugeBar label={t("pacing.obsolescence")} value={state.obsolescenceRisk} color="#8b5cf6" icon="⏳" subtitle={getStatusLabel(state.obsolescenceRisk, "obsolescenceRisk")} />
             </div>
             {state.history.length > 0 && (
               <div style={{ borderTop: "1px solid #1e2533", marginTop: 12, paddingTop: 12 }}>
-                <div style={{ fontFamily: "'DM Mono', monospace", fontSize: 10, color: "#64748b", marginBottom: 6 }}>PAST DECISIONS</div>
+                <div style={{ fontFamily: "'DM Mono', monospace", fontSize: 10, color: "#64748b", marginBottom: 6 }}>{t("pacing.pastDecisions")}</div>
                 {state.history.map((h, i) => (
                   <div key={i} style={{ display: "flex", alignItems: "center", gap: 6, marginBottom: 4 }}>
                     <span style={{ fontSize: 10 }}>{h.bias === "speed" ? "⚡" : h.bias === "rigour" ? "🔬" : "⚖️"}</span>
@@ -592,7 +487,7 @@ export default function PacingProblem({ onBack }: { onBack: () => void }) {
                 <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 16 }}>
                   <span style={{ fontSize: 32 }}>{ev.icon}</span>
                   <div>
-                    <div style={{ fontFamily: "'Space Mono', monospace", fontSize: 10, letterSpacing: 2, color: "#f97316" }}>{ev.category}</div>
+                    <div style={{ fontFamily: "'Space Mono', monospace", fontSize: 10, letterSpacing: 2, color: "#f97316" }}>{t(`scenarios.pacing_event_${ev.id}.category`, ev.category)}</div>
                     <h2 style={{ fontFamily: "'Instrument Serif', serif", fontSize: 24, fontWeight: 400 }}>{t(`scenarios.pacing_event_${ev.id}.title`, ev.title)}</h2>
                   </div>
                 </div>

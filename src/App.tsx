@@ -149,7 +149,7 @@ function Home({ onSelect }: { onSelect: (tool: string) => void }) {
                 {t("home.theoryP3a")}<strong style={{ color: "#e2e8f0" }}>{t("home.theoryP3b")}</strong>{t("home.theoryP3c")}
               </p>
               <div style={{ marginTop: 18, display: "flex", gap: 8, flexWrap: "wrap" as const }}>
-                {["Individual trade-off reasoning", "Coordination under asymmetric information", "Institutional incentive structures", "Post-catastrophe accountability"].map(tag => (
+                {[t("home.theoryTag1"), t("home.theoryTag2"), t("home.theoryTag3"), t("home.theoryTag4")].map(tag => (
                   <span key={tag} style={{ fontFamily: "'DM Mono', monospace", fontSize: 10, color: "#64748b", background: "#1e293b", padding: "4px 10px", borderRadius: 4 }}>{tag}</span>
                 ))}
               </div>

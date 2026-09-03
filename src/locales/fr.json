@@ -40,7 +40,11 @@
     "tagHealth": "Indicateurs de santé institutionnelle",
     "tag6crises": "6 scénarios de crise",
     "tag4roles": "4 rôles institutionnels",
-    "tagCoord": "Note de coordination + contrefactuels"
+    "tagCoord": "Note de coordination + contrefactuels",
+    "theoryTag1": "Raisonnement individuel sur les arbitrages",
+    "theoryTag2": "Coordination en information asymétrique",
+    "theoryTag3": "Structures d'incitatifs institutionnels",
+    "theoryTag4": "Reddition de comptes après une catastrophe"
   },
   "quickPlay": {
     "title": "JEU RAPIDE",
@@ -139,7 +143,43 @@
     "runTeam": "Animez cet atelier avec votre équipe",
     "runTeamDesc": "Ces simulations sont conçues pour des ateliers de groupe. Attribuez de vrais rôles, séparez vos participants et découvrez comment votre organisation aborde les arbitrages liés à la gouvernance de l'IA.",
     "workshopFormats": "Formats d'atelier disponibles : démo de 15 min · séance de 1 h · parcours complet de 2 h",
-    "homeArrow": "← ACCUEIL"
+    "homeArrow": "← ACCUEIL",
+    "status": {
+      "critical": "CRITIQUE",
+      "elevated": "ÉLEVÉ",
+      "moderate": "MODÉRÉ",
+      "low": "FAIBLE",
+      "strong": "SOLIDE",
+      "stable": "STABLE",
+      "strained": "FRAGILISÉ"
+    },
+    "coreInsightP1": "Le défi du rythme n'est pas une énigme à résoudre. C'est une tension à gérer. Chaque institution fait face au même arbitrage fondamental : agir assez vite pour compter, ou assez soigneusement pour avoir raison. La simulation montre pourquoi « il suffit de réglementer l'IA » est une stratégie insuffisante. Le",
+    "coreInsightHow": "comment",
+    "coreInsightP2": "de la gouvernance compte autant que le",
+    "coreInsightWhether": "si",
+    "coreInsightP3": ", et les coûts de l'action comme de l'inaction sont réels et mesurables.",
+    "archetypes": {
+      "captured": {
+        "name": "Le régulateur capturé",
+        "desc": "Votre institution est devenue le prolongement des industries qu'elle devait surveiller. La rapidité sans garde-fous suffisants a érodé son indépendance. Cela reflète des schémas réels observés dans la réglementation financière avant 2008 et la surveillance des télécommunications dans les années 1990."
+      },
+      "museum": {
+        "name": "La pièce de musée",
+        "desc": "Votre institution a produit d'excellentes analyses, arrivées trop tard pour compter. Au moment où vos cadres ont été publiés, la technologie était déjà passée à autre chose. C'est la trajectoire de nombreux organismes de normalisation internationaux confrontés à des changements technologiques rapides."
+      },
+      "discredited": {
+        "name": "L'autorité discréditée",
+        "desc": "Votre institution a perdu le mandat public nécessaire pour gouverner efficacement. Sans légitimité démocratique, même une bonne politique ne peut être mise en œuvre. Cela reflète le défi auquel font face des institutions comme l'OMS lors de crises contestées."
+      },
+      "adaptive": {
+        "name": "L'institution adaptative",
+        "desc": "Vous avez réussi l'équilibre impossible : assez de rapidité pour rester pertinent, assez de rigueur pour rester crédible. C'est rare en pratique, mais des institutions comme la DARPA et certaines banques centrales y sont parvenues dans des domaines étroits."
+      },
+      "muddling": {
+        "name": "La navigation à vue",
+        "desc": "Vous avez évité l'échec catastrophique mais accumulé des dommages sur tous les fronts. C'est le résultat le plus courant dans la réalité : des institutions qui survivent mais perdent graduellement leur efficacité. La réforme devient plus difficile à mesure que cet état persiste."
+      }
+    }
   },
   "govGame": {
     "title": "Le jeu de la gouvernance de l'IA",
@@ -208,11 +248,26 @@
     "basedOnReporting": "Fondé sur des reportages publics en date du",
     "lastReviewed": "Contenu révisé le",
     "sources": "Sources",
-    "scoringNote": "POINTAGE : Chaque option décrit la tension qu’elle comporte. Vos choix individuels comptent, mais ce sont les interactions entre les rôles qui produisent les plus grands écarts, en bien comme en mal.",
+    "scoringNote": "POINTAGE : Chaque option décrit la tension qu'elle comporte. Vos choix individuels comptent, mais ce sont les interactions entre les rôles qui produisent les plus grands écarts, en bien comme en mal.",
     "roadmapTitle": "FEUILLE DE ROUTE MULTIJOUEUR",
-    "roadmapDesc": "Prochaine étape : jouer un scénario en équipe à partir d’appareils distincts, à votre rythme, avec une courte déclaration publique de chaque rôle avant que quiconque s’engage, et une page de révélation partagée à laquelle revenir pour le bilan.",
+    "roadmapDesc": "Prochaine étape : jouer un scénario en équipe à partir d'appareils distincts, à votre rythme, avec une courte déclaration publique de chaque rôle avant que quiconque s'engage, et une page de révélation partagée à laquelle revenir pour le bilan.",
     "forFacilitatorsTitle": "POUR LES ANIMATEURS",
-    "forFacilitatorsDesc": "Attribuez un rôle à chaque participant et séparez-les physiquement. Accordez 3 minutes pour lire les renseignements et décider. Réunissez tout le monde pour la révélation. L’analyse « et si » rend la discussion du bilan concrète."
+    "forFacilitatorsDesc": "Attribuez un rôle à chaque participant et séparez-les physiquement. Accordez 3 minutes pour lire les renseignements et décider. Réunissez tout le monde pour la révélation. L'analyse « et si » rend la discussion du bilan concrète.",
+    "introP1": "La gouvernance de l'IA ne repose sur aucune institution en particulier. La question est de savoir si plusieurs acteurs disposant d'une information asymétrique (chacun sait des choses que les autres ignorent), d'incitatifs différents et d'horizons temporels différents peuvent agir de façon cohérente sous pression.",
+    "howItWorksP1a": "Une crise se déclenche. Vous endossez quatre rôles institutionnels, chacun disposant de ",
+    "howItWorksP1b": "renseignements privés",
+    "howItWorksP1c": " que les autres ne voient pas. Engagez la décision de chaque rôle à l'aveugle, puis découvrez comment vos choix ",
+    "howItWorksP1d": "interagissent",
+    "howScoringWorks": "COMMENT FONCTIONNE LE POINTAGE",
+    "scoringP1a": "Votre résultat est mesuré selon quatre indicateurs. Le choix individuel de chaque rôle influe sur les quatre, mais ce sont les ",
+    "scoringP1b": "interactions entre les rôles",
+    "scoringP1c": " qui produisent les plus grands écarts. Une seule synergie (deux actions qui ont amplifié leurs effets positifs mutuels) ou un seul conflit (deux actions qui se sont nui l'une à l'autre, aggravant la situation) peut l'emporter sur n'importe quelle décision individuelle. Votre note de coordination, qui mesure à quel point les actions institutionnelles se sont renforcées ou minées mutuellement, est déterminée par l'équilibre de ces interactions.",
+    "scoringKey": "À RETENIR : Chaque option décrit la tension qu'elle comporte (ce qu'elle protège et ce qu'elle risque). La note de coordination dépend du nombre de synergies par rapport aux conflits que vos choix combinés déclenchent.",
+    "publicBriefing": "BRIEFING PUBLIC : TOUS LES ACTEURS",
+    "coreInsightTitle": "L'ENSEIGNEMENT CLÉ",
+    "coreInsightP1a": "Le problème le plus difficile en gouvernance de l'IA n'est pas de prendre de bonnes décisions individuelles. C'est de prendre des décisions qui ",
+    "coreInsightP1b": "se composent bien",
+    "coreInsightP1c": " entre des institutions disposant d'une information asymétrique et d'incitatifs contradictoires. L'architecture de coordination, c'est-à-dire les canaux par lesquels les institutions partagent l'information et alignent leurs actions, détermine si de bonnes décisions individuelles produisent de bons résultats collectifs."
   },
   "metrics": {
     "integrity": "Intégrité de l'information",
@@ -243,7 +298,9 @@
   "share": {
     "shareResult": "PARTAGER VOTRE RÉSULTAT",
     "copiedToClipboard": "COPIÉ DANS LE PRESSE-PAPIERS",
-    "copyResult": "COPIER LE RÉSULTAT POUR PARTAGER"
+    "copyResult": "COPIER LE RÉSULTAT POUR PARTAGER",
+    "myArchetype": "MON ARCHÉTYPE INSTITUTIONNEL",
+    "grade": "NOTE"
   },
   "roles": {
     "regulator": {
@@ -306,5 +363,17 @@
     "insteadOf": "au lieu de",
     "overall": "global",
     "gradeChange": "Note"
+  },
+  "metricsDesc": {
+    "integrity": "L'information exacte a-t-elle atteint le public à temps pour compter? Mesure si la réponse collective a amélioré ou dégradé l'environnement informationnel.",
+    "trust": "Le public fait-il plus ou moins confiance aux institutions après cette réponse? Elle est érodée par les dissimulations perçues, les excès ou l'incompétence; elle se rebâtit lentement par la transparence et la constance.",
+    "legitimacy": "Les institutions ont-elles agi dans les limites de leur mandat et respecté la procédure? Une légitimité élevée signifie que les actions résisteront aux contestations judiciaires et créeront de bons précédents.",
+    "rights": "Les libertés civiles (expression, vie privée, procédure équitable) ont-elles été protégées? Mesure si la réponse a respecté les droits fondamentaux même sous la pression d'une crise."
+  },
+  "metricsShort": {
+    "integrity": "Intégrité",
+    "trust": "Confiance",
+    "legitimacy": "Légitimité",
+    "rights": "Droits"
   }
 }

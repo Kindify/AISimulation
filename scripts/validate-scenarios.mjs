@@ -143,3 +143,26 @@ for (const w of warnings) console.log(`  warning  ${w}`);
 for (const e of errors) console.log(`  ERROR    ${e}`);
 if (errors.length || (strict && warnings.length)) { console.log(`\n${errors.length} error(s), ${warnings.length} warning(s). Build blocked.`); process.exit(1); }
 console.log(`${warnings.length} warning(s), 0 errors.`);
+
+// ── Pacing Problem overlays: every string in src/pacing/events.json needs a twin in each <lang>.json
+{
+  const pacingDir = path.join(root, "src/pacing");
+  if (fs.existsSync(path.join(pacingDir, "events.json"))) {
+    const events = JSON.parse(fs.readFileSync(path.join(pacingDir, "events.json"), "utf8"));
+    const langs = fs.readdirSync(pacingDir).filter(f => /^[a-z]{2}\.json$/.test(f));
+    const perr = [];
+    if (langs.length === 0) perr.push("no translation overlay (fr.json) found for pacing events");
+    for (const lf of langs) {
+      const tr = JSON.parse(fs.readFileSync(path.join(pacingDir, lf), "utf8"));
+      const missing = [];
+      for (const ev of events) {
+        const k = `pacing_event_${ev.id}`;
+        for (const f of ["title", "category", "description"]) if (!tr[k]?.[f]) missing.push(`${k}.${f}`);
+        for (const o of ["speedOutcome", "rigourOutcome", "balancedOutcome"]) for (const f of ["label", "detail", "headline"]) if (!tr[k]?.[o]?.[f]) missing.push(`${k}.${o}.${f}`);
+      }
+      if (missing.length) perr.push(`${lf} is missing ${missing.length} string(s): ${missing.slice(0, 6).join(", ")}${missing.length > 6 ? ", ..." : ""}`);
+    }
+    if (perr.length) { for (const e of perr) console.log(`  ERROR    pacing: ${e}`); process.exit(1); }
+    console.log(`Validated ${events.length} pacing event(s) with ${langs.length} overlay(s).`);
+  }
+}

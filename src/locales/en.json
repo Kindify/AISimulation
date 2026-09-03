@@ -40,7 +40,11 @@
     "tagHealth": "Institutional health metrics",
     "tag6crises": "6 crisis scenarios",
     "tag4roles": "4 institutional roles",
-    "tagCoord": "Coordination grade + counterfactuals"
+    "tagCoord": "Coordination grade + counterfactuals",
+    "theoryTag1": "Individual trade-off reasoning",
+    "theoryTag2": "Coordination under asymmetric information",
+    "theoryTag3": "Institutional incentive structures",
+    "theoryTag4": "Post-catastrophe accountability"
   },
   "quickPlay": {
     "title": "QUICK PLAY",
@@ -139,7 +143,43 @@
     "runTeam": "Run this with your team",
     "runTeamDesc": "These simulations are designed for group workshops. Assign real roles, separate your participants, and discover how your organization thinks about AI governance trade-offs.",
     "workshopFormats": "Workshop formats available: 15-minute demo · 1-hour session · 2-hour lifecycle arc",
-    "homeArrow": "← HOME"
+    "homeArrow": "← HOME",
+    "status": {
+      "critical": "CRITICAL",
+      "elevated": "ELEVATED",
+      "moderate": "MODERATE",
+      "low": "LOW",
+      "strong": "STRONG",
+      "stable": "STABLE",
+      "strained": "STRAINED"
+    },
+    "coreInsightP1": "The pacing problem is not a puzzle to solve. It's a tension to manage. Every institution faces the same fundamental trade-off: act quickly enough to matter, or carefully enough to be right. The simulation demonstrates why \"just regulate AI\" is insufficient as a strategy. The",
+    "coreInsightHow": "how",
+    "coreInsightP2": "of governance matters as much as the",
+    "coreInsightWhether": "whether",
+    "coreInsightP3": ", and the costs of both action and inaction are real and measurable.",
+    "archetypes": {
+      "captured": {
+        "name": "The Captured Regulator",
+        "desc": "Your institution became an extension of the industries it was meant to oversee. Speed without sufficient safeguards eroded independence. This mirrors real patterns seen in financial regulation pre-2008 and telecom oversight in the 1990s."
+      },
+      "museum": {
+        "name": "The Museum Piece",
+        "desc": "Your institution produced excellent analysis that arrived too late to matter. By the time your frameworks were published, the technology had moved on. This is the trajectory of many international standards bodies confronting rapid technological change."
+      },
+      "discredited": {
+        "name": "The Discredited Authority",
+        "desc": "Your institution lost the public mandate needed to govern effectively. Without democratic legitimacy, even good policy can't be implemented. This reflects the challenge facing institutions like the WHO during contested crises."
+      },
+      "adaptive": {
+        "name": "The Adaptive Institution",
+        "desc": "You managed the impossible balance: maintaining enough speed to stay relevant while preserving enough rigour to stay credible. This is rare in practice, but institutions like DARPA and certain central banks have achieved it in narrow domains."
+      },
+      "muddling": {
+        "name": "The Muddling Through",
+        "desc": "You avoided catastrophic failure but accumulated damage on all fronts. This is the most common real-world outcome: institutions that survive but gradually lose effectiveness. Reform becomes harder the longer this state persists."
+      }
+    }
   },
   "govGame": {
     "title": "The AI Governance Game",
@@ -212,7 +252,22 @@
     "roadmapTitle": "MULTIPLAYER ROADMAP",
     "roadmapDesc": "Coming next: play a scenario with your team from separate devices at your own pace, with a short public statement from each role before anyone commits, and a shared reveal page you can return to for the debrief.",
     "forFacilitatorsTitle": "FOR FACILITATORS",
-    "forFacilitatorsDesc": "Assign each participant a role and physically separate them. Give 3 minutes to read intel and decide. Bring everyone together for the reveal. The \"what if\" analysis makes the debrief conversation concrete."
+    "forFacilitatorsDesc": "Assign each participant a role and physically separate them. Give 3 minutes to read intel and decide. Bring everyone together for the reveal. The \"what if\" analysis makes the debrief conversation concrete.",
+    "introP1": "AI governance isn't about any single institution. It's about whether multiple actors with asymmetric information (each actor knows things the others don't), different incentives, and different time horizons can act coherently under pressure.",
+    "howItWorksP1a": "A crisis unfolds. You step into four institutional roles, each with ",
+    "howItWorksP1b": "private intelligence",
+    "howItWorksP1c": " the others can't see. Commit each role's decision blind, then discover how your choices ",
+    "howItWorksP1d": "interact",
+    "howScoringWorks": "HOW SCORING WORKS",
+    "scoringP1a": "Your outcome is measured on four metrics. Each role's individual choice affects all four, but the ",
+    "scoringP1b": "interactions between roles",
+    "scoringP1c": " generate the largest swings. A single synergy (two actions that amplified each other's positive effects) or conflict (two actions that undermined each other, making things worse) can outweigh any individual decision. Your coordination grade, which measures how well institutional actions reinforced or undermined each other, is determined by the balance of these interactions.",
+    "scoringKey": "KEY: Each option describes the tension it carries (what it protects against what it risks). The coordination grade is based on how many synergies vs conflicts your combined choices trigger.",
+    "publicBriefing": "PUBLIC BRIEFING: ALL ACTORS",
+    "coreInsightTitle": "THE CORE INSIGHT",
+    "coreInsightP1a": "The hardest problem in AI governance isn't making good individual decisions. It's making decisions that ",
+    "coreInsightP1b": "compose well",
+    "coreInsightP1c": " across institutions with asymmetric information and conflicting incentives. Coordination architecture, the channels through which institutions share information and align action, determines whether individual good decisions produce collective good outcomes."
   },
   "metrics": {
     "integrity": "Information Integrity",
@@ -243,7 +298,9 @@
   "share": {
     "shareResult": "SHARE YOUR RESULT",
     "copiedToClipboard": "COPIED TO CLIPBOARD",
-    "copyResult": "COPY RESULT TO SHARE"
+    "copyResult": "COPY RESULT TO SHARE",
+    "myArchetype": "MY INSTITUTIONAL ARCHETYPE",
+    "grade": "GRADE"
   },
   "roles": {
     "regulator": {
@@ -306,5 +363,17 @@
     "insteadOf": "instead of",
     "overall": "overall",
     "gradeChange": "Grade"
+  },
+  "metricsDesc": {
+    "integrity": "Did accurate information reach the public in time to matter? Measures whether the collective response improved or degraded the information environment.",
+    "trust": "Does the public trust institutions more or less after this response? Eroded by perceived cover-ups, overreach, or incompetence, rebuilt slowly through transparency and consistency.",
+    "legitimacy": "Did institutions act within their mandates and follow due process? High legitimacy means actions will survive legal challenge and set good precedent.",
+    "rights": "Were civil liberties (speech, privacy, due process) protected? Measures whether the response respected fundamental rights even under crisis pressure."
+  },
+  "metricsShort": {
+    "integrity": "Integrity",
+    "trust": "Trust",
+    "legitimacy": "Legitimacy",
+    "rights": "Rights"
   }
 }

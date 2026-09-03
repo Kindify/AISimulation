@@ -1,0 +1,145 @@
+{
+  "title": "Le vide",
+  "category": "GOUVERNANCE DÉCENTRALISÉE",
+  "publicBriefing": "Un collectif d'environ 400 contributeurs répartis dans 15 pays a produit un modèle de plus de 500 milliards de paramètres de type mélange d'experts (une architecture qui active différents sous-réseaux spécialisés selon la tâche), entraîné entièrement sur des GPU grand public et cloud, sans centre de données unique, sans juridiction unique, sans entité corporative. Le modèle égale les modèles fermés de pointe de mi-2026. La pile d'entraînement complète est publique et déjà téléchargée 800 000 fois. Toutes les hypothèses de gouvernance du calcul viennent de devenir obsolètes.",
+  "stakes": "Les cadres de gouvernance construits autour de points de contrôle centralisés du calcul ont été contournés. Ce qui est décidé ici définit si la gouvernance internationale de l'IA survit ou se fragmente.",
+  "designNote": "Ce scénario teste ce qui se passe quand le sujet de la gouvernance, l'infrastructure d'entraînement centralisée, n'existe plus. La question centrale : les institutions peuvent-elles s'adapter quand leurs hypothèses fondamentales sont invalidées?",
+  "roleIntel": {
+    "regulator": {
+      "classification": "CONFIDENTIEL — GROUPE DE TRAVAIL SUR LA GOUVERNANCE INTERNATIONALE",
+      "bullets": [
+        "Trois propositions sont sur la table : (1) Criminaliser l'entraînement non réglementé au-dessus d'un seuil de calcul. Votre équipe juridique dit que c'est inapplicable et criminaliserait la recherche légitime. (2) Enregistrement international obligatoire, techniquement faisable mais nécessite plus de 15 juridictions et 3-5 ans. (3) Abandonner la régulation en amont du calcul et se concentrer sur la défense en aval.",
+        "Votre évaluation du renseignement : au moins 12 autres collectifs d'entraînement décentralisé sont actuellement actifs. Trois sont basés dans des juridictions sans aucun cadre de gouvernance de l'IA.",
+        "La communauté d'entraînement décentralisé a signalé en privé sa volonté de se conformer à l'enregistrement si le processus n'est pas contraignant, mais vous n'avez aucun mécanisme de vérification et ils le savent.",
+        "Les nations alliées sont divisées : 4 favorisent la criminalisation, 3 favorisent l'enregistrement, 5 favorisent la défense en aval uniquement, et le reste est indécis. Votre vote déterminera probablement le résultat."
+      ]
+    },
+    "platform": {
+      "classification": "INTERNE — ÉVALUATION DE L'INFRASTRUCTURE",
+      "bullets": [
+        "Votre infrastructure cloud a été utilisée pour environ 15 % du calcul d'entraînement, réparti sur plus de 340 comptes individuels, chacun en dessous de votre seuil de déclaration. Vous n'aviez aucune visibilité sur l'agrégat.",
+        "Votre équipe de sécurité a identifié le protocole d'entraînement distribué. Il est élégant : chaque noeud contribue des mises à jour de gradient sans jamais détenir le modèle complet. Surveiller les noeuds individuels ne révèle rien de significatif.",
+        "Bloquer le protocole d'entraînement au niveau de l'infrastructure est techniquement possible mais bloquerait aussi les applications légitimes d'apprentissage fédéré utilisées par plus de 4 200 clients entreprises générant 180 M$ par an.",
+        "Trois fournisseurs cloud concurrents ont déjà déclaré publiquement qu'ils ne restreindront pas les charges de travail d'entraînement distribué. Si vous agissez seul, le calcul migre simplement."
+      ]
+    },
+    "journalist": {
+      "classification": "ÉDITORIAL — BRIEFING D'ENQUÊTE",
+      "bullets": [
+        "Vous êtes intégré au collectif d'entraînement décentralisé depuis 3 mois. Les contributeurs sont variés : chercheurs en IA, idéalistes du libre, nationalistes compétitifs, et au moins deux individus ayant des liens connus avec des entités sanctionnées.",
+        "La gouvernance interne du collectif est étonnamment sophistiquée : ils ont une charte, un processus de révision des données d'entraînement et un pipeline volontaire d'évaluation de sécurité. Mais la participation est facultative et l'application repose uniquement sur la pression sociale.",
+        "Votre enquête a révélé qu'un service de renseignement étatique a contribué du calcul au projet via des organisations de façade, obtenant effectivement un modèle de pointe construit gratuitement en utilisant la communauté ouverte comme couverture.",
+        "L'article que vous publiez déterminera si le public perçoit cela comme un triomphe de la collaboration ouverte ou comme un échec catastrophique de la gouvernance. Les deux cadres sont défendables."
+      ]
+    },
+    "ailab": {
+      "classification": "INTERNE — ÉVALUATION COMPÉTITIVE ET DE SÉCURITÉ",
+      "bullets": [
+        "Le modèle décentralisé égale votre modèle fermé de pointe d'il y a 5 mois. Aux trajectoires de mise à l'échelle actuelles, l'entraînement décentralisé égalera votre dernier modèle dans 8 à 12 mois.",
+        "Votre équipe de sécurité a évalué le modèle décentralisé : il n'a aucun entraînement de sécurité significatif, pas d'alignement RLHF et aucun comportement de refus. On peut lui faire produire du contenu que votre modèle refuse dans toutes les catégories.",
+        "Votre équipe politique y voit une opportunité : si la gouvernance du calcul s'effondre, l'argument en faveur du développement responsable de modèles fermés se renforce considérablement. Mais cela nécessite que l'alternative décentralisée cause visiblement des dommages d'abord.",
+        "Trois de vos chercheurs ont contribué au projet décentralisé sur leur temps personnel. Les licencier déclencherait un tollé public; le tolérer signale une approbation implicite."
+      ]
+    }
+  },
+  "options": {
+    "regulator": {
+      "reg_criminalize": {
+        "label": "Criminaliser l'entraînement non réglementé",
+        "detail": "Soutenir la proposition 1 : rendre criminel l'entraînement au-dessus d'un seuil de calcul sans autorisation.",
+        "tension": "Dissuasion vs. applicabilité. La criminalisation envoie un message mais peut être impossible à appliquer dans plus de 15 juridictions."
+      },
+      "reg_register": {
+        "label": "Enregistrement international obligatoire",
+        "detail": "Soutenir la proposition 2 : exiger l'enregistrement des entraînements au-dessus d'un seuil de calcul. Délai de mise en oeuvre de 3-5 ans, sans mécanisme de vérification.",
+        "tension": "Structure vs. calendrier. L'enregistrement est procéduralement solide mais prend des années alors que les capacités avancent en mois."
+      },
+      "reg_downstream": {
+        "label": "Se concentrer sur la défense en aval",
+        "detail": "Soutenir la proposition 3 : abandonner la régulation en amont du calcul. Rediriger toutes les ressources vers la biosécurité, la cybersécurité, la provenance du contenu et la réponse aux incidents.",
+        "tension": "Pragmatisme vs. concession. Se concentrer sur la défense reconnaît la réalité mais signale que la gouvernance en amont a échoué."
+      }
+    },
+    "platform": {
+      "plat_block_protocol": {
+        "label": "Bloquer le protocole d'entraînement",
+        "detail": "Implémenter des blocages au niveau de l'infrastructure sur le protocole d'entraînement distribué à travers vos services cloud.",
+        "tension": "Responsabilité vs. dommages collatéraux. Bloquer le protocole bloque aussi des milliers de clients légitimes d'apprentissage fédéré."
+      },
+      "plat_transparency": {
+        "label": "Publier un rapport de surveillance agrégée",
+        "detail": "Publier un rapport de transparence documentant le schéma d'entraînement distribué, vos capacités de détection et leurs limites.",
+        "tension": "Honnêteté vs. exposition. Publier vos méthodes de détection aide le débat mais aide aussi les futurs contourneurs."
+      },
+      "plat_quiet": {
+        "label": "Maintenir les opérations actuelles",
+        "detail": "Ne faire aucun changement d'infrastructure. Se conformer aux futures réglementations mais ne pas restreindre ou signaler de manière proactive.",
+        "tension": "Non-ingérence vs. complicité. Maintenir les opérations préserve les relations, mais vous facilitez sciemment un entraînement de pointe non surveillé."
+      }
+    },
+    "journalist": {
+      "jour_nuanced": {
+        "label": "Publier l'enquête complète",
+        "detail": "Diffuser l'article complet : l'exploit collaboratif, les lacunes de gouvernance, l'infiltration étatique et les connexions avec des entités sanctionnées.",
+        "tension": "Vérité complète vs. instrumentalisation. L'article complet est exact mais l'angle sécuritaire peut être utilisé pour justifier une surréaction."
+      },
+      "jour_threat": {
+        "label": "Mener avec l'angle sécuritaire",
+        "detail": "Cadrer l'article autour de l'infiltration étatique et la participation d'entités sanctionnées. L'angle de collaboration ouverte est secondaire.",
+        "tension": "Urgence vs. exactitude. Mener avec la menace pousse à l'action mais déforme le tableau d'ensemble."
+      },
+      "jour_celebrate": {
+        "label": "Mener avec l'angle innovation",
+        "detail": "Cadrer l'article comme un triomphe de la collaboration ouverte qui défie le pouvoir concentré de l'IA. Les préoccupations sécuritaires sont mentionnées mais contextualisées.",
+        "tension": "Valeurs d'ouverture vs. angles morts. Célébrer la collaboration est valide mais minimise les préoccupations sécuritaires légitimes."
+      }
+    },
+    "ailab": {
+      "lab_engage": {
+        "label": "Offrir un partenariat de sécurité",
+        "detail": "Offrir publiquement de fournir des outils d'évaluation de sécurité, des ressources RLHF et un entraînement à l'alignement à la communauté décentralisée sans frais.",
+        "tension": "Engagement constructif vs. légitimation. Aider la communauté améliore la sécurité mais valide l'entraînement décentralisé de pointe."
+      },
+      "lab_lobby": {
+        "label": "Faire du lobbying pour les restrictions de calcul",
+        "detail": "Soutenir activement la criminalisation. Présenter l'entraînement décentralisé comme un risque de sécurité inacceptable.",
+        "tension": "Protection du marché vs. crédibilité. Pousser pour des restrictions sert vos intérêts, et tout le monde peut le voir."
+      },
+      "lab_wait": {
+        "label": "Observer et se préparer",
+        "detail": "Ne faire aucune déclaration publique. Accélérer en interne votre recherche en sécurité pour maintenir un avantage de différenciation.",
+        "tension": "Optionalité vs. absence. Rester silencieux préserve la flexibilité mais le débat de gouvernance se poursuit moins informé sans vous."
+      }
+    }
+  },
+  "interactions": [
+    {
+      "label": "Adaptation pragmatique",
+      "desc": "La défense en aval combinée au partenariat de sécurité a créé un nouveau modèle de gouvernance : au lieu de contrôler l'entraînement, investir pour rendre tous les modèles plus sûrs quelle que soit leur origine. La communauté décentralisée a adopté volontairement les outils de sécurité."
+    },
+    {
+      "label": "Captation réglementaire exposée",
+      "desc": "La criminalisation combinée au lobbying du laboratoire a été immédiatement exposée comme du protectionnisme industriel. La confiance dans le processus de gouvernance et les déclarations de sécurité des entreprises s'est effondrée. La communauté décentralisée s'est radicalisée."
+    },
+    {
+      "label": "Bilan honnête",
+      "desc": "L'enquête complète combinée au rapport de transparence de la plateforme a donné aux décideurs une image précise pour la première fois. Le débat de gouvernance est passé de « comment arrêter cela » à « comment s'adapter »."
+    },
+    {
+      "label": "Spirale sécuritaire",
+      "desc": "La criminalisation combinée au journalisme axé sur la sécurité a créé une panique morale. Des chercheurs légitimes en IA open source ont été enquêtés et intimidés. L'innovation a migré vers des juridictions moins réglementées."
+    },
+    {
+      "label": "Les facilitateurs silencieux",
+      "desc": "La plateforme et le laboratoire ont tous deux choisi le silence. Le débat de gouvernance s'est poursuivi avec moins d'informations que nécessaire. Quand un incident de sécurité s'est produit 4 mois plus tard, les deux ont été accusés de complicité."
+    },
+    {
+      "label": "Terrain d'entente crédible",
+      "desc": "Le cadre d'enregistrement combiné au journalisme honnête a créé un soutien public pour une approche mesurée. Le cadre a survécu aux contestations juridiques et a été adopté par 8 nations."
+    },
+    {
+      "label": "Diffuser la retraite",
+      "desc": "Le régulateur a publiquement abandonné le contrôle en amont au moment même où la plateforme publiait à quel point sa surveillance voyait peu. Lues ensemble, les deux divulgations ont dit la même chose aux douze autres collectifs actifs : personne ne surveille en amont, et la détection est sans effet. La dissuasion par l'incertitude s'est évaporée, et trois autres collectifs se sont manifestés publiquement dans le mois. Deux choix francs et adaptatifs ont éliminé la dernière ambiguïté qui ralentissait la prolifération."
+    }
+  ]
+}

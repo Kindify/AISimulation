@@ -305,5 +305,13 @@
         "trust": 2
       }
     }
-  ]
+  ],
+  "meta": {
+    "collection": "core",
+    "status": "live",
+    "order": 1,
+    "reviewedOn": "2026-09-03",
+    "supersededBy": null,
+    "sources": []
+  }
 }

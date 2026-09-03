@@ -1,18 +1,29 @@
-import { useTranslation } from "react-i18next";
+import { useT } from "./useT";
 
-export default function LanguageToggle() {
-  const { i18n } = useTranslation();
+/**
+ * EN/FR toggle. Shown by default only where `always` is set (the home screen).
+ * Everywhere else it appears only in translation-review mode, which you turn on
+ * by adding ?review=1 to the URL (or running the dev server). That keeps the
+ * fast "flip and check every page" workflow without a toggle on every screen.
+ */
+const reviewMode = import.meta.env.DEV || new URLSearchParams(window.location.search).has("review");
+
+export default function LanguageToggle({ always = false }: { always?: boolean }) {
+  const { i18n } = useT();
+  if (!always && !reviewMode) return null;
   const isEn = i18n.language === "en";
 
   const toggle = () => {
     const newLang = isEn ? "fr" : "en";
     i18n.changeLanguage(newLang);
     localStorage.setItem("lang", newLang);
+    document.documentElement.lang = newLang;
   };
 
   return (
     <button
       onClick={toggle}
+      aria-label={isEn ? "Passer au français" : "Switch to English"}
       style={{
         background: "#141820",
         border: "1px solid #1e2533",

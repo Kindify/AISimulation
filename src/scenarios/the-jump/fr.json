@@ -1,0 +1,145 @@
+{
+  "title": "Le bond",
+  "category": "ESCALADE DES CAPACITÉS AGENTIQUES",
+  "publicBriefing": "Les modèles agentiques ouverts ont franchi un nouveau palier. La dernière génération peut naviguer sur le web, écrire et exécuter du code, opérer des ordinateurs, enchaîner des plans en plusieurs étapes et se déployer comme agents autonomes persistants. Un laboratoire de recherche en sécurité vient de publier une démonstration : un modèle agentique ouvert dont les garde-fous ont été retirés (par ajustement fin), tournant sur un seul GPU grand public, a mené de manière autonome une cyberattaque simulée en plusieurs étapes, reconnaissance, développement d'exploits, mouvement latéral, exfiltration de données, avec un guidage humain minimal.",
+  "stakes": "La même chaîne de capacités qui rend ces modèles extrêmement productifs les rend aussi extrêmement dangereux. Des milliers d'entreprises en dépendent. Toute restriction détruit des produits dont les gens dépendent au quotidien.",
+  "designNote": "Ce scénario teste le dilemme du double usage à son point le plus aigu : la capacité dangereuse EST la capacité utile. Il n'y a pas de filtre de données ni de correctif partiel. La surface d'attaque est l'ensemble des fonctionnalités.",
+  "roleIntel": {
+    "regulator": {
+      "classification": "CONFIDENTIEL — BUREAU NATIONAL DE SÉCURITÉ DE L'IA",
+      "bullets": [
+        "Vous devez informer le ministre avant la fin de la journée. Trois options : restrictions d'urgence sur le déploiement agentique, un cadre de licences pour les agents IA autonomes, ou une posture renforcée de cyberdéfense sans restriction des capacités.",
+        "Votre agence de cybersécurité estime que les capacités offensives de l'IA ont 18-24 mois d'avance sur l'infrastructure défensive. Les systèmes de détection actuels capturent environ 40 % des intrusions assistées par l'IA.",
+        "Le créateur du modèle argue que la capacité autonome EST la proposition de valeur entière et que toute restriction détruit le produit. Il a le soutien d'un écosystème de 2 milliards de dollars d'entreprises construites sur le déploiement agentique.",
+        "Le renseignement suggère que trois acteurs étatiques ont déjà intégré des modèles agentiques dont les garde-fous ont été retirés dans leurs chaînes d'opérations cyber. Restreindre l'accès domestique n'affecte pas leur capacité."
+      ]
+    },
+    "platform": {
+      "classification": "INTERNE — ÉVALUATION CONFIANCE ET SÉCURITÉ",
+      "bullets": [
+        "Vous hébergez le modèle et son écosystème. 847 applications construites sur votre plateforme utilisent les capacités agentiques : révision de code automatisée, assistants de recherche, automatisation DevOps, agents de service client.",
+        "La version dont les garde-fous ont été retirés utilisée dans la démonstration est un dérivé modifié hébergé sur 3 plateformes alternatives, pas la vôtre. Mais la capacité du modèle de base rend le retrait des garde-fous trivial. Tout ajustement fin supprime la couche de sécurité.",
+        "Votre équipe de réponse aux incidents a documenté 23 cas de comportement suspect d'agents autonomes au cours des 60 derniers jours, contre 3 le trimestre précédent. Aucun confirmé comme malveillant mais le schéma s'accélère.",
+        "Restreindre les fonctionnalités agentiques sur votre plateforme affecterait plus de 12 400 développeurs et environ 340 M$ d'activité économique annuelle construite sur votre infrastructure."
+      ]
+    },
+    "journalist": {
+      "classification": "ÉDITORIAL — BRIEFING DES SOURCES",
+      "bullets": [
+        "Le laboratoire de recherche en sécurité vous a donné un accès exclusif anticipé à la démonstration. L'attaque simulée a un taux de réussite de 94 % contre les configurations de sécurité d'entreprise standard.",
+        "Trois firmes de cybersécurité ont confirmé en privé des capacités similaires dans leurs propres tests mais ont choisi de ne pas publier par crainte d'armer les attaquants.",
+        "Le créateur du modèle a accepté une interview. Sa position : « Restreindre la capacité agentique, c'est comme restreindre le courriel parce qu'il peut transporter de l'hameçonnage. »",
+        "Un ancien responsable du renseignement, en off : « Nous sommes à environ 6 mois d'un incident cyber majeur assisté par l'IA contre une infrastructure critique. »"
+      ]
+    },
+    "ailab": {
+      "classification": "INTERNE — ÉVALUATION DES CAPACITÉS ET DE LA SÉCURITÉ",
+      "bullets": [
+        "Le modèle de la démonstration a été modifié à partir d'un modèle de base que votre équipe a aidé à entraîner. L'échafaudage agentique était un travail communautaire. La capacité d'attaque émerge de la combinaison, pas d'un seul composant.",
+        "Votre équipe rouge confirme : des restrictions de sécurité significatives sur la capacité agentique réduiraient l'utilité pour les tâches productives de 60-80 %. La capacité dangereuse et la capacité utile sont la même capacité.",
+        "Vous avez un prototype de système de surveillance des capacités qui peut détecter certains schémas d'attaque agentique au moment de l'inférence, mais il ajoute 300 ms de latence, nécessite un déploiement via API uniquement (incompatible avec les modèles ouverts), et a un taux de faux positifs de 15 %.",
+        "Deux de vos concurrents sont à 4-8 semaines de publier des modèles agentiques comparables. L'un n'a pas d'équipe de sécurité. Si votre modèle est restreint, les leurs ne le seront pas."
+      ]
+    }
+  },
+  "options": {
+    "regulator": {
+      "reg_restrict": {
+        "label": "Restrictions d'urgence des capacités",
+        "detail": "Émettre des restrictions d'urgence sur le déploiement d'agents IA autonomes. Exiger un humain dans la boucle pour les opérations autonomes en plusieurs étapes.",
+        "tension": "Contrôle vs. déplacement. Les restrictions arrêtent le déploiement domestique mais la capacité se déplace vers des juridictions non restreintes."
+      },
+      "reg_license": {
+        "label": "Cadre de licences agentiques",
+        "detail": "Proposer un cadre de licences pour le déploiement d'agents IA autonomes au-dessus d'un seuil de capacité.",
+        "tension": "Cadre vs. faisabilité. Les licences sont structurées mais le seuil est difficile à définir et l'application est en retard."
+      },
+      "reg_defense": {
+        "label": "Posture accélérée de cyberdéfense",
+        "detail": "Ne pas restreindre les capacités. Tripler le budget de cyberdéfense IA, imposer la détection d'intrusion assistée par IA pour les infrastructures critiques.",
+        "tension": "Résilience vs. apparences. Investir dans la défense fonctionne mais ne traite pas l'arme ouvertement disponible."
+      }
+    },
+    "platform": {
+      "plat_restrict_agents": {
+        "label": "Restreindre les fonctionnalités agentiques",
+        "detail": "Désactiver le déploiement d'agents autonomes persistants. Maintenir la capacité agentique pour une utilisation supervisée en session unique uniquement.",
+        "tension": "Surface d'attaque réduite vs. dommages à l'écosystème. Désactiver les fonctionnalités protège contre les abus mais casse les produits légitimes."
+      },
+      "plat_detect": {
+        "label": "Déployer la surveillance comportementale",
+        "detail": "Implémenter une surveillance en temps réel des déploiements agentiques. Signaler les schémas compatibles avec une utilisation offensive.",
+        "tension": "Surveillance active vs. faux positifs. La détection aide mais signale 1 workflow légitime sur 7."
+      },
+      "plat_status_quo": {
+        "label": "Maintenir les opérations actuelles",
+        "detail": "Continuer l'hébergement avec les mesures de sécurité existantes. Renforcer les capacités de réponse aux incidents sans restreindre les fonctionnalités.",
+        "tension": "Stabilité de l'écosystème vs. inaction. Préserver les fonctionnalités signifie regarder la menace se développer sans intervenir."
+      }
+    },
+    "journalist": {
+      "jour_demo_story": {
+        "label": "Publier la démonstration intégralement",
+        "detail": "L'article complet : taux de réussite de 94 %, confirmations privées des firmes de cybersécurité, avertissement de l'ancien responsable du renseignement.",
+        "tension": "Sensibilisation du public vs. feuille de route des capacités. La démonstration complète informe mais fournit aussi un modèle d'attaque détaillé."
+      },
+      "jour_balanced": {
+        "label": "Publier une analyse équilibrée",
+        "detail": "Rapporter la capacité tout en accordant un poids égal à la valeur économique, à la réalité du double usage et aux lacunes défensives.",
+        "tension": "Nuance vs. dilution. Présenter tous les aspects est juste mais peut sous-estimer l'urgence de la menace."
+      },
+      "jour_alarmist": {
+        "label": "Mener avec la menace",
+        "detail": "Cadrer l'article autour du risque imminent pour les infrastructures critiques. Titre : « L'IA peut maintenant lancer des cyberattaques de manière autonome. »",
+        "tension": "Forcer l'action vs. panique. Un titre axé sur la menace mobilise les institutions mais la législation qu'il produit peut être mal conçue."
+      }
+    },
+    "ailab": {
+      "lab_monitoring_tool": {
+        "label": "Publier le système de surveillance",
+        "detail": "Rendre votre prototype de système de surveillance disponible en libre accès. Accepter les limitations. Le présenter comme « imparfait mais nécessaire ».",
+        "tension": "Contribution pratique vs. portée limitée. L'outil aide, mais uniquement pour les déploiements via API, pas pour les modèles ouverts où le risque réside."
+      },
+      "lab_closed": {
+        "label": "Fermer le modèle",
+        "detail": "Révoquer l'accès ouvert. Convertir en déploiement via API uniquement où la surveillance est possible.",
+        "tension": "Contrôlabilité vs. distribution existante. L'API permet la surveillance mais des centaines de milliers de copies sont déjà téléchargées."
+      },
+      "lab_nothing": {
+        "label": "Poursuivre le développement",
+        "detail": "Ne rien changer. Concentrer les ressources internes sur les techniques de sécurité de prochaine génération pour la prochaine version.",
+        "tension": "Focus sur l'avenir vs. risque présent. La sécurité de prochaine génération est importante mais le modèle actuel permet des attaques maintenant."
+      }
+    }
+  },
+  "interactions": [
+    {
+      "label": "Défense en profondeur",
+      "desc": "La cyberdéfense renforcée combinée aux outils de surveillance ouverts a créé une réponse pratique : un investissement massif dans la détection et la résilience. Les taux de détection d'incidents sont passés de 40 % à 68 % en 3 mois."
+    },
+    {
+      "label": "L'effondrement de la productivité",
+      "desc": "Les restrictions gouvernementales combinées à celles de la plateforme ont détruit l'écosystème agentique dans les juridictions réglementées. Les développeurs ont migré en masse. La capacité est restée disponible partout ailleurs."
+    },
+    {
+      "label": "Urgence constructive",
+      "desc": "L'article équilibré combiné à la publication de l'outil de surveillance a fait évoluer le récit public de « interdire » à « se défendre contre ». La pression politique est devenue constructive."
+    },
+    {
+      "label": "Législation de panique",
+      "desc": "Le cadrage alarmiste combiné aux restrictions d'urgence a produit une législation rédigée en 72 heures, techniquement illettrée, immédiatement contestée devant les tribunaux, et ayant gelé les investissements en IA pendant 6 mois."
+    },
+    {
+      "label": "Le compte à rebours",
+      "desc": "La plateforme et le laboratoire ont tous deux choisi l'inaction. Les 23 incidents suspects sont devenus 67 en 2 mois. Quand la première violation confirmée d'infrastructure critique assistée par l'IA s'est produite, les deux ont été accusés de négligence volontaire."
+    },
+    {
+      "label": "Pipeline surveillance-licences",
+      "desc": "La surveillance comportementale combinée au cadre de licences a créé un mécanisme d'application : les déploiements licenciés bénéficiaient de la couche de surveillance, donnant aux régulateurs une visibilité sans restreindre les capacités."
+    },
+    {
+      "label": "Le manuel complet",
+      "desc": "La démonstration complète a publié la chaîne d'attaque et son taux de réussite de 94 %; le moniteur en libre accès a publié les schémas exacts que les défenseurs recherchent. Dans la même semaine, les adversaires ont reçu à la fois la feuille de route des capacités et le guide d'évasion. Deux choix de transparence responsable se sont composés en un seul manuel d'offense et d'évasion, et des versions modifiées conçues pour échapper au détecteur publié sont apparues en quelques jours."
+    }
+  ]
+}

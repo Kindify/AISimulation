@@ -309,5 +309,13 @@
         "rights": -4
       }
     }
-  ]
+  ],
+  "meta": {
+    "collection": "lifecycle",
+    "status": "live",
+    "order": 3,
+    "reviewedOn": "2026-09-03",
+    "supersededBy": null,
+    "sources": []
+  }
 }

@@ -1,0 +1,145 @@
+{
+  "title": "Le mandat souverain sur l'ADN",
+  "category": "GOUVERNANCE DE LA BIOSÉCURITÉ",
+  "publicBriefing": "Le 4 juin 2026, les PDG de quatre grands laboratoires d'IA de pointe ont signé une lettre conjointe sans précédent au Congrès demandant le dépistage obligatoire de toutes les commandes d'ADN et d'ARN synthétiques. Leur argument : les systèmes d'IA de pointe égalent ou dépassent désormais les virologistes de niveau doctoral sur les questions techniques de laboratoire, et les barrières de connaissances qui ont historiquement empêché le développement d'armes biologiques s'érodent. Un projet de loi bipartisan sur la biosécurité progresse en comité. 69 signataires de l'IA, de la biotechnologie et de la sécurité nationale sont alignés. Mais l'industrie de la synthèse est divisée sur la mise en oeuvre.",
+  "stakes": "Le Congrès dispose d'une fenêtre étroite pour adopter une législation sur la biosécurité avec un rare consensus interindustriel. Si la coalition se fracture sur les détails de mise en oeuvre, la fenêtre se ferme et le dépistage volontaire reste la seule protection.",
+  "designNote": "Ce scénario teste ce qui se passe quand les parties prenantes sont largement d'accord sur le problème mais en désaccord sur la solution. Le défi de coordination n'est pas l'opposition, c'est l'alignement sur les détails sous pression temporelle.",
+  "roleIntel": {
+    "regulator": {
+      "classification": "CONFIDENTIEL — BRIEFING DU PERSONNEL DE COMITÉ PARLEMENTAIRE",
+      "bullets": [
+        "Vous avez deux projets de loi concurrents : un à orientation volontaire (normes de dépistage non contraignantes) et un obligatoire (règles du département du Commerce avec des mécanismes d'application). Les deux ont un parrainage bipartisan. Votre président de comité veut un seul projet de loi au vote dans 60 jours.",
+        "Les sondages internes montrent 72 % de soutien public pour « obliger les entreprises à dépister les commandes d'ADN pour le potentiel d'armes biologiques ». Mais le soutien tombe à 41 % quand la question mentionne « surveillance gouvernementale des achats de recherche scientifique ».",
+        "L'Institut canadien de sécurité de l'IA (ICSIA) et l'AISI du Royaume-Uni ont indiqué en privé qu'ils aligneront leurs cadres de biosécurité sur ce que les États-Unis adopteront, faisant effectivement de ceci une norme internationale de facto.",
+        "Trois plus petites entreprises de synthèse d'ADN ont fait du lobbying auprès de votre bureau, avertissant que les coûts de dépistage obligatoire pourraient atteindre 2 à 5 M$ par an par entreprise, forçant potentiellement une consolidation à 3-4 grands fournisseurs et réduisant la concurrence sur un marché servant actuellement plus de 12 000 institutions de recherche."
+      ]
+    },
+    "platform": {
+      "classification": "INTERNE — BRIEFING EXÉCUTIF DU FOURNISSEUR DE SYNTHÈSE D'ADN",
+      "bullets": [
+        "Vous êtes l'un des 5 principaux fournisseurs de synthèse. Vous effectuez déjà un dépistage volontaire via un cadre de consortium industriel établi et avez investi 8 M$ en infrastructure de dépistage sur 4 ans. Le dépistage obligatoire uniformiserait les règles du jeu avec les concurrents qui le contournent actuellement.",
+        "Vos données internes : 0,3 % des commandes déclenchent vos alertes de dépistage annuellement. Parmi celles-ci, 94 % sont des faux positifs de recherche légitime. Chaque commande signalée nécessite 4-6 heures d'examen d'expert à un coût de 1 200 $ par cas. L'extension à un dépistage obligatoire à l'échelle de l'industrie implique des besoins importants en main-d'oeuvre.",
+        "Les fournisseurs de synthèse chinois, qui gèrent environ 30 % des commandes mondiales, ne sont pas couverts par la législation américaine. Si le dépistage américain ajoute 5-7 jours au délai d'exécution des commandes, les laboratoires académiques sensibles aux prix pourraient déplacer leurs commandes à l'étranger où le dépistage est minimal ou inexistant.",
+        "La lettre des PDG aide votre position concurrentielle mais votre conseil d'administration est préoccupé par la disposition de tenue de registres. Maintenir des historiques détaillés d'achats des clients crée une base de données qui pourrait être assignée à comparaître, piratée ou détournée. Votre équipe juridique l'appelle « un registre de surveillance des clients en biotechnologie »."
+      ]
+    },
+    "journalist": {
+      "classification": "ÉDITORIAL — BRIEFING D'ENQUÊTE",
+      "bullets": [
+        "Vous avez obtenu des évaluations internes de deux laboratoires d'IA de pointe montrant que leurs derniers modèles peuvent fournir des protocoles de synthèse étape par étape pour certains bioagents de catégorie A lorsqu'ils sont sollicités avec un cadrage technique spécifique. Les laboratoires ont corrigé ces voies mais ont reconnu que la capacité sous-jacente persiste.",
+        "Un ancien membre du conseil du consortium vous a dit, en arrière-plan, que le dépistage volontaire attrape « peut-être 60 % des commandes préoccupantes dans un bon jour » et que la base de données de séquences du consortium n'a pas été mise à jour pour les nouveaux pathogènes modifiés depuis 2024.",
+        "Le timing de la lettre des PDG est suspect pour certaines de vos sources. Un bioéthicien l'a qualifiée de « chef-d'oeuvre de captation réglementaire : les entreprises dont l'IA crée la menace façonnent la loi qui régit la réponse, tout en se positionnant comme des leaders responsables ».",
+        "Votre rédacteur en chef veut que l'article soit cadré autour de l'angle d'unité des PDG. Vos sources en sécurité nationale veulent que vous vous concentriez sur les lacunes du dépistage. Publier les détails des évaluations des laboratoires démontrerait l'urgence mais pourrait servir de démonstration de capacité."
+      ]
+    },
+    "ailab": {
+      "classification": "INTERNE — ÉVALUATION POLITIQUE DU LABORATOIRE DE POINTE",
+      "bullets": [
+        "Votre PDG a signé la lettre. Vos évaluations internes confirment l'affirmation : votre dernier modèle se classe au 89e percentile sur les évaluations techniques de virologie, contre le 67e percentile il y a 18 mois. La trajectoire suggère un 95e percentile et plus dans les 12 mois.",
+        "Votre équipe de sécurité a implémenté des refus de requêtes liées à la biologie, mais les tests d'intrusion montrent que les sollicitations en plusieurs étapes et les scénarios de jeu de rôle contournent les refus 23 % du temps. Un utilisateur déterminé avec des connaissances de base en biologie peut extraire des informations de synthèse exploitables en moins de 30 minutes.",
+        "Soutenir le dépistage obligatoire aide votre positionnement public mais crée un précédent : si le Congrès peut imposer un dépistage en aval pour la synthèse d'ADN, le même cadre pourrait être appliqué aux sorties de modèles d'IA, aux contrôles d'accès API, ou aux restrictions de capacités. Votre équipe politique est divisée sur la question de savoir si ce précédent vous aide ou vous nuit.",
+        "Deux de vos concurrents n'ont pas signé la lettre. Ils se positionnent comme « pro-innovation » et arguent que les affirmations de biorisque sont exagérées pour justifier la réglementation. Si la législation passe avec de larges restrictions de capacités, ils gagnent un récit compétitif. Si elle échoue, ils gagnent en position de marché."
+      ]
+    }
+  },
+  "options": {
+    "regulator": {
+      "reg_mandatory": {
+        "label": "Adopter le projet de loi de dépistage obligatoire",
+        "detail": "Faire avancer le projet de loi obligatoire avec dépistage complet, vérification des clients et exigences de tenue de registres pour tous les fournisseurs de synthèse basés aux États-Unis.",
+        "tension": "Protection complète vs. charge de mise en oeuvre. Le dépistage obligatoire complet comble les lacunes mais les coûts de conformité peuvent consolider l'industrie à quelques grands acteurs."
+      },
+      "reg_hybrid": {
+        "label": "Cadre réglementaire à niveaux",
+        "detail": "Fusionner les deux projets de loi en une approche à niveaux : dépistage obligatoire pour les séquences au-dessus d'un seuil de risque, processus simplifié pour les commandes clairement non dangereuses, avec supervision du département du Commerce et un délai de mise en oeuvre de 18 mois.",
+        "tension": "Compromis pragmatique vs. ambiguïté des seuils. Un système à niveaux est plus praticable mais définir « clairement non dangereux » est là où le vrai désaccord réside."
+      },
+      "reg_voluntary_plus": {
+        "label": "Renforcer le cadre volontaire",
+        "detail": "Formaliser les normes du consortium comme lignes directrices approuvées par le gouvernement avec des exigences de rapports publics et des audits annuels, mais sans aller jusqu'à l'application pénale.",
+        "tension": "Coopération industrielle vs. lacune d'application. Le volontaire amélioré préserve la flexibilité mais le système volontaire actuel attrape peut-être 60 % des commandes préoccupantes."
+      }
+    },
+    "platform": {
+      "plat_advocate": {
+        "label": "Défendre publiquement le dépistage obligatoire",
+        "detail": "Faire activement du lobbying pour la version la plus stricte du projet de loi obligatoire, y compris la tenue de registres universelle. Offrir votre infrastructure de dépistage comme modèle pour la mise en oeuvre industrielle.",
+        "tension": "Leadership de marché vs. précédent de surveillance. Défendre la loi uniformise les règles pour vous mais crée une base de données d'achats clients qui pourrait être détournée."
+      },
+      "plat_carveout": {
+        "label": "Lobbying pour des exemptions de mise en oeuvre",
+        "detail": "Soutenir le dépistage obligatoire en principe mais pousser pour des exemptions : clause d'antériorité pour les membres existants du consortium, exclusion des commandes en dessous d'un seuil de longueur de séquence, et limitation de la tenue de registres à 2 ans.",
+        "tension": "Mise en oeuvre praticable vs. failles. Les exemptions rendent la conformité réaliste mais chaque exemption est une lacune potentielle que les acteurs malveillants peuvent exploiter."
+      },
+      "plat_resist": {
+        "label": "S'opposer aux dispositions de tenue de registres",
+        "detail": "Soutenir les mandats de dépistage mais s'opposer activement aux exigences de tenue de registres des clients, les présentant comme une surveillance gouvernementale de la recherche scientifique légitime.",
+        "tension": "Protection de la vie privée vs. traçabilité. S'opposer à la tenue de registres protège la vie privée des clients mais élimine la capacité de tracer les commandes en plusieurs parties qui semblent bénignes individuellement."
+      }
+    },
+    "journalist": {
+      "jour_unity": {
+        "label": "Publier le récit d'unité",
+        "detail": "Mener avec le consensus interindustriel sans précédent : des PDG rivaux, des entreprises de synthèse et des responsables de la sécurité nationale tous d'accord sur le dépistage obligatoire. Le présenter comme un modèle de coopération pour la gouvernance de l'IA.",
+        "tension": "Célébrer le consensus vs. manquer les fissures. L'angle d'unité est réel et digne d'intérêt, mais il obscurcit les désaccords profonds sur la mise en oeuvre et la critique de captation réglementaire."
+      },
+      "jour_gaps": {
+        "label": "Publier l'enquête sur les lacunes du dépistage",
+        "detail": "Mener avec l'évaluation de l'ancien membre du conseil du consortium que le dépistage volontaire attrape « peut-être 60 % des commandes préoccupantes » et que la base de données de séquences est obsolète. Inclure les détails des évaluations des laboratoires montrant la capacité active.",
+        "tension": "Démontrer l'urgence vs. faciliter la capacité. Publier les lacunes de dépistage et les détails d'évaluation des laboratoires prouve que la menace est réelle, mais signale aussi aux acteurs malveillants exactement où sont les vulnérabilités."
+      },
+      "jour_capture": {
+        "label": "Publier l'angle de captation réglementaire",
+        "detail": "Mener avec la critique du bioéthicien : les entreprises dont l'IA crée la menace de biorisque façonnent maintenant la loi qui régit la réponse, se positionnant comme des leaders responsables tout en contrôlant le cadre réglementaire.",
+        "tension": "Responsabilité vs. dommage à la coalition. La critique de captation est légitime et importante, mais la publier peut fracturer le rare consensus nécessaire pour adopter toute législation."
+      }
+    },
+    "ailab": {
+      "lab_transparent": {
+        "label": "Publier les évaluations internes de capacité",
+        "detail": "Publier les scores d'évaluation en virologie de votre modèle. Montrer la trajectoire du 67e au 89e percentile. Le présenter comme preuve soutenant l'urgence législative.",
+        "tension": "Soutenir le dossier vs. démontrer la menace. Publier vos scores prouve que le Congrès devrait agir, mais confirme aussi publiquement la capacité de votre modèle en matière de connaissances sur les armes biologiques."
+      },
+      "lab_refusals": {
+        "label": "Renforcer les garde-fous du modèle",
+        "detail": "Annoncer des refus améliorés pour les requêtes liées à la biologie et publier les résultats de vos tests d'intrusion montrant le taux de contournement de 23 %. Le positionner comme un travail de sécurité de pointe pendant que la législation est débattue.",
+        "tension": "Sécurité proactive vs. faiblesse admise. Publier le taux de contournement montre la responsabilité, mais « 23 % des tentatives réussissent » est un titre qui pourrait saper la confiance du public dans la sécurité de l'IA de manière générale."
+      },
+      "lab_quiet_support": {
+        "label": "Signer et rester discret",
+        "detail": "Votre PDG a signé la lettre. Ne pas publier les évaluations internes ni les taux de contournement. Soutenir la législation publiquement sans révéler les spécificités des capacités de votre modèle.",
+        "tension": "Positionnement stratégique vs. débat informé. Rester discret protège l'information concurrentielle, mais le Congrès légifère sans connaître les niveaux réels de capacité des modèles qu'il tente de gouverner."
+      }
+    }
+  },
+  "interactions": [
+    {
+      "label": "Législation fondée sur les preuves",
+      "desc": "Le cadre à niveaux combiné aux données de capacité publiées a donné aux législateurs les preuves pour calibrer précisément les seuils de risque. Le projet de loi résultant était techniquement informé, ce qui l'a rendu plus difficile à contester et plus facile à mettre en oeuvre à l'international."
+    },
+    {
+      "label": "La fracture de la coalition",
+      "desc": "Le dépistage obligatoire complet combiné à l'opposition de l'industrie à la tenue de registres a divisé la coalition qui avait rendu la lettre possible. Les législateurs ont reçu des signaux contradictoires de la même industrie, et le projet de loi a calé en comité tandis que la fenêtre de consensus se refermait."
+    },
+    {
+      "label": "La cascade de responsabilité",
+      "desc": "L'enquête sur les lacunes de dépistage combinée à la divulgation des capacités du laboratoire a créé un récit public indéniable : la menace est réelle, les défenses actuelles sont inadéquates, et les outils pour corriger existent. L'élan législatif s'est accéléré."
+    },
+    {
+      "label": "Effondrement de la crédibilité",
+      "desc": "L'article sur la captation réglementaire a frappé plus fort parce que le laboratoire a refusé de publier ses données réelles de capacité. Le silence a été interprété comme une confirmation que la lettre était un positionnement stratégique, pas une véritable préoccupation de sécurité. La confiance du public dans l'autorégulation de l'industrie de l'IA a chuté brusquement."
+    },
+    {
+      "label": "Alliance de mise en oeuvre",
+      "desc": "Le plaidoyer actif du fournisseur de synthèse combiné au cadre réglementaire à niveaux a créé un modèle praticable : l'infrastructure existante du fournisseur est devenue le modèle pour le système à niveaux, réduisant le temps de mise en oeuvre de 18 mois à 8."
+    },
+    {
+      "label": "Le piège du statu quo",
+      "desc": "Les lignes directrices volontaires améliorées combinées au silence de l'industrie ont préservé l'apparence d'action sans rien changer de substantiel. La lacune de dépistage est restée à 60 %. Quand un incident de biosécurité a failli se produire 5 mois plus tard, le régulateur et le laboratoire ont été accusés de gouvernance performative."
+    },
+    {
+      "label": "Le registre de surveillance",
+      "desc": "Le plus grand fournisseur défendant la tenue de registres universelle combiné à un projet de loi obligatoire complet qui l'exigeait ont ensemble construit ce que les propres avocats du fournisseur avaient redouté : un registre centralisé, assignable et piratable de qui a commandé quelles séquences. Deux acteurs optimisant chacun pour la protection maximale en biosécurité ont produit une base de données de surveillance des achats en biotechnologie, inhibant la recherche légitime et créant une cible unique de haute valeur. La protection et la responsabilité étaient le même système."
+    }
+  ]
+}

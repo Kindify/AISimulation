@@ -1,0 +1,12 @@
+# Netlify build settings, kept in the repo so they are versioned.
+# This file overrides whatever is set in the Netlify UI under
+# Site configuration > Build & deploy > Build settings.
+[build]
+  command = "npm run build"
+  publish = "dist"
+
+# Single-page app: every path serves index.html (needed once URL routing lands).
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200

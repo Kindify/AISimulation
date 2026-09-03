@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useTranslation } from "react-i18next";
+import { useT } from "./useT";
 import PacingProblem from "./PacingProblem";
 import EpistemicCommonsV2 from "./EpistemicCommons";
 import QuickPlay from "./QuickPlay";
@@ -27,7 +27,7 @@ textarea, input { font-family: 'DM Sans', sans-serif; }
 }`;
 
 function Home({ onSelect }: { onSelect: (tool: string) => void }) {
-  const { t } = useTranslation();
+  const { t } = useT();
   const [showTheory, setShowTheory] = useState(false);
 
   useEffect(() => {
@@ -51,7 +51,7 @@ function Home({ onSelect }: { onSelect: (tool: string) => void }) {
             <div style={{ fontFamily: "'DM Mono', monospace", fontSize: 11, color: "#64748b" }}>{t("home.subtitle")}</div>
           </div>
           <div style={{ paddingTop: 4 }}>
-            <LanguageToggle />
+            <LanguageToggle always />
           </div>
         </div>
 

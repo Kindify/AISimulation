@@ -309,5 +309,13 @@
         "legitimacy": -4
       }
     }
-  ]
+  ],
+  "meta": {
+    "collection": "lifecycle",
+    "status": "live",
+    "order": 4,
+    "reviewedOn": "2026-09-03",
+    "supersededBy": null,
+    "sources": []
+  }
 }

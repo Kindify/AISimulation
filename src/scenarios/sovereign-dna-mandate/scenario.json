@@ -311,5 +311,14 @@
     }
   ],
   "sourceDate": "June 2026",
-  "sourceNote": "Inspired by publicly reported events as of June 2026. Details are fictionalized for gameplay. Contested claims are flagged where sources conflict."
+  "sourceNote": "Inspired by publicly reported events as of June 2026. Details are fictionalized for gameplay. Contested claims are flagged where sources conflict.",
+  "meta": {
+    "collection": "topical",
+    "status": "live",
+    "order": 1,
+    "sourceDate": "2026-06-01",
+    "reviewedOn": "2026-09-03",
+    "supersededBy": null,
+    "sources": []
+  }
 }

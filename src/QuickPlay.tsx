@@ -1,8 +1,9 @@
 import { useState, useEffect } from "react";
-import { useTranslation } from "react-i18next";
+import { useT } from "./useT";
 import { useTranslatedCrisis } from "./useTranslatedCrisis";
-import { ROLES, computeOutcome } from "./EpistemicCommons";
-import { ALL_SCENARIOS, TOPICAL_SCENARIOS } from "./scenarios";
+import { computeOutcome } from "./EpistemicCommons";
+import { ALL_SCENARIOS, TOPICAL_SCENARIOS, FEATURED_SCENARIOS, rolesFor } from "./scenarios";
+import type { Scenario, Role } from "./scenarios";
 import LanguageToggle from "./LanguageToggle";
 import { track } from "./analytics";
 
@@ -40,11 +41,11 @@ interface Props {
 }
 
 export default function QuickPlay({ onBack, onFullPlay }: Props) {
-  const { t } = useTranslation();
+  const { t } = useT();
   const [phase, setPhase] = useState<"play" | "outcome">("play");
-  const [crisis, setCrisis] = useState<any>(null);
-  const [role, setRole] = useState<any>(null);
-  const [otherDecisions, setOtherDecisions] = useState<any>({});
+  const [crisis, setCrisis] = useState<Scenario | null>(null);
+  const [role, setRole] = useState<Role | null>(null);
+  const [otherDecisions, setOtherDecisions] = useState<Record<string, string>>({});
   const [selectedOption, setSelectedOption] = useState<string | null>(null);
   const [outcome, setOutcome] = useState<any>(null);
   const [copied, setCopied] = useState(false);
@@ -53,15 +54,16 @@ export default function QuickPlay({ onBack, onFullPlay }: Props) {
   const [feedbackSubmitted, setFeedbackSubmitted] = useState(false);
 
   const randomize = (isReroll = false) => {
-    let pool: typeof ALL_SCENARIOS;
-    if (TOPICAL_SCENARIOS.length > 0 && Math.random() < 0.5) {
-      pool = [...TOPICAL_SCENARIOS];
-    } else {
-      pool = [...ALL_SCENARIOS];
-    }
+    // Featured scenarios (this week's news) are preferred, then topical, then everything.
+    let pool: Scenario[];
+    const r = Math.random();
+    if (FEATURED_SCENARIOS.length > 0 && r < 0.5) pool = [...FEATURED_SCENARIOS];
+    else if (TOPICAL_SCENARIOS.length > 0 && r < 0.75) pool = [...TOPICAL_SCENARIOS];
+    else pool = [...ALL_SCENARIOS];
     const randomCrisis = pool[Math.floor(Math.random() * pool.length)];
+    const ROLES = rolesFor(randomCrisis);
     const randomRole = ROLES[Math.floor(Math.random() * ROLES.length)];
-    const others: any = {};
+    const others: Record<string, string> = {};
     ROLES.forEach(r => {
       if (r.id !== randomRole.id) {
         const opts = randomCrisis.options[r.id];
@@ -106,7 +108,7 @@ export default function QuickPlay({ onBack, onFullPlay }: Props) {
 
   const commitChoice = () => {
     if (!selectedOption || !crisis || !role) return;
-    const opts: any[] = crisis.options[role.id] || [];
+    const opts = crisis.options[role.id] || [];
     track("quick_play_commit", {
       scenario_id: crisis.id,
       role_id: role.id,
@@ -146,6 +148,7 @@ export default function QuickPlay({ onBack, onFullPlay }: Props) {
   };
 
   const tc = useTranslatedCrisis(crisis);
+  const ROLES = rolesFor(crisis);
   if (!crisis || !role) return null;
 
   const myOptions: any[] = tc?.options?.[role.id] || crisis.options?.[role.id] || [];

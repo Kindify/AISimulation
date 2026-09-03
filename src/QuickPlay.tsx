@@ -447,7 +447,7 @@ export default function QuickPlay({ onBack, onFullPlay }: Props) {
               </div>
             )}
             <div style={{ paddingTop: 10, borderTop: "1px solid #1e2533", fontFamily: "'DM Mono', monospace", fontSize: 9, color: "#475569" }}>
-              strategy.mobilis.studio — AI Governance Simulation
+              strategy.mobilis.studio · {t("home.suiteTitle")}
             </div>
           </div>
           <button

@@ -349,15 +349,15 @@ export default function PacingProblem({ onBack }: { onBack: () => void }) {
               <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: 12 }}>
                 <div>
                   <div style={{ fontFamily: "'DM Mono', monospace", fontSize: 9, color: "#64748b", letterSpacing: 1 }}>{t("pacing.myArchetype")}</div>
-                  <div style={{ fontFamily: "'Instrument Serif', serif", fontSize: 20, color: archetypeColor, marginTop: 4 }}>{archetype}</div>
+                  <div style={{ fontFamily: "'Instrument Serif', serif", fontSize: 20, color: archetypeColor, marginTop: 4 }}>{t(`pacing.archetypes.${archetypeKey}.name`, archetype)}</div>
                 </div>
               </div>
               <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 8, marginBottom: 12 }}>
                 {[
-                  { label: "Bandwidth", val: state.bandwidth, icon: "📊", suffix: "%" },
-                  { label: "Credibility", val: state.credibility, icon: "🏛️", suffix: "%" },
-                  { label: "Public Trust", val: state.publicTrust, icon: "👥", suffix: "%" },
-                  { label: "Capture Risk", val: state.captureRisk, icon: "🎯", suffix: "%" }
+                  { label: t("pacing.bandwidth"), val: state.bandwidth, icon: "📊", suffix: "%" },
+                  { label: t("pacing.credibility"), val: state.credibility, icon: "🏛️", suffix: "%" },
+                  { label: t("pacing.publicTrust"), val: state.publicTrust, icon: "👥", suffix: "%" },
+                  { label: t("pacing.captureRisk"), val: state.captureRisk, icon: "🎯", suffix: "%" }
                 ].map((m, i) => (
                   <div key={i} style={{ fontFamily: "'DM Mono', monospace", fontSize: 11, color: "#94a3b8" }}>
                     {m.icon} {m.label}: <span style={{ color: "#e2e8f0", fontWeight: 700 }}>{m.val}{m.suffix}</span>
@@ -365,10 +365,10 @@ export default function PacingProblem({ onBack }: { onBack: () => void }) {
                 ))}
               </div>
               <div style={{ fontFamily: "'DM Mono', monospace", fontSize: 11, color: "#64748b", marginBottom: 12 }}>
-                ⚡ {speedChoices} speed · ⚖️ {balancedChoices} balanced · 🔬 {rigourChoices} rigour
+                ⚡ {speedChoices} {t("pacing.speedShort").toLowerCase()} · ⚖️ {balancedChoices} {t("pacing.balancedShort").toLowerCase()} · 🔬 {rigourChoices} {t("pacing.rigourShort").toLowerCase()}
               </div>
               <div style={{ paddingTop: 12, borderTop: "1px solid #1e2533", fontFamily: "'DM Mono', monospace", fontSize: 9, color: "#64748b" }}>
-                strategy.mobilis.studio — AI Governance Simulation
+                strategy.mobilis.studio · {t("home.suiteTitle")}
               </div>
             </div>
             <button onClick={copyResult} style={{ width: "100%", padding: "12px", background: copied ? "#10b981" : "#1e293b", color: copied ? "#0c0f14" : "#94a3b8", border: "1px solid #334155", borderRadius: 8, cursor: "pointer", fontFamily: "'Space Mono', monospace", fontSize: 11, fontWeight: 700, letterSpacing: 1, transition: "all 0.3s ease" }}>

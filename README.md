@@ -12,7 +12,7 @@ Interactive simulation tools for exploring AI governance trade-offs. Built as an
 
 **THEN** policymakers and the public will move from "vague fear" towards "accurate mental models" of epistemic and institutional risks,
 
-**WHICH LEADS TO** increased democratic pressure for robust, evidence-based AI safeguards and faster institutional adaptation.
+**WHICH LEADS TO** increased democratic pressure for robust, evidence-based AI safeguards and faster institutional adaptation more in keeping with the pace of AI development.
 
 **ASSUMING** interactive formats actually improve decision-making (not just engagement) and that there is an appetite in mainstream institutions for balanced, non-polarized educational content.
 
